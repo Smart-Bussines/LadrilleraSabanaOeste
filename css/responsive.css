@@ -1247,7 +1247,7 @@ FOOTER MOBILE FIX DEFINITIVO
 .widget_instagram ul li img{
 
     width:100%;
-    border-radius:0px !important;
+    aspect-ratio:4/5;
     object-fit:cover;
 
 }
@@ -1295,3 +1295,12 @@ FOOTER MOBILE FIX DEFINITIVO
 
 }
 
+@media (max-width: 991px){
+
+.widget_instagram ul li img{
+
+    border-radius:0px !important;
+
+}
+
+}
