@@ -12,12 +12,154 @@
 .main-menu ul li a {
 	padding: 40px 7px;
 }
+
+.slider-wrapper, .slider-caption {
+	width: 100%;
+	padding: 0px 60px;
+}
 .slider-text {
 padding: 40px 30px;
 width: 991px;
 }
 .slider-text h1{
 font-size: 48px;	
+}
+/* =====================================
+MOBILE OPTIMIZATION FINAL
+Slider + Footer + Instagram
+===================================== */
+
+@media (max-width: 991px){
+
+/* ======================
+FOOTER LAYOUT MOBILE
+====================== */
+
+.footer-sec .row{
+    flex-direction:column;
+    gap:25px;
+}
+
+.footer-widget{
+    width:100% !important;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+/* ======================
+INSTAGRAM GRID MOBILE
+====================== */
+
+.widget_instagram ul{
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.widget_instagram ul li img{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+    border-radius:0px !important;
+}
+
+/* ======================
+CONTACT WIDGET MOBILE
+====================== */
+
+.footer-wedget-four{
+    width:100%;
+    padding:25px 20px;
+}
+
+.footer-contact-info{
+    margin-bottom:18px;
+}
+
+.footer-contact-info-icon{
+    width:38px;
+    height:38px;
+    line-height:38px;
+    font-size:18px;
+}
+
+.footer-social{
+    margin-top:15px;
+}
+
+.footer-social ul{
+    display:flex;
+    gap:10px;
+}
+
+}
+
+
+/* =====================================
+SLIDER MOBILE IMPROVEMENT (PRO)
+===================================== */
+
+@media (max-width: 767px){
+
+/* slider altura optimizada */
+
+.single-slide{
+    min-height:380px;
+    background-size:cover;
+    background-position:center;
+}
+
+/* wrapper del slider */
+
+.slider-wrapper{
+    width:100%;
+    max-width:100%;
+    padding:10px 20px;
+    margin:0 auto;
+}
+
+/* texto slider */
+
+.slider-text h1{
+    font-size:22px;
+    line-height:30px;
+}
+
+.slider-text p{
+    font-size:14px;
+    line-height:22px;
+}
+
+/* botones slider */
+
+.slider-text ul li a{
+    padding:8px 14px;
+    font-size:13px;
+}
+
+/* reducir espacio slider */
+
+.slider-caption{
+    padding:0;
+}
+
+}
+
+
+/* =====================================
+MOBILE SMALL DEVICES
+===================================== */
+
+@media (max-width: 575px){
+
+.slider-wrapper{
+    padding:15px;
+}
+
+.slider-text h1{
+    font-size:20px;
+    line-height:28px;
+}
+
 }
 .gallery-overlay-text h2{
 	font-size:14px;
@@ -225,15 +367,8 @@ font-size: 16px;
 	margin-top: 40px;
 }
 
-@media (max-width: 991px){
-
 .slider-wrapper{
-
-    width:100%;
-    max-width:100%;
-    padding:20px;
-    margin:0 auto;
-}
+	width:100%;
 }
 .gallery-sec .sec-title,
 .testimonial-sec .sec-title{
