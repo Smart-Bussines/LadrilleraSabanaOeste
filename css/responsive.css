@@ -233,11 +233,8 @@ font-size: 16px;
     max-width:100%;
     padding:20px;
     margin:0 auto;
-
 }
-
 }
-
 .gallery-sec .sec-title,
 .testimonial-sec .sec-title{
 	margin: 0 0px 50px 0px;	
@@ -558,10 +555,6 @@ display:none;
 }
 .sngl-price {
 	margin-bottom: 50px;
-}
-.slider-wrapper, .slider-caption {
-	width: 100%;
-	padding: 0px 60px;
 }
 .slider-text {
 width:100%;
