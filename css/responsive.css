@@ -143,11 +143,95 @@ SLIDER MOBILE IMPROVEMENT (PRO)
 }
 
 }
+/* =====================================
+MOBILE SLIDER OPTIMIZATION
+===================================== */
 
+@media (max-width:767px){
+
+/* Ajustar tamaño del slider */
+
+.single-slide{
+
+    min-height:360px;
+    background-size:cover;
+    background-position:center top;
+    background-repeat:no-repeat;
+
+}
+
+/* Ajustar contenedor del slider */
+
+.slider-wrapper{
+
+    width:100%;
+    max-width:100%;
+    padding:15px 20px;
+    margin:0 auto;
+
+}
+
+/* Centrar contenido del slider */
+
+.slider-text{
+
+    text-align:center;
+
+}
+
+/* Reducir tamaño del titulo */
+
+.slider-text h1{
+
+    font-size:20px;
+    line-height:28px;
+
+}
+
+/* Ajustar subtitulo */
+
+.slider-text p{
+
+    font-size:13px;
+    line-height:20px;
+
+}
+
+/* Ajustar botones */
+
+.slider-text ul{
+
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+
+}
+
+.slider-text ul li a{
+
+    padding:8px 14px;
+    font-size:13px;
+
+}
+
+/* Reducir flechas del slider */
+
+.owl-prev,
+.owl-next{
+
+    width:35px;
+    height:35px;
+    line-height:35px;
+
+}
+
+}
 
 /* =====================================
 MOBILE SMALL DEVICES
 ===================================== */
+
 
 @media (max-width: 575px){
 
