@@ -224,8 +224,18 @@ font-size: 16px;
 .vedio-inner {
 	margin-top: 40px;
 }
+
+@media (max-width: 991px){
+
 .slider-wrapper{
-	width:100%;
+
+    width:100%;
+    max-width:100%;
+    padding:20px;
+    margin:0 auto;
+
+}
+
 }
 
 .gallery-sec .sec-title,
@@ -551,7 +561,7 @@ display:none;
 }
 .slider-wrapper, .slider-caption {
 	width: 100%;
-	padding: 0px 30px;
+	padding: 0px 60px;
 }
 .slider-text {
 width:100%;
