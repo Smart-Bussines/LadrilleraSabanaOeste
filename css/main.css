@@ -286,6 +286,8 @@ padding-top: 11px;
 	color: #fff;
 }
 
+
+
 /*
 4.Menu  Section
 =================*/
@@ -699,6 +701,16 @@ transition: all 0.5s ease-out 0s;background:#fe7c00;color:#fff;border-color:#fe7
     -webkit-transform: translate3d(0, 0, 0);	
 }
 
+.blog-slider .swiper-button-next,
+.blog-slider .swiper-button-prev{
+width:25px;
+height:25px;
+}
+
+.blog-slider .swiper-button-next:after,
+.blog-slider .swiper-button-prev:after{
+font-size:14px;
+}
 /*
 7.About Us Section
 =================*/
@@ -2348,6 +2360,27 @@ a.blog-readmore {
 }
 .single-post-thumb.blog-details {
 	margin-bottom: 30px;
+}
+
+.blog-slider{
+width:100%;
+height:420px;
+border-radius:6px;
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.blog-slider .swiper-slide{
+display:flex;
+align-items:center;
+justify-content:center;
+background:#eee;
+}
+
+.blog-slider img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 /*latest news*/
 .latest-news-thumb {
