@@ -140,6 +140,9 @@ textarea:focus, input:focus{
 .bg-light-gray{
 	background:#f9f9f9
 }
+html{
+scroll-behavior:smooth;
+}
 /*
 1.Preloader
 ============================*/
