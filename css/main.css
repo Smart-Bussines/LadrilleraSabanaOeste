@@ -1657,6 +1657,22 @@ margin-bottom: 15px;
 	background: #071c34;
 	padding: 30px 0px;
 }
+
+.contact-info-item i{
+font-size:30px;
+margin-bottom:10px;
+color:#f47c20;
+}
+
+.contact-info-item h3{
+font-size:20px;
+margin-bottom:10px;
+}
+
+.contact-info-item p{
+font-size:14px;
+line-height:1.5;
+}
 .contact-page-sec .contact-page-form h2 {
 	color: #071c34;
 	text-transform: capitalize;
@@ -1682,19 +1698,35 @@ margin-bottom: 15px;
 	color: #fe7c00;
 }
 .contact-info-text p{margin-bottom:0px;}
-.contact-info-text h2 {
-	color: #fff;
-	font-size: 22px;
-	text-transform: capitalize;
-	font-weight: 600;
-	margin-bottom: 10px;
+.contact-info-text h2{
+font-size:18px;
+margin-bottom:8px;
+font-weight:600;
+color:#fff;
 }
-.contact-info-text span {
-	color: #999999;
-	font-size: 16px;
-	font-weight: ;
-	display: inline-block;
-	width: 100%;
+
+.contact-info-text span{
+display:block;
+font-size:14px;
+line-height:1.5;
+color:#cfd8e3;
+word-break:break-word;
+}
+
+/* Espaciado general */
+.contact-info-item{
+padding:20px 15px;
+}
+@media (max-width:576px){
+
+.contact-info-text h2{
+font-size:16px;
+}
+
+.contact-info-text span{
+font-size:13px;
+}
+
 }
 
 .contact-page-form input {
