@@ -1715,9 +1715,19 @@ word-break:break-word;
 
 /* Espaciado general */
 .contact-info-item{
-padding:20px 15px;
+padding:35px 15px;
 }
 @media (max-width:576px){
+
+.contact-info-item{
+transition:0.3s;
+}
+
+.contact-info-item:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
 
 .contact-info-text h2{
 font-size:16px;
