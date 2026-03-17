@@ -3489,13 +3489,22 @@ Footer Section
 	float: left;
 	border-radius: 4px;
 }
+
+
 .footer-contact-info-text {
 	padding-left: 50px;
+	position:relative;
+	top:4.5px; /* ajusta este valor */
 }
+
 .footer-contact-info-text span {
 	color: #fdfdfd;
 	display: inline-block;
 	width: 100%;
+}
+
+.footer-contact-info-text span{
+word-break:break-word;
 }
 .news-letter {
 	color: #fe7c00;
