@@ -705,12 +705,17 @@ transition: all 0.5s ease-out 0s;background:#fe7c00;color:#fff;border-color:#fe7
 .blog-slider .swiper-button-prev{
 width:20px;
 height:20px;
+color:#f8f7f7;
 }
 
 .blog-slider .swiper-button-next:after,
 .blog-slider .swiper-button-prev:after{
 font-size:14px;
+
+
 }
+
+
 /*
 7.About Us Section
 =================*/
@@ -2217,6 +2222,15 @@ overflow: hidden;
 	width: 100%;
 }
 .pagination.custom-pagination li a:hover{background: #383949 none repeat scroll 0 0;color:#fff;}
+
+.blog-slider .swiper-pagination-bullet{
+background:#424242;
+opacity:1;
+}
+
+.blog-slider .swiper-pagination-bullet-active{
+background:#ffffff;
+}
 
 /*
 22.Home 2 
