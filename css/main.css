@@ -2793,7 +2793,20 @@ padding: 0 14px;
 	color: #071c34;
 	font-size: 22px;
 	text-transform: capitalize;
-	margin-bottom: 20px;
+	
+}
+
+.testimonial-comment-desc h2{
+margin-bottom:4px;
+}
+
+.testimonial-comment-desc h5{
+margin:0 0 6px 0;
+}
+
+.testimonial-comment-desc p{
+margin-top:0;
+line-height:1.6;
 }
 .single-testimonial {
 	position: relative;
@@ -2824,6 +2837,17 @@ padding: 0 14px;
 	display: inline-block;
 	border-radius: 4px;
 }
+
+.company{
+display:inline-block;
+font-size:13px;
+color:#000000;
+background:rgba(153, 136, 119, 0.1);
+padding:3px 10px;
+border-radius:20px;
+margin-bottom:10px;
+}
+
 .client-rating {
 	color: #fe7c00;
 }
