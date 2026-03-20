@@ -1199,33 +1199,6 @@ padding: 40px 10px;
 	text-align: center;
 }
 
-@media (max-width: 420px){
-
-/* CONTENEDOR */
-.header-left ul{
-	display:flex;
-	justify-content:center;
-	align-items:center;
-	gap:15px;
-	flex-wrap:nowrap;
-}
-
-/* ITEMS */
-.header-left li{
-	display:flex;
-	align-items:center;
-	white-space:nowrap;
-	font-size:13px;
-	width:auto !important;
-}
-
-/* SOLO dejamos visibles los 2 teléfonos */
-.header-left li:nth-child(3),
-.header-left li:nth-child(4){
-	display:none;
-}
-
-}
 .mean-container a.meanmenu-reveal {
 	margin-top: -80px;
 }
