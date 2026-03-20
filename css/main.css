@@ -3630,7 +3630,7 @@ z-index:999999;
 /* WAZE */
 .waze-float{
     position:fixed;
-    bottom:100px; /* 🔥 separación exacta */
+    bottom:95px; /* 🔥 separación exacta */
     right:20px;
     width:60px;   /* MISMO tamaño */
     height:60px;  /* MISMO tamaño */
@@ -3651,9 +3651,10 @@ z-index:999999;
     100%{transform:scale(1);}
 }
 
-.whatsapp-float{
+/*.whatsapp-float{
     animation:pulse 2s infinite;
-}
+}*/
+
 .email-subscription form {
   background: #525459 none repeat scroll 0 0;
   margin-top: 20px;position:relative
