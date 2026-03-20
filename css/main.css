@@ -240,6 +240,12 @@ padding-top: 11px;
 	position: relative;
 }
 
+.header-left li a{
+color:#fff;
+text-decoration:none;
+display:inline-block;
+}
+
 .header-left li:last-child:before{
 	display:none;
 }
