@@ -3585,6 +3585,66 @@ word-break:break-word;
 z-index:999999;
 }
 
+.waze-float{
+    position:fixed;
+    bottom:90px; /* 🔥 arriba del WhatsApp */
+    right:20px;
+    width:55px;
+    height:55px;
+    background:#33ccff;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    z-index:9999;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    transition:0.3s;
+}
+
+/* Hover */
+.waze-float:hover{
+    transform:scale(1.1);
+    background:#0099cc;
+}
+
+/* WHATSAPP */
+.whatsapp-float{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:60px;
+    height:60px;
+    background:#25D366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    z-index:9999;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* WAZE */
+.waze-float{
+    position:fixed;
+    bottom:100px; /* 🔥 separación exacta */
+    right:20px;
+    width:60px;   /* MISMO tamaño */
+    height:60px;  /* MISMO tamaño */
+    background:#33ccff;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    z-index:9999;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
 @keyframes pulse{
     0%{transform:scale(1);}
     50%{transform:scale(1.1);}
