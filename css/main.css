@@ -272,10 +272,10 @@ display:inline-block;
 	display: inline-block;
 }
 .soical-profile li a i {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 	text-align: center;
-	line-height: 20px;
+	line-height: 30px;
 	border-radius: 100%;
 	display: inline-block;
 }
