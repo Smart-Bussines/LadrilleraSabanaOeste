@@ -3509,16 +3509,20 @@ Footer Section
 	width: 40px;
 	height: 40px;
 	text-align: center;
-	line-height: 35px;
+	line-height: 40px;
 	color: #1a1919;
 	font-size: 20px;
 	background: #fd9902;
-	top: 10px;
+	top: 15px;
 	position: relative;
 	float: left;
 	border-radius: 4px;
 }
 
+.footer-contact-info:hover .footer-contact-info-icon{
+    transform:scale(1.1);
+    transition:0.3s;
+}
 
 .footer-contact-info-text {
 	padding-left: 50px;
@@ -3728,6 +3732,13 @@ padding:10px
 .footer-social li:last-child a{
 	margin-right:0px;
 }
+
+.footer-social ul li:nth-child(1) a:hover{ background:#1877f2; } /* Facebook */
+.footer-social ul li:nth-child(2) a:hover{ background:#e4405f; } /* Instagram */
+.footer-social ul li:nth-child(3) a:hover{ background:#0077b5; } /* LinkedIn */
+.footer-social ul li:nth-child(4) a:hover{ background:#bd081c; } /* Pinterest */
+.footer-social ul li:nth-child(5) a:hover{ background:#000; } /* TikTok */
+
 .footer-social li a:hover{
 	background:#000205;
 
