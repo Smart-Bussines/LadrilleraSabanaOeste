@@ -121,12 +121,26 @@
     scrollbar-width: none; flex: 1;
   }
   .filter-scroll::-webkit-scrollbar { display: none; }
+  .filter-hint {
+    display: none;
+    align-items: center; gap: 4px;
+    font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+    color: rgba(168,196,224,.6); flex-shrink: 0;
+    padding-left: 10px; border-left: 1px solid rgba(254,124,0,.2);
+    animation: hintPulse 2s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  .filter-hint svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+  @keyframes hintPulse {
+    0%, 100% { opacity: .5; transform: translateX(0); }
+    50%       { opacity: 1;  transform: translateX(3px); }
+  }
   .filter-btn {
     background: rgba(255,255,255,.06);
     border: 1px solid rgba(255,255,255,.14);
     color: #a8c4e0; font-family: 'Barlow', sans-serif;
     font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
-    padding: 7px 18px; border-radius: 20px; cursor: pointer;
+    padding: 7px 18px; border-radius: 3px; cursor: pointer;
     transition: all .22s; white-space: nowrap;
   }
   .filter-btn:hover {
@@ -264,19 +278,24 @@
     /* Nav compacto */
     nav {
       padding: 12px 16px;
+      position: relative;
     }
     .nav-back {
       padding: 7px 14px;
       font-size: .72rem; letter-spacing: .08em;
       border-width: 1.5px;
+      flex-shrink: 0;
     }
     .nav-back svg { width: 13px; height: 13px; }
     .nav-title {
-      font-size: 1rem; letter-spacing: .02em;
+      position: absolute; left: 50%; transform: translateX(-50%);
+      font-size: .95rem; letter-spacing: .02em;
+      white-space: nowrap;
     }
     .nav-cta {
       padding: 7px 14px;
       font-size: .72rem; letter-spacing: .08em;
+      flex-shrink: 0;
     }
 
     /* Hero más compacto */
@@ -300,6 +319,7 @@
     .filter-btn {
       font-size: .68rem; padding: 5px 13px; letter-spacing: .04em;
     }
+    .filter-hint { display: flex; }
 
     /* Grid 1 columna */
     .catalog {
@@ -442,7 +462,7 @@
   <span class="nav-title">Catálogo de Productos</span>
   <a class="nav-cta"
      href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20cotizar%20un%20producto."
-     target="_blank">Cotizar Ahora</a>
+     target="_blank">Cotizar</a>
 </nav>
 
 <!-- HERO -->
@@ -463,6 +483,10 @@
     <button class="filter-btn" onclick="filter('sellador', this)">Selladores</button>
     <button class="filter-btn" onclick="filter('accesorio', this)">Accesorios</button>
     <button class="filter-btn" onclick="filter('instalacion', this)">Instalación</button>
+  </div>
+  <div class="filter-hint">
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    más
   </div>
 </div>
 
