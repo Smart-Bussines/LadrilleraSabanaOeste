@@ -37,15 +37,14 @@
     border-bottom: 1px solid rgba(254,124,0,.2);
   }
   .nav-back {
-    
-    
+    background: #046401; color: var(--white);
     padding: 8px 14px; border-radius: 2px;
     font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
     text-decoration: none; font-weight: 600;
     transition: background .25s, color .25s, border-color .25s, transform .2s;
   }
   .nav-back svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .nav-back:hover { background: #02b46a; color: #071c34; border-color: #68ecb5; transform: translateY(-1px); }
+  .nav-back:hover { background: #029215; color: #f8faf9; border-color: #029215; transform: translateY(-1px); }
   .nav-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: .04em;
@@ -67,7 +66,7 @@
     margin-top: 72px;
     background:
       linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 70%),
-      url('img/temp2.png') center/cover no-repeat;
+      url('img/temp5.png') center/cover no-repeat;
     position: relative;
     overflow: hidden;
   }
@@ -109,11 +108,12 @@
     box-shadow: 0 4px 16px rgba(0,0,0,.35);
   }
   .filter-label {
-    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+    font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
     color: #fe7c00; white-space: nowrap; flex-shrink: 0; font-weight: 700;
-    padding: 18px 18px 18px 0;
+    padding: 14px 14px 14px 0;
     border-right: 1px solid rgba(254,124,0,.3);
-    margin-right: 16px; font-size: .7rem; letter-spacing: .2em;
+    margin-right: 12px;
+    display: flex; align-items: center;
   }
   .filter-scroll {
     display: flex; gap: 8px; align-items: center;
@@ -122,9 +122,9 @@
   }
   .filter-scroll::-webkit-scrollbar { display: none; }
   .filter-label-arrow {
-    display: none;
-    font-size: .9rem; margin-left: 2px;
-    animation: arrowPulse 1.6s ease-in-out infinite;
+    display: inline-block;
+    font-size: 1.3rem; margin-left: 3px; line-height: 1;
+    animation: arrowPulse 1.4s ease-in-out infinite;
   }
   @keyframes arrowPulse {
     0%, 100% { opacity: .4; transform: translateX(0); }
@@ -310,13 +310,14 @@
       padding: 0 16px;
     }
     .filter-label {
-      font-size: .62rem; padding: 14px 12px 14px 0; margin-right: 10px;
+      font-size: .6rem; padding: 11px 10px 11px 0; margin-right: 8px; letter-spacing: .06em;
     }
+    .filter-label-arrow { font-size: 1.5rem; }
     .filter-scroll { padding: 11px 0; gap: 6px; }
     .filter-btn {
       font-size: .68rem; padding: 5px 13px; letter-spacing: .04em;
     }
-    .filter-label-arrow { display: inline-block; }
+    /* filter-label-arrow already visible globally */
 
     /* Grid 1 columna */
     .catalog {
@@ -357,7 +358,7 @@
     }
     .lightbox-title { font-size: 1rem; }
     .lightbox-desc { font-size: .82rem; }
-    .lightbox-wa { width: 100%; justify-content: center; }
+    .lightbox-wa { align-self: flex-end; }
   }
 
   /* ── LIGHTBOX / SLIDER ── */
@@ -414,28 +415,29 @@
   .lightbox-footer {
     position: absolute; bottom: 0; left: 0; right: 0;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 32px 24px;
-    background: linear-gradient(to top, rgba(7,28,52,1), transparent);
+    padding: 16px 28px 20px;
+    background: linear-gradient(to top, rgba(7,28,52,.98), rgba(7,28,52,.6) 60%, transparent);
   }
-  .lightbox-desc { color: var(--sand); font-size: .9rem; font-weight: 300; max-width: 500px; }
-  .lightbox-counter { color: var(--stone); font-size: .8rem; letter-spacing: .1em; }
+  .lightbox-desc { color: var(--sand); font-size: .88rem; font-weight: 300; max-width: 440px; }
+  .lightbox-counter { display: none; }
   .lightbox-wa {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 7px;
     background: #fe7c00; color: var(--white);
-    padding: 10px 20px; border-radius: 2px;
-    font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+    padding: 9px 18px; border-radius: 2px;
+    font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
     text-decoration: none; font-weight: 600; transition: background .25s;
+    white-space: nowrap; flex-shrink: 0;
   }
   .lightbox-wa:hover { background: #d96700; }
-  .lightbox-dots {
-    display: flex; gap: 8px; justify-content: center; margin-top: 16px;
+  /* dots removed — counter used instead */
+  .lightbox-counter-badge {
+    position: absolute; bottom: 12px; right: 14px;
+    background: rgba(7,28,52,.75); backdrop-filter: blur(4px);
+    color: #a8c4e0; font-size: .75rem; letter-spacing: .1em;
+    padding: 4px 10px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.1);
+    pointer-events: none;
   }
-  .lightbox-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,.25); cursor: pointer;
-    transition: background .25s, transform .25s;
-  }
-  .lightbox-dot.active { background: var(--clay); transform: scale(1.3); }
   .card-img { cursor: zoom-in; }
 
   @media (max-width: 768px) {
@@ -468,19 +470,18 @@
 
 <!-- FILTER -->
 <div class="filter-bar">
-  <span class="filter-label">Filtrar por: <span class="filter-label-arrow">›</span></span>
+  <span class="filter-label">Filtro <span class="filter-label-arrow">›</span></span>
   <div class="filter-scroll">
     <button class="filter-btn active" onclick="filter('all', this)">Todos</button>
     <button class="filter-btn" onclick="filter('enchape', this)">Enchapes</button>
-    <button class="filter-btn" onclick="filter('teja', this)">Tejas</button>
-    <button class="filter-btn" onclick="filter('piso', this)">Pisos</button>
     <button class="filter-btn" onclick="filter('piedra', this)">Piedras Naturales</button>
-    <button class="filter-btn" onclick="filter('sellador', this)">Selladores</button>
-    <button class="filter-btn" onclick="filter('accesorio', this)">Accesorios</button>
-    <button class="filter-btn" onclick="filter('otros', this)">Ladrillos</button>
-    <button class="filter-btn" onclick="filter('otros', this)">Morteros</button>
-    <button class="filter-btn" onclick="filter('otros', this)">Cementicios</button>
-    <button class="filter-btn" onclick="filter('otros', this)">Jardin</button>
+    <button class="filter-btn" onclick="filter('teja', this)">Tejas</button>
+    <button class="filter-btn" onclick="filter('ladrillo', this)">Ladrillos</button>
+    <button class="filter-btn" onclick="filter('refractario', this)">Refractario</button>
+    <button class="filter-btn" onclick="filter('piso', this)">Pisos</button>
+    <button class="filter-btn" onclick="filter('mortero', this)">Morteros</button>
+    <button class="filter-btn" onclick="filter('cementicio', this)">Cementicios</button>
+    <button class="filter-btn" onclick="filter('jardin', this)">Jardín</button>
     <button class="filter-btn" onclick="filter('otros', this)">Otros</button>
   </div>
 </div>
@@ -488,390 +489,690 @@
 <!-- CATALOG GRID -->
 <section class="catalog" id="catalog">
 
-  <!-- ENCHAPES -->
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/grafito.jpg" alt="Loseta Ladrillo Cooper WC" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra2.png" alt="Loseta Ladrillo Cooper WC" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
+      <div class="card-cat">Enchape</div>
       <div class="card-name">Loseta Ladrillo Cooper WC</div>
       <p class="card-desc">Acabado artesanal con tonos cobrizos cálidos. Ideal para muros interiores y fachadas contemporáneas.</p>
       <div class="card-footer">
         <span class="card-tag">Interior · Exterior</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Loseta%20Ladrillo%20Cooper%20WC.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Loseta%20Ladrillo%20Cooper%20WC.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/ozark.jpg" alt="Enchape Ladrillo Cooper CH" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra4.png" alt="Enchape Ladrillo Cooper CH" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
+      <div class="card-cat">Enchape</div>
       <div class="card-name">Enchape Ladrillo Cooper CH</div>
       <p class="card-desc">Formato alargado de ladrillo, textura rústica pronunciada. Muy usado en fachadas residenciales modernas.</p>
       <div class="card-footer">
         <span class="card-tag">Fachada · Muro</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Cooper%20CH.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Enchape%20Ladrillo%20Cooper%20CH.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/montanaamarilla.jpg" alt="Ladrillo Naranja Demolición" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra5.png" alt="Ladrillo Naranja Demolición" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
+      <div class="card-cat">Enchape</div>
       <div class="card-name">Ladrillo Naranja Demolición</div>
       <p class="card-desc">Acabado vintage con irregularidades únicas. Muy valorado en diseño de interiores industriales y rústicos.</p>
       <div class="card-footer">
         <span class="card-tag">Vintage · Industrial</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Naranja%20Demolición.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Ladrillo%20Naranja%20Demolición.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/rustic.jpg" alt="Apilable Ozark WF" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra6.png" alt="Apilable Ozark WF" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
+      <div class="card-cat">Enchape</div>
       <div class="card-name">Apilable Ozark WF</div>
       <p class="card-desc">Piedra apilable de gran impacto visual. Perfecta para muros divisorios, chimeneas y jardines verticales.</p>
       <div class="card-footer">
         <span class="card-tag">Muro · Jardín</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Apilable%20Ozark%20WF.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Apilable%20Ozark%20WF.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/piedra1.png" alt="Loseta Ladrillo Cooper WC" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/brava.png" alt="Fachaleta Cartago Antiguo" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Loseta Ladrillo Cooper WC</div>
-      <p class="card-desc">Acabado artesanal con tonos cobrizos cálidos. Ideal para muros interiores y fachadas contemporáneas.</p>
+      <div class="card-cat">Enchape</div>
+      <div class="card-name">Fachaleta Cartago Antiguo</div>
+      <p class="card-desc">Fachaleta de arcilla horneada, formato 7.5x24 cms. Textura rugosa con acabado añejado ideal para fachadas rústicas.</p>
       <div class="card-footer">
-        <span class="card-tag">Interior · Exterior</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Loseta%20Ladrillo%20Cooper%20WC.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Fachaleta · Nacional</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Fachaleta%20Cartago%20Antiguo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/piedra2.png" alt="Enchape Ladrillo Cooper CH" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/nicausada.png" alt="Enchape Nicaragüense" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Enchape Ladrillo Cooper CH</div>
-      <p class="card-desc">Formato alargado de ladrillo, textura rústica pronunciada. Muy usado en fachadas residenciales modernas.</p>
+      <div class="card-cat">Enchape</div>
+      <div class="card-name">Enchape Nicaragüense</div>
+      <p class="card-desc">Ladrillo Nicaragüense en formato enchape 3x9x20 cms. Tonos cálidos artesanales únicos.</p>
       <div class="card-footer">
-        <span class="card-tag">Fachada · Muro</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Cooper%20CH.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Artesanal · Rústico</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Enchape%20Nicaragüense.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/piedrag3.png" alt="Ladrillo Naranja Demolición" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Ladrillo Naranja Demolición</div>
-      <p class="card-desc">Acabado vintage con irregularidades únicas. Muy valorado en diseño de interiores industriales y rústicos.</p>
-      <div class="card-footer">
-        <span class="card-tag">Vintage · Industrial</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Naranja%20Demolición.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="img/piedra4.png" alt="Apilable Ozark WF" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Apilable Ozark WF</div>
-      <p class="card-desc">Piedra apilable de gran impacto visual. Perfecta para muros divisorios, chimeneas y jardines verticales.</p>
-      <div class="card-footer">
-        <span class="card-tag">Muro · Jardín</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Apilable%20Ozark%20WF.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- TEJAS -->
-  <div class="card" data-cat="teja">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja1.png" alt="Teja Plana Importada" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Tejas</div>
-      <div class="card-name">Teja Plana Importada</div>
-      <p class="card-desc">Elegancia y durabilidad en cubierta. Superficie lisa y uniforme con excelente resistencia a la intemperie.</p>
-      <div class="card-footer">
-        <span class="card-tag">Cubierta · Residencial</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Plana%20Importada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="teja">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja2.png" alt="Teja Imperial Matizada" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Tejas</div>
-      <div class="card-name">Teja Imperial Matizada</div>
-      <p class="card-desc">Perfil curvo clásico con acabado matizado. Combina estética colonial con alta resistencia a la lluvia.</p>
-      <div class="card-footer">
-        <span class="card-tag">Colonial · Premium</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Imperial%20Matizada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="teja">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja6.png" alt="Teja Nicaragüense Nueva" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Tejas</div>
-      <div class="card-name">Teja Nicaragüense Nueva</div>
-      <p class="card-desc">Teja artesanal de arcilla, coloración uniforme. Excelente para proyectos turísticos y residencias de campo.</p>
-      <div class="card-footer">
-        <span class="card-tag">Artesanal · Campo</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Nicaragüense%20Nueva.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- PISOS -->
-  <div class="card" data-cat="piso">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso1.png" alt="Piso Betania 30x30" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Pisos</div>
-      <div class="card-name">Piso Betania 30×30</div>
-      <p class="card-desc">Formato clásico en arcilla natural. Acabado poroso ideal para espacios con carácter rústico y mediterráneo.</p>
-      <div class="card-footer">
-        <span class="card-tag">Interior · Rústico</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Piso%20Betania%2030x30.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="piso">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso3.png" alt="Piso Terrazo" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Pisos</div>
-      <div class="card-name">Piso Terrazo</div>
-      <p class="card-desc">Composición de mármol y cemento con patrones únicos. Alta durabilidad y resistencia al tráfico intenso.</p>
-      <div class="card-footer">
-        <span class="card-tag">Terrazo · Alto Tráfico</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Piso%20Terrazo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- PIEDRAS -->
   <div class="card" data-cat="piedra">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra1.png" alt="Piedra Apilable Rustic" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
+      <div class="card-cat">Piedra</div>
       <div class="card-name">Piedra Apilable Rustic</div>
       <p class="card-desc">Piedra natural apilada a mano. Cada instalación es única. Muy solicitada en fachadas y muros de jardín.</p>
       <div class="card-footer">
         <span class="card-tag">Natural · Jardín</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Apilable%20Rustic.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piedra%20Apilable%20Rustic.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="piedra">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra3.png" alt="Molejón Amarillo Irregular" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
+      <div class="card-cat">Piedra</div>
       <div class="card-name">Molejón Amarillo Irregular</div>
       <p class="card-desc">Piedra de río en tonos amarillos y ocres. Ideal para pisos exteriores, senderos y muros ornamentales.</p>
       <div class="card-footer">
         <span class="card-tag">Exterior · Ornamental</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Molejón%20Amarillo%20Irregular.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.998-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Molejón%20Amarillo%20Irregular.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="piedra">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Piedra Natural Laja Gris" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra7.png" alt="Ozark Irishstone" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
-      <div class="card-name">Piedra Natural Laja Gris</div>
+      <div class="card-cat">Piedra</div>
+      <div class="card-name">Ozark Irishstone</div>
+      <p class="card-desc">Enchape natural en tonos grises con vetas. Estilo contemporáneo de alta durabilidad.</p>
+      <div class="card-footer">
+        <span class="card-tag">Premium · Contemporáneo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Ozark%20Irishstone.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piedra">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Laja Gris Irregular" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piedra</div>
+      <div class="card-name">Laja Gris Irregular</div>
       <p class="card-desc">Lajas de piedra natural gris. Aspecto contemporáneo con textura orgánica, ideal para terrazas y exteriores.</p>
       <div class="card-footer">
         <span class="card-tag">Contemporáneo · Terraza</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Natural%20Laja%20Gris.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Laja%20Gris%20Irregular.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <!-- SELLADORES -->
-  <div class="card" data-cat="sellador">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Sellador para Pisos Rústicos" loading="lazy">
+  <div class="card" data-cat="piedra">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/crurrasquera2.png" alt="Sánchez Volcánica Multiformato" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Selladores</div>
-      <div class="card-name">Sellador para Pisos Rústicos</div>
-      <p class="card-desc">Protege y realza el color natural de pisos y paredes de arcilla. Acabado satinado resistente a la humedad.</p>
+      <div class="card-cat">Piedra</div>
+      <div class="card-name">Sánchez Volcánica Multiformato</div>
+      <p class="card-desc">Enchape natural volcánico en multiformato. Textura única y dureza excepcional para exteriores.</p>
       <div class="card-footer">
-        <span class="card-tag">Protección · Interior</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Sellador%20para%20Pisos%20Rústicos.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Volcánica · Natural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Sánchez%20Volcánica%20Multiformato.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <div class="card" data-cat="sellador">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso8.png" alt="Sellador Rústico Acabado Natural" loading="lazy">
+  <div class="card" data-cat="piedra">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Laja Negra Rústica" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Selladores</div>
-      <div class="card-name">Sellador Rústico Acabado Natural</div>
-      <p class="card-desc">Fórmula de penetración profunda que prolonga la vida útil de enchapes y piedras naturales expuestas.</p>
+      <div class="card-cat">Piedra</div>
+      <div class="card-name">Laja Negra Rústica</div>
+      <p class="card-desc">Laja negra oxidada en formato irregular. Alto contraste visual para muros de diseño y jardines.</p>
       <div class="card-footer">
-        <span class="card-tag">Exterior · Enchapes</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Sellador%20Rústico%20Acabado%20Natural.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Laja · Diseño</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Laja%20Negra%20Rústica.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <!-- ACCESORIOS -->
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/refractario.png" alt="Ladrillo Refractario" loading="lazy">
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja1.png" alt="Teja Plana Importada" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Ladrillo Refractario</div>
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Plana Importada</div>
+      <p class="card-desc">Elegancia y durabilidad en cubierta. Superficie lisa y uniforme con excelente resistencia a la intemperie.</p>
+      <div class="card-footer">
+        <span class="card-tag">Cubierta · Residencial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Plana%20Importada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja2.png" alt="Teja Imperial Matizada" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Imperial Matizada</div>
+      <p class="card-desc">Perfil curvo clásico con acabado matizado. Combina estética colonial con alta resistencia a la lluvia.</p>
+      <div class="card-footer">
+        <span class="card-tag">Colonial · Premium</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Imperial%20Matizada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja3.png" alt="Teja Plana Lisa" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Plana Lisa</div>
+      <p class="card-desc">Teja plana de arcilla con acabado liso. Excelente para proyectos modernos y líneas arquitectónicas limpias.</p>
+      <div class="card-footer">
+        <span class="card-tag">Plana · Moderna</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Plana%20Lisa.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja6.png" alt="Teja Nicaragüense Nueva" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Nicaragüense Nueva</div>
+      <p class="card-desc">Teja artesanal de arcilla, coloración uniforme. Excelente para proyectos turísticos y residencias de campo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Artesanal · Campo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Nicaragüense%20Nueva.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja7.png" alt="Teja Nicaragüense Antigua" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Nicaragüense Antigua</div>
+      <p class="card-desc">Teja usada con carácter y acabado añejado. Aporta autenticidad y encanto a techos rústicos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Rústica · Añejada</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Nicaragüense%20Antigua.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="teja">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja9.png" alt="Teja Colonial Matizada" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Teja</div>
+      <div class="card-name">Teja Colonial Matizada</div>
+      <p class="card-desc">Teja colonial con matización artesanal. Gran variedad de tonos, ideal para proyectos de alto impacto visual.</p>
+      <div class="card-footer">
+        <span class="card-tag">Colonial · Matizada</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Teja%20Colonial%20Matizada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="ladrillo">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Ladrillo+Sólido" alt="Ladrillo Rojo Sólido 5x10x22" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillo</div>
+      <div class="card-name">Ladrillo Rojo Sólido 5x10x22</div>
+      <p class="card-desc">Ladrillo rojo sólido rústico de arcilla horneada. Alta resistencia estructural, ideal para muros, fachadas y obras residenciales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Estructural · Rústico</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Ladrillo%20Rojo%20Sólido%205x10x22.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="ladrillo">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Ladrillo+2+Huecos" alt="Ladrillo 2 Huecos 5x10x22" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillo</div>
+      <div class="card-name">Ladrillo 2 Huecos 5x10x22</div>
+      <p class="card-desc">Ladrillo de dos huecos liso o decorado. Menor peso y excelente aislación térmica. Uso en muros divisorios y fachadas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Liviano · Decorativo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Ladrillo%202%20Huecos%205x10x22.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="ladrillo">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Block+BG+12x20x40" alt="Block Estructural BG 12x20x40" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillo</div>
+      <div class="card-name">Block Estructural BG 12x20x40</div>
+      <p class="card-desc">Block de concreto estructural de alta resistencia. Dimensiones estándar 12x20x40 cms para construcciones formales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Estructural · Block</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Block%20Estructural%20BG%2012x20x40.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="refractario">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/refractario.png" alt="Ladrillo Refractario SK-32" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Ladrillo Refractario SK-32</div>
       <p class="card-desc">Alta resistencia al calor extremo. Ideal para chimeneas, hornos de leña, parrillas y asadores artesanales.</p>
       <div class="card-footer">
         <span class="card-tag">Alta Temp · Chimenea</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%20Refractario.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Ladrillo%20Refractario%20SK-32.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/quarrytile.png" alt="Quarry Tile" loading="lazy">
+  <div class="card" data-cat="refractario">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Loseta+Refractaria" alt="Loseta Refractaria N.2" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Quarry Tile</div>
-      <p class="card-desc">Baldosa de arcilla sin esmaltar, muy resistente al desgaste. Perfecta para cocinas industriales y exteriores.</p>
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Loseta Refractaria N.2</div>
+      <p class="card-desc">Loseta refractaria 4.5x11.5x23 cms. Perfecta como piso de hornos y chimeneas. Soporta temperaturas extremas.</p>
       <div class="card-footer">
-        <span class="card-tag">Industrial · Cocina</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Quarry%20Tile.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Horno · Piso</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Loseta%20Refractaria%20N.2.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/mediterraneo.png" alt="Serie Mediterráneo" loading="lazy">
+  <div class="card" data-cat="refractario">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Mortero+Refractario" alt="Mortero Refractario 5050 20kg" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Serie Mediterráneo</div>
-      <p class="card-desc">Colección inspirada en el mediterráneo europeo. Tonos cálidos con acabado artesanal único en cada pieza.</p>
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Mortero Refractario 5050 20kg</div>
+      <p class="card-desc">Mezcla refractaria para repellos y juntas en hornos y chimeneas. Uso industrial y artesanal.</p>
       <div class="card-footer">
-        <span class="card-tag">Artesanal · Premium</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Serie%20Mediterráneo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Mortero · Industrial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Mortero%20Refractario%205050%2020kg.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
-  <!-- INSTALACIÓN -->
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso1.png" alt="Piso Betania 30×30" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Piso Betania 30×30</div>
+      <p class="card-desc">Formato clásico en arcilla natural. Acabado poroso ideal para espacios con carácter rústico y mediterráneo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Interior · Rústico</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piso%20Betania%2030×30.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso2.png" alt="Betania Medidas Variadas" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Betania Medidas Variadas</div>
+      <p class="card-desc">Piso Betania en múltiples medidas. Permite combinaciones creativas para espacios interiores únicos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Versátil · Artesanal</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Betania%20Medidas%20Variadas.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso3.png" alt="Piso Terrazo" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Piso Terrazo</div>
+      <p class="card-desc">Composición de mármol y cemento con patrones únicos. Alta durabilidad y resistencia al tráfico intenso.</p>
+      <div class="card-footer">
+        <span class="card-tag">Terrazo · Alto Tráfico</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piso%20Terrazo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso5.png" alt="Baldosa 40×40" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Baldosa 40×40</div>
+      <p class="card-desc">Baldosa de concreto 40x40 cms en tono gris o color. Durabilidad comprobada para exteriores e interiores.</p>
+      <div class="card-footer">
+        <span class="card-tag">Exterior · Resistente</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Baldosa%2040×40.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso6.png" alt="Betania con Borde Grada" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Betania con Borde Grada</div>
+      <p class="card-desc">Piso Betania con remate para gradas. Solución completa para escaleras rústicas con acabado uniforme.</p>
+      <div class="card-footer">
+        <span class="card-tag">Gradas · Completo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Betania%20con%20Borde%20Grada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso7.png" alt="Piso Nicaragüense 28×28" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Piso Nicaragüense 28×28</div>
+      <p class="card-desc">Piso artesanal nicaragüense 28x28 cms. Textura natural con carácter rústico auténtico.</p>
+      <div class="card-footer">
+        <span class="card-tag">Artesanal · Campo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piso%20Nicaragüense%2028×28.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso9.png" alt="Gradas Coralina Natural" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Gradas Coralina Natural</div>
+      <p class="card-desc">Escaleras en coralina natural. Acabado poroso y antideslizante ideal para exteriores tropicales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Coralina · Natural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Gradas%20Coralina%20Natural.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="piso">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/quarrytile.png" alt="Quarry Tile Industrial 15×15" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piso</div>
+      <div class="card-name">Quarry Tile Industrial 15×15</div>
+      <p class="card-desc">Piso Quarry Tile de arcilla sin esmaltar. Alta resistencia al desgaste para cocinas industriales y exteriores.</p>
+      <div class="card-footer">
+        <span class="card-tag">Industrial · Quarry</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Quarry%20Tile%20Industrial%2015×15.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="mortero">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Mortero Porcelánico Gress 387" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Mortero</div>
+      <div class="card-name">Mortero Porcelánico Gress 387</div>
+      <p class="card-desc">Mortero premium para instalación de porcelanatos y piedras naturales. Alta adherencia y resistencia.</p>
+      <div class="card-footer">
+        <span class="card-tag">Adhesivo · Premium</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Mortero%20Porcelánico%20Gress%20387.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="mortero">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Fragua+Color" alt="Fragua con Arena de Color" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Mortero</div>
+      <div class="card-name">Fragua con Arena de Color</div>
+      <p class="card-desc">Fragua lista para usar en múltiples tonos: blanco, gris, negro, tabaco, chocolate y más. Para todo tipo de juntas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Fragua · Color</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Fragua%20con%20Arena%20de%20Color.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="mortero">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Cemento+Blanco" alt="Cemento Blanco Portland 50kg" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Mortero</div>
+      <div class="card-name">Cemento Blanco Portland 50kg</div>
+      <p class="card-desc">Cemento blanco Holcim de alta pureza. Ideal para fraguas, repellos y mezclas especiales en acabados finos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Cemento · Blanco</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Cemento%20Blanco%20Portland%2050kg.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="cementicio">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Huella+45x45" alt="Huella 45×45 Cinturón de Juego" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Cementicios</div>
+      <div class="card-name">Huella 45×45 Cinturón de Juego</div>
+      <p class="card-desc">Huella de concreto prefabricada 45x45 cms. Resistente y decorativa para senderos, jardines y zonas de juego.</p>
+      <div class="card-footer">
+        <span class="card-tag">Jardín · Sendero</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Huella%2045×45%20Cinturón%20de%20Juego.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="cementicio">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Baldosa+Concreto" alt="Baldosa Antigua 40×40 Decorock" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Cementicios</div>
+      <div class="card-name">Baldosa Antigua 40×40 Decorock</div>
+      <p class="card-desc">Baldosa de concreto estilo antiguo 40x40 cms. Acabado artesanal con textura envejecida para exteriores.</p>
+      <div class="card-footer">
+        <span class="card-tag">Cementicios · Exterior</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Baldosa%20Antigua%2040×40%20Decorock.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="cementicio">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Mosaico+Hidraulico" alt="Mosaico Hidráulico Estampado" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Cementicios</div>
+      <div class="card-name">Mosaico Hidráulico Estampado</div>
+      <p class="card-desc">Mosaico fabricado a mano 2 o 3 colores. Diseños clásicos y modernos para pisos decorativos únicos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Mosaico · Artesanal</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Mosaico%20Hidráulico%20Estampado.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="jardin">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Piedra+Rio+Gris" alt="Piedra Bola Río Gris" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Jardin</div>
+      <div class="card-name">Piedra Bola Río Gris</div>
+      <p class="card-desc">Piedra de río redondeada en tono gris. Cubeta de 20 kgs. Ideal para drenajes, jardines y decoración exterior.</p>
+      <div class="card-footer">
+        <span class="card-tag">Río · Decorativo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piedra%20Bola%20Río%20Gris.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="jardin">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Piedra+Cuarta+Blanca" alt="Piedra Cuarta Blanca" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Jardin</div>
+      <div class="card-name">Piedra Cuarta Blanca</div>
+      <p class="card-desc">Grava decorativa blanca por cubeta. Perfecta para jardines zen, senderos y camas de plantas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Jardín · Decorativa</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piedra%20Cuarta%20Blanca.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="jardin">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Piedra+Quinta+Negra" alt="Piedra Quinta Negra" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Jardin</div>
+      <div class="card-name">Piedra Quinta Negra</div>
+      <p class="card-desc">Grava quinta de color negro. Contraste moderno para jardines, accesos y espacios exteriores.</p>
+      <div class="card-footer">
+        <span class="card-tag">Grava · Negra</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Piedra%20Quinta%20Negra.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="jardin">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Granulado+Rojo" alt="Granulado Rojo Decorativo" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Jardin</div>
+      <div class="card-name">Granulado Rojo Decorativo</div>
+      <p class="card-desc">Granulado rojo en cubeta. Aporta color y textura a jardines. También usado en decoración de peceras.</p>
+      <div class="card-footer">
+        <span class="card-tag">Granulado · Color</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Granulado%20Rojo%20Decorativo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
   <div class="card" data-cat="otros">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img1.png" alt="Instalación de Enchapes" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Manga+Fraguar" alt="Duya / Manga para Fraguar" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Otros</div>
-      <div class="card-name">Instalación de Enchapes</div>
-      <p class="card-desc">Servicio profesional de instalación de enchapes en fachadas, muros y espacios interiores. Incluye mano de obra y acabados.</p>
+      <div class="card-name">Duya / Manga para Fraguar</div>
+      <p class="card-desc">Duya especial para fraguar silicón flex. Aplicación precisa en juntas de pisos y paredes. Indispensable en obra.</p>
       <div class="card-footer">
-        <span class="card-tag">Servicio · Profesional</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Instalación%20de%20Enchapes.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Herramienta · Fraguado</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Duya%20/%20Manga%20para%20Fraguar.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="otros">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img2.png" alt="Instalación de Tejas" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Poliducto+Teja" alt="Poliducto para Teja" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Otros</div>
-      <div class="card-name">Instalación de Tejas</div>
-      <p class="card-desc">Colocación profesional de tejas coloniales, imperiales y planas. Garantizamos estanqueidad y acabado impecable.</p>
+      <div class="card-name">Poliducto para Teja</div>
+      <p class="card-desc">Clavador en poliducto para instalación de tejas. Rollo de 72-90 metros lineales. Rinde 22.5 m2 por rollo.</p>
       <div class="card-footer">
-        <span class="card-tag">Servicio · Techo</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Instalación%20de%20Tejas.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Instalación · Tejas</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Poliducto%20para%20Teja.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
       </div>
     </div>
   </div>
-
   <div class="card" data-cat="otros">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img3.png" alt="Mantenimiento Correctivo" loading="lazy">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Sellador Pared Base Agua" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Otros</div>
-      <div class="card-name">Mantenimiento Correctivo y Preventivo</div>
-      <p class="card-desc">Reparación y conservación de superficies en tejas, enchapes y pisos. Prolongamos la vida útil de su inversión.</p>
+      <div class="card-name">Sellador Pared Base Agua</div>
+      <p class="card-desc">Sellador de alto tránsito para pisos y paredes de arcilla. Protege, realza el color y facilita la limpieza.</p>
       <div class="card-footer">
-        <span class="card-tag">Mantenimiento · Reparación</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Mantenimiento.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+        <span class="card-tag">Sellador · Protección</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Sellador%20Pared%20Base%20Agua.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+          Cotizar
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="card" data-cat="otros">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/C4794A?text=Lavamanos+Rustico" alt="Lavamanos Rústico Molejón" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Otros</div>
+      <div class="card-name">Lavamanos Rústico Molejón</div>
+      <p class="card-desc">Lavamanos artesanal tallado en piedra molejón. Pieza única que eleva cualquier baño o espacio de diseño.</p>
+      <div class="card-footer">
+        <span class="card-tag">Artesanal · Diseño</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20Lavamanos%20Rústico%20Molejón.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
           Cotizar
         </a>
@@ -912,18 +1213,17 @@
   <div class="lightbox-img-wrap">
     <button class="lightbox-btn lightbox-prev" onclick="slideDir(-1)">&#8592;</button>
     <img id="lb-img" src="" alt="">
+    <div class="lightbox-counter-badge" id="lb-badge">1 / 1</div>
     <button class="lightbox-btn lightbox-next" onclick="slideDir(1)">&#8594;</button>
   </div>
-  <div class="lightbox-dots" id="lb-dots"></div>
   <div class="lightbox-footer">
     <p class="lightbox-desc" id="lb-desc"></p>
     <div style="display:flex;align-items:center;gap:16px;">
       <span class="lightbox-counter" id="lb-counter"></span>
       <a class="lightbox-wa" id="lb-wa" href="#" target="_blank">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-        Cotizar este producto
+        Cotizar
       </a>
-    </div>
   </div>
 </div>
 
@@ -981,15 +1281,9 @@
     document.getElementById('lb-wa').href             = wa;
     document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbCards.length;
 
-    // Dots
-    const dotsEl = document.getElementById('lb-dots');
-    dotsEl.innerHTML = '';
-    lbCards.forEach((_, idx) => {
-      const d = document.createElement('div');
-      d.className = 'lightbox-dot' + (idx === lbIndex ? ' active' : '');
-      d.onclick = () => showSlide(idx);
-      dotsEl.appendChild(d);
-    });
+    // Badge counter
+    const badge = document.getElementById('lb-badge');
+    if (badge) badge.textContent = (lbIndex + 1) + ' / ' + lbCards.length;
   }
 
   function slideDir(dir) { showSlide(lbIndex + dir); }
