@@ -3727,6 +3727,12 @@ text-align:center;
 .footer-wedget-one img {
 	margin-top: -13px;
 }
+
+.footer-wedget-one p{
+    font-size:14px; /* 🔥 tamaño ideal */
+    line-height:1.6;
+    color:#ccc; /* opcional, más suave */
+}
 .footer-wedget-one i:hover{background:#fe7c00;color:#fff;border-color:#fe7c00; transition: all 0.4s ease-in-out 0s;}
 .footer-wedget-one ul {
   margin-top: 30px;

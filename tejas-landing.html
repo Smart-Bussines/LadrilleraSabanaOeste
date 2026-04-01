@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tejas Rústicas | Ladrillera Sabana Oeste</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --terracota:    #B5451B;
+      --terracota-dark: #8C3415;
+      --clay:         #C97B3C;
+      --sand:         #E8D5B0;
+      --cream:        #FAF5EC;
+      --espresso:     #2C1A0E;
+      --bark:         #5A3A1A;
+      --green-moss:   #4A5E3A;
+      --white:        #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--espresso);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.6;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(160deg, rgba(44,26,14,0.78) 0%, rgba(181,69,27,0.55) 60%, rgba(74,94,58,0.4) 100%),
+        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 120px;
+      background: var(--cream);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    .nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      padding: 28px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--sand);
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+    .nav-logo span { color: var(--clay); display: block; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; font-family: 'Lato', sans-serif; font-weight: 300; }
+
+    .nav-cta {
+      background: var(--terracota);
+      color: var(--white);
+      padding: 11px 28px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--terracota-dark); }
+
+    .hero-content {
+      padding: 0 60px;
+      max-width: 760px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--terracota);
+      color: var(--white);
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin-bottom: 28px;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      font-weight: 900;
+    }
+    .hero h1 em { color: var(--clay); font-style: normal; }
+
+    .hero-sub {
+      color: var(--sand);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 44px;
+      font-weight: 300;
+    }
+
+    .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--terracota);
+      color: var(--white);
+      padding: 16px 38px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn-primary:hover { background: var(--terracota-dark); transform: translateY(-2px); }
+
+    .btn-secondary {
+      border: 2px solid var(--sand);
+      color: var(--sand);
+      padding: 16px 38px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: rgba(232,213,176,0.12); }
+
+    .hero-stats {
+      position: absolute;
+      bottom: 140px;
+      right: 60px;
+      display: flex;
+      gap: 40px;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--clay); font-weight: 700; line-height: 1; }
+    .stat-label { font-size: 0.7rem; color: var(--sand); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+
+    /* ── INTRO BAND ── */
+    .intro-band {
+      background: var(--espresso);
+      color: var(--sand);
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+    .intro-band strong { color: var(--clay); font-weight: 700; }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 60px; }
+
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--terracota);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      color: var(--espresso);
+      line-height: 1.15;
+      max-width: 640px;
+    }
+
+    /* ── PRODUCTOS GRID ── */
+    .productos { background: var(--cream); }
+    .productos-header { text-align: center; margin-bottom: 60px; }
+    .productos-header .section-title { margin: 0 auto; }
+    .productos-header p { color: var(--bark); font-size: 1.05rem; line-height: 1.7; margin-top: 18px; max-width: 580px; margin-left: auto; margin-right: auto; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(44,26,14,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(44,26,14,0.15); }
+
+    .card-img {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .card-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--terracota);
+      color: var(--white);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      font-weight: 700;
+      border-radius: 1px;
+    }
+
+    .card-body { padding: 28px; }
+    .card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--espresso);
+      margin-bottom: 10px;
+    }
+    .card-body p { color: var(--bark); font-size: 0.9rem; line-height: 1.65; margin-bottom: 20px; }
+
+    .card-specs { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .spec-chip {
+      background: var(--sand);
+      color: var(--espresso);
+      font-size: 0.72rem;
+      padding: 5px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .card-link {
+      color: var(--terracota);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .card-link:hover { border-color: var(--terracota); }
+
+    /* ── VENTAJAS ── */
+    .ventajas {
+      background: var(--espresso);
+      color: var(--sand);
+      position: relative;
+      overflow: hidden;
+    }
+    .ventajas::before {
+      content: 'TEJAS';
+      position: absolute;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 18rem;
+      color: rgba(255,255,255,0.03);
+      white-space: nowrap;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .ventajas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .ventajas-left .section-title { color: var(--sand); }
+
+    .ventajas-left p {
+      color: rgba(232,213,176,0.7);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-top: 22px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .items-list { list-style: none; display: flex; flex-direction: column; gap: 28px; }
+    .items-list li {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .item-icon {
+      width: 48px; height: 48px;
+      border: 1px solid var(--clay);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      color: var(--clay);
+    }
+    .item-text h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .item-text p { font-size: 0.88rem; color: rgba(232,213,176,0.65); line-height: 1.6; font-weight: 300; }
+
+    /* ── PROCESO ── */
+    .proceso { background: var(--sand); }
+    .proceso-header { text-align: center; margin-bottom: 70px; }
+    .proceso-header p { color: var(--bark); font-size: 1rem; line-height: 1.7; margin-top: 14px; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--terracota), var(--clay));
+      z-index: 0;
+    }
+
+    .step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .step-num {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--terracota);
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 4px 20px rgba(181,69,27,0.3);
+    }
+    .step h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--espresso);
+      margin-bottom: 10px;
+    }
+    .step p { font-size: 0.85rem; color: var(--bark); line-height: 1.65; }
+
+    /* ── GALERÍA ── */
+    .galeria { background: var(--cream); padding: 80px 0; }
+    .galeria h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--espresso);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .galeria-sub { text-align: center; color: var(--bark); font-size: 0.95rem; margin-bottom: 50px; }
+
+    .gallery-strip {
+      display: flex;
+      gap: 12px;
+      padding: 0 60px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+    .gallery-strip::-webkit-scrollbar { display: none; }
+
+    .gal-item {
+      min-width: 320px;
+      height: 260px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      position: relative;
+    }
+    .gal-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .gal-item:hover img { transform: scale(1.04); }
+    .gal-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44,26,14,0.7), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .gal-item:hover .overlay { opacity: 1; }
+    .overlay span { color: var(--white); font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
+
+    /* ── CTA ── */
+    .cta-block {
+      background: linear-gradient(135deg, var(--terracota) 0%, var(--terracota-dark) 100%);
+      padding: 100px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .cta-block .section-tag { color: rgba(255,255,255,0.7); }
+    .cta-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      color: var(--white);
+      margin: 14px auto 20px;
+      max-width: 700px;
+    }
+    .cta-block p { color: rgba(255,255,255,0.8); font-size: 1.05rem; max-width: 520px; margin: 0 auto 44px; line-height: 1.7; font-weight: 300; }
+
+    .cta-actions { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--terracota);
+      padding: 16px 40px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    .btn-outline-white {
+      border: 2px solid rgba(255,255,255,0.6);
+      color: var(--white);
+      padding: 16px 40px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+    /* ── FORM ── */
+    .cotizacion {
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 0;
+      min-height: 600px;
+    }
+    .cotizacion-left {
+      background: var(--espresso);
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cotizacion-left .section-title { color: var(--white); margin-bottom: 18px; }
+    .cotizacion-left p { color: rgba(232,213,176,0.7); font-size: 0.95rem; line-height: 1.75; font-weight: 300; margin-bottom: 40px; }
+
+    .contact-info { display: flex; flex-direction: column; gap: 18px; }
+    .contact-item { display: flex; gap: 14px; align-items: center; }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: rgba(181,69,27,0.2);
+      border: 1px solid rgba(181,69,27,0.4);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--clay);
+      font-size: 1.1rem;
+    }
+    .contact-item span { color: var(--sand); font-size: 0.9rem; }
+
+    .cotizacion-right { padding: 80px 60px; }
+    .cotizacion-right h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--espresso);
+      margin-bottom: 30px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bark); margin-bottom: 8px; font-weight: 700; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid rgba(90,58,26,0.2);
+      border-radius: 2px;
+      background: var(--white);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      color: var(--espresso);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--terracota); }
+    .form-group textarea { resize: vertical; height: 110px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--terracota);
+      color: var(--white);
+      padding: 16px;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 10px;
+    }
+    .btn-submit:hover { background: var(--terracota-dark); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1A0E08;
+      color: rgba(232,213,176,0.5);
+      padding: 50px 60px 30px;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(232,213,176,0.1);
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--sand);
+      line-height: 1.2;
+    }
+    .footer-brand span { display: block; font-size: 0.72rem; letter-spacing: 0.22em; color: var(--clay); font-family: 'Lato', sans-serif; font-weight: 300; margin-top: 4px; text-transform: uppercase; }
+
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(232,213,176,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--sand); }
+
+    .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 0.78rem; }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+      width: 60px; height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+    .whatsapp-float svg { width: 32px; height: 32px; fill: white; }
+
+    /* ── ANIM ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 70px 30px; }
+      .nav { padding: 22px 30px; }
+      .hero-content { padding: 0 30px; }
+      .hero-stats { right: 30px; bottom: 160px; gap: 24px; }
+      .ventajas-grid { grid-template-columns: 1fr; gap: 50px; }
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .steps::before { display: none; }
+      .cotizacion { grid-template-columns: 1fr; }
+      .cotizacion-left, .cotizacion-right { padding: 60px 30px; }
+      .form-row { grid-template-columns: 1fr; }
+      .gallery-strip { padding: 0 30px; }
+      footer { padding: 40px 30px 24px; }
+    }
+    @media (max-width: 600px) {
+      .hero-stats { display: none; }
+      .steps { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <nav class="nav">
+    <div class="nav-logo">
+      Ladrillera Sabana Oeste
+      <span>Acabados Rústicos · Costa Rica</span>
+    </div>
+    <a href="#cotizacion" class="nav-cta">Cotizar ahora</a>
+  </nav>
+
+  <div class="hero-content">
+    <span class="hero-label">Tejas Rústicas de Arcilla</span>
+    <h1>Techos que cuentan<br/><em>una historia</em></h1>
+    <p class="hero-sub">
+      Tejas de arcilla cocida hechas para durar generaciones. Belleza rústica auténtica con la resistencia que Costa Rica exige.
+    </p>
+    <div class="hero-actions">
+      <a href="#cotizacion" class="btn-primary">
+        ✉ Solicitar cotización
+      </a>
+      <a href="#productos" class="btn-secondary">Ver catálogo</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">+25</div>
+      <div class="stat-label">Años de experiencia</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Arcilla natural</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Garantía de calidad</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INTRO BAND ── -->
+<div class="intro-band">
+  Desde <strong>1998</strong> — Especialistas en acabados rústicos para construcción &nbsp;·&nbsp; Tejas · Pisos · Enchapes · Fachaletas &nbsp;·&nbsp; <strong>+506 6172-2670</strong>
+</div>
+
+<!-- ── PRODUCTOS ── -->
+<section class="productos" id="productos">
+  <div class="productos-header reveal">
+    <div class="section-tag">Nuestro catálogo</div>
+    <h2 class="section-title">Línea completa de Tejas Rústicas</h2>
+    <p>Variedad de estilos y colores para proyectos residenciales, comerciales, ranchos, hoteles y más.</p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card reveal">
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80')">
+        <span class="card-badge">Más popular</span>
+      </div>
+      <div class="card-body">
+        <h3>Teja Escazú</h3>
+        <p>Teja de arcilla cocida clásica, ideal para proyectos residenciales y comerciales que buscan un acabado auténtico y duradero.</p>
+        <div class="card-specs">
+          <span class="spec-chip">Arcilla natural</span>
+          <span class="spec-chip">Interior · Exterior</span>
+          <span class="spec-chip">Varios colores</span>
+        </div>
+        <a href="#cotizacion" class="card-link">Cotizar este producto →</a>
+      </div>
+    </div>
+
+    <div class="card reveal" style="transition-delay: 0.1s">
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80')">
+        <span class="card-badge">Para ranchos</span>
+      </div>
+      <div class="card-body">
+        <h3>Teja Rústica Colonial</h3>
+        <p>Diseño inspirado en la arquitectura colonial centroamericana. Perfecta para ranchos campestres, fincas y hoteles boutique.</p>
+        <div class="card-specs">
+          <span class="spec-chip">Alta durabilidad</span>
+          <span class="spec-chip">Resistente al calor</span>
+          <span class="spec-chip">Estilo colonial</span>
+        </div>
+        <a href="#cotizacion" class="card-link">Cotizar este producto →</a>
+      </div>
+    </div>
+
+    <div class="card reveal" style="transition-delay: 0.2s">
+      <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1534951009808-766178b47a4f?w=600&q=80')">
+        <span class="card-badge">Premium</span>
+      </div>
+      <div class="card-body">
+        <h3>Teja Refractaria</h3>
+        <p>Teja de alta temperatura y resistencia, ideal para hornos, pizzerías, asadores y entornos industriales exigentes.</p>
+        <div class="card-specs">
+          <span class="spec-chip">Alta temperatura</span>
+          <span class="spec-chip">Industrial</span>
+          <span class="spec-chip">Refractario</span>
+        </div>
+        <a href="#cotizacion" class="card-link">Cotizar este producto →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VENTAJAS ── -->
+<section class="ventajas">
+  <div class="ventajas-grid">
+    <div class="ventajas-left reveal">
+      <div class="section-tag" style="color: var(--clay)">¿Por qué elegirnos?</div>
+      <h2 class="section-title">La calidad rústica que su proyecto merece</h2>
+      <p>Más de 25 años fabricando y comercializando tejas de arcilla en Costa Rica. Conocemos los proyectos, los climas y las exigencias locales.</p>
+      <a href="#cotizacion" class="btn-primary">Contáctenos hoy</a>
+    </div>
+
+    <ul class="items-list reveal" style="transition-delay: 0.2s">
+      <li>
+        <div class="item-icon">🏺</div>
+        <div class="item-text">
+          <h4>Arcilla 100% Natural</h4>
+          <p>Materias primas seleccionadas para garantizar color auténtico, resistencia al clima tropical y longevidad excepcional.</p>
+        </div>
+      </li>
+      <li>
+        <div class="item-icon">🌧️</div>
+        <div class="item-text">
+          <h4>Resistencia Climática</h4>
+          <p>Diseñadas para el clima costarricense: lluvia intensa, humedad, sol directo y cambios bruscos de temperatura.</p>
+        </div>
+      </li>
+      <li>
+        <div class="item-icon">🔨</div>
+        <div class="item-text">
+          <h4>Asesoría e Instalación</h4>
+          <p>Nuestro equipo lo acompaña desde la selección del producto hasta la instalación correcta para un resultado impecable.</p>
+        </div>
+      </li>
+      <li>
+        <div class="item-icon">🚚</div>
+        <div class="item-text">
+          <h4>Entrega a todo el país</h4>
+          <p>Coordinamos envíos a cualquier parte de Costa Rica. Lleve sus tejas directo a la obra.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── PROCESO ── -->
+<section class="proceso">
+  <div class="proceso-header reveal">
+    <div class="section-tag">Simple y rápido</div>
+    <h2 class="section-title">¿Cómo funciona?</h2>
+    <p>De la consulta a la entrega en su obra en 4 pasos claros</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <h4>Consulta</h4>
+      <p>Contáctenos por WhatsApp, teléfono o formulario. Cuéntenos su proyecto.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:0.1s">
+      <div class="step-num">2</div>
+      <h4>Cotización</h4>
+      <p>Le enviamos una cotización detallada con precios, cantidades y opciones.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:0.2s">
+      <div class="step-num">3</div>
+      <h4>Selección</h4>
+      <p>Elija su teja, el color y el estilo. Puede visitar nuestra sala de exhibición.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:0.3s">
+      <div class="step-num">4</div>
+      <h4>Entrega</h4>
+      <p>Coordinamos la entrega en su obra o retiro en nuestro local en La Sabana.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALERÍA ── -->
+<section class="galeria">
+  <h2 class="reveal">Proyectos realizados</h2>
+  <p class="galeria-sub reveal">Tejas instaladas en ranchos, residencias, hoteles y comercios de todo Costa Rica</p>
+  <div class="gallery-strip">
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Rancho con tejas" loading="lazy" />
+      <div class="overlay"><span>Rancho Campestre</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Casa con tejas" loading="lazy" />
+      <div class="overlay"><span>Residencia Privada</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80" alt="Techo teja" loading="lazy" />
+      <div class="overlay"><span>Hotel Boutique</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Detalle teja" loading="lazy" />
+      <div class="overlay"><span>Detalle Escazú</span></div>
+    </div>
+    <div class="gal-item">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Techo colonial" loading="lazy" />
+      <div class="overlay"><span>Estilo Colonial</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BAND ── -->
+<div class="cta-block reveal">
+  <div class="section-tag">Oferta especial</div>
+  <h2>¿Listo para comenzar su proyecto?</h2>
+  <p>Contáctenos hoy y reciba asesoría personalizada sin costo. Disponemos de tejas en inventario para entrega inmediata.</p>
+  <div class="cta-actions">
+    <a href="https://wa.me/50661722670?text=Hola,%20me%20interesa%20cotizar%20tejas%20rústicas" target="_blank" class="btn-white">
+      💬 WhatsApp directo
+    </a>
+    <a href="#cotizacion" class="btn-outline-white">Formulario de contacto</a>
+  </div>
+</div>
+
+<!-- ── COTIZACION FORM ── -->
+<div class="cotizacion" id="cotizacion">
+  <div class="cotizacion-left reveal">
+    <div class="section-tag" style="color: var(--clay)">Contáctenos</div>
+    <h2 class="section-title">Solicite su cotización hoy</h2>
+    <p>Llenamos el formulario o escríbanos directamente. Nuestro equipo le responde en menos de 24 horas.</p>
+
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <span>+506 6172-2670</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <span>ladrillerasabanaoeste@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <span>800 mts oeste de POPs La Sabana, San José</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏰</div>
+        <span>Lun–Vie 7am–5pm · Sáb 8am–2pm</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cotizacion-right reveal" style="transition-delay: 0.2s">
+    <h3>Formulario de Cotización</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nombre completo</label>
+        <input type="text" placeholder="Su nombre" />
+      </div>
+      <div class="form-group">
+        <label>Teléfono / WhatsApp</label>
+        <input type="tel" placeholder="+506 0000-0000" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Correo electrónico</label>
+      <input type="email" placeholder="correo@ejemplo.com" />
+    </div>
+    <div class="form-group">
+      <label>Tipo de teja de interés</label>
+      <select>
+        <option value="">-- Seleccione --</option>
+        <option>Teja Escazú (arcilla clásica)</option>
+        <option>Teja Rústica Colonial</option>
+        <option>Teja Refractaria</option>
+        <option>No estoy seguro / necesito asesoría</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Área aproximada (m²)</label>
+        <input type="number" placeholder="Ej: 80" />
+      </div>
+      <div class="form-group">
+        <label>Tipo de proyecto</label>
+        <select>
+          <option>Residencia</option>
+          <option>Rancho / Finca</option>
+          <option>Hotel / Comercio</option>
+          <option>Proyecto industrial</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Mensaje adicional</label>
+      <textarea placeholder="Cuéntenos más sobre su proyecto, fecha estimada, ubicación..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="handleSubmit()">Enviar solicitud de cotización →</button>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      Ladrillera Sabana Oeste
+      <span>Todo en Acabados Rústicos · Est. 1998</span>
+    </div>
+    <div class="footer-links">
+      <a href="#productos">Tejas</a>
+      <a href="#">Pisos</a>
+      <a href="#">Enchapes</a>
+      <a href="#">Fachaletas</a>
+      <a href="#">Piedra Natural</a>
+      <a href="#cotizacion">Cotizar</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Ladrillera Sabana Oeste. Todos los derechos reservados.</span>
+    <span>Diseñado para conversiones 🏺</span>
+  </div>
+</footer>
+
+<!-- ── WHATSAPP FLOAT ── -->
+<a href="https://wa.me/50661722670?text=Hola,%20me%20interesa%20cotizar%20tejas%20rústicas" target="_blank" class="whatsapp-float" title="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit simulation
+  function handleSubmit() {
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = '✅ ¡Enviado! Le contactaremos pronto.';
+    btn.style.background = 'var(--green-moss)';
+    btn.disabled = true;
+
+    // In real use: replace with fetch() to FormSubmit, Formspree, or WhatsApp redirect
+    setTimeout(() => {
+      window.open('https://wa.me/50661722670?text=Hola,%20acabo%20de%20llenar%20el%20formulario%20de%20cotización%20para%20tejas%20rústicas', '_blank');
+    }, 1200);
+  }
+</script>
+</body>
+</html>

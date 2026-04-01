@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Tejas Rústicas | Ladrillera Sabana Oeste Costa Rica</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --fire:#C94A1B;
+  --fire2:#A83812;
+  --ember:#E07840;
+  --gold:#D4A04A;
+  --sand:#EDD9A3;
+  --parch:#FAF4E8;
+  --earth:#2B1810;
+  --bark:#5C3320;
+  --moss:#3D5229;
+  --white:#fff;
+  --gray:#f4ede3;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:var(--parch);color:var(--earth);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── GRAIN OVERLAY ── */
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:16px 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .3s,backdrop-filter .3s,box-shadow .3s}
+.nav.scrolled{background:rgba(43,24,16,.93);backdrop-filter:blur(14px);box-shadow:0 2px 24px rgba(0,0,0,.35)}
+.nav-logo{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo strong{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--white);font-weight:700;letter-spacing:.02em}
+.nav-logo span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ember);font-weight:500}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-phone{color:var(--sand);font-size:.8rem;letter-spacing:.05em;text-decoration:none;font-weight:500;display:none}
+@media(min-width:600px){.nav-phone{display:block}}
+.nav-btn{background:var(--fire);color:var(--white);padding:10px 22px;border-radius:3px;text-decoration:none;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:var(--fire2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{min-height:100svh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85') center/cover no-repeat;transform:scale(1.05);transition:transform 8s ease}
+.hero-bg.loaded{transform:scale(1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(43,24,16,.92) 0%,rgba(43,24,16,.75) 50%,rgba(61,82,41,.5) 100%)}
+.hero-content{position:relative;z-index:2;padding:100px 5vw 80px;max-width:780px;animation:heroIn .9s cubic-bezier(.22,1,.36,1) both}
+
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(201,74,27,.15);border:1px solid rgba(201,74,27,.5);border-radius:100px;padding:6px 16px 6px 10px;margin-bottom:28px}
+.hero-eyebrow .dot{width:8px;height:8px;background:var(--fire);border-radius:50%;animation:pulse 1.8s infinite}
+.hero-eyebrow span{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ember);font-weight:700}
+
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,8vw,6rem);color:var(--white);line-height:1.02;font-weight:900;margin-bottom:24px}
+.hero h1 .line2{color:var(--ember);display:block}
+
+.hero-desc{color:rgba(237,217,163,.8);font-size:clamp(.95rem,2.5vw,1.12rem);line-height:1.75;max-width:540px;margin-bottom:38px;font-weight:300}
+
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:50px}
+.btn-fire{background:var(--fire);color:var(--white);padding:15px 32px;border-radius:3px;text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:all .25s;display:inline-flex;align-items:center;gap:10px;border:2px solid var(--fire)}
+.btn-fire:hover{background:var(--fire2);border-color:var(--fire2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,74,27,.45)}
+.btn-ghost{color:var(--white);padding:15px 32px;border-radius:3px;text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:all .25s;display:inline-flex;align-items:center;gap:10px;border:2px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7)}
+
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;max-width:480px}
+.hstat{background:rgba(43,24,16,.6);backdrop-filter:blur(8px);padding:18px 16px;text-align:center}
+.hstat-n{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--ember);font-weight:700;line-height:1}
+.hstat-l{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(237,217,163,.6);margin-top:4px}
+
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;animation:float 2.5s ease-in-out infinite}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,transparent,var(--ember));animation:scrollLine 2s ease-in-out infinite}
+.scroll-txt{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ember);opacity:.7}
+.hero-wave{position:absolute;bottom:-1px;left:0;right:0;z-index:3}
+
+/* ── TICKER ── */
+.ticker{background:var(--earth);overflow:hidden;padding:14px 0}
+.ticker-track{display:flex;gap:0;animation:tickerMove 22s linear infinite;width:max-content}
+.ticker-item{display:flex;align-items:center;gap:12px;padding:0 40px;white-space:nowrap;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);font-weight:500}
+.ticker-item .sep{color:var(--fire);font-size:1.1rem}
+
+/* ── SECTIONS SHARED ── */
+.section{padding:90px 5vw}
+.sect-tag{font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--fire);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sect-tag::before{content:'';width:28px;height:2px;background:var(--fire);border-radius:2px}
+.sect-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;font-weight:900;color:var(--earth)}
+.sect-title em{color:var(--fire);font-style:normal}
+
+/* ── PRODUCTS SECTION ── */
+.products-hd{text-align:center;margin-bottom:60px}
+.products-hd .sect-tag{justify-content:center}
+.products-hd .sect-tag::before{display:none}
+.products-hd p{color:var(--bark);max-width:560px;margin:16px auto 0;line-height:1.7;font-size:.95rem}
+
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1200px;margin:0 auto}
+.pcard{background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 2px 20px rgba(43,24,16,.07);transition:transform .3s,box-shadow .3s;cursor:pointer}
+.pcard:hover{transform:translateY(-7px);box-shadow:0 16px 48px rgba(43,24,16,.15)}
+.pcard-img{height:230px;background-size:cover;background-position:center;position:relative}
+.pcard-badge{position:absolute;top:14px;left:14px;background:var(--fire);color:#fff;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:5px 12px;font-weight:700;border-radius:2px}
+.pcard-body{padding:26px}
+.pcard-body h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;margin-bottom:8px}
+.pcard-body p{font-size:.85rem;color:var(--bark);line-height:1.65;margin-bottom:18px}
+.pcard-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.ptag{background:var(--sand);color:var(--bark);font-size:.65rem;padding:4px 10px;border-radius:2px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.pcard-link{color:var(--fire);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border-bottom:2px solid transparent;transition:border-color .2s;padding-bottom:2px}
+.pcard-link:hover{border-color:var(--fire)}
+
+/* ── SPECS TABLE SECTION ── */
+.specs-section{background:var(--earth);padding:90px 5vw;overflow:hidden;position:relative}
+.specs-section::before{content:'TEJAS';position:absolute;right:-60px;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:20rem;color:rgba(255,255,255,.02);line-height:1;pointer-events:none;white-space:nowrap}
+.specs-hd{margin-bottom:50px}
+.specs-hd .sect-tag{color:var(--ember)}
+.specs-hd .sect-tag::before{background:var(--ember)}
+.specs-hd .sect-title{color:var(--white)}
+.specs-hd p{color:rgba(237,217,163,.65);font-size:.95rem;line-height:1.75;margin-top:14px;max-width:600px;font-weight:300}
+
+.specs-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.stab{padding:10px 22px;border-radius:3px;border:1.5px solid rgba(255,255,255,.12);color:rgba(237,217,163,.6);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .2s;background:transparent}
+.stab.active{background:var(--fire);border-color:var(--fire);color:#fff}
+.stab:hover:not(.active){border-color:rgba(201,74,27,.5);color:var(--ember)}
+
+.specs-panel{display:none}
+.specs-panel.active{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:start}
+@media(max-width:800px){.specs-panel.active{grid-template-columns:1fr}}
+
+.spec-img-wrap{border-radius:6px;overflow:hidden;position:relative}
+.spec-img-wrap img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.spec-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(43,24,16,.7) 0%,transparent 60%);display:flex;align-items:flex-end;padding:20px}
+.spec-img-overlay h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#fff;font-weight:700}
+
+.spec-table-wrap h4{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--white);margin-bottom:6px;font-weight:700}
+.spec-table-wrap .spec-desc{color:rgba(237,217,163,.6);font-size:.85rem;line-height:1.65;margin-bottom:24px;font-weight:300}
+.spec-table{width:100%;border-collapse:collapse;margin-bottom:24px}
+.spec-table tr{border-bottom:1px solid rgba(255,255,255,.06)}
+.spec-table tr:last-child{border-bottom:none}
+.spec-table td{padding:11px 0;font-size:.85rem;vertical-align:top}
+.spec-table td:first-child{color:rgba(237,217,163,.5);width:45%;font-weight:500;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding-right:16px}
+.spec-table td:last-child{color:var(--sand);font-weight:500}
+.spec-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.sbadge{background:rgba(201,74,27,.15);border:1px solid rgba(201,74,27,.3);color:var(--ember);font-size:.65rem;padding:5px 12px;border-radius:2px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.spec-catalog-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.18);color:var(--sand);padding:12px 22px;border-radius:3px;text-decoration:none;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;transition:all .2s}
+.spec-catalog-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+
+/* ── VENTAJAS ── */
+.ventajas{background:var(--parch)}
+.ventajas-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1200px;margin:0 auto}
+@media(max-width:850px){.ventajas-inner{grid-template-columns:1fr;gap:48px}}
+.vent-visual{position:relative}
+.vent-main-img{width:100%;border-radius:8px;display:block;aspect-ratio:4/5;object-fit:cover}
+.vent-badge{position:absolute;bottom:-20px;right:-20px;background:var(--fire);color:#fff;padding:22px 28px;border-radius:6px;text-align:center;box-shadow:0 8px 32px rgba(201,74,27,.4)}
+.vent-badge strong{font-family:'Cormorant Garamond',serif;font-size:2.2rem;display:block;line-height:1;font-weight:900}
+.vent-badge span{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+@media(max-width:850px){.vent-badge{right:0}}
+
+.vent-list{display:flex;flex-direction:column;gap:24px;margin-top:32px}
+.vitem{display:flex;gap:18px;align-items:flex-start;padding:20px;border-radius:6px;transition:background .2s}
+.vitem:hover{background:rgba(201,74,27,.06)}
+.vicon{width:50px;height:50px;border-radius:6px;background:linear-gradient(135deg,var(--fire),var(--ember));display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 4px 16px rgba(201,74,27,.3)}
+.vtxt h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;margin-bottom:5px;color:var(--earth)}
+.vtxt p{font-size:.83rem;color:var(--bark);line-height:1.65}
+
+/* ── PROCESO ── */
+.proceso{background:linear-gradient(160deg,var(--earth) 0%,#3d1f10 100%);padding:90px 5vw;position:relative;overflow:hidden}
+.proceso::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0L80 12v2L54 40h-2zm4 0L80 16v2L58 40h-2zm4 0L80 20v2L62 40h-2zm4 0L80 24v2L66 40h-2zm4 0L80 28v2L70 40h-2zm4 0L80 32v2L74 40h-2zm4 0L80 36v2L78 40h-2zm4 0L80 40h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.proceso-hd{text-align:center;margin-bottom:60px;position:relative;z-index:1}
+.proceso-hd .sect-tag{justify-content:center;color:var(--ember)}
+.proceso-hd .sect-tag::before{display:none}
+.proceso-hd .sect-title{color:var(--white)}
+.proceso-hd p{color:rgba(237,217,163,.55);max-width:500px;margin:14px auto 0;font-size:.9rem;line-height:1.7;font-weight:300}
+
+.steps-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+@media(max-width:900px){.steps-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+@media(max-width:580px){.steps-grid{grid-template-columns:1fr 1fr;gap:20px}}
+
+.step-connector{display:flex;align-items:flex-start;padding-top:32px}
+.step-conn-line{flex:1;height:2px;background:linear-gradient(90deg,rgba(201,74,27,.5),rgba(201,74,27,.15));margin-top:2px}
+@media(max-width:900px){.step-connector{display:none}}
+
+.step{text-align:center;padding:24px 16px;border-radius:8px;transition:background .2s}
+.step:hover{background:rgba(255,255,255,.04)}
+.step-circle{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--fire2));display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 6px 24px rgba(201,74,27,.4);font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:900;color:#fff;position:relative}
+.step-circle::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(201,74,27,.3)}
+.step h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);margin-bottom:8px;font-weight:700}
+.step p{font-size:.78rem;color:rgba(237,217,163,.5);line-height:1.65;font-weight:300}
+.step-icon{font-size:1.6rem;margin-bottom:12px}
+.nacional-badge{margin:36px auto 0;max-width:600px;background:rgba(201,74,27,.12);border:1px solid rgba(201,74,27,.3);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.nacional-badge .nb-icon{font-size:2rem;flex-shrink:0}
+.nacional-badge p{font-size:.85rem;color:var(--sand);line-height:1.65;font-weight:300}
+.nacional-badge p strong{color:var(--ember);font-weight:700}
+
+/* ── GALLERY ── */
+.gallery-section{background:var(--gray);padding:90px 0}
+.gallery-hd{padding:0 5vw;margin-bottom:40px}
+.gallery-hd .sect-tag{}
+.gallery-controls{padding:0 5vw;display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.gallery-count{font-size:.78rem;color:var(--bark);letter-spacing:.1em}
+.gal-arrows{display:flex;gap:10px}
+.garrow{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(92,51,32,.25);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--bark);transition:all .2s}
+.garrow:hover{background:var(--fire);border-color:var(--fire);color:#fff}
+
+.gallery-track-wrap{position:relative;overflow:hidden}
+.gallery-track{display:flex;gap:16px;padding:0 5vw;transition:transform .45s cubic-bezier(.25,.1,.25,1);will-change:transform}
+.gal-item{min-width:320px;height:270px;border-radius:8px;overflow:hidden;flex-shrink:0;position:relative;cursor:pointer}
+@media(max-width:600px){.gal-item{min-width:80vw;height:230px}}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .45s}
+.gal-item:hover img{transform:scale(1.06)}
+.gal-caption{position:absolute;inset:0;background:linear-gradient(to top,rgba(43,24,16,.85) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:18px;opacity:0;transition:opacity .3s}
+.gal-item:hover .gal-caption,.gal-item:focus .gal-caption{opacity:1}
+.gal-caption h5{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#fff;font-weight:700}
+.gal-caption p{font-size:.72rem;color:rgba(237,217,163,.75);letter-spacing:.1em;margin-top:2px}
+.gallery-dots{display:flex;justify-content:center;gap:8px;padding:24px 5vw 0}
+.gdot{width:8px;height:8px;border-radius:50%;background:rgba(92,51,32,.2);cursor:pointer;transition:all .2s}
+.gdot.active{background:var(--fire);width:24px;border-radius:4px}
+
+/* ── CTA STRIP ── */
+.cta-strip{background:linear-gradient(100deg,var(--fire) 0%,var(--fire2) 60%,#7a2a0d 100%);padding:70px 5vw;position:relative;overflow:hidden;text-align:center}
+.cta-strip::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fff' fill-opacity='.04'%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3Ccircle cx='37' cy='7' r='3'/%3E%3Ccircle cx='7' cy='37' r='3'/%3E%3Ccircle cx='37' cy='37' r='3'/%3E%3C/g%3E%3C/svg%3E")}
+.cta-strip .sect-tag{justify-content:center;color:rgba(255,255,255,.7);position:relative}
+.cta-strip .sect-tag::before{background:rgba(255,255,255,.4)}
+.cta-strip h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.2rem);color:#fff;margin:14px auto 18px;max-width:680px;line-height:1.15;font-weight:900;position:relative}
+.cta-strip p{color:rgba(255,255,255,.78);font-size:.95rem;line-height:1.7;max-width:500px;margin:0 auto 40px;font-weight:300;position:relative}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;position:relative}
+.btn-wh{background:#fff;color:var(--fire);padding:15px 36px;border-radius:3px;text-decoration:none;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:all .25s;display:inline-flex;align-items:center;gap:10px}
+.btn-wh:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.btn-ghost-wh{border:2px solid rgba(255,255,255,.4);color:#fff;padding:15px 36px;border-radius:3px;text-decoration:none;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;transition:all .25s;display:inline-flex;align-items:center;gap:10px}
+.btn-ghost-wh:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+/* ── FORM ── */
+.contact-split{display:grid;grid-template-columns:1fr 1.1fr;min-height:600px}
+@media(max-width:800px){.contact-split{grid-template-columns:1fr}}
+.contact-left{background:var(--earth);padding:80px 5vw;display:flex;flex-direction:column;justify-content:center}
+.contact-left .sect-tag{color:var(--ember)}
+.contact-left .sect-tag::before{background:var(--ember)}
+.contact-left .sect-title{color:var(--white);font-size:clamp(1.8rem,4vw,2.8rem)}
+.contact-left p{color:rgba(237,217,163,.6);font-size:.88rem;line-height:1.75;margin-top:14px;margin-bottom:40px;font-weight:300}
+.cinfo{display:flex;flex-direction:column;gap:16px}
+.cinfo-item{display:flex;align-items:center;gap:14px}
+.cinfo-icon{width:42px;height:42px;background:rgba(201,74,27,.2);border:1px solid rgba(201,74,27,.35);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.cinfo-item a,.cinfo-item span{color:var(--sand);font-size:.85rem;text-decoration:none;transition:color .2s}
+.cinfo-item a:hover{color:var(--ember)}
+.contact-right{background:var(--white);padding:70px 5vw;display:flex;flex-direction:column;justify-content:center}
+.contact-right h3{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--earth);margin-bottom:28px;font-weight:700}
+.fgroup{margin-bottom:18px}
+.fgroup label{display:block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bark);margin-bottom:7px;font-weight:700}
+.fgroup input,.fgroup select,.fgroup textarea{width:100%;padding:12px 14px;border:1.5px solid rgba(92,51,32,.18);border-radius:3px;background:var(--parch);font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--earth);transition:border-color .2s;outline:none}
+.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-color:var(--fire);background:var(--white)}
+.fgroup textarea{resize:vertical;height:100px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.frow{grid-template-columns:1fr}}
+.btn-submit{width:100%;background:var(--fire);color:#fff;padding:15px;border:none;border-radius:3px;font-family:'DM Sans',sans-serif;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .25s;margin-top:6px}
+.btn-submit:hover{background:var(--fire2);transform:translateY(-1px)}
+
+/* ── FOOTER ── */
+footer{background:#190d08;color:rgba(237,217,163,.4);padding:50px 5vw 28px}
+.foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:28px}
+.foot-brand strong{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--sand);display:block;font-weight:700}
+.foot-brand span{font-size:.62rem;letter-spacing:.25em;color:var(--ember);text-transform:uppercase;margin-top:3px;display:block;font-weight:500}
+.foot-links{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-links a{color:rgba(237,217,163,.45);text-decoration:none;font-size:.8rem;transition:color .2s}
+.foot-links a:hover{color:var(--sand)}
+.foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.72rem}
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:800;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 24px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;animation:waPulse 3s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.12);box-shadow:0 6px 32px rgba(37,211,102,.6)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+.wa-tooltip{position:absolute;right:70px;background:var(--earth);color:var(--sand);font-size:.72rem;padding:7px 14px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;font-weight:500;letter-spacing:.05em}
+.wa-float:hover .wa-tooltip{opacity:1}
+
+/* ── ANIMATIONS ── */
+@keyframes heroIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes scrollLine{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(0);transform-origin:bottom}}
+@keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 24px rgba(37,211,102,.45)}50%{box-shadow:0 4px 36px rgba(37,211,102,.7)}}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE FIXES ── */
+@media(max-width:600px){
+  .hero h1{font-size:2.5rem}
+  .hero-actions{flex-direction:column}
+  .btn-fire,.btn-ghost{width:100%;justify-content:center;text-align:center}
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:1px}
+  .hstat-n{font-size:1.5rem}
+  .section{padding:60px 5vw}
+  .ventajas-inner{gap:40px}
+  .vent-badge{right:10px;bottom:-15px;padding:16px 20px}
+  .vent-badge strong{font-size:1.8rem}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .nacional-badge{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo">
+    <strong>Ladrillera Sabana Oeste</strong>
+    <span>Acabados Rústicos · CR</span>
+  </div>
+  <div class="nav-right">
+    <a href="tel:+50661722670" class="nav-phone">📞 6172-2670</a>
+    <a href="#cotizar" class="nav-btn">Cotizar ahora</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span>Tejas Rústicas de Arcilla · Costa Rica</span>
+    </div>
+    <h1>Techos que<span class="line2">hablan por sí solos</span></h1>
+    <p class="hero-desc">Fabricamos e instalamos tejas de arcilla cocida en cualquier rincón de Costa Rica. Resistentes, auténticas y con garantía de por vida.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/50661722670?text=Hola,%20quiero%20cotizar%20tejas%20rústicas" target="_blank" class="btn-fire">
+        💬 WhatsApp directo
+      </a>
+      <a href="#catalogo" class="btn-ghost">Ver catálogo &amp; especificaciones</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">+25</div><div class="hstat-l">Años exp.</div></div>
+      <div class="hstat"><div class="hstat-n">100%</div><div class="hstat-l">Arcilla natural</div></div>
+      <div class="hstat"><div class="hstat-n">∞</div><div class="hstat-l">Garantía</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-txt">Explorar</span>
+    <div class="scroll-line"></div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,50 C360,100 1080,0 1440,50 L1440,80 L0,80 Z" fill="#FAF4E8"/></svg>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item">🏺 Tejas de Arcilla <span class="sep">✦</span></div>
+    <div class="ticker-item">Instalación Profesional <span class="sep">✦</span></div>
+    <div class="ticker-item">Cobertura Nacional <span class="sep">✦</span></div>
+    <div class="ticker-item">Pisos · Enchapes · Fachaletas <span class="sep">✦</span></div>
+    <div class="ticker-item">Piedra Natural <span class="sep">✦</span></div>
+    <div class="ticker-item">+25 Años de Experiencia <span class="sep">✦</span></div>
+    <div class="ticker-item">Garantía de Calidad <span class="sep">✦</span></div>
+    <div class="ticker-item">San José, Costa Rica <span class="sep">✦</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item">🏺 Tejas de Arcilla <span class="sep">✦</span></div>
+    <div class="ticker-item">Instalación Profesional <span class="sep">✦</span></div>
+    <div class="ticker-item">Cobertura Nacional <span class="sep">✦</span></div>
+    <div class="ticker-item">Pisos · Enchapes · Fachaletas <span class="sep">✦</span></div>
+    <div class="ticker-item">Piedra Natural <span class="sep">✦</span></div>
+    <div class="ticker-item">+25 Años de Experiencia <span class="sep">✦</span></div>
+    <div class="ticker-item">Garantía de Calidad <span class="sep">✦</span></div>
+    <div class="ticker-item">San José, Costa Rica <span class="sep">✦</span></div>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<section class="section" id="productos">
+  <div class="products-hd reveal">
+    <div class="sect-tag">Nuestro catálogo</div>
+    <h2 class="sect-title">Línea de <em>Tejas Rústicas</em></h2>
+    <p>Cada teja es cocida a alta temperatura con arcilla natural costarricense. Perfectas para cualquier tipo de proyecto y clima.</p>
+  </div>
+  <div class="products-grid">
+    <div class="pcard reveal">
+      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80')">
+        <span class="pcard-badge">⭐ Más popular</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Teja Escazú Classic</h3>
+        <p>La teja costarricense por excelencia. Arcilla cocida con acabado rústico natural, ideal para residencias, condominios y proyectos turísticos.</p>
+        <div class="pcard-tags"><span class="ptag">Residencial</span><span class="ptag">Exterior</span><span class="ptag">Varios colores</span></div>
+        <a href="#catalogo" class="pcard-link">Ver especificaciones →</a>
+      </div>
+    </div>
+    <div class="pcard reveal" style="transition-delay:.1s">
+      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80')">
+        <span class="pcard-badge">🏡 Para ranchos</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Teja Colonial Rústica</h3>
+        <p>Inspirada en la arquitectura colonial centroamericana. El acabado perfecto para ranchos, fincas, hoteles boutique y proyectos ecoturísticos.</p>
+        <div class="pcard-tags"><span class="ptag">Colonial</span><span class="ptag">Ranchos</span><span class="ptag">Alta durabilidad</span></div>
+        <a href="#catalogo" class="pcard-link">Ver especificaciones →</a>
+      </div>
+    </div>
+    <div class="pcard reveal" style="transition-delay:.2s">
+      <div class="pcard-img" style="background-image:url('https://images.unsplash.com/photo-1534951009808-766178b47a4f?w=700&q=80')">
+        <span class="pcard-badge">🔥 Premium</span>
+      </div>
+      <div class="pcard-body">
+        <h3>Teja Refractaria</h3>
+        <p>Alta resistencia térmica para hornos de pizza, asadores, chimeneas y entornos industriales. Fabricada con arcilla refractaria especial.</p>
+        <div class="pcard-tags"><span class="ptag">Industrial</span><span class="ptag">Alta temperatura</span><span class="ptag">Refractario</span></div>
+        <a href="#catalogo" class="pcard-link">Ver especificaciones →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS CATALOG -->
+<section class="specs-section" id="catalogo">
+  <div class="specs-hd reveal">
+    <div class="sect-tag">Ficha técnica</div>
+    <h2 class="sect-title">Especificaciones<br/>Técnicas</h2>
+    <p>Seleccione el tipo de teja para ver medidas, peso, rendimiento por m² y todos los detalles que necesita para su proyecto.</p>
+  </div>
+
+  <div class="specs-tabs reveal">
+    <button class="stab active" onclick="showSpec('escazu',this)">Teja Escazú</button>
+    <button class="stab" onclick="showSpec('colonial',this)">Colonial Rústica</button>
+    <button class="stab" onclick="showSpec('refractaria',this)">Refractaria</button>
+    <button class="stab" onclick="showSpec('plana',this)">Teja Plana</button>
+  </div>
+
+  <!-- ESCAZÚ -->
+  <div class="specs-panel active" id="spec-escazu">
+    <div class="spec-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Teja Escazú" loading="lazy"/>
+      <div class="spec-img-overlay"><h3>Teja Escazú Classic</h3></div>
+    </div>
+    <div class="spec-table-wrap reveal" style="transition-delay:.1s">
+      <h4>Teja Escazú Classic</h4>
+      <p class="spec-desc">La teja de arcilla más utilizada en Costa Rica. Cocida a más de 1000°C, ofrece impermeabilidad natural, excelente aislamiento térmico y resistencia al calor tropical.</p>
+      <div class="spec-badges">
+        <span class="sbadge">✅ Resistente al agua</span>
+        <span class="sbadge">🌡️ Aislante térmico</span>
+        <span class="sbadge">🌱 100% Natural</span>
+        <span class="sbadge">♻️ Ecológica</span>
+      </div>
+      <table class="spec-table">
+        <tr><td>Largo</td><td>42 cm</td></tr>
+        <tr><td>Ancho</td><td>28 cm</td></tr>
+        <tr><td>Grosor</td><td>12 – 15 mm</td></tr>
+        <tr><td>Peso por pieza</td><td>Aprox. 2.8 kg</td></tr>
+        <tr><td>Rendimiento por m²</td><td>10 – 12 piezas</td></tr>
+        <tr><td>Peso por m²</td><td>28 – 34 kg/m²</td></tr>
+        <tr><td>Material</td><td>Arcilla natural cocida</td></tr>
+        <tr><td>Temperatura cocción</td><td>+1000 °C</td></tr>
+        <tr><td>Absorción de agua</td><td>&lt; 6%</td></tr>
+        <tr><td>Resistencia a heladas</td><td>F2 (norma EN 539-2)</td></tr>
+        <tr><td>Colores disponibles</td><td>Natural, Envejecido, Rojo, Ocre</td></tr>
+        <tr><td>Garantía</td><td>25 años de producto</td></tr>
+        <tr><td>Aplicación</td><td>Techos inclinados 22° – 60°</td></tr>
+      </table>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#cotizar" class="btn-fire" style="font-size:.72rem;padding:12px 22px">Cotizar esta teja</a>
+        <a href="#" class="spec-catalog-btn" onclick="alert('Conéctelo a su catálogo PDF digital aquí')">📄 Ver catálogo digital</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLONIAL -->
+  <div class="specs-panel" id="spec-colonial">
+    <div class="spec-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Teja Colonial" loading="lazy"/>
+      <div class="spec-img-overlay"><h3>Teja Colonial Rústica</h3></div>
+    </div>
+    <div class="spec-table-wrap reveal" style="transition-delay:.1s">
+      <h4>Teja Colonial Rústica</h4>
+      <p class="spec-desc">Teja de perfil curvo tipo canal, inspirada en la arquitectura colonial. Su forma permite excelente escorrentía del agua lluvia y una estética inconfundible para ranchos y fincas.</p>
+      <div class="spec-badges">
+        <span class="sbadge">🏡 Ranchos & Fincas</span>
+        <span class="sbadge">💧 Alto drenaje</span>
+        <span class="sbadge">🌿 Estilo campestre</span>
+        <span class="sbadge">🔩 Fácil instalación</span>
+      </div>
+      <table class="spec-table">
+        <tr><td>Largo</td><td>48 cm</td></tr>
+        <tr><td>Ancho canal</td><td>16 cm</td></tr>
+        <tr><td>Grosor</td><td>10 – 13 mm</td></tr>
+        <tr><td>Peso por pieza</td><td>Aprox. 2.2 kg</td></tr>
+        <tr><td>Rendimiento por m²</td><td>14 – 16 piezas</td></tr>
+        <tr><td>Peso por m²</td><td>30 – 36 kg/m²</td></tr>
+        <tr><td>Material</td><td>Arcilla cocida natural</td></tr>
+        <tr><td>Temperatura cocción</td><td>+980 °C</td></tr>
+        <tr><td>Absorción de agua</td><td>&lt; 8%</td></tr>
+        <tr><td>Pendiente mínima</td><td>30°</td></tr>
+        <tr><td>Colores disponibles</td><td>Natural, Viejo, Barro crudo</td></tr>
+        <tr><td>Garantía</td><td>20 años de producto</td></tr>
+        <tr><td>Aplicación</td><td>Ranchos, casas coloniales, hoteles</td></tr>
+      </table>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#cotizar" class="btn-fire" style="font-size:.72rem;padding:12px 22px">Cotizar esta teja</a>
+        <a href="#" class="spec-catalog-btn" onclick="alert('Conéctelo a su catálogo PDF digital aquí')">📄 Ver catálogo digital</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFRACTARIA -->
+  <div class="specs-panel" id="spec-refractaria">
+    <div class="spec-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1534951009808-766178b47a4f?w=800&q=80" alt="Teja Refractaria" loading="lazy"/>
+      <div class="spec-img-overlay"><h3>Teja Refractaria</h3></div>
+    </div>
+    <div class="spec-table-wrap reveal" style="transition-delay:.1s">
+      <h4>Teja Refractaria</h4>
+      <p class="spec-desc">Especialmente formulada para soportar altas temperaturas. Usada en hornos de pizza artesanales, asadores, chimeneas y aplicaciones industriales que requieren resistencia térmica extrema.</p>
+      <div class="spec-badges">
+        <span class="sbadge">🔥 Alta temperatura</span>
+        <span class="sbadge">🍕 Hornos pizza</span>
+        <span class="sbadge">🏭 Industrial</span>
+        <span class="sbadge">⚡ Choque térmico</span>
+      </div>
+      <table class="spec-table">
+        <tr><td>Largo</td><td>24 cm</td></tr>
+        <tr><td>Ancho</td><td>12 cm</td></tr>
+        <tr><td>Grosor</td><td>25 – 30 mm</td></tr>
+        <tr><td>Peso por pieza</td><td>Aprox. 3.5 kg</td></tr>
+        <tr><td>Rendimiento por m²</td><td>33 – 35 piezas</td></tr>
+        <tr><td>Temperatura máx. continua</td><td>1260 °C</td></tr>
+        <tr><td>Temperatura pico</td><td>hasta 1450 °C</td></tr>
+        <tr><td>Contenido Al₂O₃</td><td>30 – 45%</td></tr>
+        <tr><td>Resistencia compresión</td><td>+30 MPa</td></tr>
+        <tr><td>Colores</td><td>Beige claro natural</td></tr>
+        <tr><td>Garantía</td><td>10 años de producto</td></tr>
+        <tr><td>Aplicación</td><td>Hornos, chimeneas, industria</td></tr>
+      </table>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#cotizar" class="btn-fire" style="font-size:.72rem;padding:12px 22px">Cotizar esta teja</a>
+        <a href="#" class="spec-catalog-btn" onclick="alert('Conéctelo a su catálogo PDF digital aquí')">📄 Ver catálogo digital</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANA -->
+  <div class="specs-panel" id="spec-plana">
+    <div class="spec-img-wrap reveal">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" alt="Teja Plana" loading="lazy"/>
+      <div class="spec-img-overlay"><h3>Teja Plana Artesanal</h3></div>
+    </div>
+    <div class="spec-table-wrap reveal" style="transition-delay:.1s">
+      <h4>Teja Plana Artesanal</h4>
+      <p class="spec-desc">Acabado moderno-rústico en un perfil plano. Ideal para diseños arquitectónicos contemporáneos que buscan la textura natural de la arcilla con líneas limpias y ordenadas.</p>
+      <div class="spec-badges">
+        <span class="sbadge">🏗️ Arquitectura moderna</span>
+        <span class="sbadge">📐 Perfil plano</span>
+        <span class="sbadge">🎨 Varios acabados</span>
+        <span class="sbadge">🌧️ Alta impermeabilidad</span>
+      </div>
+      <table class="spec-table">
+        <tr><td>Largo</td><td>40 cm</td></tr>
+        <tr><td>Ancho</td><td>24 cm</td></tr>
+        <tr><td>Grosor</td><td>14 – 18 mm</td></tr>
+        <tr><td>Peso por pieza</td><td>Aprox. 3.1 kg</td></tr>
+        <tr><td>Rendimiento por m²</td><td>10 – 13 piezas</td></tr>
+        <tr><td>Peso por m²</td><td>31 – 40 kg/m²</td></tr>
+        <tr><td>Material</td><td>Arcilla fina seleccionada</td></tr>
+        <tr><td>Absorción de agua</td><td>&lt; 5%</td></tr>
+        <tr><td>Pendiente mínima</td><td>18°</td></tr>
+        <tr><td>Colores disponibles</td><td>Natural, Gris, Envejecido, Negra</td></tr>
+        <tr><td>Garantía</td><td>25 años de producto</td></tr>
+        <tr><td>Aplicación</td><td>Arquitectura contemporánea</td></tr>
+      </table>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#cotizar" class="btn-fire" style="font-size:.72rem;padding:12px 22px">Cotizar esta teja</a>
+        <a href="#" class="spec-catalog-btn" onclick="alert('Conéctelo a su catálogo PDF digital aquí')">📄 Ver catálogo digital</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENTAJAS -->
+<section class="section ventajas" id="nosotros">
+  <div class="ventajas-inner">
+    <div class="vent-visual reveal">
+      <img class="vent-main-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80" alt="Casa con tejas rústicas" loading="lazy"/>
+      <div class="vent-badge">
+        <strong>+25</strong>
+        <span>años de<br/>experiencia</span>
+      </div>
+    </div>
+    <div>
+      <div class="sect-tag reveal">¿Por qué Ladrillera Sabana Oeste?</div>
+      <h2 class="sect-title reveal">La diferencia está en<br/><em>los detalles</em></h2>
+      <ul class="vent-list">
+        <li class="vitem reveal">
+          <div class="vicon">🏺</div>
+          <div class="vtxt"><h4>Arcilla 100% Natural</h4><p>Materias primas de origen costarricense, cocidas a alta temperatura para garantizar color auténtico y máxima resistencia climática.</p></div>
+        </li>
+        <li class="vitem reveal" style="transition-delay:.1s">
+          <div class="vicon">🔨</div>
+          <div class="vtxt"><h4>Instalación Profesional Incluida</h4><p>Contamos con equipo técnico propio para instalar sus tejas correctamente. Nos trasladamos a cualquier provincia de Costa Rica sin costo adicional de asesoría.</p></div>
+        </li>
+        <li class="vitem reveal" style="transition-delay:.2s">
+          <div class="vicon">🛡️</div>
+          <div class="vtxt"><h4>Garantía Real</h4><p>Hasta 25 años de garantía en nuestros productos. Si hay algún defecto de fabricación, lo resolvemos sin costo. Así de seguros estamos de nuestra calidad.</p></div>
+        </li>
+        <li class="vitem reveal" style="transition-delay:.3s">
+          <div class="vicon">🚚</div>
+          <div class="vtxt"><h4>Entrega + Instalación Nacional</h4><p>Llevamos e instalamos sus tejas en cualquier punto del país: San José, Guanacaste, Limón, Puntarenas, Cartago, Heredia, Alajuela y Zona Sur.</p></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="proceso-hd reveal">
+    <div class="sect-tag">Sencillo y claro</div>
+    <h2 class="sect-title" style="color:var(--white)">De la consulta a su<br/>techo terminado</h2>
+    <p>5 pasos que garantizan un resultado impecable, donde sea que esté en Costa Rica.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step reveal">
+      <div class="step-circle">1</div>
+      <div class="step-icon">💬</div>
+      <h4>Consulta</h4>
+      <p>Escríbanos por WhatsApp o llame. Cuéntenos su proyecto, área y ubicación.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.08s">
+      <div class="step-circle">2</div>
+      <div class="step-icon">📋</div>
+      <h4>Cotización</h4>
+      <p>Le enviamos en menos de 24h una cotización detallada con precios, cantidades y opciones.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.16s">
+      <div class="step-circle">3</div>
+      <div class="step-icon">🏺</div>
+      <h4>Selección</h4>
+      <p>Elija el tipo, color y estilo de su teja. Puede visitar nuestra sala de exhibición en La Sabana.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.24s">
+      <div class="step-circle">4</div>
+      <div class="step-icon">🚚</div>
+      <h4>Entrega</h4>
+      <p>Coordinamos la entrega del material directamente en su obra, en cualquier parte del país.</p>
+    </div>
+    <div class="step reveal" style="transition-delay:.32s">
+      <div class="step-circle">5</div>
+      <div class="step-icon">🛡️</div>
+      <h4>Instalación & Garantía</h4>
+      <p>Nuestros técnicos instalan sus tejas con garantía. Trabajo impecable o lo volvemos a hacer.</p>
+    </div>
+  </div>
+  <div class="nacional-badge reveal">
+    <div class="nb-icon">📍</div>
+    <p><strong>Instalamos en toda Costa Rica</strong> — San José · Alajuela · Heredia · Cartago · Guanacaste · Puntarenas · Limón · Zona Sur · Zona Norte. Un solo proveedor, todo el país.</p>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="gallery-section" id="galeria">
+  <div class="gallery-hd reveal">
+    <div class="sect-tag">Proyectos realizados</div>
+    <h2 class="sect-title">Ideas para <em>su proyecto</em></h2>
+  </div>
+  <div class="gallery-controls">
+    <span class="gallery-count" id="galCount">Mostrando 1–5 de 10 proyectos</span>
+    <div class="gal-arrows">
+      <button class="garrow" id="galPrev" onclick="moveGallery(-1)" aria-label="Anterior">‹</button>
+      <button class="garrow" id="galNext" onclick="moveGallery(1)" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+  <div class="gallery-track-wrap">
+    <div class="gallery-track" id="galTrack">
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80" alt="Rancho campestre" loading="lazy"/><div class="gal-caption"><h5>Rancho Campestre</h5><p>Guanacaste · Teja Colonial</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80" alt="Residencia" loading="lazy"/><div class="gal-caption"><h5>Residencia Privada</h5><p>Escazú · Teja Escazú Classic</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80" alt="Hotel boutique" loading="lazy"/><div class="gal-caption"><h5>Hotel Boutique</h5><p>La Fortuna · Teja Colonial</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Detalle teja" loading="lazy"/><div class="gal-caption"><h5>Detalle Escazú</h5><p>San José · Teja Plana</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Techo colonial" loading="lazy"/><div class="gal-caption"><h5>Casa Colonial</h5><p>Cartago · Teja Colonial Rústica</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=80" alt="Finca" loading="lazy"/><div class="gal-caption"><h5>Finca Ecoturística</h5><p>Pérez Zeledón · Teja Escazú</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1602343168117-bb8ffe3e2e9f?w=700&q=80" alt="Condominio" loading="lazy"/><div class="gal-caption"><h5>Condominio</h5><p>Santa Ana · Teja Plana</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=700&q=80" alt="Casa moderna" loading="lazy"/><div class="gal-caption"><h5>Casa Moderna Rústica</h5><p>Heredia · Teja Escazú Classic</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&q=80" alt="Cabaña" loading="lazy"/><div class="gal-caption"><h5>Cabaña de Montaña</h5><p>Turrialba · Teja Colonial</p></div></div>
+      <div class="gal-item"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=700&q=80" alt="Villa" loading="lazy"/><div class="gal-caption"><h5>Villa de Lujo</h5><p>Jacó · Teja Refractaria</p></div></div>
+    </div>
+  </div>
+  <div class="gallery-dots" id="galDots"></div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip reveal">
+  <div class="sect-tag">Atención inmediata</div>
+  <h2>¿Cuántas tejas necesita para su proyecto?</h2>
+  <p>Escríbanos hoy y en menos de 24 horas le enviamos su cotización con medidas, cantidades exactas y precio final.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/50661722670?text=Hola,%20quiero%20una%20cotización%20de%20tejas%20rústicas" target="_blank" class="btn-wh">💬 WhatsApp ahora</a>
+    <a href="#cotizar" class="btn-ghost-wh">📋 Formulario de cotización</a>
+  </div>
+</div>
+
+<!-- FORMULARIO -->
+<div class="contact-split" id="cotizar">
+  <div class="contact-left reveal">
+    <div class="sect-tag">Contáctenos</div>
+    <h2 class="sect-title">Hablemos de<br/>su proyecto</h2>
+    <p>Cuéntenos qué necesita y le asesoramos sin compromiso. Contamos con sala de exhibición en San José y visitas técnicas a su obra.</p>
+    <div class="cinfo">
+      <div class="cinfo-item"><div class="cinfo-icon">📞</div><a href="tel:+50661722670">+506 6172-2670</a></div>
+      <div class="cinfo-item"><div class="cinfo-icon">💬</div><a href="https://wa.me/50661722670" target="_blank">WhatsApp directo</a></div>
+      <div class="cinfo-item"><div class="cinfo-icon">✉️</div><a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a></div>
+      <div class="cinfo-item"><div class="cinfo-icon">📍</div><span>800 mts oeste de POPs La Sabana, San José</span></div>
+      <div class="cinfo-item"><div class="cinfo-icon">⏰</div><span>Lun–Vie 7am–5pm &nbsp;·&nbsp; Sáb 8am–2pm</span></div>
+    </div>
+  </div>
+  <div class="contact-right reveal" style="transition-delay:.15s">
+    <h3>Solicitar cotización</h3>
+    <div class="frow">
+      <div class="fgroup"><label>Nombre</label><input type="text" placeholder="Su nombre completo"/></div>
+      <div class="fgroup"><label>WhatsApp</label><input type="tel" placeholder="+506 0000-0000"/></div>
+    </div>
+    <div class="fgroup"><label>Correo electrónico</label><input type="email" placeholder="correo@ejemplo.com"/></div>
+    <div class="frow">
+      <div class="fgroup"><label>Tipo de teja</label>
+        <select>
+          <option value="">-- Seleccione --</option>
+          <option>Teja Escazú Classic</option>
+          <option>Teja Colonial Rústica</option>
+          <option>Teja Refractaria</option>
+          <option>Teja Plana Artesanal</option>
+          <option>No estoy seguro / necesito asesoría</option>
+        </select>
+      </div>
+      <div class="fgroup"><label>Área aprox. (m²)</label><input type="number" placeholder="Ej: 120"/></div>
+    </div>
+    <div class="frow">
+      <div class="fgroup"><label>Tipo de proyecto</label>
+        <select>
+          <option>Residencia / Casa</option>
+          <option>Rancho / Finca</option>
+          <option>Hotel / Comercio</option>
+          <option>Condominio</option>
+          <option>Industrial</option>
+        </select>
+      </div>
+      <div class="fgroup"><label>Provincia</label>
+        <select>
+          <option>San José</option>
+          <option>Alajuela</option>
+          <option>Heredia</option>
+          <option>Cartago</option>
+          <option>Guanacaste</option>
+          <option>Puntarenas</option>
+          <option>Limón</option>
+        </select>
+      </div>
+    </div>
+    <div class="fgroup"><label>Descripción del proyecto</label><textarea placeholder="Cuéntenos más: fechas, tipo de techo, si necesita instalación, preguntas específicas..."></textarea></div>
+    <button class="btn-submit" onclick="submitForm(this)">Enviar solicitud de cotización →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <strong>Ladrillera Sabana Oeste</strong>
+      <span>Todo en Acabados Rústicos · Establecidos 1998</span>
+    </div>
+    <div class="foot-links">
+      <a href="#productos">Tejas</a>
+      <a href="#catalogo">Especificaciones</a>
+      <a href="#galeria">Proyectos</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#cotizar">Cotizar</a>
+      <a href="https://wa.me/50661722670" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2025 Ladrillera Sabana Oeste. Todos los derechos reservados.</span>
+    <span>Fabricamos e instalamos en toda Costa Rica 🏺</span>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/50661722670?text=Hola,%20me%20interesa%20cotizar%20tejas%20rústicas" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <span class="wa-tooltip">💬 Escribir por WhatsApp</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// NAV scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)
+})
+
+// Hero BG lazy
+setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),100)
+
+// Reveal on scroll
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.1})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
+
+// Spec tabs
+function showSpec(id,btn){
+  document.querySelectorAll('.specs-panel').forEach(p=>{p.classList.remove('active');p.querySelectorAll('.reveal').forEach(r=>{r.classList.remove('vis')})})
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'))
+  const panel=document.getElementById('spec-'+id)
+  panel.classList.add('active')
+  btn.classList.add('active')
+  setTimeout(()=>panel.querySelectorAll('.reveal').forEach(r=>r.classList.add('vis')),50)
+}
+
+// Gallery
+const items=document.querySelectorAll('.gal-item')
+const track=document.getElementById('galTrack')
+const dots=document.getElementById('galDots')
+let galPos=0
+const itemW=()=>document.querySelector('.gal-item').offsetWidth+16
+const visible=()=>Math.floor((window.innerWidth*.9)/itemW())
+const total=items.length
+
+// Build dots
+for(let i=0;i<total;i++){const d=document.createElement('div');d.className='gdot'+(i===0?' active':'');d.onclick=()=>{galPos=i;renderGal()};dots.appendChild(d)}
+
+function renderGal(){
+  galPos=Math.max(0,Math.min(galPos,total-1))
+  track.style.transform=`translateX(-${galPos*itemW()}px)`
+  document.querySelectorAll('.gdot').forEach((d,i)=>d.classList.toggle('active',i===galPos))
+  const vis=visible()
+  document.getElementById('galCount').textContent=`Mostrando ${galPos+1}–${Math.min(galPos+vis,total)} de ${total} proyectos`
+}
+function moveGallery(dir){galPos+=dir;renderGal()}
+
+// Touch swipe for gallery
+let ts=0;
+track.addEventListener('touchstart',e=>{ts=e.touches[0].clientX},{passive:true})
+track.addEventListener('touchend',e=>{const d=ts-e.changedTouches[0].clientX;if(Math.abs(d)>50){galPos+=d>0?1:-1;renderGal()}},{passive:true})
+window.addEventListener('resize',renderGal)
+renderGal()
+
+// Form submit
+function submitForm(btn){
+  const orig=btn.textContent
+  btn.textContent='✅ ¡Recibido! Le contactamos pronto.'
+  btn.style.background='#3D5229'
+  btn.disabled=true
+  setTimeout(()=>{
+    window.open('https://wa.me/50661722670?text=Hola,%20acabo%20de%20enviar%20mi%20solicitud%20de%20cotización%20de%20tejas.%20Espero%20su%20respuesta%20🏺','_blank')
+  },1400)
+}
+</script>
+</body>
+</html>
