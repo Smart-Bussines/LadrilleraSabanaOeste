@@ -1,0 +1,609 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+
+.infogram {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  color: var(--color-text-primary);
+}
+
+.cover {
+  background: #024e96;
+  border-radius: var(--border-radius-lg);
+  padding: 2rem 2rem 1.6rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.cover-pattern {
+  position: absolute; inset: 0; opacity: .08;
+  background: repeating-linear-gradient(0deg, transparent, transparent 28px, #fff 28px, #fff 30px),
+              repeating-linear-gradient(90deg, transparent, transparent 44px, #fff 44px, #fff 46px);
+}
+.cover-inner { position: relative; }
+.cover-badge {
+  display: inline-block;
+  background: #C4900A;
+  color: #fff;
+  font-size: 11px; font-weight: 500; letter-spacing: .08em;
+  padding: 3px 12px; border-radius: 20px; margin-bottom: 14px;
+}
+.cover h1 { font-size: 26px; font-weight: 500; color: #fff; line-height: 1.2; margin-bottom: 10px; }
+.cover h1 span { color: #FAC775; }
+.cover-sub { font-size: 14px; color: rgba(255,255,255,.7); margin-bottom: 20px; }
+.cover-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px;
+}
+.cover-stat {
+  background: rgba(255,255,255,.1);
+  border: 0.5px solid rgba(255,255,255,.2);
+  border-radius: var(--border-radius-md);
+  padding: 12px 14px;
+  text-align: center;
+}
+.cover-stat-num { font-size: 22px; font-weight: 500; color: #FAC775; }
+.cover-stat-label { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+.section-title {
+  font-size: 13px; font-weight: 500; letter-spacing: .08em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 12px; margin-top: 1.5rem;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title::after {
+  content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary);
+}
+
+.problem-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-bottom: 1.5rem;
+}
+.problem-card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 14px 16px;
+}
+.problem-icon {
+  width: 32px; height: 32px; border-radius: var(--border-radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; margin-bottom: 8px;
+}
+.icon-red { background: #FCEBEB; }
+.problem-card h4 { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.problem-card p { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+
+.roadmap {
+  display: flex; flex-direction: column; gap: 0; margin-bottom: 1.5rem;
+}
+.roadmap-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0;
+  position: relative;
+}
+.roadmap-left {
+  display: flex; flex-direction: column; align-items: center;
+}
+.roadmap-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500;
+  flex-shrink: 0; z-index: 1;
+}
+.roadmap-line {
+  width: 2px; flex: 1; min-height: 16px;
+}
+.roadmap-content {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 14px 16px;
+  margin: 0 0 12px 12px;
+}
+.roadmap-phase {
+  font-size: 11px; font-weight: 500; letter-spacing: .06em;
+  margin-bottom: 4px;
+}
+.roadmap-content h4 { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.roadmap-tasks {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.task-pill {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  border: 0.5px solid var(--color-border-tertiary);
+  color: var(--color-text-secondary);
+  background: var(--color-background-secondary);
+}
+.task-pill.fire { background: #FAECE7; color: #712B13; border-color: #F5C4B3; }
+.task-pill.amber { background: #FAEEDA; color: #633806; border-color: #FAC775; }
+.task-pill.teal { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
+.task-pill.blue { background: #E6F1FB; color: #0C447C; border-color: #B5D4F4; }
+.task-pill.green { background: #EAF3DE; color: #27500A; border-color: #C0DD97; }
+
+.chart-section {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 1.5rem;
+}
+.chart-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.chart-title { font-size: 15px; font-weight: 500; }
+.chart-subtitle { font-size: 12px; color: var(--color-text-secondary); margin-top: 2px; }
+.chart-legend { display: flex; gap: 14px; font-size: 12px; color: var(--color-text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem;
+}
+.kpi-card {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 14px 14px;
+  text-align: center;
+}
+.kpi-num { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+.kpi-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; line-height: 1.4; }
+.kpi-change { font-size: 11px; margin-top: 4px; }
+.kpi-up { color: #3B6D11; }
+
+.blog-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; margin-bottom: 1.5rem;
+}
+.blog-card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 12px 14px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.blog-num {
+  width: 28px; height: 28px; min-width: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500;
+}
+.blog-card h5 { font-size: 13px; font-weight: 500; margin-bottom: 3px; line-height: 1.35; }
+.blog-card span { font-size: 11px; color: var(--color-text-secondary); }
+
+.gbp-card {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 1.5rem;
+}
+.gbp-steps {
+  display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 8px; margin-top: 14px;
+}
+.gbp-step {
+  text-align: center; padding: 12px 8px;
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+}
+.gbp-step-num {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #7D1C0A; color: #fff;
+  font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 7px;
+}
+.gbp-step p { font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; }
+
+.footer-cta {
+  background: #7D1C0A;
+  border-radius: var(--border-radius-lg);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.footer-cta h3 { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+.footer-cta p { font-size: 13px; color: rgba(255,255,255,.7); }
+.footer-btn {
+  background: #C4900A; color: #fff;
+  font-size: 13px; font-weight: 500;
+  padding: 10px 20px; border-radius: var(--border-radius-md);
+  white-space: nowrap; cursor: pointer; border: none;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid { grid-template-columns: 1fr; }
+  .gbp-steps { grid-template-columns: repeat(3, 1fr); }
+  .cover-stats { grid-template-columns: 1fr 1fr; }
+  .footer-cta { flex-direction: column; }
+}
+</style>
+
+<div class="infogram">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-pattern"></div>
+    <div class="cover-inner">
+      <span class="cover-badge">Plan SEO · Ladrillera Sabana Oeste</span>
+      <h1>De invisible a <span>primero en Google</span><br>en 6 meses</h1>
+      <p class="cover-sub">Hoja de ruta visual para posicionar ladrillerasabanaoeste.com — paso a paso, mes a mes</p>
+      <div class="cover-stats">
+        <div class="cover-stat">
+          <div class="cover-stat-num">3–6</div>
+          <div class="cover-stat-label">meses para ver resultados</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">12</div>
+          <div class="cover-stat-label">artículos de blog planificados</div>
+        </div>
+        <div class="cover-stat">
+          <div class="cover-stat-num">0₡</div>
+          <div class="cover-stat-label">costo en publicidad pagada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEMAS ACTUALES -->
+  <p class="section-title">Situación actual — dónde estamos hoy</p>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Sin título SEO optimizado</h4>
+      <p>Google no entiende bien qué vende el sitio ni dónde está ubicado.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Sin Google Business Profile</h4>
+      <p>No aparece en Google Maps cuando buscan "tejas San José" o similares.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Blog sin actividad regular</h4>
+      <p>Solo 3 artículos publicados. Google premia la consistencia de contenido.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Imágenes sin texto ALT</h4>
+      <p>Más de 30 fotos de proyectos que Google no puede "leer" ni indexar.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Sin datos estructurados</h4>
+      <p>Falta el código Schema que le dice a Google que es un negocio local.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon icon-red">✗</div>
+      <h4>Palabras clave débiles</h4>
+      <p>Los textos actuales no usan las frases exactas que buscan los clientes.</p>
+    </div>
+  </div>
+
+  <!-- PROYECCIÓN DE CRECIMIENTO -->
+  <p class="section-title">Proyección de crecimiento orgánico — visitas mensuales estimadas</p>
+  <div class="chart-section">
+    <div class="chart-header">
+      <div>
+        <p class="chart-title">Visitantes mensuales desde Google (proyección)</p>
+        <p class="chart-subtitle">Ejecutando el plan SEO al pie de la letra, sin publicidad pagada</p>
+      </div>
+      <div class="chart-legend">
+        <span style="display:flex;align-items:center;gap:5px;"><span class="legend-dot" style="background:#B33A20;"></span>Con SEO</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span class="legend-dot" style="background:#D3D1C7;"></span>Sin cambios</span>
+      </div>
+    </div>
+    <div style="position:relative;width:100%;height:240px;">
+      <canvas id="growthChart"></canvas>
+    </div>
+    <p style="font-size:11px;color:var(--color-text-secondary);margin-top:10px;text-align:center;">
+      Proyección orientativa basada en prácticas estándar de SEO local. Los resultados reales pueden variar según la ejecución y la competencia en el mercado.
+    </p>
+  </div>
+
+  <!-- KPIs ESPERADOS -->
+  <p class="section-title">Resultados esperados a los 6 meses</p>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:#8A1F08;">+340%</div>
+      <div class="kpi-label">más visitas orgánicas desde Google</div>
+      <div class="kpi-change kpi-up">↑ de ~90 a ~400 visitas/mes</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:#8A1F08;">Top 5</div>
+      <div class="kpi-label">en búsquedas clave de tejas y enchapes en CR</div>
+      <div class="kpi-change kpi-up">↑ desde posición 30+</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:#8A1F08;">+200%</div>
+      <div class="kpi-label">más llamadas y mensajes desde Google Maps</div>
+      <div class="kpi-change kpi-up">↑ Google Business activo</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-num" style="color:#8A1F08;">12</div>
+      <div class="kpi-label">artículos publicados generando tráfico constante</div>
+      <div class="kpi-change kpi-up">↑ 2 por mes, 6 meses</div>
+    </div>
+  </div>
+
+  <!-- HOJA DE RUTA -->
+  <p class="section-title">Hoja de ruta — los 4 pilares del plan</p>
+  <div class="roadmap">
+
+    <div class="roadmap-item">
+      <div class="roadmap-left">
+        <div class="roadmap-dot" style="background:#FAECE7;color:#8A1F08;">1</div>
+        <div class="roadmap-line" style="background:#F5C4B3;"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase" style="color:#8A1F08;">Urgente — esta semana</p>
+        <h4>Optimización de la página web (On-Page SEO)</h4>
+        <div class="roadmap-tasks">
+          <span class="task-pill fire">Nuevo título de página</span>
+          <span class="task-pill fire">Meta description</span>
+          <span class="task-pill fire">Textos de servicios con palabras clave</span>
+          <span class="task-pill fire">ALT en todas las imágenes</span>
+          <span class="task-pill fire">Schema LocalBusiness</span>
+          <span class="task-pill fire">Velocidad en PageSpeed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-left">
+        <div class="roadmap-dot" style="background:#FAEEDA;color:#633806;">2</div>
+        <div class="roadmap-line" style="background:#FAC775;"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase" style="color:#854F0B;">Urgente — semanas 1 y 2</p>
+        <h4>Google Business Profile completo y activo</h4>
+        <div class="roadmap-tasks">
+          <span class="task-pill amber">Crear / reclamar perfil</span>
+          <span class="task-pill amber">Categorías correctas</span>
+          <span class="task-pill amber">Descripción SEO lista</span>
+          <span class="task-pill amber">20+ fotos del negocio</span>
+          <span class="task-pill amber">Pedir reseñas a clientes</span>
+          <span class="task-pill amber">Publicaciones semanales</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-left">
+        <div class="roadmap-dot" style="background:#E1F5EE;color:#085041;">3</div>
+        <div class="roadmap-line" style="background:#9FE1CB;"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase" style="color:#0F6E56;">Continuo — 2 artículos por mes</p>
+        <h4>Blog con contenido SEO: 12 artículos en 6 meses</h4>
+        <div class="roadmap-tasks">
+          <span class="task-pill teal">Abril: tejas (costo + tipos)</span>
+          <span class="task-pill teal">Mayo: enchapes y fachadas</span>
+          <span class="task-pill teal">Junio: pisos rústicos</span>
+          <span class="task-pill teal">Julio: proyectos reales</span>
+          <span class="task-pill teal">Agosto: guías técnicas</span>
+          <span class="task-pill teal">Septiembre: tendencias 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap-item">
+      <div class="roadmap-left">
+        <div class="roadmap-dot" style="background:#E6F1FB;color:#0C447C;">4</div>
+        <div class="roadmap-line" style="background:transparent;"></div>
+      </div>
+      <div class="roadmap-content">
+        <p class="roadmap-phase" style="color:#185FA5;">Mensual — revisión y ajuste</p>
+        <h4>Monitoreo y mejora continua</h4>
+        <div class="roadmap-tasks">
+          <span class="task-pill blue">Google Search Console</span>
+          <span class="task-pill blue">Google Analytics 4</span>
+          <span class="task-pill blue">Posiciones en buscadores</span>
+          <span class="task-pill blue">Reseñas Google Maps</span>
+          <span class="task-pill blue">Ajuste de estrategia</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BLOG PLAN -->
+  <p class="section-title">Plan de blog — 12 artículos · abril a septiembre 2026</p>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-num" style="background:#FAECE7;color:#8A1F08;">1</div>
+      <div>
+        <h5>¿Cuánto cuesta instalar teja colonial en CR?</h5>
+        <span>Abril · Tejas · Listo ✓</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#FAECE7;color:#8A1F08;">2</div>
+      <div>
+        <h5>Teja colonial, imperial o plana: ¿cuál elegir?</h5>
+        <span>Abril · Tejas · Listo ✓</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#FAECE7;color:#8A1F08;">3</div>
+      <div>
+        <h5>Material refractario: ladrillo, mortero y Quarry Tile</h5>
+        <span>Abril · Refractarios · Listo ✓</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#FAEEDA;color:#633806;">4</div>
+      <div>
+        <h5>Cómo elegir el enchape de ladrillo para fachadas</h5>
+        <span>Mayo · Enchapes</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#FAEEDA;color:#633806;">5</div>
+      <div>
+        <h5>Ozark, Molejón o Laja Gris: ¿cuál piedra elegir?</h5>
+        <span>Mayo · Enchapes</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#E1F5EE;color:#085041;">6</div>
+      <div>
+        <h5>Pisos rústicos para exteriores en clima tropical</h5>
+        <span>Junio · Pisos</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#E1F5EE;color:#085041;">7</div>
+      <div>
+        <h5>Cómo limpiar y sellar pisos de ladrillo rústico</h5>
+        <span>Junio · Pisos</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#E6F1FB;color:#0C447C;">8</div>
+      <div>
+        <h5>Fachada con piedra Montaña Amarilla: caso real</h5>
+        <span>Julio · Proyectos</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#E6F1FB;color:#0C447C;">9</div>
+      <div>
+        <h5>5 techos de teja en hoteles y restaurantes de CR</h5>
+        <span>Julio · Proyectos</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#EAF3DE;color:#27500A;">10</div>
+      <div>
+        <h5>Guía: cómo instalar teja colonial paso a paso</h5>
+        <span>Agosto · Técnico</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#EAF3DE;color:#27500A;">11</div>
+      <div>
+        <h5>¿Cuándo necesita mantenimiento su techo de teja?</h5>
+        <span>Agosto · Técnico</span>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-num" style="background:#F1EFE8;color:#444441;">12</div>
+      <div>
+        <h5>Tendencias en acabados rústicos en Costa Rica 2026</h5>
+        <span>Septiembre · Tendencias</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE BUSINESS -->
+  <p class="section-title">Google Business Profile — 5 pasos para el mapa de Google</p>
+  <div class="gbp-card">
+    <p style="font-size:13px;color:var(--color-text-secondary);">El paso más importante para captar clientes locales en San José. Completar el perfil en <strong style="color:var(--color-text-primary);">business.google.com</strong></p>
+    <div class="gbp-steps">
+      <div class="gbp-step">
+        <div class="gbp-step-num">1</div>
+        <p>Crear o reclamar el perfil del negocio</p>
+      </div>
+      <div class="gbp-step">
+        <div class="gbp-step-num">2</div>
+        <p>Completar todos los datos y categorías</p>
+      </div>
+      <div class="gbp-step">
+        <div class="gbp-step-num">3</div>
+        <p>Subir 20+ fotos del local y proyectos</p>
+      </div>
+      <div class="gbp-step">
+        <div class="gbp-step-num">4</div>
+        <p>Pedir reseñas a clientes actuales</p>
+      </div>
+      <div class="gbp-step">
+        <div class="gbp-step-num">5</div>
+        <p>Publicar 1 vez por semana en el perfil</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <div>
+      <h3>El plan ya está listo. Solo hay que ejecutarlo.</h3>
+      <p>Documentos entregados: Plan SEO · Plan de Blog · 3 artículos HTML y PDF · Esta hoja de ruta</p>
+   
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+const textColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)';
+
+const labels = ['Hoy','Mes 1','Mes 2','Mes 3','Mes 4','Mes 5','Mes 6','Mes 9','Mes 12'];
+const withSEO = [90, 95, 120, 160, 220, 290, 380, 520, 720];
+const noChange = [90, 92, 91, 93, 90, 92, 91, 90, 93];
+
+new Chart(document.getElementById('growthChart'), {
+  type: 'line',
+  data: {
+    labels,
+    datasets: [
+      {
+        label: 'Con plan SEO',
+        data: withSEO,
+        borderColor: '#B33A20',
+        backgroundColor: 'rgba(179,58,32,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#B33A20',
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        borderWidth: 2.5,
+      },
+      {
+        label: 'Sin cambios',
+        data: noChange,
+        borderColor: '#B4B2A9',
+        backgroundColor: 'rgba(180,178,169,0.05)',
+        fill: true,
+        tension: 0.2,
+        pointBackgroundColor: '#B4B2A9',
+        pointRadius: 3,
+        pointHoverRadius: 5,
+        borderWidth: 1.5,
+        borderDash: [5,4],
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.dataset.label}: ${Math.round(ctx.raw)} visitas/mes`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: gridColor },
+        ticks: { color: textColor, font: { size: 11 }, autoSkip: false, maxRotation: 0 }
+      },
+      y: {
+        min: 0, max: 800,
+        grid: { color: gridColor },
+        ticks: {
+          color: textColor, font: { size: 11 },
+          callback: v => Math.round(v)
+        }
+      }
+    }
+  }
+});
+</script>
