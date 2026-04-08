@@ -334,13 +334,12 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 .lbx{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
 .lbx.open{display:flex}
 .lbx img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 60px rgba(0,0,0,.6)}
-.lbx-close{position:absolute;top:18px;right:22px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;opacity:.8;transition:opacity .2s}
+.lbx-close{position:absolute;top:18px;right:22px;color:#fff;font-size:2.4rem;cursor:pointer;background:none;border:none;line-height:1;opacity:.8;transition:opacity .2s}
 .lbx-close:hover{opacity:1}
-.lbx-arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.2rem;cursor:pointer;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.lbx-arr:hover{background:rgba(255,255,255,.25)}
-.lbx-prev{left:16px}
-.lbx-next{right:16px}
-.lbx-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.75);font-size:.8rem;letter-spacing:.06em}
+.lbx-arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.lbx-arr:hover{background:rgba(255,255,255,.28)}
+.lbx-prev{left:16px}.lbx-next{right:16px}
+.lbx-cap{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:rgba(255,255,255,.7);font-size:.8rem;letter-spacing:.05em}
 .gi img{cursor:zoom-in}
 </style>
 </head>
@@ -520,139 +519,156 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <h2 class="ttl">Ideas Para <em>Su Proyecto</em></h2>
   </div>
   <div class="galctrl">
-    <span class="galcnt" id="galCount">1 de 15 proyectos Instalados</span>
+    <span class="galcnt" id="galCount">1 de 16 proyectos Instalados</span>
     <div class="galarrs">
       <button class="garr" onclick="moveGallery(-1)" aria-label="Anterior">&#8249;</button>
       <button class="garr" onclick="moveGallery(1)" aria-label="Siguiente">&#8250;</button>
     </div>
   </div>
-  <!-- Gallery: 16 slides, clean image, caption below -->
   <div class="gal-outer">
     <div class="gal-viewport">
       <div class="gal-slide active-slide">
         <div class="gi">
-          <img onclick="openLbx(0)" src="img/Landing/landingslite1.jpg" alt="Proyecto 1 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite1.jpg" alt="Proyecto 1 instalado" loading="lazy" onclick="openLbx(0)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 1</h5>
+          <p>Guanacaste &mdash; Teja Colonial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(1)" src="img/Landing/landingslite2.jpg" alt="Proyecto 2 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite2.jpg" alt="Proyecto 2 instalado" loading="lazy" onclick="openLbx(1)"/>
         </div>
         <div class="gcap">
-         <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 2</h5>
+          <p>Escazu &mdash; Teja Imperial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(2)" src="img/Landing/landingslite3.jpg" alt="Proyecto 3 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite3.jpg" alt="Proyecto 3 instalado" loading="lazy" onclick="openLbx(2)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 3</h5>
+          <p>Playa Jaco &mdash; Teja Plana Colombiana</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(3)" src="img/Landing/landingslite4.jpg" alt="Proyecto 4 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite4.jpg" alt="Proyecto 4 instalado" loading="lazy" onclick="openLbx(3)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 4</h5>
+          <p>San Jose &mdash; Teja Colonial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(4)" src="img/Landing/landingslite5.jpg" alt="Proyecto 5 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite5.jpg" alt="Proyecto 5 instalado" loading="lazy" onclick="openLbx(4)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>    
+          <h5>Proyecto 5</h5>
+          <p>Cartago &mdash; Teja Colonial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(5)" src="img/Landing/landingslite6.jpg" alt="Proyecto 6 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite6.jpg" alt="Proyecto 6 instalado" loading="lazy" onclick="openLbx(5)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 6</h5>
+          <p>Perez Zeledon &mdash; Teja Nicaraguense</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(6)" src="img/Landing/landingslite7.jpg" alt="Proyecto 7 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite7.jpg" alt="Proyecto 7 instalado" loading="lazy" onclick="openLbx(6)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p> 
+          <h5>Proyecto 7</h5>
+          <p>Heredia &mdash; Teja Mediterraneo</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(7)" src="img/Landing/landingslite8.jpg" alt="Proyecto 8 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite8.jpg" alt="Proyecto 8 instalado" loading="lazy" onclick="openLbx(7)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 8</h5>
+          <p>Turrialba &mdash; Teja Santa Fe</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(8)" src="img/Landing/landingslite9.jpg" alt="Proyecto 9 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite9.jpg" alt="Proyecto 9 instalado" loading="lazy" onclick="openLbx(8)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 9</h5>
+          <p>San Jose Norte &mdash; Teja Nicaraguense</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(9)" src="img/Landing/landingslite10.jpg" alt="Proyecto 10 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite10.jpg" alt="Proyecto 10 instalado" loading="lazy" onclick="openLbx(9)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 10</h5>
+          <p>Guanacaste &mdash; Teja Santa Fe Ecuatoriana</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(10)" src="img/Landing/landingslite11.jpg" alt="Proyecto 11 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite11.jpg" alt="Proyecto 11 instalado" loading="lazy" onclick="openLbx(10)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 11</h5>
+          <p>Alajuela &mdash; Teja Mediterraneo</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(11)" src="img/Landing/landingslite12.jpg" alt="Proyecto 12 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite12.jpg" alt="Proyecto 12 instalado" loading="lazy" onclick="openLbx(11)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
-      </div>
-      <div class="gal-slide">
-        <div class="gi">
-          <img onclick="openLbx(12)" src="img/Landing/landingslite13.jpg" alt="Proyecto 13 instalado" loading="lazy"/>
-        </div>
-        <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 12</h5>
+          <p>Cartago &mdash; Teja Colonial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(13)" src="img/Landing/landingslite14.jpg" alt="Proyecto 14 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite13.jpg" alt="Proyecto 13 instalado" loading="lazy" onclick="openLbx(12)"/>
         </div>
         <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
+          <h5>Proyecto 13</h5>
+          <p>Heredia &mdash; Teja Imperial Nacional</p>
         </div>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(14)" src="img/Landing/landingslite15.jpg" alt="Proyecto 15 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite14.jpg" alt="Proyecto 14 instalado" loading="lazy" onclick="openLbx(13)"/>
         </div>
         <div class="gcap">
-        <p>Santa Ana - Teja Renacimiento</p>
+          <h5>Proyecto 14</h5>
+          <p>San Jose Sur &mdash; Teja Salvadorena</p>
         </div>
+      </div>
       <div class="gal-slide">
         <div class="gi">
-          <img onclick="openLbx(15)" src="img/Landing/landingslite16.jpg" alt="Proyecto 16 instalado" loading="lazy"/>
+          <img src="img/Landing/landingslite15.jpg" alt="Proyecto 15 instalado" loading="lazy" onclick="openLbx(14)"/>
         </div>
         <div class="gcap">
-        <p>Jaco - Teja Salvadorena</p>
+          <h5>Proyecto 15</h5>
+          <p>Santa Ana &mdash; Teja Renacimiento</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite16.jpg" alt="Proyecto 16 instalado" loading="lazy" onclick="openLbx(15)"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 16</h5>
+          <p>Jaco &mdash; Teja Salvadorena</p>
         </div>
       </div>
     </div>
@@ -855,7 +871,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <div class="cinfo">
       <div class="ci"><div class="cico">&#128222;</div><a href="tel:+50663995641">+506 6399-5641</a></div>
       <div class="ci"><div class="cico">&#128172;</div><a href="https://wa.me/50663995641?text=Hola,%20me%20interesa%20informacion.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank">WhatsApp directo</a></div>
-      <div class="ci"><div class="cico">&#128231;</div><a href="/cdn-cgi/l/email-protection#2844494c5a4144444d5a495b494a494649474d5b5c4d684f45494144064b4745"><span class="__cf_email__" data-cfemail="65090401170c0909001704160407040b040a00161100250208040c094b060a08">[email&#160;protected]</span></a></div>
+      <div class="ci"><div class="cico">&#128231;</div><a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a></div>
       <div class="ci"><div class="cico">&#128205;</div><span>800 mts oeste de POPs La Sabana, San Jose</span></div>
       <div class="ci"><div class="cico">&#128197;</div><span>Lun-Vie 7am-5pm - Sab 8am-2pm</span></div>
       <div class="ci"><div class="cico">&#127760;</div><a href="https://ladrillerasabanaoeste.com" target="_blank">ladrillerasabanaoeste.com</a></div>
@@ -902,7 +918,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
         <textarea name="message" placeholder="Cuentenos mas: tipo de techo, estructura existente, fecha estimada, si necesita instalacion..."></textarea>
       </div>
       <button type="submit" class="bsub">Enviar solicitud de cotizacion</button>
-      <p class="fnote">Su mensaje llega directamente a <a href="/cdn-cgi/l/email-protection#0d616c697f646161687f6c7e6c6f6c636c62687e79684d6a606c6461236e6260"><span class="__cf_email__" data-cfemail="f69a9792849f9a9a9384978597949798979993858293b6919b979f9ad895999b">[email&#160;protected]</span></a>. Le respondemos en menos de 48 horas habiles.</p>
+      <p class="fnote">Su mensaje llega directamente a <a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a>. Le respondemos en menos de 48 horas habiles.</p>
     </form>
   </div>
 </div>
@@ -1124,6 +1140,8 @@ function toggleFaq(btn){
 /* Lightbox */
 function openLbx(idx){
   var slides=document.querySelectorAll('.gal-slide');
+  var total=slides.length;
+  idx=Math.max(0,Math.min(idx,total-1));
   var img=slides[idx]?slides[idx].querySelector('img'):null;
   var cap=slides[idx]?slides[idx].querySelector('.gcap'):null;
   if(!img) return;
@@ -1141,16 +1159,14 @@ function closeLbx(e){if(e.target===document.getElementById('galLbx'))lbxClose();
 function lbxMove(dir,e){
   e.stopPropagation();
   var idx=parseInt(document.getElementById('galLbx').dataset.idx||0)+dir;
-  var total=document.querySelectorAll('.gal-slide').length;
-  idx=Math.max(0,Math.min(idx,total-1));
   openLbx(idx);
 }
 document.addEventListener('keydown',function(e){
   var lbx=document.getElementById('galLbx');
-  if(!lbx.classList.contains('open')) return;
-  if(e.key==='Escape') lbxClose();
-  if(e.key==='ArrowRight') lbxMove(1,{stopPropagation:function(){}});
-  if(e.key==='ArrowLeft') lbxMove(-1,{stopPropagation:function(){}});
+  if(!lbx||!lbx.classList.contains('open'))return;
+  if(e.key==='Escape')lbxClose();
+  if(e.key==='ArrowRight')lbxMove(1,{stopPropagation:function(){}});
+  if(e.key==='ArrowLeft')lbxMove(-1,{stopPropagation:function(){}});
 });
 </script>
 
@@ -1160,7 +1176,7 @@ document.addEventListener('keydown',function(e){
   <button class="lbx-arr lbx-prev" onclick="lbxMove(-1,event)">&#8249;</button>
   <img id="lbxImg" src="" alt=""/>
   <button class="lbx-arr lbx-next" onclick="lbxMove(1,event)">&#8250;</button>
-  <div class="lbx-caption" id="lbxCap"></div>
+  <div class="lbx-cap" id="lbxCap"></div>
 </div>
 </body>
 </html>
