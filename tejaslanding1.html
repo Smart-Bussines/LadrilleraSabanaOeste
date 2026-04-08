@@ -165,6 +165,7 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .garr:hover{background:var(--or);border-color:var(--or);color:#fff}
 /* Gallery viewport — desktop: 2 images side by side; mobile: 1 centered */
 /* Gallery: 2-per-page desktop, 1 mobile — bulletproof no-bleed */
+/* ── GALLERY: single-image fade slider, same style as before/after ── */
 .galsec{background:var(--g1);padding:86px 0}
 .galhd{padding:0 5vw;margin-bottom:34px}
 .galctrl{padding:0 5vw;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
@@ -172,48 +173,25 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .galarrs{display:flex;gap:9px}
 .garr{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--g3);background:var(--wh);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#555;transition:all .2s}
 .garr:hover{background:var(--or);border-color:var(--or);color:#fff}
-/* Outer clip container — no padding, clips overflow */
-.gal-outer{overflow:hidden;width:100%}
-/* Inner viewport with side padding — this is what we slide */
-.gal-viewport{padding:0 5vw;box-sizing:border-box;width:100%}
-/* Track: each "slide" = full width of .gal-viewport */
-.gal-track{display:flex;transition:transform .5s cubic-bezier(.25,.1,.36,1);width:100%}
-/* Each slide holds 2 (desktop) or 1 (mobile) cards */
-.gal-slide{flex:0 0 100%;display:flex;gap:16px;box-sizing:border-box}
-.gi{flex:1 1 0;min-width:0;height:300px;border-radius:12px;overflow:hidden;position:relative;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.09)}
+/* Viewport: centered max-width like ba-vp */
+.gal-outer{padding:0 5vw}
+.gal-viewport{max-width:900px;margin:0 auto;position:relative}
+/* Each slide: full width, fade in/out */
+.gal-slide{display:none;animation:galFadeIn .45s ease}
+.gal-slide.active-slide{display:block}
+@keyframes galFadeIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+/* Image fills slide */
+.gi{width:100%;height:420px;border-radius:12px 12px 0 0;overflow:hidden;position:relative;box-shadow:0 8px 36px rgba(0,0,0,.12)}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gi:hover img{transform:scale(1.03)}
+/* Caption bar below image — like ba-info */
+.gcap{background:var(--wh);border-radius:0 0 12px 12px;padding:16px 22px;border:1px solid var(--g3);border-top:none;display:flex;flex-direction:column;gap:4px}
+.gcap h5{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--tx);font-weight:700}
+.gcap p{font-size:.78rem;color:var(--mu);margin:0}
 @media(max-width:640px){
-  /* Mobile peek carousel: active image centered, neighbors blurred */
-  .gal-outer{overflow:hidden}
-  .gal-viewport{
-    padding:0;
-    overflow:visible;
-    /* Push start so first slide is centered: (100vw - 80vw)/2 = 10vw */
-  }
-  .gal-track{
-    overflow:visible;
-    /* Start offset so slide[0] is centered: left = 10vw */
-    padding-left:10vw;
-    /* Each slide step = 80vw (slide width) + 0 gap */
-  }
-  .gal-slide{
-    flex:0 0 80vw;
-    width:80vw;
-    gap:0;
-    margin-right:0;
-    /* Default: blurred and dimmed */
-    filter:blur(3px) brightness(0.5);
-    transform:scale(0.94);
-    transition:filter .4s ease, transform .4s ease, opacity .4s ease;
-    opacity:.45;
-  }
-  .gal-slide .gi:last-child{display:none}
-  .gi{height:240px;width:100%;border-radius:12px;flex:none}
-  /* Active slide: full color, sharp, slightly larger */
-  .gal-slide.active-slide{
-    filter:none;
-    transform:scale(1);
-    opacity:1;
-  }
+  .gal-outer{padding:0 4vw}
+  .gi{height:260px;border-radius:12px 12px 0 0}
+  .gcap{padding:12px 16px}
 }
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .gi:hover img{transform:scale(1.04)}
@@ -524,55 +502,157 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <h2 class="ttl">Ideas Para <em>Su Proyecto</em></h2>
   </div>
   <div class="galctrl">
-    <span class="galcnt" id="galCount">1 de 10 proyectos</span>
+    <span class="galcnt" id="galCount">1 de 16 proyectos</span>
     <div class="galarrs">
       <button class="garr" onclick="moveGallery(-1)" aria-label="Anterior">&#8249;</button>
       <button class="garr" onclick="moveGallery(1)" aria-label="Siguiente">&#8250;</button>
     </div>
   </div>
-  <!-- Gallery: slides are pre-grouped. JS just translates by slide index -->
+  <!-- Gallery: 16 individual slides with fade effect -->
   <div class="gal-outer">
     <div class="gal-viewport">
-      <div class="gal-track" id="galTrack">
-        <!-- Slide 1: items 1-2 -->
-        <div class="gal-slide active-slide">
-          <div class="gi"><img src="img/Landing/landingslite1.jpg?w=700&h=500&fit=crop&q=80" alt="Rancho" loading="lazy"/><div class="gcap"><p>Guanacaste - Teja Colonial</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite2.jpg?w=700&h=500&fit=crop&q=80" alt="Residencia" loading="lazy"/><div class="gcap"><p>Escazu - Teja Imperial</p></div></div>
+      <div class="gal-slide active-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite1.jpg?w=700&h=500&fit=crop&q=80" alt="Rancho" loading="lazy"/>
         </div>
-        <!-- Slide 2: items 3-4 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite3.jpg?w=700&h=500&fit=crop&q=80" alt="Hotel" loading="lazy"/><div class="gcap"><p>La Fortuna - Teja Colonial</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite4.jpg?w=700&h=500&fit=crop&q=80" alt="Detalle" loading="lazy"/><div class="gcap"><p>San Jose - Teja Plana Colombiana</p></div></div>
+        <div class="gcap">
+          <h5>Proyecto 1</h5>
+          <p>Guanacaste - Teja Colonial</p>
         </div>
-        <!-- Slide 3: items 5-6 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite5.jpg" alt="Casa colonial" loading="lazy"/><div class="gcap"><p>Cartago - Teja Colonial Nacional</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite6.jpg?w=700&h=500&fit=crop&q=80" alt="Finca" loading="lazy"/><div class="gcap"><p>Perez Zeledon - Teja Nicaraguense</p></div></div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite2.jpg?w=700&h=500&fit=crop&q=80" alt="Residencia" loading="lazy"/>
         </div>
-        <!-- Slide 4: items 7-8 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite7.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/><div class="gcap"><p>Heredia - Teja Mediterraneo</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite8.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/><div class="gcap"><p>Turrialba - Teja Santa Fe</p></div></div>
+        <div class="gcap">
+          <h5>Proyecto 2</h5>
+          <p>Escazu - Teja Imperial</p>
         </div>
-        <!-- Slide 4: items 9-10 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite9.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/><div class="gcap"><p>Heredia - Teja Mediterraneo</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite10.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/><div class="gcap"><p>Turrialba - Teja Santa Fe</p></div></div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite3.jpg?w=700&h=500&fit=crop&q=80" alt="Hotel" loading="lazy"/>
         </div>
-        <!-- Slide 4: items 11-12 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite11.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/><div class="gcap"><p>Heredia - Teja Mediterraneo</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite12.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/><div class="gcap"><p>Turrialba - Teja Santa Fe</p></div></div>
+        <div class="gcap">
+          <h5>Proyecto 3</h5>
+          <p>Playa Jaco - Teja Plana Colombiana</p>
         </div>
-         <!-- Slide 4: items 13-14 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite13.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/><div class="gcap"><p>Heredia - Teja Mediterraneo</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite14.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/><div class="gcap"><p>Turrialba - Teja Santa Fe</p></div></div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite4.jpg?w=700&h=500&fit=crop&q=80" alt="Detalle" loading="lazy"/>
         </div>
-        <!-- Slide 5: items 15-16 -->
-        <div class="gal-slide">
-          <div class="gi"><img src="img/Landing/landingslite15.jpg?w=700&h=500&fit=crop&q=80" alt="Condominio" loading="lazy"/><div class="gcap"><p>Santa Ana - Teja Renacimiento</p></div></div>
-          <div class="gi"><img src="img/Landing/landingslite16.jpg?w=700&h=500&fit=crop&q=80" alt="Villa" loading="lazy"/><div class="gcap"><p>Jaco - Teja Salvadorena</p></div></div>
+        <div class="gcap">
+          <h5>Proyecto 4</h5>
+          <p>San Jose - Teja Plana Colombiana</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite5.jpg" alt="Casa colonial" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 5</h5>
+          <p>Cartago - Teja Colonial Nacional</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite6.jpg?w=700&h=500&fit=crop&q=80" alt="Finca" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 6</h5>
+          <p>Perez Zeledon - Teja Nicaraguense</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite7.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 7</h5>
+          <p>Heredia - Teja Mediterraneo</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite8.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 8</h5>
+          <p>Turrialba - Teja Santa Fe</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite9.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 9</h5>
+          <p>Heredia - Teja Mediterraneo</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite10.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 10</h5>
+          <p>Turrialba - Teja Santa Fe</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite11.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 11</h5>
+          <p>Heredia - Teja Mediterraneo</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite12.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 12</h5>
+          <p>Turrialba - Teja Santa Fe</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite13.jpg?w=700&h=500&fit=crop&q=80" alt="Casa moderna" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 13</h5>
+          <p>Heredia - Teja Mediterraneo</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite14.jpg?w=700&h=500&fit=crop&q=80" alt="Cabana" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 14</h5>
+          <p>Turrialba - Teja Santa Fe</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite15.jpg?w=700&h=500&fit=crop&q=80" alt="Condominio" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 15</h5>
+          <p>Santa Ana - Teja Renacimiento</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img src="img/Landing/landingslite16.jpg?w=700&h=500&fit=crop&q=80" alt="Villa" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 16</h5>
+          <p>Jaco - Teja Salvadorena</p>
         </div>
       </div>
     </div>
@@ -740,7 +820,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <div class="cinfo">
       <div class="ci"><div class="cico">&#128222;</div><a href="tel:+50663995641">+506 6399-5641</a></div>
       <div class="ci"><div class="cico">&#128172;</div><a href="https://wa.me/50663995641?text=Hola,%20me%20interesa%20informacion.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank">WhatsApp directo</a></div>
-      <div class="ci"><div class="cico">&#128231;</div><a href="/cdn-cgi/l/email-protection#1e727f7a6c7772727b6c7f6d7f7c7f707f717b6d6a7b5e79737f7772307d7173"><span class="__cf_email__" data-cfemail="6a060b0e180306060f180b190b080b040b050f191e0f2a0d070b030644090507">[email&#160;protected]</span></a></div>
+      <div class="ci"><div class="cico">&#128231;</div><a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a></div>
       <div class="ci"><div class="cico">&#128205;</div><span>800 mts oeste de POPs La Sabana, San Jose</span></div>
       <div class="ci"><div class="cico">&#128197;</div><span>Lun-Vie 7am-5pm - Sab 8am-2pm</span></div>
     </div>
@@ -786,7 +866,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
         <textarea name="message" placeholder="Cuentenos mas: tipo de techo, estructura existente, fecha estimada, si necesita instalacion..."></textarea>
       </div>
       <button type="submit" class="bsub">Enviar solicitud de cotizacion</button>
-      <p class="fnote">Su mensaje llega directamente a <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fe929f9a8c9792929b8c9f8d9f9c9f909f919b8d8a9bbe99939f9792d09d9193">[email&#160;protected]</a>. Le respondemos en menos de 48 horas habiles.</p>
+      <p class="fnote">Su mensaje llega directamente a <a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a>. Le respondemos en menos de 48 horas habiles.</p>
     </form>
   </div>
 </div>
@@ -821,7 +901,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
 setTimeout(function(){var b=document.getElementById('heroBg');if(b)b.classList.add('ok');},100);
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:0.1});
@@ -910,12 +990,9 @@ function setTeja(name){
   setTimeout(function(){document.getElementById('cotizar').scrollIntoView({behavior:'smooth',block:'start'});},50);
 }
 function openCatalog(type){alert('Proximamente: catalogo digital de esta teja.\nEscribanos al WhatsApp: +506 6399-5641');}
-/* ── GALLERY: slide-based, 100% width per slide, zero bleed ── */
-/* HTML has pre-grouped .gal-slide divs (2 items each on desktop) */
-/* On mobile, CSS makes each .gi full-width via media query */
-var galTrackEl=document.getElementById('galTrack');
-var galDotsEl=document.getElementById('galDots');
+/* ── GALLERY: fade slider, 1 image at a time, 16 slides ── */
 var galSlides=document.querySelectorAll('.gal-slide');
+var galDotsEl=document.getElementById('galDots');
 var galTotal=galSlides.length;
 var galPos=0;
 
@@ -926,7 +1003,7 @@ function buildDots(){
       var d=document.createElement('button');
       d.className='gdot'+(pg===0?' on':'');
       d.onclick=function(){galPos=pg;renderGal();};
-      d.setAttribute('aria-label','Pagina '+(pg+1));
+      d.setAttribute('aria-label','Foto '+(pg+1));
       galDotsEl.appendChild(d);
     })(i);
   }
@@ -934,40 +1011,30 @@ function buildDots(){
 
 function renderGal(){
   galPos=Math.max(0,Math.min(galPos,galTotal-1));
-  var mob=window.innerWidth<=640;
-  if(mob){
-    /* Mobile peek:
-       track starts at padding-left:10vw so slide[0] is centered.
-       Each slide is 80vw wide, no gap.
-       To center slide[N]: translate = -N * 80vw
-       (the 10vw padding already handles the initial centering) */
-    var slideW=window.innerWidth*0.80;
-    galTrackEl.style.transform='translateX(-'+(galPos*slideW)+'px)';
-    galSlides.forEach(function(s,i){
-      s.classList.toggle('active-slide',i===galPos);
-    });
-  } else {
-    galTrackEl.style.transform='translateX(-'+(galPos*100)+'%)';
-    galSlides.forEach(function(s){s.classList.remove('active-slide');});
-  }
+  galSlides.forEach(function(s,i){
+    s.classList.toggle('active-slide',i===galPos);
+  });
   document.querySelectorAll('.gdot').forEach(function(d,i){
     d.classList.toggle('on',i===galPos);
   });
   var el=document.getElementById('galCount');
-  if(el) el.textContent='Pagina '+(galPos+1)+' de '+galTotal;
+  if(el) el.textContent=(galPos+1)+' de '+galTotal+' proyectos';
 }
 
 function moveGallery(dir){galPos+=dir;renderGal();}
 
+/* Touch swipe */
 var gts=0;
-galTrackEl.addEventListener('touchstart',function(e){gts=e.touches[0].clientX;},{passive:true});
-galTrackEl.addEventListener('touchend',function(e){
-  var d=gts-e.changedTouches[0].clientX;
-  if(Math.abs(d)>40){galPos+=d>0?1:-1;renderGal();}
-},{passive:true});
-window.addEventListener('resize',function(){galPos=0;renderGal();},{passive:true});
-/* On mobile orientation change, recalc immediately */
-window.addEventListener('orientationchange',function(){setTimeout(renderGal,150);},{passive:true});
+var galVp=document.querySelector('.gal-viewport');
+if(galVp){
+  galVp.addEventListener('touchstart',function(e){gts=e.touches[0].clientX;},{passive:true});
+  galVp.addEventListener('touchend',function(e){
+    var d=gts-e.changedTouches[0].clientX;
+    if(Math.abs(d)>40){galPos+=d>0?1:-1;renderGal();}
+  },{passive:true});
+}
+buildDots();
+renderGal();
 buildDots();
 renderGal();
 

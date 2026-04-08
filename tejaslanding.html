@@ -30,7 +30,7 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .hov{position:absolute;inset:0;background:linear-gradient(130deg,rgba(8,18,36,.68) 0%,rgba(8,18,36,.42) 55%,rgba(15,25,45,.22) 100%)}
 .hcon{position:relative;z-index:2;padding:110px 5vw 90px;max-width:800px;animation:hIn .85s cubic-bezier(.22,1,.36,1) both}
 .hpill{display:inline-flex;align-items:center;gap:10px;background:rgba(254,124,0,.12);border:1px solid rgba(254,124,0,.4);border-radius:100px;padding:6px 18px 6px 10px;margin-bottom:26px}
-.hdot{width:8px;height:8px;background:var(--or);border-radius:50%;animation:pulse 1.8s infinite}
+.hdot{width:10px;height:10px;background:var(--dk2);border-radius:40%;animation:pulse 1.8s infinite}
 .hpill span{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--or);font-weight:700}
 .hcon h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7.5vw,5.8rem);color:#fff;line-height:1.04;font-weight:900;margin-bottom:22px}
 .hcon h1 em{color:var(--or);font-style:normal;display:block}
@@ -138,15 +138,15 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .vic{width:44px;height:44px;border-radius:8px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:2px solid var(--g3)}
 .vit h4{font-size:.9rem;font-weight:700;margin-bottom:3px;color:var(--tx)}
 .vit p{font-size:.78rem;color:var(--mu);line-height:1.66}
-.proc{background:var(--dk);padding:62px 5vw}
-.prochd{text-align:center;margin-bottom:46px}
+.proc{background:var(--dk);padding:44px 5vw}
+.prochd{text-align:center;margin-bottom:28px}
 .prochd .tag{justify-content:center;color:var(--or)}.prochd .tag::before{display:none}
 .prochd .ttl{color:#fff}
 .prochd p{color:rgba(255, 255, 255, 0.705);max-width:460px;margin:10px auto 0;font-size:.8rem;line-height:1.7;font-weight:300}
 .sgrid{display:grid;grid-template-columns:repeat(5,1fr);max-width:1080px;margin:0 auto}
 @media(max-width:900px){.sgrid{grid-template-columns:repeat(3,1fr);gap:24px}}
 @media(max-width:560px){.sgrid{grid-template-columns:1fr 1fr;gap:16px}}
-.step{text-align:center;padding:18px 10px;position:relative}
+.step{text-align:center;padding:10px 8px;position:relative}
 .step::after{content:'to';position:absolute;right:-8px;top:18px;color:rgba(254,124,0,.2);font-size:1rem;font-family:serif}
 .step:last-child::after,.step:nth-child(3n)::after{display:none}
 @media(max-width:900px){.step::after{display:none}}
@@ -177,11 +177,10 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .gal-outer{padding:0 5vw}
 .gal-viewport{max-width:900px;margin:0 auto;position:relative}
 /* Each slide: full width, fade in/out */
-.gal-slide{display:none;animation:galFadeIn .45s ease}
+.gal-slide{display:none}
 .gal-slide.active-slide{display:block}
-@keyframes galFadeIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
 /* Image fills slide */
-.gi{width:100%;height:420px;border-radius:12px 12px 0 0;overflow:hidden;position:relative;box-shadow:0 8px 36px rgba(0,0,0,.12)}
+.gi{width:100%;height:280px;border-radius:12px 12px 0 0;overflow:hidden;position:relative;box-shadow:0 4px 18px rgba(0,0,0,.1)}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .gi:hover img{transform:scale(1.03)}
 /* Caption bar below image — like ba-info */
@@ -216,11 +215,11 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .rep-free{position:absolute;top:-16px;right:16px;background:var(--or);color:#fff;padding:12px 18px;border-radius:8px;text-align:center;box-shadow:0 6px 24px rgba(254,124,0,.5);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;line-height:1.5}
 .rep-free strong{font-size:1.1rem;display:block;font-family:'Cormorant Garamond',serif;letter-spacing:0;text-transform:none}
 /* Services + BA sections sit on white/light — break from blue */
-.rep-svcs-wrap{background:var(--wh);padding:70px 5vw 70px}
+.rep-svcs-wrap{background:var(--wh);padding:46px 5vw}
 .rep-svcs{max-width:1100px;margin:0 auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:800px){.rep-svcs{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.rep-svcs{grid-template-columns:1fr}}
-.rsvc{background:var(--g1);border-radius:8px;padding:22px;transition:all .25s;border:1px solid transparent}
+.rsvc{background:var(--g1);border-radius:8px;padding:16px;transition:all .25s;border:1px solid transparent}
 .rsvc:hover{background:var(--wh);border-color:var(--g3);box-shadow:0 4px 20px rgba(0,0,0,.07);transform:translateY(-3px)}
 .rsvc-ico{font-size:2rem;margin-bottom:12px}
 .rsvc h4{font-size:.93rem;font-weight:700;color:var(--tx);margin-bottom:5px}
@@ -248,12 +247,13 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .bchip-val{font-size:.79rem;color:var(--tx);font-weight:600;margin-top:2px}
 .bchip-val.ok{color:#16a34a}
 .ba-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.rep-test{background:var(--g2);padding:64px 5vw}
+.rep-test{background:var(--g2);padding:44px 5vw}
 .rep-test-hd{text-align:center;margin-bottom:36px}
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
 @media(max-width:800px){.tgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.tgrid{grid-template-columns:1fr}}
-.tcard{background:var(--wh);border-radius:10px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+@media(max-width:580px){.tgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:380px){.tgrid{grid-template-columns:1fr}}
+.tcard{background:var(--wh);border-radius:10px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .tstars{color:var(--or);font-size:1rem;letter-spacing:2px;margin-bottom:12px}
 .tcard p{font-size:.81rem;color:var(--mu);line-height:1.7;font-style:italic;margin-bottom:16px}
 .tauthor{display:flex;align-items:center;gap:10px}
@@ -322,6 +322,16 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   .bwh,.bgwh{width:100%;justify-content:center}
   .snav{gap:6px}
 }
+
+/* FAQ */
+.faqitem{border-bottom:1px solid var(--g3)}
+.faqitem:first-child{border-top:1px solid var(--g3)}
+.faqq{width:100%;background:none;border:none;padding:15px 4px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Poppins',sans-serif;font-size:.86rem;font-weight:600;color:var(--tx);text-align:left;gap:12px;transition:color .2s}
+.faqq:hover,.faqq.open{color:var(--or)}
+.faqarrow{font-size:.7rem;transition:transform .3s;flex-shrink:0;color:var(--or)}
+.faqq.open .faqarrow{transform:rotate(180deg)}
+.faqa{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;font-size:.82rem;color:var(--mu);line-height:1.72;padding:0 4px}
+.faqa.open{max-height:200px;padding:0 4px 14px}
 </style>
 </head>
 <body>
@@ -341,17 +351,17 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="hbg" id="heroBg"></div>
   <div class="hov"></div>
   <div class="hcon">
-    <div class="hpill"><span class="hdot"></span><span>Tejas Rusticas de Arcilla</span></div>
+    <div class="hpill"><span class="hdot"></span><span>Venta e Instalacion &mdash; Paquete Completo</span></div>
     <h1>TECHOS QUE<em>HABLAN POR SI SOLOS</em></h1>
     <p class="hdesc">Vendemos e instalamos tejas de arcilla en cualquier rincon de Costa Rica. Resistentes, autenticas y con garantia de instalacion. Además ofrecemos servicio espercializado de reparacion y mantenimiento de Techos</p> 
     <div class="hbtns">
-      <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bor">&#128172; WhatsApp directo</a>
+      <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bor">&#128172; Cotiza por WhatsApp HOY</a>
       <a href="#catalogo" class="bgh">Ver catalogo tecnico</a>
     </div>
     <div class="hstats">
       <div class="hs"><div class="hs-n">+25</div><div class="hs-l">Anos exp.</div></div>
-      <div class="hs"><div class="hs-n">100%</div><div class="hs-l">Arcilla natural</div></div>
-      <div class="hs"><div class="hs-n">con</div><div class="hs-l">Garantia</div></div>
+      <div class="hs"><div class="hs-n">+500</div><div class="hs-l">Techos instalados</div></div>
+      <div class="hs"><div class="hs-n">100%</div><div class="hs-l">Garantia incluida</div></div>
     </div>
   </div>
   <svg class="hwave" viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,55 C360,100 1080,5 1440,55 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
@@ -412,52 +422,52 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 
   <div class="spanel on" id="sp-colonial">
     <div class="spimg reveal"><img src="img/Landing/tecnicacolonial.jpg??w=800&h=600&fit=crop&q=82" alt="Teja Colonial" loading="lazy"/><div class="spimgov"><h3>Teja Colonial Nacional</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Colonial Nacional</h4><p class="spdesc">Teja canal de perfil curvo fabricada en Costa Rica con arcilla local. Preferida para ranchos, fincas, hoteles , negocios y proyectos habitacionales. Excelente escorrentia en temporada lluviosa.</p><div class="spbdg"><span class="sbg">Alto drenaje</span><span class="sbg">Resistente</span><span class="sbg">Facil instalacion</span></div><table class="sptbl"><tr><td>Largo</td><td>43 cm</td></tr><tr><td>Ancho canal</td><td>18 - 20 cm</td></tr><tr><td>Grosor</td><td>10 - 13 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.75 - 2 kg</td></tr><tr><td>Rendimiento m2</td><td>18 piezas</td></tr><tr><td>Peso total m2</td><td>28 - 38 kg/m2</td></tr><tr><td>Pendiente minima</td><td>30 grados</td></tr><tr><td>Temperatura coccion</td><td>+980 C</td></tr><tr><td>Absorcion de agua</td><td>menos 8%</td></tr><tr><td>Colores</td><td>Natural, Envejecido, Barro</td></tr><tr><td>Aplicaciones</td><td>Ranchos, fincas, hoteles, casas</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Colonial Nacional')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('colonial');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Colonial Nacional</h4><p class="spdesc">Teja canal de perfil curvo fabricada en Costa Rica con arcilla local. Preferida para ranchos, fincas, hoteles , negocios y proyectos habitacionales. Excelente escorrentia en temporada lluviosa.</p><div class="spbdg"><span class="sbg">Alto drenaje</span><span class="sbg">Resistente</span><span class="sbg">Facil instalacion</span></div><table class="sptbl"><tr><td>Largo</td><td>43 cm</td></tr><tr><td>Ancho canal</td><td>18 - 20 cm</td></tr><tr><td>Grosor</td><td>10 - 13 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.75 - 2 kg</td></tr><tr><td>Rendimiento m2</td><td>18 piezas</td></tr><tr><td>Peso total m2</td><td>28 - 38 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 8%</td></tr><tr><td>Colores</td><td>Natural, Envejecido, Barro</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Colonial Nacional')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('colonial');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-imperial">
     <div class="spimg reveal"><img src="img/Landing/tecnicaimperial.jpg??w=800&h=600&fit=crop&q=82" alt="Teja Imperial" loading="lazy"/><div class="spimgov"><h3>Teja Imperial Nacional</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Imperial Nacional</h4><p class="spdesc">Perfil mixto (canal y copete) fabricada en Costa Rica. Acabado mas elevado que la colonial simple, muy usada en residencias y proyectos turisticos donde se busca un techo vistoso y duradero.</p><div class="spbdg"><span class="sbg">Alta gama</span><span class="sbg">Aislante</span><span class="sbg">Residencial</span></div><table class="sptbl"><tr><td>Largo</td><td>45 - 46 cm</td></tr><tr><td>Ancho</td><td>24 cm</td></tr><tr><td>Grosor</td><td>12 - 15 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 2.6 - 3.0 kg</td></tr><tr><td>Rendimiento m2</td><td>12 piezas</td></tr><tr><td>Peso total m2</td><td>36 - 38 kg/m2</td></tr><tr><td>Pendiente minima</td><td>25 grados</td></tr><tr><td>Temperatura coccion</td><td>+1000 C</td></tr><tr><td>Absorcion de agua</td><td>menos 6%</td></tr><tr><td>Colores</td><td>Natural, Ocre, Rojo vivo</td></tr><tr><td>Aplicaciones</td><td>Residencias, condominios, turismo</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Imperial Nacional')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('imperial');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Imperial Nacional</h4><p class="spdesc">Perfil mixto (canal y copete) fabricada en Costa Rica. Acabado mas elevado que la colonial simple, muy usada en residencias y proyectos turisticos donde se busca un techo vistoso y duradero.</p><div class="spbdg"><span class="sbg">Alta gama</span><span class="sbg">Aislante</span><span class="sbg">Residencial</span></div><table class="sptbl"><tr><td>Largo</td><td>45 - 46 cm</td></tr><tr><td>Ancho</td><td>24 cm</td></tr><tr><td>Grosor</td><td>12 - 15 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 2.6 - 3.0 kg</td></tr><tr><td>Rendimiento m2</td><td>12 piezas</td></tr><tr><td>Peso total m2</td><td>36 - 38 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 6%</td></tr><tr><td>Colores</td><td>Natural, Ocre, Rojo vivo</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Imperial Nacional')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('imperial');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-plana">
     <div class="spimg reveal"><img src="img/Landing/tecnicaplanacol.jpg??w=800&h=600&fit=crop&q=82" alt="Teja Plana" loading="lazy"/><div class="spimgov"><h3>Teja Plana Colombiana</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Plana Colombiana</h4><p class="spdesc">Importada de Colombia, perfil plano con superficie texturizada. Elegida en arquitectura contemporanea o minimalista que desea el caracter del barro con lineas limpias y ordenadas.</p><div class="spbdg"><span class="sbg">Colombia</span><span class="sbg">Perfil plano</span><span class="sbg">Varios colores</span><span class="sbg">Moderno</span></div><table class="sptbl"><tr><td>Largo</td><td>30 cm</td></tr><tr><td>Ancho</td><td>20 cm</td></tr><tr><td>Grosor</td><td>14 - 18 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.4 kg</td></tr><tr><td>Rendimiento m2</td><td>24 piezas</td></tr><tr><td>Peso total m2</td><td>35 - 40 kg/m2</td></tr><tr><td>Pendiente minima</td><td>18 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Gris, Matizada</td></tr><tr><td>Aplicaciones</td><td>Arquitectura moderna, comercial</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Plana Colombiana')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('plana');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Plana Colombiana</h4><p class="spdesc">Importada de Colombia, perfil plano con superficie texturizada. Elegida en arquitectura contemporanea o minimalista que desea el caracter del barro con lineas limpias y ordenadas.</p><div class="spbdg"><span class="sbg">Colombia</span><span class="sbg">Perfil plano</span><span class="sbg">Varios colores</span><span class="sbg">Moderno</span></div><table class="sptbl"><tr><td>Largo</td><td>30 cm</td></tr><tr><td>Ancho</td><td>20 cm</td></tr><tr><td>Grosor</td><td>14 - 18 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.4 kg</td></tr><tr><td>Rendimiento m2</td><td>24 piezas</td></tr><tr><td>Peso total m2</td><td>35 - 40 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Gris, Matizada</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Plana Colombiana')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('plana');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-nicanew">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicanueva.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Nicaraguense Nueva" loading="lazy"/><div class="spimgov"><h3>Teja Nicaraguense Nueva</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Nicaraguense Nueva</h4><p class="spdesc">Teja canal fabricada en Nicaragua, excelente calidad y precio competitivo. Muy popular en el mercado centroamericano por su resistencia y disponibilidad. Ideal para proyectos de gran metraje.</p><div class="spbdg"><span class="sbg">Nicaragua</span><span class="sbg">Precio competitivo</span><span class="sbg">Alta disponibilidad</span></div><table class="sptbl"><tr><td>Largo</td><td>38 cm</td></tr><tr><td>Ancho canal</td><td>16 - 18 cm</td></tr><tr><td>Grosor</td><td>9 - 12 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.3 kg</td></tr><tr><td>Rendimiento m2</td><td>27 piezas</td></tr><tr><td>Peso total m2</td><td>35 - 37 kg/m2</td></tr><tr><td>Pendiente minima</td><td>28 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 10%</td></tr><tr><td>Colores</td><td>Natural terracota</td></tr><tr><td>Aplicaciones</td><td>Uso general, ranchos, bodegas, Viviendas</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Nicaraguense Nueva')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('nicanew');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Nicaraguense Nueva</h4><p class="spdesc">Teja canal fabricada en Nicaragua, excelente calidad y precio competitivo. Muy popular en el mercado centroamericano por su resistencia y disponibilidad. Ideal para proyectos de gran metraje.</p><div class="spbdg"><span class="sbg">Nicaragua</span><span class="sbg">Precio competitivo</span><span class="sbg">Alta disponibilidad</span></div><table class="sptbl"><tr><td>Largo</td><td>38 cm</td></tr><tr><td>Ancho canal</td><td>16 - 18 cm</td></tr><tr><td>Grosor</td><td>9 - 12 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.3 kg</td></tr><tr><td>Rendimiento m2</td><td>27 piezas</td></tr><tr><td>Peso total m2</td><td>35 - 37 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 10%</td></tr><tr><td>Colores</td><td>Natural terracota</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Nicaraguense Nueva')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('nicanew');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-nicaold">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicaantigua.jpg??w=800&h=600&fit=crop&q=82" alt="Teja Nicaraguense Antigua" loading="lazy"/><div class="spimgov"><h3>Teja Nicaraguense Antigua</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Nicaraguense Antigua</h4><p class="spdesc">Teja canal nicaraguense recuperada. Muy buscada por su acabado envejecido natural, perfecta para proyectos que desean un look rustico autentico desde el primer dia. Seleccionada y revisada antes de la venta.</p><div class="spbdg"><span class="sbg">Envejecido</span><span class="sbg">Recuperada</span><span class="sbg">Acabado natural</span></div><table class="sptbl"><tr><td>Largo</td><td>43 - 47 cm (variable)</td></tr><tr><td>Ancho canal</td><td>14 - 18.5 cm</td></tr><tr><td>Grosor</td><td>9 - 12 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.8 - 2 kg</td></tr><tr><td>Rendimiento m2</td><td>27 piezas</td></tr><tr><td>Condicion</td><td>Usada, seleccionada y limpiada</td></tr><tr><td>Acabado</td><td>Patina envejecida natural</td></tr><tr><td>Pendiente minima</td><td>28 grados</td></tr><tr><td>Aplicaciones</td><td>Restauraciones, ranchos vintage, Viviendas</td></tr><tr><td>Nota</td><td>Stock variable, consultar</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Nicaraguense Usada')">Consultar disponibilidad</a><a href="#" class="bcat" onclick="openCatalog('nicaold');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Nicaraguense Antigua</h4><p class="spdesc">Teja canal nicaraguense recuperada. Muy buscada por su acabado envejecido natural, perfecta para proyectos que desean un look rustico autentico desde el primer dia. Seleccionada y revisada antes de la venta.</p><div class="spbdg"><span class="sbg">Envejecido</span><span class="sbg">Recuperada</span><span class="sbg">Acabado natural</span></div><table class="sptbl"><tr><td>Largo</td><td>43 - 47 cm (variable)</td></tr><tr><td>Ancho canal</td><td>14 - 18.5 cm</td></tr><tr><td>Grosor</td><td>9 - 12 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.8 - 2 kg</td></tr><tr><td>Rendimiento m2</td><td>27 piezas</td></tr><tr><td>Condicion</td><td>Usada, seleccionada y limpiada</td></tr><tr><td>Acabado</td><td>Patina envejecida natural</td></tr><tr><td>Nota</td><td>Stock variable, consultar</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Nicaraguense Usada')">Consultar disponibilidad</a><a href="#" class="bcat" onclick="openCatalog('nicaold');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-med">
     <div class="spimg reveal"><img src="img/Landing/tecnicamediterranea.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Mediterraneo" loading="lazy"/><div class="spimgov"><h3>Teja Mediterraneo</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Mediterraneo</h4><p class="spdesc">Teja de perfil ondulado estilo europeo-mediterraneo, de mayor dimension. Aspecto distinguido para hoteles, condominios y residencias de alto nivel. Excelente impermeabilidad.</p><div class="spbdg"><span class="sbg">Estilo europeo</span><span class="sbg">Hotels</span><span class="sbg">Alta impermeabilidad</span></div><table class="sptbl"><tr><td>Largo</td><td>46 - 50 cm</td></tr><tr><td>Ancho</td><td>30 - 34 cm</td></tr><tr><td>Grosor</td><td>14 - 17 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 3.0 - 3.8 kg</td></tr><tr><td>Rendimiento m2</td><td>8 - 10 piezas</td></tr><tr><td>Peso total m2</td><td>24 - 38 kg/m2</td></tr><tr><td>Pendiente minima</td><td>22 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Arena, Gris, Rojo</td></tr><tr><td>Aplicaciones</td><td>Hoteles, condominios, villas</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Mediterraneo')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('med');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Mediterraneo</h4><p class="spdesc">Teja de perfil ondulado estilo europeo-mediterraneo, de mayor dimension. Aspecto distinguido para hoteles, condominios y residencias de alto nivel. Excelente impermeabilidad.</p><div class="spbdg"><span class="sbg">Estilo europeo</span><span class="sbg">Hotels</span><span class="sbg">Alta impermeabilidad</span></div><table class="sptbl"><tr><td>Largo</td><td>46 - 50 cm</td></tr><tr><td>Ancho</td><td>30 - 34 cm</td></tr><tr><td>Grosor</td><td>14 - 17 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 3.0 - 3.8 kg</td></tr><tr><td>Rendimiento m2</td><td>8 - 10 piezas</td></tr><tr><td>Peso total m2</td><td>24 - 38 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Arena, Gris, Rojo</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Mediterraneo')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('med');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-sal">
     <div class="spimg reveal"><img src="img/Landing/tecnicasalvador.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Salvadorena" loading="lazy"/><div class="spimgov"><h3>Teja Salvadorena</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Salvadorena</h4><p class="spdesc">Fabricada en El Salvador con arcilla seleccionada. Canal similar a la nicaraguense, buen precio y alta resistencia. Utilizada en vivienda de interes social y proyectos rurales.</p><div class="spbdg"><span class="sbg">El Salvador</span><span class="sbg">Economica</span><span class="sbg">Uso general</span></div><table class="sptbl"><tr><td>Largo</td><td>42 - 46 cm</td></tr><tr><td>Ancho canal</td><td>13 - 16 cm</td></tr><tr><td>Grosor</td><td>9 - 11 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.7 - 2.2 kg</td></tr><tr><td>Rendimiento m2</td><td>15 - 18 piezas</td></tr><tr><td>Peso total m2</td><td>25 - 36 kg/m2</td></tr><tr><td>Pendiente minima</td><td>28 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 10%</td></tr><tr><td>Colores</td><td>Terracota natural</td></tr><tr><td>Aplicaciones</td><td>Vivienda, uso general, rural</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Salvadorena')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('sal');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Salvadorena</h4><p class="spdesc">Fabricada en El Salvador con arcilla seleccionada. Canal similar a la nicaraguense, buen precio y alta resistencia. Utilizada en vivienda de interes social y proyectos rurales.</p><div class="spbdg"><span class="sbg">El Salvador</span><span class="sbg">Economica</span><span class="sbg">Uso general</span></div><table class="sptbl"><tr><td>Largo</td><td>42 - 46 cm</td></tr><tr><td>Ancho canal</td><td>13 - 16 cm</td></tr><tr><td>Grosor</td><td>9 - 11 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.7 - 2.2 kg</td></tr><tr><td>Rendimiento m2</td><td>15 - 18 piezas</td></tr><tr><td>Peso total m2</td><td>25 - 36 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 10%</td></tr><tr><td>Colores</td><td>Terracota natural</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Salvadorena')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('sal');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-ren">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicarenacimiento.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Renacimiento" loading="lazy"/><div class="spimgov"><h3>Teja Renacimiento Terracota</h3></div><span class="sptag">800x600px</span></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Renacimiento Terracota</h4><p class="spdesc">Perfil especial con acabado terracota intenso y uniforme. Muy usada en complejos turisticos, hoteles y villas de lujo donde se busca un rojo-terracota vibrante y consistente.</p><div class="spbdg"><span class="sbg">Terracota intenso</span><span class="sbg">Color uniforme</span><span class="sbg">Turistico</span><span class="sbg">Acabado especial</span></div><table class="sptbl"><tr><td>Largo</td><td>44 - 48 cm</td></tr><tr><td>Ancho</td><td>26 - 30 cm</td></tr><tr><td>Grosor</td><td>13 - 16 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 2.6 - 3.1 kg</td></tr><tr><td>Rendimiento m2</td><td>10 - 12 piezas</td></tr><tr><td>Peso total m2</td><td>26 - 36 kg/m2</td></tr><tr><td>Pendiente minima</td><td>22 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 6%</td></tr><tr><td>Colores</td><td>Terracota intenso, Rojo oscuro</td></tr><tr><td>Aplicaciones</td><td>Hoteles, villas, condominios premium</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Renacimiento Terracota')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('ren');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Renacimiento Terracota</h4><p class="spdesc">Perfil especial con acabado terracota intenso y uniforme. Muy usada en complejos turisticos, hoteles y villas de lujo donde se busca un rojo-terracota vibrante y consistente.</p><div class="spbdg"><span class="sbg">Terracota intenso</span><span class="sbg">Color uniforme</span><span class="sbg">Turistico</span><span class="sbg">Acabado especial</span></div><table class="sptbl"><tr><td>Largo</td><td>44 - 48 cm</td></tr><tr><td>Ancho</td><td>26 - 30 cm</td></tr><tr><td>Grosor</td><td>13 - 16 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 2.6 - 3.1 kg</td></tr><tr><td>Rendimiento m2</td><td>10 - 12 piezas</td></tr><tr><td>Peso total m2</td><td>26 - 36 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 6%</td></tr><tr><td>Colores</td><td>Terracota intenso, Rojo oscuro</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Renacimiento Terracota')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('ren');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-sf">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicaecuatoriana.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Santa Fe" loading="lazy"/><div class="spimgov"><h3>Teja Santa Fe Ecuatoriana</h3></div><span class="sptag">800x600px</span></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Santa Fe Ecuatoriana</h4><p class="spdesc">Importada desde Ecuador, alta densidad y acabado muy uniforme. Excelente relacion calidad-precio en el segmento premium. Gran formato que reduce el numero de piezas necesarias.</p><div class="spbdg"><span class="sbg">Ecuador</span><span class="sbg">Alta densidad</span><span class="sbg">Gran formato</span><span class="sbg">Menos piezas</span></div><table class="sptbl"><tr><td>Largo</td><td>50 - 54 cm</td></tr><tr><td>Ancho</td><td>28 - 32 cm</td></tr><tr><td>Grosor</td><td>16 - 20 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 3.5 - 4.2 kg</td></tr><tr><td>Rendimiento m2</td><td>7 - 9 piezas</td></tr><tr><td>Peso total m2</td><td>25 - 36 kg/m2</td></tr><tr><td>Pendiente minima</td><td>20 grados</td></tr><tr><td>Absorcion de agua</td><td>menos 4%</td></tr><tr><td>Colores</td><td>Natural, Ocre, Envejecido, Gris</td></tr><tr><td>Aplicaciones</td><td>Proyectos premium, gran metraje</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Santa Fe Ecuatoriana')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('sf');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Santa Fe Ecuatoriana</h4><p class="spdesc">Importada desde Ecuador, alta densidad y acabado muy uniforme. Excelente relacion calidad-precio en el segmento premium. Gran formato que reduce el numero de piezas necesarias.</p><div class="spbdg"><span class="sbg">Ecuador</span><span class="sbg">Alta densidad</span><span class="sbg">Gran formato</span><span class="sbg">Menos piezas</span></div><table class="sptbl"><tr><td>Largo</td><td>50 - 54 cm</td></tr><tr><td>Ancho</td><td>28 - 32 cm</td></tr><tr><td>Grosor</td><td>16 - 20 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 3.5 - 4.2 kg</td></tr><tr><td>Rendimiento m2</td><td>7 - 9 piezas</td></tr><tr><td>Peso total m2</td><td>25 - 36 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 4%</td></tr><tr><td>Colores</td><td>Natural, Ocre, Envejecido, Gris</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Santa Fe Ecuatoriana')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('sf');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-plas">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicaplastica.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Plastica" loading="lazy"/><div class="spimgov"><h3>Teja Plastica en Paneles</h3></div><span class="sptag">800x600px</span></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Plastica en Paneles</h4><p class="spdesc">Panel de PVC o polipropileno con forma de teja. Ultra liviano, facil de instalar y bajo mantenimiento. Ideal para ranchos, quinchos y estructuras que no soportan mucho peso. Resistente UV.</p><div class="spbdg"><span class="sbg">Ultra liviano</span><span class="sbg">Resistente UV</span><span class="sbg">Facil instalacion</span><span class="sbg">Impermeable</span></div><table class="sptbl"><tr><td>Dimension panel</td><td>120 x 90 cm (variable)</td></tr><tr><td>Cobertura efectiva</td><td>1.08 m2 por panel</td></tr><tr><td>Grosor</td><td>2 - 4 mm</td></tr><tr><td>Peso por panel</td><td>Aprox. 1.2 - 2.0 kg</td></tr><tr><td>Peso total m2</td><td>1.1 - 1.8 kg/m2</td></tr><tr><td>Material</td><td>PVC / Polipropileno reforzado</td></tr><tr><td>Resistencia UV</td><td>Alta (tratamiento especial)</td></tr><tr><td>Pendiente minima</td><td>10 grados</td></tr><tr><td>Colores</td><td>Terracota, Rojo, Gris, Natural</td></tr><tr><td>Aplicaciones</td><td>Ranchos, cobertizos, quinchos</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Plastica en Paneles')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('plas');return false">Ver catalogo digital</a></div></div>
+    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Plastica en Paneles</h4><p class="spdesc">Panel de PVC o polipropileno con forma de teja. Ultra liviano, facil de instalar y bajo mantenimiento. Ideal para ranchos, quinchos y estructuras que no soportan mucho peso. Resistente UV.</p><div class="spbdg"><span class="sbg">Ultra liviano</span><span class="sbg">Resistente UV</span><span class="sbg">Facil instalacion</span><span class="sbg">Impermeable</span></div><table class="sptbl"><tr><td>Dimension panel</td><td>120 x 90 cm (variable)</td></tr><tr><td>Cobertura efectiva</td><td>1.08 m2 por panel</td></tr><tr><td>Grosor</td><td>2 - 4 mm</td></tr><tr><td>Peso por panel</td><td>Aprox. 1.2 - 2.0 kg</td></tr><tr><td>Peso total m2</td><td>1.1 - 1.8 kg/m2</td></tr><tr><td>Material</td><td>PVC / Polipropileno reforzado</td></tr><tr><td>Resistencia UV</td><td>Alta (tratamiento especial)</td></tr><tr><td>Colores</td><td>Terracota, Rojo, Gris, Natural</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Plastica en Paneles')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('plas');return false">Ver catalogo digital</a></div></div>
   </div>
 </section>
 
@@ -466,10 +476,10 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <div class="vvis reveal">
       <img class="vimg" src="img/Landing/Elejirnos.jpg" alt="Proyecto instalado" loading="lazy"/>
       <div class="vbdg"><strong>+25</strong><span>años de experiencia</span></div>
-     </div>
+    </div>
     <div>
       <div class="tag reveal">Por que elegirnos?</div>
-      <h2 class="ttl reveal">La Diferencia Esta En<br/><em>Los Detalles</em></h2>
+      <h2 class="ttl reveal">Por que <em>Elegirnos?</em></h2>
       <ul class="vlist">
         <li class="vi reveal"><div class="vic">&#128681;</div><div class="vit"><h4>Arcilla 100% Natural</h4><p>Materias primas seleccionadas y cocidas a alta temperatura. Color autentico, resistencia climatica y longevidad excepcional en el tropico.</p></div></li>
         <li class="vi reveal" style="transition-delay:.09s"><div class="vic">&#128296;</div><div class="vit"><h4>Instalación Profesional</h4><p>Nuestro Equipo técnico capaz de instalar sus tejas donde lo necesite. Coordinamos logistica, estructura y acabado. Trabajo garantizado.</p></div></li>
@@ -668,6 +678,11 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="rep-intro">
     <div>
       <span class="rep-badge-pill">Servicio especializado</span>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+        <span style="font-size:.75rem;color:rgba(255,255,255,.65)">&#10003; +500 techos intervenidos</span>
+        <span style="font-size:.75rem;color:rgba(255,255,255,.65)">&#10003; +300 proyectos completados</span>
+        <span style="font-size:.75rem;color:rgba(255,255,255,.65)">&#10003; Atencion en 24h</span>
+      </div>
       <h2 class="ttl" style="color:#fff;font-size:clamp(2.2rem,5vw,3.6rem)">REPARACION Y <br/><em>MANTENIMIENTO DE TECHOS</em></h2>
       <p style="color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.75;margin-top:14px;margin-bottom:22px">En Costa Rica, la temporada lluviosa castiga los techos sin piedad. Un techo con filtraciones no es solo una molestia: puede arruinar estructura, madera, paredes y cimientos. Nosotros lo resolvemos antes de que el problema crezca.</p>
       <div class="rep-stats">
@@ -772,7 +787,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 
   </div>
   <div class="ba-ctas reveal">
-    <a href="https://wa.me/50663995641?text=Hola,%20quiero%20solicitar%20una%20revision%20GRATIS%20de%20mi%20techo.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bor">&#128172; Solicitar revision GRATIS</a>
+    <a href="https://wa.me/50663995641?text=Hola,%20quiero%20solicitar%20una%20revision%20GRATIS%20de%20mi%20techo.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bor">&#128172; Recibe asesoria GRATIS &mdash; Sin costo</a>
     <a href="#cotizar" class="bcat" style="padding:14px 26px">Cotizar reparacion</a>
   </div>
 </div><!-- end rep-svcs-wrap white -->
@@ -803,15 +818,46 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 </div>
 
 <div class="cta reveal">
-  <div class="tag">Respuesta en menos de 48 horas</div>
+  <div class="tag">Visita tecnica GRATIS &mdash; Sin compromiso</div>
   <h2>Listo Para Comenzar <br><span>Su Proyecto</span>&nbsp;?</h2>
   <p>Cuentenos que necesita y le enviamos una cotizacion con cantidades exactas, precio final y opciones de instalacion.</p>
   <div class="ctabtns">
-    <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bwh">WhatsApp ahora</a>
-    <a href="#cotizar" class="bgwh">Formulario de cotizacion</a>
+    <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank" class="bwh">&#128172; Quiero mi techo nuevo ahora</a>
+    <a href="#cotizar" class="bgwh">Solicitar inspeccion sin costo</a>
   </div>
 </div>
 
+
+<!-- FAQ -->
+<section style="background:var(--g1);padding:56px 5vw" id="faq">
+  <div style="max-width:820px;margin:0 auto">
+    <div class="tag" style="justify-content:center;margin-bottom:8px"><span>Preguntas frecuentes</span></div>
+    <h2 class="ttl" style="text-align:center;margin-bottom:32px">Resolvemos sus <em>dudas</em></h2>
+    <div>
+      <div class="faqitem">
+        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Cuanto tarda la instalacion de un techo?</span><span class="faqarrow">&#9660;</span></button>
+        <div class="faqa">Un proyecto residencial promedio toma entre 2 y 5 dias habiles segun el area. Le damos un cronograma exacto al momento de la cotizacion. Trabajamos con cuadrillas completas para no dejar su techo expuesto.</div>
+      </div>
+      <div class="faqitem">
+        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Que incluye el Paquete Completo de instalacion?</span><span class="faqarrow">&#9660;</span></button>
+        <div class="faqa">Incluye: visita tecnica previa sin costo, suministro de tejas, desinstalacion del techo viejo, reparacion de estructura si aplica, instalacion completa, recoleccion de escombros y garantia de instalacion. Un solo proveedor para todo.</div>
+      </div>
+      <div class="faqitem">
+        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Llegan a instalar a Guanacaste, Limon o zonas alejadas?</span><span class="faqarrow">&#9660;</span></button>
+        <div class="faqa">Si, cubrimos todo el territorio nacional. Coordinamos el transporte del material y el equipo de instalacion directamente a su obra. Consultenos su ubicacion sin compromiso.</div>
+      </div>
+      <div class="faqitem">
+        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Pueden visitarme para medicion previa y traer muestras?</span><span class="faqarrow">&#9660;</span></button>
+        <div class="faqa">Por supuesto. La visita de medicion es completamente GRATIS y sin compromiso. Llevamos muestras fisicas de los tipos de teja disponibles para que vea colores y texturas reales antes de decidir.</div>
+      </div>
+      <div class="faqitem">
+        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Tienen garantia en el producto y la instalacion?</span><span class="faqarrow">&#9660;</span></button>
+        <div class="faqa">Si. Ofrecemos garantia de producto segun cada tipo de teja y garantia de instalacion en mano de obra. Si hay algun problema con nuestra instalacion, regresamos a resolverlo sin costo adicional.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
 <div class="csplit" id="cotizar">
   <div class="cleft reveal">
     <div class="tag">Contactenos</div>
@@ -820,7 +866,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <div class="cinfo">
       <div class="ci"><div class="cico">&#128222;</div><a href="tel:+50663995641">+506 6399-5641</a></div>
       <div class="ci"><div class="cico">&#128172;</div><a href="https://wa.me/50663995641?text=Hola,%20me%20interesa%20informacion.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejaslanding" target="_blank">WhatsApp directo</a></div>
-      <div class="ci"><div class="cico">&#128231;</div><a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a></div>
+      <div class="ci"><div class="cico">&#128231;</div><a href="/cdn-cgi/l/email-protection#9cf0fdf8eef5f0f0f9eefdeffdfefdf2fdf3f9efe8f9dcfbf1fdf5f0b2fff3f1"><span class="__cf_email__" data-cfemail="3b575a5f495257575e495a485a595a555a545e484f5e7b5c565a525715585456">[email&#160;protected]</span></a></div>
       <div class="ci"><div class="cico">&#128205;</div><span>800 mts oeste de POPs La Sabana, San Jose</span></div>
       <div class="ci"><div class="cico">&#128197;</div><span>Lun-Vie 7am-5pm - Sab 8am-2pm</span></div>
     </div>
@@ -866,7 +912,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
         <textarea name="message" placeholder="Cuentenos mas: tipo de techo, estructura existente, fecha estimada, si necesita instalacion..."></textarea>
       </div>
       <button type="submit" class="bsub">Enviar solicitud de cotizacion</button>
-      <p class="fnote">Su mensaje llega directamente a <a href="mailto:ladrillerasabanaoeste@gmail.com">ladrillerasabanaoeste@gmail.com</a>. Le respondemos en menos de 48 horas habiles.</p>
+      <p class="fnote">Su mensaje llega directamente a <a href="/cdn-cgi/l/email-protection#acc0cdc8dec5c0c0c9decddfcdcecdc2cdc3c9dfd8c9eccbc1cdc5c082cfc3c1"><span class="__cf_email__" data-cfemail="b2ded3d6c0dbdeded7c0d3c1d3d0d3dcd3ddd7c1c6d7f2d5dfd3dbde9cd1dddf">[email&#160;protected]</span></a>. Le respondemos en menos de 48 horas habiles.</p>
     </form>
   </div>
 </div>
@@ -878,6 +924,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       <span class="flogotxt">Ladrillera Sabana Oeste</span>
     </div>
     <div class="flinks">
+      <a href="https://ladrillerasabanaoeste.com" target="_blank">Sitio web</a>
       <a href="#productos">Tejas populares</a>
       <a href="#catalogo">Especificaciones</a>
       <a href="#galeria">Proyectos</a>
@@ -901,7 +948,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);},{passive:true});
 setTimeout(function(){var b=document.getElementById('heroBg');if(b)b.classList.add('ok');},100);
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:0.1});
@@ -1074,6 +1121,24 @@ function initBaSplit(idx){
   split.addEventListener('touchend',function(){dragging=false;});
 }
 initBaSplit(0);
+
+/* FAQ toggle */
+function toggleFaq(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.contains('open');
+  document.querySelectorAll('.faqa').forEach(function(a){a.classList.remove('open');});
+  document.querySelectorAll('.faqq').forEach(function(b){b.classList.remove('open');});
+  if(!isOpen){ans.classList.add('open');btn.classList.add('open');}
+}
+
+/* FAQ */
+function toggleFaq(btn){
+  var ans=btn.nextElementSibling;
+  var isOpen=ans.classList.contains('open');
+  document.querySelectorAll('.faqa').forEach(function(a){a.classList.remove('open');});
+  document.querySelectorAll('.faqq').forEach(function(b){b.classList.remove('open');});
+  if(!isOpen){ans.classList.add('open');btn.classList.add('open');}
+}
 </script>
 </body>
 </html>
