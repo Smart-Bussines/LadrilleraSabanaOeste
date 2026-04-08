@@ -180,7 +180,7 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .gal-slide{display:none}
 .gal-slide.active-slide{display:block}
 /* Image fills slide */
-.gi{width:100%;height:380px;border-radius:10px 10px 0 0;overflow:hidden}
+.gi{width:100%;height:380px;border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,.18)}
 .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .gi:hover img{transform:scale(1.03)}
 /* Caption bar below image — like ba-info */
@@ -329,6 +329,19 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 .faqq.open .faqarrow{transform:rotate(180deg)}
 .faqa{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;font-size:.82rem;color:var(--mu);line-height:1.72;padding:0 4px}
 .faqa.open{max-height:200px;padding:0 4px 14px}
+
+/* Lightbox */
+.lbx{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
+.lbx.open{display:flex}
+.lbx img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:6px;box-shadow:0 8px 60px rgba(0,0,0,.6)}
+.lbx-close{position:absolute;top:18px;right:22px;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;opacity:.8;transition:opacity .2s}
+.lbx-close:hover{opacity:1}
+.lbx-arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2.2rem;cursor:pointer;background:rgba(255,255,255,.12);border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lbx-arr:hover{background:rgba(255,255,255,.25)}
+.lbx-prev{left:16px}
+.lbx-next{right:16px}
+.lbx-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,.75);font-size:.8rem;letter-spacing:.06em}
+.gi img{cursor:zoom-in}
 </style>
 </head>
 <body>
@@ -518,7 +531,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
     <div class="gal-viewport">
       <div class="gal-slide active-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite1.jpg" alt="Proyecto 1 instalado" loading="lazy"/>
+          <img onclick="openLbx(0)" src="img/Landing/landingslite1.jpg" alt="Proyecto 1 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -526,7 +539,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite2.jpg" alt="Proyecto 2 instalado" loading="lazy"/>
+          <img onclick="openLbx(1)" src="img/Landing/landingslite2.jpg" alt="Proyecto 2 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
          <p>Guanacaste - Teja Colonial</p>
@@ -534,7 +547,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite3.jpg" alt="Proyecto 3 instalado" loading="lazy"/>
+          <img onclick="openLbx(2)" src="img/Landing/landingslite3.jpg" alt="Proyecto 3 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -542,7 +555,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite4.jpg" alt="Proyecto 4 instalado" loading="lazy"/>
+          <img onclick="openLbx(3)" src="img/Landing/landingslite4.jpg" alt="Proyecto 4 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -550,7 +563,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite5.jpg" alt="Proyecto 5 instalado" loading="lazy"/>
+          <img onclick="openLbx(4)" src="img/Landing/landingslite5.jpg" alt="Proyecto 5 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>    
@@ -558,7 +571,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite6.jpg" alt="Proyecto 6 instalado" loading="lazy"/>
+          <img onclick="openLbx(5)" src="img/Landing/landingslite6.jpg" alt="Proyecto 6 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -566,7 +579,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite7.jpg" alt="Proyecto 7 instalado" loading="lazy"/>
+          <img onclick="openLbx(6)" src="img/Landing/landingslite7.jpg" alt="Proyecto 7 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p> 
@@ -574,7 +587,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite8.jpg" alt="Proyecto 8 instalado" loading="lazy"/>
+          <img onclick="openLbx(7)" src="img/Landing/landingslite8.jpg" alt="Proyecto 8 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -582,7 +595,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite9.jpg" alt="Proyecto 9 instalado" loading="lazy"/>
+          <img onclick="openLbx(8)" src="img/Landing/landingslite9.jpg" alt="Proyecto 9 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -590,7 +603,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite10.jpg" alt="Proyecto 10 instalado" loading="lazy"/>
+          <img onclick="openLbx(9)" src="img/Landing/landingslite10.jpg" alt="Proyecto 10 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -598,7 +611,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite11.jpg" alt="Proyecto 11 instalado" loading="lazy"/>
+          <img onclick="openLbx(10)" src="img/Landing/landingslite11.jpg" alt="Proyecto 11 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -606,22 +619,14 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite12.jpg" alt="Proyecto 12 instalado" loading="lazy"/>
+          <img onclick="openLbx(11)" src="img/Landing/landingslite12.jpg" alt="Proyecto 12 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite13.jpg" alt="Proyecto 13 instalado" loading="lazy"/>
-        </div>
-        <div class="gcap">
-        <p>Guanacaste - Teja Colonial</p>
-        </div>
-      </div>
-      <div class="gal-slide">
-        <div class="gi">
-          <img src="img/Landing/landingslite14.jpg" alt="Proyecto 14 instalado" loading="lazy"/>
+          <img onclick="openLbx(12)" src="img/Landing/landingslite13.jpg" alt="Proyecto 13 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
@@ -629,10 +634,27 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       </div>
       <div class="gal-slide">
         <div class="gi">
-          <img src="img/Landing/landingslite15.jpg" alt="Proyecto 16 instalado" loading="lazy"/>
+          <img onclick="openLbx(13)" src="img/Landing/landingslite14.jpg" alt="Proyecto 14 instalado" loading="lazy"/>
         </div>
         <div class="gcap">
         <p>Guanacaste - Teja Colonial</p>
+        </div>
+      </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img onclick="openLbx(14)" src="img/Landing/landingslite15.jpg" alt="Proyecto 15 instalado" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 15</h5>
+          <p>Santa Ana - Teja Renacimiento</p>
+        </div>
+      <div class="gal-slide">
+        <div class="gi">
+          <img onclick="openLbx(15)" src="img/Landing/landingslite16.jpg" alt="Proyecto 16 instalado" loading="lazy"/>
+        </div>
+        <div class="gcap">
+          <h5>Proyecto 16</h5>
+          <p>Jaco - Teja Salvadorena</p>
         </div>
       </div>
     </div>
@@ -1100,6 +1122,47 @@ function toggleFaq(btn){
   document.querySelectorAll('.faqq').forEach(function(b){b.classList.remove('open');});
   if(!isOpen){ans.classList.add('open');btn.classList.add('open');}
 }
+
+/* Lightbox */
+function openLbx(idx){
+  var slides=document.querySelectorAll('.gal-slide');
+  var img=slides[idx]?slides[idx].querySelector('img'):null;
+  var cap=slides[idx]?slides[idx].querySelector('.gcap'):null;
+  if(!img) return;
+  document.getElementById('lbxImg').src=img.src;
+  document.getElementById('lbxCap').textContent=cap?cap.textContent.trim():'';
+  document.getElementById('galLbx').dataset.idx=idx;
+  document.getElementById('galLbx').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function lbxClose(){
+  document.getElementById('galLbx').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeLbx(e){if(e.target===document.getElementById('galLbx'))lbxClose();}
+function lbxMove(dir,e){
+  e.stopPropagation();
+  var idx=parseInt(document.getElementById('galLbx').dataset.idx||0)+dir;
+  var total=document.querySelectorAll('.gal-slide').length;
+  idx=Math.max(0,Math.min(idx,total-1));
+  openLbx(idx);
+}
+document.addEventListener('keydown',function(e){
+  var lbx=document.getElementById('galLbx');
+  if(!lbx.classList.contains('open')) return;
+  if(e.key==='Escape') lbxClose();
+  if(e.key==='ArrowRight') lbxMove(1,{stopPropagation:function(){}});
+  if(e.key==='ArrowLeft') lbxMove(-1,{stopPropagation:function(){}});
+});
 </script>
+
+<!-- Lightbox -->
+<div class="lbx" id="galLbx" onclick="closeLbx(event)">
+  <button class="lbx-close" onclick="lbxClose()">&times;</button>
+  <button class="lbx-arr lbx-prev" onclick="lbxMove(-1,event)">&#8249;</button>
+  <img id="lbxImg" src="" alt=""/>
+  <button class="lbx-arr lbx-next" onclick="lbxMove(1,event)">&#8250;</button>
+  <div class="lbx-caption" id="lbxCap"></div>
+</div>
 </body>
 </html>
