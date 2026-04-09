@@ -6,9 +6,9 @@
   <meta name="description" content="Quinta Atenas — Casa Vacacional en las Montañas de Atenas, Costa Rica" />
   <meta property="og:title" content="Quinta Atenas" />
   <meta property="og:description" content="Hermosa propiedad para alquiler, Atenas Costa Rica" />
-  <meta property="og:image" content="img/quintaatenas2.png" />
+  <meta property="og:image" content="img/img/quintaatenas2.png" />
   <title>Quinta Atenas</title>
-  <link rel="icon" href="img/quintaatenas.png" />
+  <link rel="icon" href="img/img/quintaatenas.png" />
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -97,21 +97,6 @@
       border-radius: 3px;
     }
 
-    /* Hero badge (Destacado pill top-right) */
-    .hero-badge-top {
-      position: absolute;
-      top: 14px; right: 14px;
-      z-index: 6;
-      background: var(--gold);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: 20px;
-    }
-
     /* ══════ LOGO STRIP ══════ */
     .logo-strip {
       background: var(--white);
@@ -137,39 +122,73 @@
     }
     .logo-strip .tagline .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-    /* ══════ UTILS (Guardar / QR / Instalar) ══════ */
-    .top-utils {
+    /* ══════ HERO QUICK-PILL (esquina superior derecha) ══════ */
+    .hero-pill {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 6;
       display: flex;
-      gap: 8px;
-      padding: 14px 16px 2px;
-      justify-content: center;
-    }
-    .util-btn {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 5px;
-      padding: 10px 0;
-      width: 80px;
-      border-radius: 16px;
-      font-size: 10px;
-      font-weight: 600;
-      text-decoration: none;
+      gap: 0;
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 22px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .hero-pill-btn {
+      position: relative;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: none;
       border: none;
       cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      letter-spacing: .2px;
-      transition: transform .18s;
       color: #fff;
+      font-size: 15px;
+      border-radius: 50%;
+      transition: background .18s, transform .15s;
+      flex-shrink: 0;
     }
-    .util-btn i {
-      font-size: 20px;
-      margin-bottom: 1px;
+    .hero-pill-btn:active { transform: scale(.85); background: rgba(255,255,255,.15); }
+
+    /* divisor entre íconos */
+    .hero-pill-sep {
+      width: 1px; height: 16px;
+      background: rgba(255,255,255,.25);
+      flex-shrink: 0;
     }
-    .util-btn:active { transform: scale(.93); }
-    .util-btn.save    { background: var(--forest); }
-    .util-btn.qr      { background: var(--bark);   }
-    .util-btn.install { background: #1a6fc4;        }
+
+    /* Tooltip táctil — aparece al tocar, desaparece solo */
+    .hero-pill-btn .tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.82);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+      padding: 4px 9px;
+      border-radius: 8px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s;
+      letter-spacing: .3px;
+    }
+    /* small arrow */
+    .hero-pill-btn .tip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0,0,0,.82);
+    }
+    .hero-pill-btn .tip.show { opacity: 1; }
 
     /* ══════ ACTION BUTTONS ══════ */
     /*
@@ -490,13 +509,6 @@
       font-size: 20px;
     }
 
-    /* Instalar en pantalla */
-    .float-install {
-      background: var(--forest);
-      box-shadow: 0 4px 16px rgba(45,74,45,.45);
-      font-size: 19px;
-    }
-
     /* ══════ FADE-UP ══════ */
     .fade-up {
       opacity: 0;
@@ -708,12 +720,16 @@
   <!-- ════════ HERO — SWIPER FADE ════════ -->
   <div class="hero-swiper swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background-image:url('img/ate11.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/ate15.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/ate17.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/ate20.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/ate24.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/ate22.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/1.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/2.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/3.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/4.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/5.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/6.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/7.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/8.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/9.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/10.png')"></div>
     </div>
     <!-- Arrows -->
     <div class="swiper-button-prev"></div>
@@ -721,30 +737,32 @@
     <!-- Dots -->
     <div class="swiper-pagination"></div>
 
-    <!-- Only the gold badge remains on the hero -->
-    <div class="hero-badge-top"><i class="fa fa-star" style="margin-right:4px"></i>Destacado</div>
+    <!-- Píldora de accesos rápidos — esquina superior derecha del hero -->
+    <div class="hero-pill">
+      <button class="hero-pill-btn" onclick="showTip(this,'Guardar Contacto'); openModal('saveModal')">
+        <i class="fa fa-address-book"></i>
+        <span class="tip">Guardar Contacto</span>
+      </button>
+      <div class="hero-pill-sep"></div>
+      <button class="hero-pill-btn" onclick="showTip(this,'Código QR'); openModal('qrModal')">
+        <i class="fa fa-qrcode"></i>
+        <span class="tip">Código QR</span>
+      </button>
+      <div class="hero-pill-sep"></div>
+      <button class="hero-pill-btn" onclick="showTip(this,'Instalar App'); openModal('installModal')">
+        <i class="fa fa-mobile-screen"></i>
+        <span class="tip">Instalar App</span>
+      </button>
+    </div>
   </div>
 
   <!-- ════════ LOGO STRIP ════════ -->
   <div class="logo-strip fade-up">
-    <img src="img/QuintaAtenaslogo.png" alt="Quinta Vacacional" onerror="this.style.display='none'" />
+    <img src="img/img/logovilla.png" alt="Quinta Vacacional" onerror="this.style.display='none'" />
     <div class="tagline">
       <div class="name">QUINTA VACACIONAL</div>
       <div class="sub">Atenas · Costa Rica 🌿</div>
     </div>
-  </div>
-
-  <!-- ════════ GUARDAR / QR / INSTALAR ════════ -->
-  <div class="top-utils fade-up">
-    <button class="util-btn save" onclick="openModal('saveModal')">
-      <i class="fa fa-address-book"></i> Guardar Contacto
-    </button>
-    <button class="util-btn qr" onclick="openModal('qrModal')">
-      <i class="fa fa-qrcode"></i> QR
-    </button>
-    <button class="util-btn install" onclick="openModal('installModal')">
-      <i class="fa fa-mobile-screen"></i> Instalar
-    </button>
   </div>
 
   <!-- ════════ BOTONES DE ACCIÓN ════════
@@ -823,13 +841,16 @@
   <div class="section-title fade-up"><h2>Galería</h2></div>
 
   <div class="gallery-scroll fade-up">
-    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/ate11.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/ate12.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/ate14.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/ate15.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/ate16.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/ate17.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/ate18.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/img/1.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/img/2.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/img/3.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/4.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/5.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/6.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/img/7.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/8.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/9.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/10.png" alt="" loading="lazy"></div>
     <button class="gallery-more-btn" onclick="openModal('galeriaModal')">
       <i class="fa fa-images"></i>
       <span>Ver todas</span>
@@ -1148,6 +1169,14 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
+/* ══ TOOLTIP TÁCTIL para la píldora del hero ══════ */
+function showTip(btn, label) {
+  const tip = btn.querySelector('.tip');
+  if (!tip) return;
+  tip.classList.add('show');
+  setTimeout(() => tip.classList.remove('show'), 1600);
+}
+
 /* ══ SWIPER HERO con efecto FADE ══════════════════ */
 new Swiper('.hero-swiper', {
   loop: true,
@@ -1170,11 +1199,11 @@ new Swiper('.hero-swiper', {
 
 /* ══ Imágenes locales ══════════════════════════════ */
 const IMAGES = [
-  'img/ate11.png','img/ate12.png','img/ate14.png','img/ate15.png',
-  'img/ate16.png','img/ate17.png','img/ate18.png','img/ate19.png',
-  'img/ate20.png','img/ate21.png','img/ate22.png','img/ate23.png',
-  'img/ate24.png','img/ate25.png','img/ate26.png','img/ate27.png',
-  'img/ate28.png','img/ate29.png',
+  'img/img/1.png','img/img/6.png','img/img/11.png','img/img/15.png',
+  'img/img/2.png','img/img/7.png','img/img/12.png','img/img/16.png',
+  'img/img/3.png','img/img/8.png','img/img/13.png','img/img/17.png',
+  'img/img/4.png','img/img/9.png','img/img/14.png','img/img/18.png',
+  'img/img/5.png','img/img/10.png',
 ];
 
 /* ══ Generar grid galería en modal ════════════════ */
