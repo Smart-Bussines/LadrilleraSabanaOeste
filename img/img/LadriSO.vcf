@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8:Ramirez;Carlos
+ORG;CHARSET=utf-8:LADRILLERA SABANA OESTE
+TITLE;CHARSET=utf-8:Gerente General
+TEL;WORK;VOICE:+50622900007
+TEL;CELL;VOICE:+50660574271
+ADR;DOM;PARCEL;HOME:;;San Jose, Costa Rica.;;;;
+URL;WORK:https://midbcard.com/LadriSO
+EMAIL;INTERNET:ladrillerasabanaoeste@gmail.com
+END:VCARD

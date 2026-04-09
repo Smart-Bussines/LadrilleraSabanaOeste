@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8: Restrepo ;Nery   
+ORG;CHARSET=utf-8:TIGO
+TITLE;CHARSET=utf-8:Ejecutiva de Ventas
+TEL;WORK;VOICE:+50687211477
+TEL;CELL;VOICE:+50687211477
+ADR;DOM;PARCEL;HOME:;;Alajuela, Costa Rica.;;;;
+URL;WORK:https://midbcard.com/Nery_Tigo
+EMAIL;INTERNET:nery.restrepo@cr.tigo.com
+END:VCARD

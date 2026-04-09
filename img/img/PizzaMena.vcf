@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8:PIZZA MENA
+ORG;CHARSET=utf-8:PIZZA MENA
+TITLE;CHARSET=utf-8:Pizzeria Artesanal
+TEL;WORK;VOICE:+50660341574
+TEL;CELL;VOICE:+50660341574
+ADR;DOM;PARCEL;HOME:;;La Ceiba, Alajuela Costa Rica.;;;;
+URL;WORK:https://midbcard.com/PizzaMena
+EMAIL;INTERNET:nancyariasrojas34@gmail.com
+END:VCARD

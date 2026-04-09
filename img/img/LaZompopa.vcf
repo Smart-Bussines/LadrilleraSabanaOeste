@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=utf-8:LA ZOMPOPA
+ORG;CHARSET=utf-8:LA ZOMPOPA
+TITLE;CHARSET=utf-8:Pizzeria Artesanal
+TEL;WORK;VOICE:+50689198143
+TEL;CELL;VOICE:+50689198143
+ADR;DOM;PARCEL;HOME:;;Pilas de Alajuela, Costa Rica.;;;;
+URL;WORK:https://midbcard.com/Pizzalazompopa
+EMAIL;INTERNET:pizzazompopa@gmail.com
+END:VCARD
