@@ -6,25 +6,30 @@
   <meta name="description" content="Quinta Atenas — Casa Vacacional en las Montañas de Atenas, Costa Rica" />
   <meta property="og:title" content="Quinta Atenas" />
   <meta property="og:description" content="Hermosa propiedad para alquiler, Atenas Costa Rica" />
-  <meta property="og:image" content="img/img/quintaatenas2.png" />
+  <meta property="og:image" content="img/quintaatenas2.png" />
   <title>Quinta Atenas</title>
-  <link rel="icon" href="img/img/quintaatenas.png" />
+  <link rel="icon" href="img/quintaatenas.png" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <style>
     :root {
-      --cream:        #faf7f2;
-      --warm:         #f0ebe1;
-      --gold:         #b8903a;
-      --gold-light:   #d4a84b;
-      --forest:       #2d4a2d;
-      --bark:         #5c3d1e;
-      --text:         #1a1a1a;
-      --text-muted:   #6b6457;
-      --white:        #ffffff;
-      --shadow:       0 8px 32px rgba(0,0,0,0.12);
+      --cream:      #faf7f2;
+      --warm:       #f0ebe1;
+      --gold:       #b8903a;
+      --gold-light: #d4a84b;
+      --forest:     #2d4a2d;
+      --bark:       #5c3d1e;
+      --text:       #1a1a1a;
+      --muted:      #6b6457;
+      --white:      #ffffff;
+      --shadow:     0 8px 32px rgba(0,0,0,.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,127 +42,118 @@
       min-height: 100vh;
     }
 
-    /* ══════════════════════════════
-       CARD SHELL
-    ══════════════════════════════ */
+    /* ══════ CARD ══════ */
     .card {
       width: 100%;
       max-width: 430px;
       background: var(--cream);
       min-height: 100vh;
-      position: relative;
     }
 
-    /* ══════════════════════════════
-       HERO SLIDER
-    ══════════════════════════════ */
-    .hero {
-      position: relative;
+    /* ══════ HERO SWIPER ══════ */
+    .hero-swiper {
       height: 62vw;
-      max-height: 280px;
-      overflow: hidden;
+      max-height: 285px;
+      position: relative;
     }
 
-    .hero-slides {
-      display: flex;
-      height: 100%;
-      transition: transform 0.85s cubic-bezier(.4,0,.2,1);
-    }
-
-    .hero-slide {
-      min-width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-color: #3a5432;
-    }
-
-    .hero-slide::after {
+    /* Swiper fade overlay gradient */
+    .hero-swiper::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.1) 30%, rgba(0,0,0,.6) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,.08) 30%, rgba(0,0,0,.62) 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
-    .hero-dots {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
+    .hero-swiper .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      background-color: #3d5c34;
+    }
+
+    /* Swiper nav arrows */
+    .hero-swiper .swiper-button-next,
+    .hero-swiper .swiper-button-prev {
+      color: rgba(255,255,255,.85);
       z-index: 10;
     }
-
-    .hero-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.45);
-      cursor: pointer;
-      transition: all .3s;
+    .hero-swiper .swiper-button-next::after,
+    .hero-swiper .swiper-button-prev::after {
+      font-size: 18px;
+      font-weight: 700;
     }
-    .hero-dot.active {
+
+    /* Swiper pagination dots */
+    .hero-swiper .swiper-pagination-bullet {
+      background: rgba(255,255,255,.5);
+      opacity: 1;
+      width: 6px; height: 6px;
+    }
+    .hero-swiper .swiper-pagination-bullet-active {
       background: var(--gold-light);
       width: 20px;
       border-radius: 3px;
     }
 
-    .hero-badge {
+    /* Hero overlay content */
+    .hero-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 5;
+      padding: 0 16px 18px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .hero-title { color: #fff; }
+    .hero-title .eyebrow {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: .8;
+      margin-bottom: 3px;
+    }
+    .hero-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.05;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+    }
+
+    .hero-badge-top {
       position: absolute;
       top: 14px; right: 14px;
-      z-index: 10;
+      z-index: 6;
       background: var(--gold);
       color: #fff;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      padding: 5px 11px;
+      padding: 5px 12px;
       border-radius: 20px;
     }
 
-    .hero-bottom {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 9;
-      padding: 0 16px 16px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-    }
-
-    .hero-title-block { color: #fff; }
-    .hero-title-block .eyebrow {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: .8;
-      margin-bottom: 2px;
-    }
-    .hero-title-block h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.05;
-      text-shadow: 0 2px 10px rgba(0,0,0,.5);
-    }
-
     .hero-rating {
-      background: rgba(0,0,0,.4);
+      background: rgba(0,0,0,.38);
       backdrop-filter: blur(8px);
       border-radius: 14px;
       padding: 8px 12px;
       text-align: center;
       color: #fff;
+      pointer-events: auto;
     }
     .hero-rating .stars { color: var(--gold-light); font-size: 10px; letter-spacing: 1px; }
-    .hero-rating .score { font-size: 20px; font-weight: 700; line-height: 1; }
-    .hero-rating .label { font-size: 9px; opacity: .65; margin-top: 1px; }
+    .hero-rating .score { font-size: 20px; font-weight: 700; line-height: 1.1; }
+    .hero-rating .label { font-size: 9px; opacity: .65; }
 
-    /* ══════════════════════════════
-       LOGO STRIP (sticky)
-    ══════════════════════════════ */
+    /* ══════ LOGO STRIP ══════ */
     .logo-strip {
       background: var(--white);
       padding: 10px 16px;
@@ -170,9 +166,7 @@
       top: 0;
       z-index: 50;
     }
-
     .logo-strip img { height: 40px; width: auto; }
-
     .logo-strip .tagline { text-align: right; }
     .logo-strip .tagline .name {
       font-family: 'Playfair Display', serif;
@@ -181,22 +175,15 @@
       color: var(--forest);
       line-height: 1;
     }
-    .logo-strip .tagline .sub {
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: .4px;
-    }
+    .logo-strip .tagline .sub { font-size: 10px; color: var(--muted); }
 
-    /* ══════════════════════════════
-       TOP UTILS (Guardar / QR)
-    ══════════════════════════════ */
+    /* ══════ UTILS (Guardar / QR) ══════ */
     .top-utils {
       display: flex;
       gap: 8px;
       padding: 12px 16px 0;
       justify-content: flex-end;
     }
-
     .util-btn {
       display: flex;
       align-items: center;
@@ -216,16 +203,18 @@
     .util-btn.save { background: var(--forest); color: #fff; }
     .util-btn.qr   { background: var(--bark);   color: #fff; }
 
-    /* ══════════════════════════════
-       ACTION BUTTONS 3-COLUMN GRID
-    ══════════════════════════════ */
+    /* ══════ ACTION BUTTONS ══════ */
+    /*
+      Orden solicitado (izq→der, arriba→abajo):
+      1. Galería    2. Servicios   3. Redes Sociales
+      4. WhatsApp   5. Llamar      6. Cómo Llegar
+    */
     .actions {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
       padding: 14px 16px 4px;
     }
-
     .action-btn {
       display: flex;
       flex-direction: column;
@@ -242,16 +231,12 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.07);
     }
     .action-btn:active { transform: scale(.93); }
-
     .action-btn .icon-wrap {
       width: 46px; height: 46px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 20px;
     }
-
     .action-btn .btn-label {
       font-size: 11px;
       font-weight: 500;
@@ -259,23 +244,16 @@
       text-align: center;
       line-height: 1.25;
     }
-
-    /* icon colors */
-    .iw-green  { background: #25d366; color: #fff; }
-    .iw-blue   { background: #1877f2; color: #fff; }
-    .iw-amber  { background: var(--gold); color: #fff; }
+    /* Icon palette */
+    .iw-amber  { background: var(--gold);   color: #fff; }
+    .iw-bark   { background: var(--bark);   color: #fff; }
+    .iw-blue   { background: #1877f2;       color: #fff; }
+    .iw-green  { background: #25d366;       color: #fff; }
     .iw-forest { background: var(--forest); color: #fff; }
-    .iw-red    { background: #e53935; color: #fff; }
-    .iw-cyan   { background: #00bcd4; color: #fff; }
-    .iw-bark   { background: var(--bark); color: #fff; }
-    .iw-purple { background: #7b1fa2; color: #fff; }
+    .iw-cyan   { background: #00bcd4;       color: #fff; }
 
-    /* ══════════════════════════════
-       BIG CTA
-    ══════════════════════════════ */
-    .big-cta {
-      padding: 16px 16px 4px;
-    }
+    /* ══════ BIG CTA ══════ */
+    .big-cta { padding: 16px 16px 4px; }
     .big-cta a {
       display: flex;
       align-items: center;
@@ -294,15 +272,12 @@
     }
     .big-cta a:active { transform: scale(.97); }
     .big-cta a i { font-size: 21px; }
-
     @keyframes pulse-green {
       0%,100% { box-shadow: 0 6px 20px rgba(37,211,102,.35); }
       50%      { box-shadow: 0 6px 32px rgba(37,211,102,.65); }
     }
 
-    /* ══════════════════════════════
-       SECTION TITLE
-    ══════════════════════════════ */
+    /* ══════ SECTION TITLE ══════ */
     .section-title {
       padding: 20px 18px 10px;
       display: flex;
@@ -323,9 +298,7 @@
       font-weight: 700;
     }
 
-    /* ══════════════════════════════
-       DESCRIPTION CARD
-    ══════════════════════════════ */
+    /* ══════ DESCRIPTION ══════ */
     .description-card {
       margin: 0 16px 16px;
       background: var(--white);
@@ -336,7 +309,7 @@
     .description-card p {
       font-size: 13.5px;
       line-height: 1.75;
-      color: var(--text-muted);
+      color: var(--muted);
     }
     .description-card p + p { margin-top: 10px; }
     .description-card strong { color: var(--text); }
@@ -360,9 +333,7 @@
     }
     .pill i { font-size: 11px; color: var(--gold); }
 
-    /* ══════════════════════════════
-       GALLERY SCROLL (inline)
-    ══════════════════════════════ */
+    /* ══════ GALLERY PREVIEW ══════ */
     .gallery-scroll {
       display: flex;
       gap: 10px;
@@ -373,7 +344,6 @@
       scrollbar-width: none;
     }
     .gallery-scroll::-webkit-scrollbar { display: none; }
-
     .gallery-thumb {
       flex-shrink: 0;
       width: 130px; height: 100px;
@@ -381,16 +351,14 @@
       overflow: hidden;
       scroll-snap-align: start;
       cursor: pointer;
-      position: relative;
     }
     .gallery-thumb img {
       width: 100%; height: 100%;
       object-fit: cover;
-      transition: transform .4s;
       display: block;
+      transition: transform .4s;
     }
     .gallery-thumb:active img { transform: scale(1.06); }
-
     .gallery-more-btn {
       flex-shrink: 0;
       width: 100px; height: 100px;
@@ -406,15 +374,11 @@
       border: none;
       font-family: 'DM Sans', sans-serif;
       gap: 4px;
-      transition: opacity .2s;
     }
-    .gallery-more-btn:active { opacity: .8; }
     .gallery-more-btn i   { font-size: 22px; }
     .gallery-more-btn span { font-size: 11px; font-weight: 500; }
 
-    /* ══════════════════════════════
-       CONTACT STRIP (dark card)
-    ══════════════════════════════ */
+    /* ══════ CONTACT STRIP ══════ */
     .contact-strip {
       margin: 0 16px 16px;
       background: var(--forest);
@@ -428,45 +392,21 @@
       font-weight: 600;
       margin-bottom: 4px;
     }
-    .contact-strip .ct-sub {
-      font-size: 12px;
-      opacity: .72;
-      margin-bottom: 14px;
-    }
-    .contact-strip .owners {
-      font-size: 12.5px;
-      font-weight: 500;
-      opacity: .9;
-      margin-bottom: 10px;
-    }
+    .contact-strip .ct-sub  { font-size: 12px; opacity: .72; margin-bottom: 14px; }
+    .contact-strip .owners  { font-size: 12.5px; font-weight: 500; opacity: .9; margin-bottom: 10px; }
     .contact-strip .location {
-      font-size: 11.5px;
-      opacity: .72;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: flex-start;
-      gap: 7px;
-      line-height: 1.5;
+      font-size: 11.5px; opacity: .72; margin-bottom: 18px;
+      display: flex; align-items: flex-start; gap: 7px; line-height: 1.5;
     }
-    .contact-strip .location i { margin-top: 2px; color: var(--gold-light); flex-shrink:0; }
-
-    .contact-buttons {
-      display: flex;
-      gap: 10px;
-    }
+    .contact-strip .location i { margin-top: 2px; color: var(--gold-light); flex-shrink: 0; }
+    .contact-buttons { display: flex; gap: 10px; }
     .ct-btn {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
       padding: 11px 6px;
       border-radius: 13px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
+      font-size: 12px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       transition: transform .18s, opacity .18s;
     }
@@ -475,9 +415,7 @@
     .ct-btn.call  { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.28); }
     .ct-btn.waze  { background: #00d4e8; color: #111; }
 
-    /* ══════════════════════════════
-       SHARE ROW
-    ══════════════════════════════ */
+    /* ══════ SHARE ROW ══════ */
     .share-row {
       margin: 0 16px 20px;
       background: var(--warm);
@@ -487,33 +425,30 @@
       align-items: center;
       gap: 12px;
     }
-    .share-row .share-text { flex: 1; font-size: 12px; color: var(--text-muted); }
+    .share-row .share-text { flex: 1; font-size: 12px; color: var(--muted); }
     .share-row .share-text strong { color: var(--text); display: block; font-size: 13px; margin-bottom: 2px; }
-    .share-icons { display: flex; gap: 8px; }
+    .share-icons { display: flex; gap: 8px; flex-wrap: wrap; }
     .share-icon {
-      width: 38px; height: 38px;
-      border-radius: 11px;
+      width: 36px; height: 36px;
+      border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-      text-decoration: none;
+      font-size: 15px; text-decoration: none;
       transition: transform .18s;
     }
     .share-icon:active { transform: scale(.9); }
-    .share-icon.sw { background: #25d366; color: #fff; }
-    .share-icon.sf { background: #1877f2; color: #fff; }
+    .si-wa  { background: #25d366; color: #fff; }
+    .si-fb  { background: #1877f2; color: #fff; }
+    .si-tg  { background: #2ca5e0; color: #fff; }
+    .si-ms  { background: #0084ff; color: #fff; }
 
-    /* ══════════════════════════════
-       DIVIDER
-    ══════════════════════════════ */
+    /* ══════ DIVIDER ══════ */
     .divider {
       height: 1px;
       background: linear-gradient(to right, transparent, #ddd6cb, transparent);
       margin: 4px 16px 8px;
     }
 
-    /* ══════════════════════════════
-       FOOTER
-    ══════════════════════════════ */
+    /* ══════ FOOTER ══════ */
     .card-footer {
       background: #1a1a1a;
       color: rgba(255,255,255,.45);
@@ -524,9 +459,7 @@
     }
     .card-footer a { color: rgba(255,255,255,.55); text-decoration: none; }
 
-    /* ══════════════════════════════
-       FLOATING WHATSAPP
-    ══════════════════════════════ */
+    /* ══════ FLOATING WHATSAPP ══════ */
     .float-wa {
       position: fixed;
       bottom: 22px; right: 16px;
@@ -534,8 +467,7 @@
       background: #25d366;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 27px;
-      color: #fff;
+      font-size: 27px; color: #fff;
       text-decoration: none;
       box-shadow: 0 4px 20px rgba(37,211,102,.55);
       z-index: 100;
@@ -546,9 +478,7 @@
       50%      { transform: translateY(-7px); }
     }
 
-    /* ══════════════════════════════
-       FADE-UP ANIMATION
-    ══════════════════════════════ */
+    /* ══════ FADE-UP ══════ */
     .fade-up {
       opacity: 0;
       transform: translateY(22px);
@@ -556,9 +486,7 @@
     }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ══════════════════════════════
-       MODAL OVERLAY BASE
-    ══════════════════════════════ */
+    /* ══════ MODAL OVERLAY ══════ */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -585,29 +513,24 @@
       from { transform: translateY(100%); }
       to   { transform: translateY(0); }
     }
-
-    /* drag handle */
     .modal-handle {
       width: 38px; height: 4px;
       background: #ccc;
       border-radius: 2px;
       margin: 10px auto 18px;
     }
-
     .modal-sheet h3 {
       font-family: 'Playfair Display', serif;
       font-size: 19px;
       color: var(--text);
       margin-bottom: 6px;
     }
-    .modal-sheet .modal-sub {
+    .modal-sub {
       font-size: 12.5px;
-      color: var(--text-muted);
+      color: var(--muted);
       margin-bottom: 20px;
       line-height: 1.6;
     }
-
-    /* ── Generic modal action list ── */
     .modal-list { display: flex; flex-direction: column; gap: 10px; }
 
     .modal-row {
@@ -627,20 +550,22 @@
       text-align: left;
     }
     .modal-row:active { transform: scale(.97); }
+    .modal-row.primary { background: var(--forest); }
 
-    .modal-row .mr-icon {
+    .mr-icon {
       width: 42px; height: 42px;
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px;
       flex-shrink: 0;
     }
-
-    .modal-row .mr-text { flex: 1; }
-    .modal-row .mr-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 3px; }
-    .modal-row .mr-desc  { font-size: 11px; color: var(--text-muted); }
-
-    .modal-row .mr-arrow { color: #ccc; font-size: 13px; }
+    .mr-text { flex: 1; }
+    .mr-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 3px; }
+    .mr-desc  { font-size: 11px; color: var(--muted); }
+    .modal-row.primary .mr-title,
+    .modal-row.primary .mr-desc { color: #fff; }
+    .mr-arrow { color: #ccc; font-size: 13px; }
+    .modal-row.primary .mr-arrow { color: rgba(255,255,255,.5); }
 
     .modal-cancel {
       display: block;
@@ -653,11 +578,11 @@
       border: none;
       cursor: pointer;
       font-size: 13px;
-      color: var(--text-muted);
+      color: var(--muted);
       font-family: 'DM Sans', sans-serif;
     }
 
-    /* ── GALERÍA MODAL grid ── */
+    /* ── GALERÍA grid ── */
     .modal-gallery-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -677,7 +602,7 @@
     }
     .mgrid-thumb:active img { transform: scale(1.07); }
 
-    /* ── SERVICIOS list inside modal ── */
+    /* ── SERVICIOS list ── */
     .servicios-list {
       list-style: none;
       display: flex;
@@ -703,11 +628,36 @@
       flex-shrink: 0;
     }
 
-    /* ── QR modal ── */
-    .qr-box {
-      text-align: center;
-      padding: 10px 0 8px;
+    /* ── REDES — share mini row ── */
+    .share-mini-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
     }
+    .share-mini-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 11px 8px;
+      border-radius: 13px;
+      background: var(--white);
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      transition: transform .18s;
+    }
+    .share-mini-btn:active { transform: scale(.94); }
+    .share-mini-btn i { font-size: 17px; }
+
+    /* ── QR modal ── */
+    .qr-box { text-align: center; padding: 10px 0 8px; }
     .qr-box img {
       width: 200px; height: 200px;
       border-radius: 16px;
@@ -715,17 +665,9 @@
       display: block;
       box-shadow: var(--shadow);
     }
-    .qr-box p { font-size: 12px; color: var(--text-muted); }
+    .qr-box p { font-size: 12px; color: var(--muted); }
 
-    /* ── SAVE CONTACT vCard ── */
-    .modal-row.primary { background: var(--forest); }
-    .modal-row.primary .mr-title,
-    .modal-row.primary .mr-desc,
-    .modal-row.primary .mr-arrow { color: #fff; }
-
-    /* ══════════════════════════════
-       LIGHTBOX (full-screen viewer)
-    ══════════════════════════════ */
+    /* ══════ LIGHTBOX ══════ */
     .lightbox {
       display: none;
       position: fixed;
@@ -737,20 +679,16 @@
       flex-direction: column;
     }
     .lightbox.open { display: flex; }
-
     .lb-close {
       position: absolute;
       top: 18px; right: 20px;
-      color: #fff;
-      font-size: 28px;
-      cursor: pointer;
-      z-index: 301;
+      color: #fff; font-size: 22px;
+      cursor: pointer; z-index: 301;
       width: 40px; height: 40px;
       display: flex; align-items: center; justify-content: center;
       background: rgba(255,255,255,.12);
       border-radius: 50%;
     }
-
     #lbImg {
       max-width: 96vw;
       max-height: 72vh;
@@ -758,51 +696,44 @@
       object-fit: contain;
       user-select: none;
     }
-
-    .lb-nav {
-      display: flex;
-      gap: 16px;
-      margin-top: 18px;
-    }
+    .lb-nav { display: flex; gap: 16px; margin-top: 18px; }
     .lb-nav button {
       background: rgba(255,255,255,.14);
-      border: none;
-      color: #fff;
+      border: none; color: #fff;
       width: 46px; height: 46px;
       border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
+      font-size: 18px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: background .2s;
     }
     .lb-nav button:hover { background: rgba(255,255,255,.25); }
-
-    .lb-counter {
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-      margin-top: 12px;
-    }
+    .lb-counter { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 12px; }
   </style>
 </head>
 <body>
 
 <div class="card">
 
-  <!-- ════════════════════════════
-       HERO SLIDER
-  ════════════════════════════ -->
-  <div class="hero">
-    <div class="hero-slides" id="heroSlides">
-      <div class="hero-slide" style="background-image:url('img/img/ate11.png')"></div>
-      <div class="hero-slide" style="background-image:url('img/img/ate15.png')"></div>
-      <div class="hero-slide" style="background-image:url('img/img/ate17.png')"></div>
-      <div class="hero-slide" style="background-image:url('img/img/ate20.png')"></div>
-      <div class="hero-slide" style="background-image:url('img/img/ate24.png')"></div>
+  <!-- ════════ HERO — SWIPER FADE ════════ -->
+  <div class="hero-swiper swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image:url('img/ate11.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate15.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate17.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate20.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate24.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate22.png')"></div>
     </div>
-    <div class="hero-badge"><i class="fa fa-star" style="margin-right:4px"></i>Destacado</div>
-    <div class="hero-dots" id="heroDots"></div>
-    <div class="hero-bottom">
-      <div class="hero-title-block">
+    <!-- Arrows -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <!-- Dots -->
+    <div class="swiper-pagination"></div>
+
+    <!-- Overlay content (badge + title + rating) -->
+    <div class="hero-badge-top"><i class="fa fa-star" style="margin-right:4px"></i>Destacado</div>
+    <div class="hero-overlay">
+      <div class="hero-title">
         <div class="eyebrow">Atenas · Costa Rica</div>
         <h1>Quinta<br>Vacacional</h1>
       </div>
@@ -814,20 +745,16 @@
     </div>
   </div>
 
-  <!-- ════════════════════════════
-       LOGO STRIP
-  ════════════════════════════ -->
+  <!-- ════════ LOGO STRIP ════════ -->
   <div class="logo-strip fade-up">
-    <img src="img/img/QuintaAtenaslogo.png" alt="Quinta Atenas" onerror="this.style.display='none'" />
+    <img src="img/QuintaAtenaslogo.png" alt="Quinta Atenas" onerror="this.style.display='none'" />
     <div class="tagline">
       <div class="name">QUINTA ATENAS</div>
       <div class="sub">El mejor clima del mundo 🌿</div>
     </div>
   </div>
 
-  <!-- ════════════════════════════
-       UTILS GUARDAR / QR
-  ════════════════════════════ -->
+  <!-- ════════ GUARDAR / QR ════════ -->
   <div class="top-utils fade-up">
     <button class="util-btn save" onclick="openModal('saveModal')">
       <i class="fa fa-address-book"></i> Guardar Contacto
@@ -837,53 +764,52 @@
     </button>
   </div>
 
-  <!-- ════════════════════════════
-       BOTONES DE ACCIÓN
-  ════════════════════════════ -->
+  <!-- ════════ BOTONES DE ACCIÓN ════════
+       Orden: Galería · Servicios · Redes Sociales
+              WhatsApp · Llamar · Cómo Llegar
+  ════════ -->
   <div class="actions fade-up">
 
-    <!-- WhatsApp -->
+    <!-- 1. Galería -->
+    <button class="action-btn" onclick="openModal('galeriaModal')">
+      <div class="icon-wrap iw-amber"><i class="fa fa-images"></i></div>
+      <span class="btn-label">Galería</span>
+    </button>
+
+    <!-- 2. Servicios -->
+    <button class="action-btn" onclick="openModal('serviciosModal')">
+      <div class="icon-wrap iw-bark"><i class="fa fa-list-check"></i></div>
+      <span class="btn-label">Servicios</span>
+    </button>
+
+    <!-- 3. Redes Sociales -->
+    <button class="action-btn" onclick="openModal('socialModal')">
+      <div class="icon-wrap iw-blue"><i class="fa fa-share-nodes"></i></div>
+      <span class="btn-label">Redes Sociales</span>
+    </button>
+
+    <!-- 4. WhatsApp -->
     <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20digital%20y%20deseo%20info%20sobre%20Quinta%20Atenas"
        target="_blank" class="action-btn">
       <div class="icon-wrap iw-green"><i class="fab fa-whatsapp"></i></div>
       <span class="btn-label">WhatsApp</span>
     </a>
 
-    <!-- Galería -->
-    <button class="action-btn" onclick="openModal('galeriaModal')">
-      <div class="icon-wrap iw-amber"><i class="fa fa-images"></i></div>
-      <span class="btn-label">Galería</span>
-    </button>
-
-    <!-- Cómo llegar -->
-    <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="action-btn">
-      <div class="icon-wrap iw-cyan"><i class="fa fa-location-dot"></i></div>
-      <span class="btn-label">Cómo Llegar</span>
-    </a>
-
-    <!-- Llamar -->
+    <!-- 5. Llamar -->
     <a href="tel:+50687212050" class="action-btn">
       <div class="icon-wrap iw-forest"><i class="fa fa-phone"></i></div>
       <span class="btn-label">Llamar</span>
     </a>
 
-    <!-- Redes Sociales -->
-    <button class="action-btn" onclick="openModal('socialModal')">
-      <div class="icon-wrap iw-blue"><i class="fa fa-share-nodes"></i></div>
-      <span class="btn-label">Redes Sociales</span>
-    </button>
-
-    <!-- Servicios -->
-    <button class="action-btn" onclick="openModal('serviciosModal')">
-      <div class="icon-wrap iw-bark"><i class="fa fa-list-check"></i></div>
-      <span class="btn-label">Servicios</span>
-    </button>
+    <!-- 6. Cómo Llegar -->
+    <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="action-btn">
+      <div class="icon-wrap iw-cyan"><i class="fa fa-location-dot"></i></div>
+      <span class="btn-label">Cómo Llegar</span>
+    </a>
 
   </div>
 
-  <!-- ════════════════════════════
-       BIG CTA WHATSAPP
-  ════════════════════════════ -->
+  <!-- ════════ BIG CTA ════════ -->
   <div class="big-cta fade-up">
     <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20consultar%20disponibilidad%20en%20Quinta%20Atenas"
        target="_blank">
@@ -892,22 +818,16 @@
     </a>
   </div>
 
-  <!-- ════════════════════════════
-       DESCRIPCIÓN
-  ════════════════════════════ -->
+  <!-- ════════ DESCRIPCIÓN ════════ -->
   <div class="section-title fade-up"><h2>La Propiedad</h2></div>
 
   <div class="description-card fade-up">
-    <p>
-      Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas.
-      Ideal para vacacionar en familia, celebraciones y eventos sociales.
-      También disponible como <strong>pase del día</strong> para matrimonios,
-      cumpleaños y reuniones con opción de área social, rancho y piscina.
-    </p>
-    <p>
-      Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para
-      teletrabajo en un entorno natural inigualable.
-    </p>
+    <p>Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas.
+       Ideal para vacacionar en familia, celebraciones y eventos sociales.
+       También disponible como <strong>pase del día</strong> para matrimonios,
+       cumpleaños y reuniones con opción de área social, rancho y piscina.</p>
+    <p>Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para
+       teletrabajo en un entorno natural inigualable.</p>
     <div class="capacity-pills">
       <div class="pill"><i class="fa fa-users"></i> 20–25 personas hospedaje</div>
       <div class="pill"><i class="fa fa-champagne-glasses"></i> Hasta 60 en eventos</div>
@@ -916,28 +836,24 @@
     </div>
   </div>
 
-  <!-- ════════════════════════════
-       GALERÍA PREVIEW (scroll)
-  ════════════════════════════ -->
+  <!-- ════════ GALERÍA PREVIEW SCROLL ════════ -->
   <div class="section-title fade-up"><h2>Galería</h2></div>
 
   <div class="gallery-scroll fade-up">
-    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/img/ate11.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/img/ate12.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/img/ate14.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/ate15.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/ate16.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/ate17.png" alt="" loading="lazy" /></div>
-    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/img/ate18.png" alt="" loading="lazy" /></div>
+    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/ate11.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/ate12.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/ate14.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/ate15.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/ate16.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/ate17.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/ate18.png" alt="" loading="lazy"></div>
     <button class="gallery-more-btn" onclick="openModal('galeriaModal')">
       <i class="fa fa-images"></i>
       <span>Ver todas</span>
     </button>
   </div>
 
-  <!-- ════════════════════════════
-       CONTACTO STRIP
-  ════════════════════════════ -->
+  <!-- ════════ CONTACTO STRIP ════════ -->
   <div class="section-title fade-up"><h2>Contacto</h2></div>
 
   <div class="contact-strip fade-up">
@@ -950,39 +866,37 @@
     </div>
     <div class="contact-buttons">
       <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20reservar%20Quinta%20Atenas"
-         target="_blank" class="ct-btn wapp">
-        <i class="fab fa-whatsapp"></i> WhatsApp
-      </a>
-      <a href="tel:+50687212050" class="ct-btn call">
-        <i class="fa fa-phone"></i> Llamar
-      </a>
-      <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="ct-btn waze">
-        <i class="fa fa-location-dot"></i> Waze
-      </a>
+         target="_blank" class="ct-btn wapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+50687212050" class="ct-btn call"><i class="fa fa-phone"></i> Llamar</a>
+      <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="ct-btn waze"><i class="fa fa-location-dot"></i> Waze</a>
     </div>
   </div>
 
-  <!-- ════════════════════════════
-       COMPARTIR
-  ════════════════════════════ -->
+  <!-- ════════ COMPARTIR ════════ -->
   <div class="share-row fade-up">
     <div class="share-text">
       <strong>Comparte este enlace</strong>
       Envíalo a quien lo necesite
     </div>
     <div class="share-icons">
-      <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20%E2%80%94%20Casa%20vacacional%20en%20Atenas%2C%20Costa%20Rica%20https://midbcard.com/QuintaAtenas"
-         target="_blank" class="share-icon sw"><i class="fab fa-whatsapp"></i></a>
+      <!-- WhatsApp -->
+      <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20%E2%80%94%20Atenas%20CR%20https://midbcard.com/QuintaAtenas"
+         target="_blank" class="share-icon si-wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <!-- Facebook -->
       <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas"
-         target="_blank" class="share-icon sf"><i class="fab fa-facebook-f"></i></a>
+         target="_blank" class="share-icon si-fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <!-- Telegram -->
+      <a href="https://telegram.me/share/url?url=https://midbcard.com/QuintaAtenas&text=Te%20recomiendo%20esta%20propiedad%20en%20alquiler"
+         target="_blank" class="share-icon si-tg" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+      <!-- Messenger -->
+      <a href="fb-messenger://share/?link=https://midbcard.com/QuintaAtenas"
+         class="share-icon si-ms" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- ════════════════════════════
-       FOOTER
-  ════════════════════════════ -->
+  <!-- ════════ FOOTER ════════ -->
   <div class="card-footer">
     <p>© 2025 Quinta Atenas · Atenas, Costa Rica</p>
     <p>Tarjeta Digital por <a href="#">NovaMente Digital</a></p>
@@ -990,17 +904,13 @@
 
 </div><!-- /card -->
 
-<!-- ════════════════════════════
-     BOTÓN FLOTANTE WHATSAPP
-════════════════════════════ -->
+<!-- ════════ BOTÓN FLOTANTE WHATSAPP ════════ -->
 <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
-   target="_blank" class="float-wa">
-  <i class="fab fa-whatsapp"></i>
-</a>
+   target="_blank" class="float-wa"><i class="fab fa-whatsapp"></i></a>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════
      MODAL: GUARDAR CONTACTO
-════════════════════════════════════════════ -->
+══════════════════════════════════════════════ -->
 <div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -1037,9 +947,9 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     MODAL: CÓDIGO QR
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════
+     MODAL: QR
+══════════════════════════════════════════════ -->
 <div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
@@ -1054,97 +964,27 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════
      MODAL: GALERÍA COMPLETA
-════════════════════════════════════════════ -->
+══════════════════════════════════════════════ -->
 <div class="modal-overlay" id="galeriaModal" onclick="closeModal('galeriaModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <h3>📸 Galería</h3>
-    <p class="modal-sub">Desliza para ver todas las fotos de la propiedad. Toca cualquier imagen para verla en grande.</p>
-    <div class="modal-gallery-grid" id="modalGalleryGrid">
-      <!-- generado por JS -->
-    </div>
+    <p class="modal-sub">Toca cualquier foto para verla en pantalla completa.</p>
+    <div class="modal-gallery-grid" id="modalGalleryGrid"></div>
     <button class="modal-cancel" onclick="closeModal('galeriaModal')">Cerrar</button>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     MODAL: REDES SOCIALES
-════════════════════════════════════════════ -->
-<div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🌐 Redes Sociales</h3>
-    <p class="modal-sub">Síguenos, mira nuestro video y descarga el brochure digital de la propiedad.</p>
-    <div class="modal-list">
-
-      <a href="https://www.facebook.com/willian.mora.520562" target="_blank" class="modal-row">
-        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
-        <div class="mr-text">
-          <div class="mr-title">Facebook</div>
-          <div class="mr-desc">Síguenos y mira nuestras publicaciones</div>
-        </div>
-        <i class="fa fa-chevron-right mr-arrow"></i>
-      </a>
-
-      <a href="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&autoplay=1" target="_blank" class="modal-row">
-        <div class="mr-icon" style="background:#fdecea"><i class="fab fa-youtube" style="color:#e53935"></i></div>
-        <div class="mr-text">
-          <div class="mr-title">Video de la Propiedad</div>
-          <div class="mr-desc">Recorrido completo en YouTube</div>
-        </div>
-        <i class="fa fa-chevron-right mr-arrow"></i>
-      </a>
-
-      <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1" target="_blank" class="modal-row">
-        <div class="mr-icon" style="background:#fef7e7"><i class="fa fa-book-open" style="color:var(--gold)"></i></div>
-        <div class="mr-text">
-          <div class="mr-title">Brochure Digital</div>
-          <div class="mr-desc">Revista digital descargable</div>
-        </div>
-        <i class="fa fa-chevron-right mr-arrow"></i>
-      </a>
-
-      <a href="https://m.me/100066473385289/" target="_blank" class="modal-row">
-        <div class="mr-icon" style="background:#eef0ff"><i class="fab fa-facebook-messenger" style="color:#0084ff"></i></div>
-        <div class="mr-text">
-          <div class="mr-title">Facebook Messenger</div>
-          <div class="mr-desc">Chatea directamente con nosotros</div>
-        </div>
-        <i class="fa fa-chevron-right mr-arrow"></i>
-      </a>
-
-      <!-- Compartir -->
-      <div style="margin-top:6px; padding: 0 2px;">
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;font-weight:500">Comparte este enlace:</div>
-        <div style="display:flex;gap:10px">
-          <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20-%20Atenas%20CR%20https://midbcard.com/QuintaAtenas"
-             target="_blank" class="modal-row" style="flex:1;padding:12px">
-            <div class="mr-icon" style="background:#e8f8ef;width:36px;height:36px;border-radius:10px"><i class="fab fa-whatsapp" style="color:#25d366;font-size:17px"></i></div>
-            <div class="mr-text"><div class="mr-title" style="font-size:12px">WhatsApp</div></div>
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas"
-             target="_blank" class="modal-row" style="flex:1;padding:12px">
-            <div class="mr-icon" style="background:#e7f0fd;width:36px;height:36px;border-radius:10px"><i class="fab fa-facebook-f" style="color:#1877f2;font-size:17px"></i></div>
-            <div class="mr-text"><div class="mr-title" style="font-size:12px">Facebook</div></div>
-          </a>
-        </div>
-      </div>
-
-    </div>
-    <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════
-     MODAL: SERVICIOS / AMENIDADES
-════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════
+     MODAL: SERVICIOS
+══════════════════════════════════════════════ -->
 <div class="modal-overlay" id="serviciosModal" onclick="closeModal('serviciosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <div class="modal-handle"></div>
     <h3>🏡 Servicios y Amenidades</h3>
-    <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada y acondicionada, incluye ropa de cama, toallas, jabón líquido y más. Cumplimos todos los protocolos del Ministerio de Salud.</p>
+    <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada: ropa de cama, toallas, jabón líquido y más. Cumplimos los protocolos del Ministerio de Salud.</p>
     <ul class="servicios-list">
       <li><i class="fa fa-person-swimming"></i> Piscina con ducha y baños</li>
       <li><i class="fa fa-bed"></i> 4 habitaciones grandes</li>
@@ -1163,9 +1003,119 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════
+     MODAL: REDES SOCIALES
+     Incluye: Facebook · Instagram · TikTok ·
+              YouTube · Brochure · Messenger
+     + Compartir: WhatsApp · Facebook · Telegram · Messenger
+══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🌐 Redes Sociales</h3>
+    <p class="modal-sub">Síguenos en nuestras redes, mira el video de la propiedad y descarga el brochure digital.</p>
+    <div class="modal-list">
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Facebook</div>
+          <div class="mr-desc">Síguenos y mira todas nuestras publicaciones</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/villahermosaquintaatenas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+         target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:linear-gradient(135deg,#fdf3e3,#f7e2f0)">
+          <i class="fab fa-instagram" style="background:linear-gradient(135deg,#e1306c,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:22px"></i>
+        </div>
+        <div class="mr-text">
+          <div class="mr-title">Instagram</div>
+          <div class="mr-desc">@villahermosaquintaatenas</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@villahermosaquintaatenas?is_from_webapp=1&sender_device=pc"
+         target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#f0f0f0"><i class="fab fa-tiktok" style="color:#010101"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">TikTok</div>
+          <div class="mr-desc">@villahermosaquintaatenas</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&autoplay=1" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fdecea"><i class="fab fa-youtube" style="color:#e53935"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Video de la Propiedad</div>
+          <div class="mr-desc">Recorrido completo en YouTube</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- Brochure -->
+      <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
+         target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fef7e7"><i class="fa fa-book-open" style="color:var(--gold)"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Brochure Digital</div>
+          <div class="mr-desc">Revista digital descargable de la propiedad</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- Messenger (chat directo) -->
+      <a href="https://m.me/100066473385289/" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#eef0ff"><i class="fab fa-facebook-messenger" style="color:#0084ff"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Facebook Messenger</div>
+          <div class="mr-desc">Chatea directamente con nosotros</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+
+      <!-- ── Compartir ── -->
+      <div style="padding:4px 2px 0">
+        <div style="font-size:12px;color:var(--muted);font-weight:500;margin-bottom:10px">
+          Comparte este enlace:
+        </div>
+        <div class="share-mini-row">
+          <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20-%20Atenas%20CR%20https://midbcard.com/QuintaAtenas"
+             target="_blank" class="share-mini-btn">
+            <i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas"
+             target="_blank" class="share-mini-btn">
+            <i class="fab fa-facebook-f" style="color:#1877f2"></i> Facebook
+          </a>
+        </div>
+        <div class="share-mini-row" style="margin-top:8px">
+          <a href="https://telegram.me/share/url?url=https://midbcard.com/QuintaAtenas&text=Te%20recomiendo%20esta%20propiedad%20en%20alquiler"
+             target="_blank" class="share-mini-btn">
+            <i class="fab fa-telegram-plane" style="color:#2ca5e0"></i> Telegram
+          </a>
+          <a href="fb-messenger://share/?link=https://midbcard.com/QuintaAtenas"
+             class="share-mini-btn">
+            <i class="fab fa-facebook-messenger" style="color:#0084ff"></i> Messenger
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
      LIGHTBOX
-════════════════════════════════════════════ -->
+══════════════════════════════════════════════ -->
 <div class="lightbox" id="lightbox">
   <div class="lb-close" onclick="closeLightbox()"><i class="fa fa-xmark"></i></div>
   <img id="lbImg" src="" alt="Quinta Atenas" draggable="false" />
@@ -1176,131 +1126,111 @@
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<!-- ════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════
      SCRIPTS
-════════════════════════════════════════════ -->
+══════════════════════════════════════════════ -->
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <script>
-/* ── Todas las imágenes locales ──────────────────── */
+/* ══ SWIPER HERO con efecto FADE ══════════════════ */
+new Swiper('.hero-swiper', {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  lazy: true,
+});
+
+/* ══ Imágenes locales ══════════════════════════════ */
 const IMAGES = [
-  'img/img/ate11.png','img/img/ate12.png','img/img/ate14.png','img/img/ate15.png',
-  'img/img/ate16.png','img/img/ate17.png','img/img/ate18.png','img/img/ate19.png',
-  'img/img/ate20.png','img/img/ate21.png','img/img/ate22.png','img/img/ate23.png',
-  'img/img/ate24.png','img/img/ate25.png','img/img/ate26.png','img/img/ate27.png',
-  'img/img/ate28.png','img/img/ate29.png'
+  'img/ate11.png','img/ate12.png','img/ate14.png','img/ate15.png',
+  'img/ate16.png','img/ate17.png','img/ate18.png','img/ate19.png',
+  'img/ate20.png','img/ate21.png','img/ate22.png','img/ate23.png',
+  'img/ate24.png','img/ate25.png','img/ate26.png','img/ate27.png',
+  'img/ate28.png','img/ate29.png',
 ];
 
-/* ── Generar grid de galería en modal ──────────────── */
-(function buildGalleryGrid() {
+/* ══ Generar grid galería en modal ════════════════ */
+(function buildGrid() {
   const grid = document.getElementById('modalGalleryGrid');
   IMAGES.forEach((src, i) => {
-    const div = document.createElement('div');
-    div.className = 'mgrid-thumb';
-    div.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy" />`;
-    div.onclick = () => { closeModal('galeriaModal'); openLightbox(i); };
-    grid.appendChild(div);
+    const d = document.createElement('div');
+    d.className = 'mgrid-thumb';
+    d.innerHTML = `<img src="${src}" alt="Foto ${i+1}" loading="lazy">`;
+    d.onclick = () => { closeModal('galeriaModal'); openLightbox(i); };
+    grid.appendChild(d);
   });
 })();
 
-/* ── HERO SLIDER ────────────────────────────────── */
-const heroSlides = document.querySelectorAll('.hero-slide');
-const dotsWrap   = document.getElementById('heroDots');
-let heroCurrent  = 0;
-let heroTimer;
-
-heroSlides.forEach((_, i) => {
-  const d = document.createElement('div');
-  d.className = 'hero-dot' + (i === 0 ? ' active' : '');
-  d.onclick = () => heroGo(i);
-  dotsWrap.appendChild(d);
-});
-
-function heroGo(n) {
-  heroCurrent = (n + heroSlides.length) % heroSlides.length;
-  document.getElementById('heroSlides').style.transform = `translateX(-${heroCurrent * 100}%)`;
-  document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroCurrent));
-}
-
-function heroStart() { heroTimer = setInterval(() => heroGo(heroCurrent + 1), 4500); }
-
-// touch swipe on hero
-let htx = 0;
-const heroEl = document.querySelector('.hero');
-heroEl.addEventListener('touchstart', e => { htx = e.touches[0].clientX; }, { passive: true });
-heroEl.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - htx;
-  if (Math.abs(dx) > 40) {
-    clearInterval(heroTimer);
-    heroGo(heroCurrent + (dx < 0 ? 1 : -1));
-    heroStart();
-  }
-}, { passive: true });
-
-heroStart();
-
-/* ── LIGHTBOX ────────────────────────────────────── */
-let lbIndex = 0;
+/* ══ LIGHTBOX ═════════════════════════════════════ */
+let lbIdx = 0;
 
 function openLightbox(i) {
-  lbIndex = i;
+  lbIdx = i;
   document.getElementById('lbImg').src = IMAGES[i];
-  document.getElementById('lbCounter').textContent = `${i + 1} / ${IMAGES.length}`;
+  document.getElementById('lbCounter').textContent = `${i+1} / ${IMAGES.length}`;
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function lbPrev() {
-  lbIndex = (lbIndex - 1 + IMAGES.length) % IMAGES.length;
-  document.getElementById('lbImg').src = IMAGES[lbIndex];
-  document.getElementById('lbCounter').textContent = `${lbIndex + 1} / ${IMAGES.length}`;
+  lbIdx = (lbIdx - 1 + IMAGES.length) % IMAGES.length;
+  document.getElementById('lbImg').src = IMAGES[lbIdx];
+  document.getElementById('lbCounter').textContent = `${lbIdx+1} / ${IMAGES.length}`;
 }
-
 function lbNext() {
-  lbIndex = (lbIndex + 1) % IMAGES.length;
-  document.getElementById('lbImg').src = IMAGES[lbIndex];
-  document.getElementById('lbCounter').textContent = `${lbIndex + 1} / ${IMAGES.length}`;
+  lbIdx = (lbIdx + 1) % IMAGES.length;
+  document.getElementById('lbImg').src = IMAGES[lbIdx];
+  document.getElementById('lbCounter').textContent = `${lbIdx+1} / ${IMAGES.length}`;
 }
 
-// touch swipe en lightbox
+// Swipe en lightbox
 let ltx = 0;
 const lbEl = document.getElementById('lightbox');
 lbEl.addEventListener('touchstart', e => { ltx = e.touches[0].clientX; }, { passive: true });
-lbEl.addEventListener('touchend', e => {
+lbEl.addEventListener('touchend',   e => {
   const dx = e.changedTouches[0].clientX - ltx;
   if (Math.abs(dx) > 40) dx < 0 ? lbNext() : lbPrev();
 }, { passive: true });
 
-// Cerrar lightbox con Escape
+// Teclado
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft')  lbPrev();
-  if (e.key === 'ArrowRight') lbNext();
+  if (e.key === 'Escape')      { closeLightbox(); closeAllModals(); }
+  if (e.key === 'ArrowLeft')   lbPrev();
+  if (e.key === 'ArrowRight')  lbNext();
 });
 
-/* ── MODALS ──────────────────────────────────────── */
+/* ══ MODALS ═══════════════════════════════════════ */
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow = '';
 }
+function closeAllModals() {
+  document.querySelectorAll('.modal-overlay.open')
+    .forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
 
-// Cerrar modals con Escape
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
-    document.body.style.overflow = '';
-  }
-});
-
-/* ── FADE-UP INTERSECTION OBSERVER ──────────────── */
+/* ══ FADE-UP OBSERVER ════════════════════════════ */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08 });
