@@ -6,9 +6,9 @@
   <meta name="description" content="Quinta Atenas — Casa Vacacional en las Montañas de Atenas, Costa Rica" />
   <meta property="og:title" content="Quinta Atenas" />
   <meta property="og:description" content="Hermosa propiedad para alquiler, Atenas Costa Rica" />
-  <meta property="og:image" content="img/img/quintaatenas2.png" />
+  <meta property="og:image" content="img/quintaatenas2.png" />
   <title>Quinta Atenas</title>
-  <link rel="icon" href="img/img/quintaatenas.png" />
+  <link rel="icon" href="img/quintaatenas.png" />
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -57,12 +57,12 @@
       position: relative;
     }
 
-    /* Swiper fade overlay gradient */
+    /* Swiper — subtle vignette only, no text overlay needed */
     .hero-swiper::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,.08) 30%, rgba(0,0,0,.62) 100%);
+      background: linear-gradient(to bottom, rgba(0,0,0,.04) 60%, rgba(0,0,0,.22) 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -97,35 +97,7 @@
       border-radius: 3px;
     }
 
-    /* Hero overlay content */
-    .hero-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      z-index: 5;
-      padding: 0 16px 18px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      pointer-events: none;
-    }
-
-    .hero-title { color: #fff; }
-    .hero-title .eyebrow {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: .8;
-      margin-bottom: 3px;
-    }
-    .hero-title h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.05;
-      text-shadow: 0 2px 10px rgba(0,0,0,.55);
-    }
-
+    /* Hero badge (Destacado pill top-right) */
     .hero-badge-top {
       position: absolute;
       top: 14px; right: 14px;
@@ -140,23 +112,10 @@
       border-radius: 20px;
     }
 
-    .hero-rating {
-      background: rgba(0,0,0,.38);
-      backdrop-filter: blur(8px);
-      border-radius: 14px;
-      padding: 8px 12px;
-      text-align: center;
-      color: #fff;
-      pointer-events: auto;
-    }
-    .hero-rating .stars { color: var(--gold-light); font-size: 10px; letter-spacing: 1px; }
-    .hero-rating .score { font-size: 20px; font-weight: 700; line-height: 1.1; }
-    .hero-rating .label { font-size: 9px; opacity: .65; }
-
     /* ══════ LOGO STRIP ══════ */
     .logo-strip {
       background: var(--white);
-      padding: 10px 16px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -165,43 +124,52 @@
       position: sticky;
       top: 0;
       z-index: 50;
+      min-height: 72px;
     }
-    .logo-strip img { height: 40px; width: auto; }
+    .logo-strip img { height: 54px; width: auto; max-width: 160px; object-fit: contain; }
     .logo-strip .tagline { text-align: right; }
     .logo-strip .tagline .name {
       font-family: 'Playfair Display', serif;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--forest);
-      line-height: 1;
+      line-height: 1.1;
     }
-    .logo-strip .tagline .sub { font-size: 10px; color: var(--muted); }
+    .logo-strip .tagline .sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-    /* ══════ UTILS (Guardar / QR) ══════ */
+    /* ══════ UTILS (Guardar / QR / Instalar) ══════ */
     .top-utils {
       display: flex;
       gap: 8px;
-      padding: 12px 16px 0;
-      justify-content: flex-end;
+      padding: 14px 16px 2px;
+      justify-content: center;
     }
     .util-btn {
       display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 5px;
-      padding: 6px 13px;
-      border-radius: 20px;
-      font-size: 11px;
+      padding: 10px 0;
+      width: 80px;
+      border-radius: 16px;
+      font-size: 10px;
       font-weight: 600;
       text-decoration: none;
       border: none;
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
-      letter-spacing: .3px;
+      letter-spacing: .2px;
       transition: transform .18s;
+      color: #fff;
+    }
+    .util-btn i {
+      font-size: 20px;
+      margin-bottom: 1px;
     }
     .util-btn:active { transform: scale(.93); }
-    .util-btn.save { background: var(--forest); color: #fff; }
-    .util-btn.qr   { background: var(--bark);   color: #fff; }
+    .util-btn.save    { background: var(--forest); }
+    .util-btn.qr      { background: var(--bark);   }
+    .util-btn.install { background: #1a6fc4;        }
 
     /* ══════ ACTION BUTTONS ══════ */
     /*
@@ -459,23 +427,74 @@
     }
     .card-footer a { color: rgba(255,255,255,.55); text-decoration: none; }
 
-    /* ══════ FLOATING WHATSAPP ══════ */
-    .float-wa {
+    /* ══════ FLOATING BUTTONS (stack) ══════ */
+    .float-stack {
       position: fixed;
       bottom: 22px; right: 16px;
-      width: 58px; height: 58px;
-      background: #25d366;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    /* shared float button style */
+    .float-btn {
+      width: 54px; height: 54px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 27px; color: #fff;
+      font-size: 22px; color: #fff;
       text-decoration: none;
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: transform .18s;
+      position: relative;
+    }
+    .float-btn:active { transform: scale(.9); }
+
+    /* tooltip labels */
+    .float-btn::before {
+      content: attr(data-tip);
+      position: absolute;
+      right: 62px;
+      background: rgba(0,0,0,.75);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+    .float-btn:hover::before { opacity: 1; }
+
+    /* WhatsApp — biggest, bounces */
+    .float-wa {
+      width: 58px; height: 58px;
+      font-size: 26px;
+      background: #25d366;
       box-shadow: 0 4px 20px rgba(37,211,102,.55);
-      z-index: 100;
       animation: bounce-wa 3s ease-in-out infinite;
     }
     @keyframes bounce-wa {
       0%,100% { transform: translateY(0); }
       50%      { transform: translateY(-7px); }
+    }
+
+    /* Brochure */
+    .float-brochure {
+      background: var(--gold);
+      box-shadow: 0 4px 16px rgba(184,144,58,.5);
+      font-size: 20px;
+    }
+
+    /* Instalar en pantalla */
+    .float-install {
+      background: var(--forest);
+      box-shadow: 0 4px 16px rgba(45,74,45,.45);
+      font-size: 19px;
     }
 
     /* ══════ FADE-UP ══════ */
@@ -628,34 +647,6 @@
       flex-shrink: 0;
     }
 
-    /* ── REDES — share mini row ── */
-    .share-mini-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
-    .share-mini-btn {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      padding: 11px 8px;
-      border-radius: 13px;
-      background: var(--white);
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text);
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      transition: transform .18s;
-    }
-    .share-mini-btn:active { transform: scale(.94); }
-    .share-mini-btn i { font-size: 17px; }
-
     /* ── QR modal ── */
     .qr-box { text-align: center; padding: 10px 0 8px; }
     .qr-box img {
@@ -717,12 +708,12 @@
   <!-- ════════ HERO — SWIPER FADE ════════ -->
   <div class="hero-swiper swiper">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background-image:url('img/img/ate11.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/img/ate15.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/img/ate17.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/img/ate20.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/img/ate24.png')"></div>
-      <div class="swiper-slide" style="background-image:url('img/img/ate22.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate11.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate15.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate17.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate20.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate24.png')"></div>
+      <div class="swiper-slide" style="background-image:url('img/ate22.png')"></div>
     </div>
     <!-- Arrows -->
     <div class="swiper-button-prev"></div>
@@ -730,37 +721,29 @@
     <!-- Dots -->
     <div class="swiper-pagination"></div>
 
-    <!-- Overlay content (badge + title + rating) -->
+    <!-- Only the gold badge remains on the hero -->
     <div class="hero-badge-top"><i class="fa fa-star" style="margin-right:4px"></i>Destacado</div>
-    <div class="hero-overlay">
-      <div class="hero-title">
-        <div class="eyebrow">Atenas · Costa Rica</div>
-        <h1>Quinta<br>Vacacional</h1>
-      </div>
-      <div class="hero-rating">
-        <div class="stars">★★★★★</div>
-        <div class="score">5.0</div>
-        <div class="label">excelente</div>
-      </div>
-    </div>
   </div>
 
   <!-- ════════ LOGO STRIP ════════ -->
   <div class="logo-strip fade-up">
-    <img src="img/img/QuintaAtenaslogo.png" alt="Quinta Atenas" onerror="this.style.display='none'" />
+    <img src="img/QuintaAtenaslogo.png" alt="Quinta Vacacional" onerror="this.style.display='none'" />
     <div class="tagline">
-      <div class="name">QUINTA ATENAS</div>
-      <div class="sub">El mejor clima del mundo 🌿</div>
+      <div class="name">QUINTA VACACIONAL</div>
+      <div class="sub">Atenas · Costa Rica 🌿</div>
     </div>
   </div>
 
-  <!-- ════════ GUARDAR / QR ════════ -->
+  <!-- ════════ GUARDAR / QR / INSTALAR ════════ -->
   <div class="top-utils fade-up">
     <button class="util-btn save" onclick="openModal('saveModal')">
       <i class="fa fa-address-book"></i> Guardar Contacto
     </button>
     <button class="util-btn qr" onclick="openModal('qrModal')">
       <i class="fa fa-qrcode"></i> QR
+    </button>
+    <button class="util-btn install" onclick="openModal('installModal')">
+      <i class="fa fa-mobile-screen"></i> Instalar
     </button>
   </div>
 
@@ -840,13 +823,13 @@
   <div class="section-title fade-up"><h2>Galería</h2></div>
 
   <div class="gallery-scroll fade-up">
-    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/img/ate11.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/img/ate12.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/img/ate14.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/ate15.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/ate16.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/ate17.png" alt="" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/img/ate18.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/ate11.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/ate12.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/ate14.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/ate15.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/ate16.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/ate17.png" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/ate18.png" alt="" loading="lazy"></div>
     <button class="gallery-more-btn" onclick="openModal('galeriaModal')">
       <i class="fa fa-images"></i>
       <span>Ver todas</span>
@@ -904,9 +887,22 @@
 
 </div><!-- /card -->
 
-<!-- ════════ BOTÓN FLOTANTE WHATSAPP ════════ -->
-<a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
-   target="_blank" class="float-wa"><i class="fab fa-whatsapp"></i></a>
+<!-- ════════ BOTONES FLOTANTES ════════
+     Orden de arriba a abajo:
+     1. Instalar en pantalla  (verde oscuro)
+     2. Brochure              (dorado)
+     3. WhatsApp              (verde — el principal, abajo)
+════════ -->
+<div class="float-stack">
+  <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
+     target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure">
+    <i class="fa fa-book-open"></i>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
+     target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
 
 <!-- ══════════════════════════════════════════════
      MODAL: GUARDAR CONTACTO
@@ -1081,35 +1077,54 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
 
-      <!-- ── Compartir ── -->
-      <div style="padding:4px 2px 0">
-        <div style="font-size:12px;color:var(--muted);font-weight:500;margin-bottom:10px">
-          Comparte este enlace:
-        </div>
-        <div class="share-mini-row">
-          <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20-%20Atenas%20CR%20https://midbcard.com/QuintaAtenas"
-             target="_blank" class="share-mini-btn">
-            <i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas"
-             target="_blank" class="share-mini-btn">
-            <i class="fab fa-facebook-f" style="color:#1877f2"></i> Facebook
-          </a>
-        </div>
-        <div class="share-mini-row" style="margin-top:8px">
-          <a href="https://telegram.me/share/url?url=https://midbcard.com/QuintaAtenas&text=Te%20recomiendo%20esta%20propiedad%20en%20alquiler"
-             target="_blank" class="share-mini-btn">
-            <i class="fab fa-telegram-plane" style="color:#2ca5e0"></i> Telegram
-          </a>
-          <a href="fb-messenger://share/?link=https://midbcard.com/QuintaAtenas"
-             class="share-mini-btn">
-            <i class="fab fa-facebook-messenger" style="color:#0084ff"></i> Messenger
-          </a>
-        </div>
-      </div>
-
     </div>
     <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODAL: INSTALAR EN PANTALLA (como app)
+══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📲 Agregar a Pantalla de Inicio</h3>
+    <p class="modal-sub">Instala esta tarjeta como si fuera una app y tendrás acceso directo con un ícono en tu teléfono — sin necesidad de descargar nada.</p>
+    <div class="modal-list">
+      <!-- Android -->
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#e8f5e9"><i class="fab fa-android" style="color:#3ddc84;font-size:22px"></i></div>
+          <div class="mr-text">
+            <div class="mr-title">Android (Chrome)</div>
+            <div class="mr-desc">Toca el menú → "Añadir a pantalla de inicio"</div>
+          </div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abre esta página en <strong>Google Chrome</strong><br>
+          2. Toca el ícono <strong>⋮</strong> (esquina superior derecha)<br>
+          3. Selecciona <strong>"Añadir a pantalla de inicio"</strong><br>
+          4. Presiona <strong>Añadir</strong> — ¡listo!
+        </div>
+      </div>
+      <!-- iPhone -->
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#f0f0f5"><i class="fab fa-apple" style="color:#555;font-size:22px"></i></div>
+          <div class="mr-text">
+            <div class="mr-title">iPhone / iPad (Safari)</div>
+            <div class="mr-desc">Toca Compartir → "En pantalla de inicio"</div>
+          </div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abre esta página en <strong>Safari</strong><br>
+          2. Toca el ícono <strong>□↑</strong> (parte inferior de la pantalla)<br>
+          3. Toca <strong>"En pantalla de inicio"</strong><br>
+          4. Presiona <strong>Añadir</strong> — ¡listo!
+        </div>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
   </div>
 </div>
 
@@ -1155,11 +1170,11 @@ new Swiper('.hero-swiper', {
 
 /* ══ Imágenes locales ══════════════════════════════ */
 const IMAGES = [
-  'img/img/ate11.png','img/img/ate12.png','img/img/ate14.png','img/img/ate15.png',
-  'img/img/ate16.png','img/img/ate17.png','img/img/ate18.png','img/img/ate19.png',
-  'img/img/ate20.png','img/img/ate21.png','img/img/ate22.png','img/img/ate23.png',
-  'img/img/ate24.png','img/img/ate25.png','img/img/ate26.png','img/img/ate27.png',
-  'img/img/ate28.png','img/img/ate29.png',
+  'img/ate11.png','img/ate12.png','img/ate14.png','img/ate15.png',
+  'img/ate16.png','img/ate17.png','img/ate18.png','img/ate19.png',
+  'img/ate20.png','img/ate21.png','img/ate22.png','img/ate23.png',
+  'img/ate24.png','img/ate25.png','img/ate26.png','img/ate27.png',
+  'img/ate28.png','img/ate29.png',
 ];
 
 /* ══ Generar grid galería en modal ════════════════ */
