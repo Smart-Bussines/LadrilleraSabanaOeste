@@ -209,7 +209,7 @@ body{font-family:'Poppins',sans-serif;background:var(--wh);color:var(--tx);overf
 .rstat span{font-size:.8rem;color:rgba(255, 255, 255, 0.774);font-weight:400;margin-top:3px;display:block}
 .rep-visual{position:relative}
 .rep-hero-img{width:100%;border-radius:10px;display:block;aspect-ratio:16/10;object-fit:cover;box-shadow:0 12px 44px rgba(0,0,0,.4)}
-.rep-free{position:absolute;top:-16px;right:16px;background:var(--or);color:#000000;padding:12px 18px;border-radius:8px;text-align:center;box-shadow:0 6px 24px rgba(254,124,0,.5);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;line-height:1.5}
+.rep-free{position:absolute;top:-16px;right:16px;background:var(--or);color:#ffffff;padding:12px 18px;border-radius:8px;text-align:center;box-shadow:0 6px 24px rgba(254,124,0,.5);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;line-height:1.5}
 .rep-free strong{font-size:1.1rem;display:block;font-family:'Cormorant Garamond',serif;letter-spacing:0;text-transform:none}
 /* Services + BA sections sit on white/light — break from blue */
 .rep-svcs-wrap{background:var(--wh);padding:46px 5vw}
@@ -400,7 +400,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
 
 <section class="spx" id="catalogo">
   <div class="sphd reveal">
-    <h2 class="ttl">Especificaciones <em>Tecnicas</em></h2>
+    <h2 class="ttl">Especificaciones <em>Técnicas</em></h2>
     <p>Seleccione cualquier teja para ver medidas , peso, rendimiento aproximado por m2 y otros detalles de instalación.<strong>Use las flechas para navegar</strong>&nbsp;en todas las opciones disponibles. </p>
   </div>
   <div class="snav reveal">
@@ -412,7 +412,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
         <button class="stab"     onclick="showSpec('plana',this)">Plana Colombiana</button>
         <button class="stab"     onclick="showSpec('nicanew',this)">Nicaraguense Nueva</button>
         <button class="stab"     onclick="showSpec('nicaold',this)">Nicaraguense Antigua</button>
-        <button class="stab"     onclick="showSpec('med',this)">Mediterranea</button>
         <button class="stab"     onclick="showSpec('sal',this)">Salvadoreña</button>
         <button class="stab"     onclick="showSpec('ren',this)">Renacimiento Terracota</button>
         <button class="stab"     onclick="showSpec('sf',this)">Santa Fe Ecuatoriana</button>
@@ -451,11 +450,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="spanel" id="sp-nicaold">
     <div class="spimg reveal"><img src="img/Landing/tecnicanicaantigua.jpg??w=800&h=600&fit=crop&q=82" alt="Teja Nicaraguense Antigua" loading="lazy"/><div class="spimgov"><h3>Teja Nicaraguense Antigua</h3></div></div>
     <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Nicaraguense Antigua</h4><p class="spdesc">Teja canal nicaraguense recuperada. Muy buscada por su acabado envejecido natural, perfecta para proyectos que desean un look rustico autentico desde el primer dia. Seleccionada y revisada antes de la venta.</p><div class="spbdg"><span class="sbg">Envejecido</span><span class="sbg">Recuperada</span><span class="sbg">Acabado natural</span></div><table class="sptbl"><tr><td>Largo</td><td>43 - 47 cm (variable)</td></tr><tr><td>Ancho canal</td><td>14 - 18.5 cm</td></tr><tr><td>Grosor</td><td>9 - 12 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.8 - 2 kg</td></tr><tr><td>Rendimiento m2</td><td>27 piezas</td></tr><tr><td>Condicion</td><td>Usada, seleccionada y limpiada</td></tr><tr><td>Acabado</td><td>Patina envejecida natural</td></tr><tr><td>Nota</td><td>Stock variable, consultar</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Nicaraguense Usada')">Consultar disponibilidad</a><a href="#" class="bcat" onclick="openCatalog('nicaold');return false">Ver catalogo digital</a></div></div>
-  </div>
-
-  <div class="spanel" id="sp-med">
-    <div class="spimg reveal"><img src="img/Landing/tecnicamediterranea.jpg?w=800&h=600&fit=crop&q=82" alt="Teja Mediterraneo" loading="lazy"/><div class="spimgov"><h3>Teja Mediterraneo</h3></div></div>
-    <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Mediterraneo</h4><p class="spdesc">Teja de perfil ondulado estilo europeo-mediterraneo, de mayor dimension. Excelente impermeabilidad. Lamentablemente ya no se fabrica.&nbsp;<strong>SOLO CONTRA PEDIDO</strong> </p><div class="spbdg"><span class="sbg">Estilo europeo</span><span class="sbg">De concreto</span><span class="sbg">Alta impermeabilidad</span></div><table class="sptbl"><tr><td>Largo</td><td>46 - 50 cm</td></tr><tr><td>Ancho</td><td>30 - 34 cm</td></tr><tr><td>Grosor</td><td>14 - 17 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 3.0 - 3.8 kg</td></tr><tr><td>Rendimiento m2</td><td>8 - 10 piezas</td></tr><tr><td>Peso total m2</td><td>24 - 38 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Arena, Gris, Rojo</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Mediterraneo')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('med');return false">Ver catalogo digital</a></div></div>
   </div>
 
   <div class="spanel" id="sp-sal">
@@ -547,7 +541,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
           <img src="img/Landing/landingslite3.jpg" alt="Proyecto 3 instalado" loading="lazy" onclick="openLbx(2)"/>
         </div>
         <div class="gcap">
-         <p>Residencial Místico&mdash; Teja Plana Colombiana</p>
+         <p>Residencial Místico&mdash; Teja Plana Chocolate</p>
         </div>
       </div>
       <div class="gal-slide">
@@ -563,7 +557,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
           <img src="img/Landing/landingslite5.jpg" alt="Proyecto 5 instalado" loading="lazy" onclick="openLbx(4)"/>
         </div>
         <div class="gcap">
-        <p>Residencial Místico &mdash; Teja Plana chocolate</p>
+        <p>Residencial Místico &mdash; Teja Plana </p>
         </div>
       </div>
       <div class="gal-slide">
@@ -882,7 +876,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
             <option value="Consulta general">-- Seleccione --</option>
             <option>Teja Colonial Nacional</option><option>Teja Imperial Nacional</option>
             <option>Teja Plana Colombiana</option><option>Teja Nicaraguense Nueva</option>
-            <option>Teja Nicaraguense Usada</option><option>Teja Mediterraneo</option>
+            <option>Teja Nicaraguense Usada</option>
             <option>Teja Salvadorena</option><option>Teja Renacimiento Terracota</option>
             <option>Teja Santa Fe Ecuatoriana</option><option>Teja Plastica en Paneles</option>
             <option>Necesito asesoria</option>
