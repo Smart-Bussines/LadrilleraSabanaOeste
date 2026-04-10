@@ -167,26 +167,78 @@
     /* ── LOGO STRIP ── */
     .logo-strip {
       background: var(--white);
-      padding: 15px 16px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #e8e2d8;
-      box-shadow: 0 2px 15px rgba(0,0,0,.07);
+      box-shadow: 0 2px 14px rgba(0,0,0,.07);
       position: sticky;
       top: 0;
       z-index: 50;
       min-height: 68px;
+      overflow: hidden;
     }
-    .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; }
+    .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; flex-shrink: 0; }
 
-    /* ── STRIP PILL (logo strip right: WA, call, waze) ── */
+    /* right side container — clips the flip */
+    .strip-right {
+      position: relative;
+      height: 44px;
+      min-width: 120px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* TAGLINE — visible on load, flips down on scroll */
+    .strip-tagline {
+      position: absolute;
+      top: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .28s ease;
+    }
+    .strip-tagline .t-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .strip-tagline .t-sub {
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+
+    /* PILL — hidden below on load, flips up on scroll */
     .strip-pill {
+      position: absolute;
+      bottom: 0; right: 0;
       display: flex; align-items: center;
       background: var(--forest);
       border-radius: 22px;
       padding: 5px 8px;
-      flex-shrink: 0;
+      transform: translateY(110%);
+      opacity: 0;
+      transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .28s ease;
+    }
+
+    /* scrolled state — tagline exits down, pill enters from below */
+    .logo-strip.scrolled .strip-tagline {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+    .logo-strip.scrolled .strip-pill {
+      transform: translateY(0);
+      opacity: 1;
     }
     .strip-pill-btn {
       position: relative;
@@ -606,24 +658,36 @@
   </div>
 
   <!-- LOGO STRIP -->
-  <div class="logo-strip fade-up">
+  <div class="logo-strip fade-up" id="logoStrip">
     <img src="img/img/logoladrillera.gif" alt="Quinta Vacacional" onerror="this.style.display='none'" />
-    <div class="strip-pill">
-      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20deseo%20info%20sobre%20Quinta%20Atenas"
-         target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
-        <i class="fab fa-whatsapp"></i>
-        <span class="stip">WhatsApp</span>
-      </a>
-      <div class="strip-pill-sep"></div>
-      <a href="tel:+50687212050" class="strip-pill-btn" onclick="showStripTip(this)">
-        <i class="fa fa-phone"></i>
-        <span class="stip">Llamar</span>
-      </a>
-      <div class="strip-pill-sep"></div>
-      <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
-        <i class="fa fa-location-dot"></i>
-        <span class="stip">Cómo llegar</span>
-      </a>
+
+    <div class="strip-right">
+
+      <!-- Tagline — visible al inicio -->
+      <div class="strip-tagline">
+        <span class="t-title">Casa Vacacional</span>
+        <span class="t-sub">El mejor clima de Atenas 🌿</span>
+      </div>
+
+      <!-- Píldora — aparece al hacer scroll -->
+      <div class="strip-pill">
+        <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20deseo%20info%20sobre%20Quinta%20Atenas"
+           target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fab fa-whatsapp"></i>
+          <span class="stip">WhatsApp</span>
+        </a>
+        <div class="strip-pill-sep"></div>
+        <a href="tel:+50687212050" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fa fa-phone"></i>
+          <span class="stip">Llamar</span>
+        </a>
+        <div class="strip-pill-sep"></div>
+        <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fa fa-location-dot"></i>
+          <span class="stip">Cómo llegar</span>
+        </a>
+      </div>
+
     </div>
   </div>
 
@@ -944,6 +1008,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+
+/* SCROLL FLIP — tagline ↓ pill ↑ desde el primer pixel */
+var logoStrip = document.getElementById('logoStrip');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 0) {
+    logoStrip.classList.add('scrolled');
+  } else {
+    logoStrip.classList.remove('scrolled');
+  }
+}, { passive: true });
 
 /* SWIPER */
 new Swiper('.hero-swiper', {
