@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="NanoSite — Tu presencia digital profesional lista en 5 días. Por NovaMente Digital, Costa Rica."/>
+<title>NanoSite · NovaMente Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --gray:#f4f3f0;
+  --muted:#888;
+  --electric:#00e5ff;
+  --lime:#b8ff57;
+  --coral:#ff5c5c;
+  --violet:#7c3aed;
+  --gold:#ffb800;
+  --wa:#25d366;
+  --radius:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--black);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:.4;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 32px;
+  background:rgba(10,10,10,.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-1px;
+  color:var(--white);
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.nav-logo .nano{color:var(--electric);}
+.nav-logo .site{color:var(--lime);}
+
+.nav-badge{
+  font-size:9px;
+  font-weight:500;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.nav-cta{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--wa);
+  color:#fff;
+  text-decoration:none;
+  padding:10px 20px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:600;
+  transition:transform .2s,opacity .2s;
+}
+.nav-cta:hover{transform:scale(1.04);opacity:.92;}
+.nav-cta i{font-size:15px;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Gradient orbs */
+.hero::after{
+  content:'';
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(0,229,255,.12) 0%, transparent 70%);
+  top:-100px;left:-100px;
+  pointer-events:none;
+  animation:drift 8s ease-in-out infinite alternate;
+}
+.orb2{
+  position:absolute;
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(184,255,87,.1) 0%, transparent 70%);
+  bottom:-80px;right:-80px;
+  pointer-events:none;
+  animation:drift2 10s ease-in-out infinite alternate;
+}
+@keyframes drift{0%{transform:translate(0,0);}100%{transform:translate(60px,40px);}}
+@keyframes drift2{0%{transform:translate(0,0);}100%{transform:translate(-40px,-60px);}}
+
+/* Eyebrow */
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  padding:6px 16px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--electric);
+  margin-bottom:32px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s ease both;
+}
+.hero-eyebrow .dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--electric);
+  animation:blink 1.4s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+.hero-logo-big{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(60px,14vw,120px);
+  line-height:.95;
+  letter-spacing:-4px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-logo-big .n{color:var(--electric);}
+.hero-logo-big .s{color:var(--lime);}
+.hero-logo-big .rest{color:var(--white);}
+
+.hero-sub-logo{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(14px,3vw,20px);
+  font-weight:400;
+  color:rgba(255,255,255,.4);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-top:8px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .15s ease both;
+}
+
+.hero-tagline{
+  font-size:clamp(16px,2.5vw,22px);
+  color:rgba(255,255,255,.7);
+  max-width:560px;
+  line-height:1.6;
+  margin:28px auto 0;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-tagline strong{color:var(--white);}
+
+.hero-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin-top:28px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .3s ease both;
+}
+.hero-pill{
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:30px;
+  padding:7px 16px;
+  font-size:12px;
+  color:rgba(255,255,255,.7);
+  display:flex;align-items:center;gap:6px;
+}
+.hero-pill i{color:var(--lime);font-size:11px;}
+
+.hero-btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:44px;
+  position:relative;z-index:1;
+  animation:fadeUp .8s .4s ease both;
+}
+
+.btn-main{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--wa);
+  color:#fff;
+  text-decoration:none;
+  padding:16px 32px;
+  border-radius:40px;
+  font-size:15px;
+  font-weight:700;
+  box-shadow:0 0 30px rgba(37,211,102,.4);
+  transition:transform .2s,box-shadow .2s;
+  animation:pulse-wa 2.5s infinite;
+}
+.btn-main:hover{transform:scale(1.04);}
+.btn-main i{font-size:20px;}
+
+@keyframes pulse-wa{
+  0%,100%{box-shadow:0 0 30px rgba(37,211,102,.4);}
+  50%{box-shadow:0 0 50px rgba(37,211,102,.65);}
+}
+
+.btn-secondary{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  color:rgba(255,255,255,.8);
+  text-decoration:none;
+  padding:16px 28px;
+  border-radius:40px;
+  font-size:14px;
+  font-weight:500;
+  border:1px solid rgba(255,255,255,.2);
+  transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--electric);color:var(--electric);}
+
+.hero-scroll{
+  position:absolute;
+  bottom:36px;left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.3);
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fadeUp 1s .8s ease both;
+}
+.hero-scroll i{animation:scrollBounce 1.5s infinite;}
+@keyframes scrollBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ── SECTION BASE ── */
+section{
+  padding:100px 24px;
+  max-width:1100px;
+  margin:0 auto;
+  position:relative;z-index:1;
+}
+
+.section-label{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--electric);
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-label::before{
+  content:'';
+  width:28px;height:2px;
+  background:var(--electric);
+  border-radius:1px;
+}
+
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  margin-bottom:20px;
+}
+
+.section-desc{
+  font-size:16px;
+  color:rgba(255,255,255,.55);
+  max-width:520px;
+  line-height:1.7;
+  margin-bottom:56px;
+}
+
+/* ── QUÉ ES NANOSITE ── */
+.what-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+@media(max-width:640px){.what-grid{grid-template-columns:1fr;}}
+
+.what-card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--radius);
+  padding:32px;
+  transition:border-color .3s,transform .3s;
+  position:relative;
+  overflow:hidden;
+}
+.what-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--electric),var(--lime));
+  transform:scaleX(0);
+  transition:transform .3s;
+  transform-origin:left;
+}
+.what-card:hover{border-color:rgba(0,229,255,.3);transform:translateY(-4px);}
+.what-card:hover::before{transform:scaleX(1);}
+
+.what-icon{
+  width:48px;height:48px;
+  border-radius:12px;
+  background:rgba(0,229,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+  color:var(--electric);
+  margin-bottom:18px;
+}
+
+.what-card h3{
+  font-family:'Syne',sans-serif;
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.what-card p{font-size:13.5px;color:rgba(255,255,255,.55);line-height:1.7;}
+
+/* ── VENTAJAS ── */
+.ventajas-bg{
+  background:rgba(255,255,255,.02);
+  border-top:1px solid rgba(255,255,255,.06);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.ventajas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:768px){.ventajas-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ventajas-grid{grid-template-columns:1fr;}}
+
+.ventaja{
+  padding:28px 24px;
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;gap:12px;
+  transition:background .3s;
+}
+.ventaja:hover{background:rgba(255,255,255,.06);}
+
+.v-icon{font-size:26px;}
+.v-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.v-desc{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* ── DEMOS / CLIENTES ── */
+.demos-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+@media(max-width:768px){.demos-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.demos-grid{grid-template-columns:1fr;}}
+
+.demo-card{
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+  transition:transform .3s,border-color .3s;
+  cursor:pointer;
+  text-decoration:none;
+}
+.demo-card:hover{transform:translateY(-6px);border-color:rgba(0,229,255,.3);}
+
+.demo-thumb{
+  height:140px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  position:relative;
+  overflow:hidden;
+}
+
+.demo-info{
+  padding:16px;
+}
+.demo-name{
+  font-family:'Syne',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.demo-cat{
+  font-size:11px;
+  color:rgba(255,255,255,.4);
+  letter-spacing:.5px;
+}
+.demo-tag{
+  display:inline-block;
+  margin-top:10px;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(0,229,255,.1);
+  color:var(--electric);
+}
+
+/* ── PRECIOS ── */
+.precios-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  align-items:start;
+}
+@media(max-width:768px){.precios-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto;}}
+
+.precio-card{
+  border-radius:var(--radius);
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  padding:32px 28px;
+  position:relative;
+  transition:transform .3s;
+}
+.precio-card:hover{transform:translateY(-4px);}
+
+.precio-card.featured{
+  background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(184,255,87,.06));
+  border-color:rgba(0,229,255,.35);
+}
+
+.plan-badge{
+  position:absolute;
+  top:-14px;left:50%;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,var(--electric),var(--lime));
+  color:var(--black);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:5px 18px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.plan-name{
+  font-family:'Syne',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+  margin-bottom:14px;
+}
+
+.plan-price{
+  font-family:'Syne',sans-serif;
+  font-size:42px;
+  font-weight:800;
+  letter-spacing:-2px;
+  line-height:1;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.plan-price span{font-size:18px;color:rgba(255,255,255,.5);font-weight:400;letter-spacing:0;}
+
+.plan-desc{
+  font-size:12px;
+  color:rgba(255,255,255,.4);
+  margin-bottom:24px;
+}
+
+.plan-features{
+  list-style:none;
+  display:flex;flex-direction:column;gap:10px;
+  margin-bottom:28px;
+}
+.plan-features li{
+  font-size:13px;
+  color:rgba(255,255,255,.65);
+  display:flex;align-items:flex-start;gap:10px;
+  line-height:1.4;
+}
+.plan-features li i{
+  color:var(--lime);
+  font-size:12px;
+  margin-top:2px;
+  flex-shrink:0;
+}
+
+.plan-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:100%;
+  padding:13px;
+  border-radius:40px;
+  font-size:13px;
+  font-weight:700;
+  text-decoration:none;
+  transition:all .2s;
+  border:1px solid rgba(255,255,255,.2);
+  color:var(--white);
+  background:transparent;
+}
+.plan-btn:hover{border-color:var(--electric);color:var(--electric);}
+.precio-card.featured .plan-btn{
+  background:var(--wa);
+  border-color:var(--wa);
+  box-shadow:0 0 20px rgba(37,211,102,.3);
+}
+.precio-card.featured .plan-btn:hover{opacity:.9;transform:scale(1.02);}
+
+.mantenimiento-note{
+  margin-top:40px;
+  background:rgba(255,184,0,.06);
+  border:1px solid rgba(255,184,0,.2);
+  border-radius:var(--radius);
+  padding:24px 28px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+.mantenimiento-note i{font-size:28px;color:var(--gold);flex-shrink:0;}
+.mantenimiento-note h4{
+  font-family:'Syne',sans-serif;
+  font-size:15px;font-weight:700;margin-bottom:4px;
+}
+.mantenimiento-note p{font-size:12.5px;color:rgba(255,255,255,.5);}
+
+/* ── POR QUÉ ── */
+.porque-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media(max-width:640px){.porque-grid{grid-template-columns:1fr;}}
+
+.porque-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:24px;
+  background:rgba(255,255,255,.03);
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.07);
+  transition:background .3s;
+}
+.porque-item:hover{background:rgba(255,255,255,.06);}
+.porque-num{
+  font-family:'Syne',sans-serif;
+  font-size:32px;
+  font-weight:800;
+  color:rgba(255,255,255,.08);
+  line-height:1;
+  flex-shrink:0;
+  min-width:44px;
+}
+.porque-text h4{
+  font-family:'Syne',sans-serif;
+  font-size:15px;font-weight:700;margin-bottom:6px;
+}
+.porque-text p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;}
+
+/* ── CTA FINAL ── */
+.cta-final{
+  text-align:center;
+  padding:100px 24px 80px;
+  position:relative;z-index:1;
+}
+
+.cta-glow{
+  position:absolute;
+  width:600px;height:400px;
+  background:radial-gradient(circle,rgba(37,211,102,.12) 0%,transparent 70%);
+  top:0;left:50%;transform:translateX(-50%);
+  pointer-events:none;
+}
+
+.cta-final .section-title{margin-bottom:16px;}
+
+.cta-final p{
+  font-size:16px;
+  color:rgba(255,255,255,.5);
+  max-width:480px;
+  margin:0 auto 44px;
+  line-height:1.7;
+}
+
+.cta-wa-big{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  background:var(--wa);
+  color:#fff;
+  text-decoration:none;
+  padding:20px 44px;
+  border-radius:50px;
+  font-size:18px;
+  font-weight:700;
+  box-shadow:0 0 40px rgba(37,211,102,.45);
+  transition:transform .2s,box-shadow .2s;
+  animation:pulse-wa 2.5s infinite;
+}
+.cta-wa-big:hover{transform:scale(1.04);}
+.cta-wa-big i{font-size:26px;}
+
+.cta-note{
+  margin-top:20px;
+  font-size:12px;
+  color:rgba(255,255,255,.3);
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid rgba(255,255,255,.07);
+  padding:40px 32px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:16px;
+  position:relative;z-index:1;
+}
+
+.footer-brand{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.5px;
+}
+.footer-brand .n{color:var(--electric);}
+.footer-brand .s{color:var(--lime);}
+
+.footer-text{font-size:12px;color:rgba(255,255,255,.35);}
+
+/* ── FLOAT WHATSAPP ── */
+.float-wa{
+  position:fixed;
+  bottom:24px;right:20px;
+  z-index:500;
+  width:58px;height:58px;
+  background:var(--wa);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;color:#fff;
+  text-decoration:none;
+  box-shadow:0 4px 24px rgba(37,211,102,.5);
+  animation:bounce-wa 3s ease-in-out infinite;
+}
+@keyframes bounce-wa{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .65s ease,transform .65s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── MOBILE NAV ── */
+@media(max-width:480px){
+  nav{padding:14px 18px;}
+  .nav-badge{display:none;}
+  .nav-cta span{display:none;}
+  .nav-cta{padding:10px 14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div>
+      <div><span class="nano">Nano</span><span class="site">Site</span></div>
+      <div class="nav-badge">by NovaMente Digital</div>
+    </div>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20vi%20la%20landing%20de%20NanoSite%20y%20quiero%20más%20info"
+     target="_blank" class="nav-cta">
+    <i class="fab fa-whatsapp"></i>
+    <span>Hablemos</span>
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="orb2"></div>
+
+  <div class="hero-eyebrow">
+    <div class="dot"></div>
+    NovaMente Digital · Costa Rica
+  </div>
+
+  <div class="hero-logo-big">
+    <span class="n">Nano</span><span class="s">Site</span>
+  </div>
+  <div class="hero-sub-logo">Tu presencia digital · siempre activa</div>
+
+  <p class="hero-tagline">
+    <strong>Tu negocio en un solo enlace.</strong> Sin app que descargar, sin web cara,
+    funciona en cualquier teléfono — listo en <strong>5 días</strong>.
+  </p>
+
+  <div class="hero-pills">
+    <div class="hero-pill"><i class="fa fa-bolt"></i> Sin descarga</div>
+    <div class="hero-pill"><i class="fa fa-mobile-screen"></i> Funciona como app</div>
+    <div class="hero-pill"><i class="fa fa-qrcode"></i> Con QR incluido</div>
+    <div class="hero-pill"><i class="fa fa-shield-halved"></i> HTTPS seguro</div>
+    <div class="hero-pill"><i class="fa fa-clock"></i> Disponible 24/7</div>
+  </div>
+
+  <div class="hero-btns">
+    <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20quiero%20mi%20NanoSite%21%20%C2%BFPor%20d%C3%B3nde%20empezamos%3F"
+       target="_blank" class="btn-main">
+      <i class="fab fa-whatsapp"></i>
+      Quiero mi NanoSite
+    </a>
+    <a href="#demos" class="btn-secondary">
+      <i class="fa fa-eye"></i>
+      Ver ejemplos
+    </a>
+  </div>
+
+  <div class="hero-scroll">
+    <i class="fa fa-chevron-down"></i>
+    Descubrí más
+  </div>
+</div>
+
+<!-- QUÉ ES NANOSITE -->
+<section id="que-es">
+  <div class="section-label">¿Qué es?</div>
+  <h2 class="section-title">Una mini-web completa<br>en un solo enlace</h2>
+  <p class="section-desc">
+    No es una tarjeta de presentación. No es una página web tradicional. Es algo mejor —
+    un NanoSite es tu vitrina digital inteligente, siempre disponible.
+  </p>
+
+  <div class="what-grid reveal">
+    <div class="what-card">
+      <div class="what-icon"><i class="fa fa-link"></i></div>
+      <h3>Un enlace que lo tiene todo</h3>
+      <p>Fotos, servicios, WhatsApp, ubicación, redes sociales, catálogo, video — todo organizado en un solo lugar que compartís en segundos.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon"><i class="fa fa-mobile-screen"></i></div>
+      <h3>Funciona como app</h3>
+      <p>Tu cliente lo agrega a su pantalla de inicio con un ícono personalizado. Sin Play Store, sin App Store — simplemente toca y ya está.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon"><i class="fa fa-qrcode"></i></div>
+      <h3>QR listo para imprimir</h3>
+      <p>Generamos tu código QR personalizado. En tarjetas, stickers, menús, vitrinas — cualquiera lo escanea y llega directo a vos.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon"><i class="fa fa-chart-simple"></i></div>
+      <h3>Tu negocio abierto 24/7</h3>
+      <p>Mientras dormís, tu NanoSite trabaja. Un cliente te busca a medianoche — tu información está ahí, clara, lista para que actúe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VENTAJAS -->
+<div class="ventajas-bg">
+<section id="ventajas" style="padding:80px 24px;">
+  <div class="section-label">Ventajas</div>
+  <h2 class="section-title">Por qué tener<br>un NanoSite</h2>
+  <p class="section-desc">Todo lo que tu negocio necesita para estar en el bolsillo de tus clientes.</p>
+
+  <div class="ventajas-grid reveal">
+    <div class="ventaja">
+      <div class="v-icon">⚡</div>
+      <div class="v-title">Carga instantánea</div>
+      <div class="v-desc">Sin tiempos de espera. Tu cliente llega y ve tu info al instante, en cualquier celular y conexión.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">📲</div>
+      <div class="v-title">Se instala como app</div>
+      <div class="v-desc">Tu cliente lo guarda en su pantalla de inicio. Un toque y te encuentra — sin buscar en Google.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">🔗</div>
+      <div class="v-title">Fácil de compartir</div>
+      <div class="v-desc">Compartible por WhatsApp, Facebook, Telegram o QR en segundos. El boca a boca digital más fácil.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">💼</div>
+      <div class="v-title">Imagen profesional</div>
+      <div class="v-desc">Diseño moderno, colores de tu marca, logo y fotos. Da confianza desde el primer vistazo.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">🔒</div>
+      <div class="v-title">HTTPS seguro</div>
+      <div class="v-desc">Certificado SSL incluido. Ningún mensaje de "sitio no seguro" — tu cliente entra tranquilo.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">🗺️</div>
+      <div class="v-title">Ubicación con Waze</div>
+      <div class="v-desc">Botón directo a Waze o Google Maps. Tu cliente llega sin perderse, sin preguntarte la dirección.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">📸</div>
+      <div class="v-title">Galería de fotos</div>
+      <div class="v-desc">Mostrá tu producto, tu local, tu trabajo. Las fotos venden — y tu NanoSite las muestra perfecto.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">📖</div>
+      <div class="v-title">Catálogo o brochure</div>
+      <div class="v-desc">Agregamos tu catálogo digital descargable. Tu cliente lo tiene en su teléfono cuando lo necesita.</div>
+    </div>
+    <div class="ventaja">
+      <div class="v-icon">🤖</div>
+      <div class="v-title">Bot de WhatsApp</div>
+      <div class="v-desc">Opcional: automatizamos tu WhatsApp para responder, informar y agendar mientras vos hacés tu trabajo.</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- DEMOS -->
+<section id="demos">
+  <div class="section-label">Ejemplos reales</div>
+  <h2 class="section-title">Clientes que ya<br>tienen su NanoSite</h2>
+  <p class="section-desc">
+    Negocios reales de Costa Rica con presencia digital activa. Cada uno personalizado para su rubro y audiencia.
+  </p>
+
+  <div class="demos-grid reveal">
+
+    <div class="demo-card" style="text-decoration:none">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#1a3a1a,#2d6b2d)">🏡</div>
+      <div class="demo-info">
+        <div class="demo-name">Quinta Atenas</div>
+        <div class="demo-cat">Casa vacacional · Atenas, CR</div>
+        <span class="demo-tag">Turismo</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#1a0a00,#7a2200)">🍕</div>
+      <div class="demo-info">
+        <div class="demo-name">Pizzerías CR</div>
+        <div class="demo-cat">Restaurantes · múltiples sedes</div>
+        <span class="demo-tag">Gastronomía</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#0a1a2a,#1a3a6a)">🍔</div>
+      <div class="demo-info">
+        <div class="demo-name">Home Burger</div>
+        <div class="demo-cat">Comida rápida · pedidos express</div>
+        <span class="demo-tag">Gastronomía</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#1a1a00,#5a5a00)">🛍️</div>
+      <div class="demo-info">
+        <div class="demo-name">Bodega Americana</div>
+        <div class="demo-cat">Tienda liquidación · artículos hogar</div>
+        <span class="demo-tag">Comercio</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#1a0a1a,#5a1a5a)">👗</div>
+      <div class="demo-info">
+        <div class="demo-name">Glamour</div>
+        <div class="demo-cat">Ropa femenina · Tibás</div>
+        <span class="demo-tag">Moda</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#001a0a,#005a20)">🌿</div>
+      <div class="demo-info">
+        <div class="demo-name">Emprendedora ABBA</div>
+        <div class="demo-cat">Productos orgánicos · finca propia</div>
+        <span class="demo-tag">Agro</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#1a0000,#6a1a00)">🪨</div>
+      <div class="demo-info">
+        <div class="demo-name">Enchapes Mau</div>
+        <div class="demo-cat">Instalación enchapes · todo el país</div>
+        <span class="demo-tag">Construcción</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#001a1a,#005a5a)">🔒</div>
+      <div class="demo-info">
+        <div class="demo-name">G Security</div>
+        <div class="demo-cat">Seguridad privada · alarmas</div>
+        <span class="demo-tag">Seguridad</span>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-thumb" style="background:linear-gradient(135deg,#0a0a1a,#2a2a6a)">🚛</div>
+      <div class="demo-info">
+        <div class="demo-name">Multillantas Tencio</div>
+        <div class="demo-cat">Repuestos camiones · La Garita</div>
+        <span class="demo-tag">Automotriz</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:40px">
+    <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20quiero%20ver%20demos%20de%20NanoSite%20para%20mi%20negocio"
+       target="_blank" class="btn-secondary" style="display:inline-flex">
+      <i class="fa fa-eye"></i> Ver demos en vivo
+    </a>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section id="precios">
+  <div class="section-label">Inversión</div>
+  <h2 class="section-title">Planes accesibles<br>para todos</h2>
+  <p class="section-desc">
+    Precio de apertura NovaMente — primeros clientes. Sin contratos, sin letra pequeña.
+  </p>
+
+  <div class="precios-grid reveal">
+
+    <!-- BÁSICO -->
+    <div class="precio-card">
+      <div class="plan-name">Básico</div>
+      <div class="plan-price">₡25<span>.000</span></div>
+      <div class="plan-desc">Pago único · entrega en 3 días</div>
+      <ul class="plan-features">
+        <li><i class="fa fa-check"></i> Info del negocio completa</li>
+        <li><i class="fa fa-check"></i> Botón WhatsApp directo</li>
+        <li><i class="fa fa-check"></i> Redes sociales enlazadas</li>
+        <li><i class="fa fa-check"></i> Código QR personalizado</li>
+        <li><i class="fa fa-check"></i> Instalable como app</li>
+        <li><i class="fa fa-check"></i> Hosting en nanosite.cr</li>
+      </ul>
+      <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20me%20interesa%20el%20plan%20B%C3%A1sico%20de%20NanoSite%20₡25.000"
+         target="_blank" class="plan-btn">
+        <i class="fab fa-whatsapp"></i> Lo quiero
+      </a>
+    </div>
+
+    <!-- PROFESIONAL - FEATURED -->
+    <div class="precio-card featured">
+      <div class="plan-badge">⭐ Más popular</div>
+      <div class="plan-name">Profesional</div>
+      <div class="plan-price">₡45<span>.000</span></div>
+      <div class="plan-desc">Pago único · entrega en 5 días</div>
+      <ul class="plan-features">
+        <li><i class="fa fa-check"></i> Todo lo del plan Básico</li>
+        <li><i class="fa fa-check"></i> Galería de fotos con slider</li>
+        <li><i class="fa fa-check"></i> Sección de servicios / menú</li>
+        <li><i class="fa fa-check"></i> Ubicación con Waze</li>
+        <li><i class="fa fa-check"></i> Brochure o catálogo digital</li>
+        <li><i class="fa fa-check"></i> Video de YouTube integrado</li>
+        <li><i class="fa fa-check"></i> Compartir en redes sociales</li>
+      </ul>
+      <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20me%20interesa%20el%20plan%20Profesional%20de%20NanoSite%20₡45.000"
+         target="_blank" class="plan-btn">
+        <i class="fab fa-whatsapp"></i> Lo quiero
+      </a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="precio-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">₡75<span>.000</span></div>
+      <div class="plan-desc">Pago único · entrega en 7 días</div>
+      <ul class="plan-features">
+        <li><i class="fa fa-check"></i> Todo lo del plan Profesional</li>
+        <li><i class="fa fa-check"></i> Animaciones y diseño avanzado</li>
+        <li><i class="fa fa-check"></i> Múltiples secciones / modales</li>
+        <li><i class="fa fa-check"></i> Contador de visitas</li>
+        <li><i class="fa fa-check"></i> Dominio personalizado (.cr)</li>
+        <li><i class="fa fa-check"></i> Bot WhatsApp básico incluido</li>
+        <li><i class="fa fa-check"></i> 1 mes de soporte gratis</li>
+      </ul>
+      <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20me%20interesa%20el%20plan%20Premium%20de%20NanoSite%20₡75.000"
+         target="_blank" class="plan-btn">
+        <i class="fab fa-whatsapp"></i> Lo quiero
+      </a>
+    </div>
+
+  </div>
+
+  <!-- MANTENIMIENTO -->
+  <div class="mantenimiento-note reveal" style="margin-top:32px">
+    <i class="fa fa-rotate"></i>
+    <div>
+      <h4>Mantenimiento mensual — opcional desde ₡8.000/mes</h4>
+      <p>Actualizaciones de fotos, textos, precios o servicios. Vos cambiás, nosotros lo aplicamos en 24 horas. Tu NanoSite siempre al día sin que tengas que preocuparte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUÉ NOSOTROS -->
+<section id="porque">
+  <div class="section-label">Por qué elegirnos</div>
+  <h2 class="section-title">No solo hacemos páginas.<br>Hacemos presencia.</h2>
+  <p class="section-desc">Somos un equipo tico que entiende el mercado local y trabaja con resultados.</p>
+
+  <div class="porque-grid reveal">
+    <div class="porque-item">
+      <div class="porque-num">01</div>
+      <div class="porque-text">
+        <h4>Entendemos el mercado tico</h4>
+        <p>Sabemos cómo compran, qué buscan y qué convence a los clientes costarricenses. No es lo mismo que una agencia genérica.</p>
+      </div>
+    </div>
+    <div class="porque-item">
+      <div class="porque-num">02</div>
+      <div class="porque-text">
+        <h4>Entrega en días, no meses</h4>
+        <p>Tu NanoSite listo en 3 a 7 días hábiles según el plan. Sin esperas, sin excusas, con comunicación directa por WhatsApp.</p>
+      </div>
+    </div>
+    <div class="porque-item">
+      <div class="porque-num">03</div>
+      <div class="porque-text">
+        <h4>Portafolio real demostrable</h4>
+        <p>Más de 15 clientes activos en Costa Rica. Restaurantes, quintas, comercios, profesionales — podés ver demos en vivo ahora mismo.</p>
+      </div>
+    </div>
+    <div class="porque-item">
+      <div class="porque-num">04</div>
+      <div class="porque-text">
+        <h4>Tecnología actual, no plantillas</h4>
+        <p>Cada NanoSite se construye desde cero para tu negocio. Diseño, colores, contenido y funciones específicas para lo que vos vendés.</p>
+      </div>
+    </div>
+    <div class="porque-item">
+      <div class="porque-num">05</div>
+      <div class="porque-text">
+        <h4>Soporte por WhatsApp siempre</h4>
+        <p>Necesitás un cambio, tenés una duda — nos escribís y respondemos. No hay tickets, no hay esperas de semanas.</p>
+      </div>
+    </div>
+    <div class="porque-item">
+      <div class="porque-num">06</div>
+      <div class="porque-text">
+        <h4>Escalable con tu negocio</h4>
+        <p>Empezás con el Básico y cuando querés más funciones, bot de WhatsApp o dominio propio — lo agregamos. Siempre hay un siguiente nivel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <div class="cta-glow"></div>
+  <div class="section-label" style="justify-content:center">¿Listo?</div>
+  <h2 class="section-title reveal">Tu negocio merece<br>estar en el bolsillo<br>de tus clientes</h2>
+  <p class="reveal">
+    Escribinos por WhatsApp ahora. En 5 minutos te decimos exactamente qué necesitás
+    y cuánto cuesta. Sin compromiso, sin letra pequeña.
+  </p>
+  <a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%20NovaMente%21%20Quiero%20saber%20m%C3%A1s%20sobre%20NanoSite%20para%20mi%20negocio%20%F0%9F%9A%80"
+     target="_blank" class="cta-wa-big reveal">
+    <i class="fab fa-whatsapp"></i>
+    Escribinos ahora
+  </a>
+  <div class="cta-note">Respondemos en menos de 1 hora · Lunes a Sábado</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand"><span class="n">Nano</span><span class="s">Site</span></div>
+    <div class="footer-text" style="margin-top:4px">by NovaMente Digital · Costa Rica</div>
+  </div>
+  <div class="footer-text">© 2025 · Todos los derechos reservados</div>
+  <a href="https://api.whatsapp.com/send?phone=50686731217" target="_blank"
+     style="color:var(--wa);font-size:12px;text-decoration:none;display:flex;align-items:center;gap:6px;">
+    <i class="fab fa-whatsapp"></i> +506 8673-1217
+  </a>
+</footer>
+
+<!-- FLOAT WA -->
+<a href="https://api.whatsapp.com/send?phone=50686731217&text=Hola%2C%20vi%20la%20p%C3%A1gina%20de%20NanoSite%20y%20quiero%20m%C3%A1s%20info"
+   target="_blank" class="float-wa">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
