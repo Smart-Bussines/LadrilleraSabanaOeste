@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Quinta Atenas — Casa Vacacional en las Montañas de Atenas, Costa Rica" />
+  <meta property="og:title" content="Quinta Atenas" />
+  <meta property="og:description" content="Hermosa propiedad para alquiler, Atenas Costa Rica" />
+  <meta property="og:image" content="img/img/logovilla2.webp" />
+  <title>Quinta Atenas</title>
+  <link rel="icon" href="img/img/logovilla2.webp" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --cream:      #faf7f2;
+      --warm:       #f0ebe1;
+      --gold:       #b8903a;
+      --gold-light: #d4a84b;
+      --forest:     #2d4a2d;
+      --bark:       #5c3d1e;
+      --text:       #1a1a1a;
+      --muted:      #6b6457;
+      --white:      #ffffff;
+      --shadow:     0 8px 32px rgba(0,0,0,.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 430px;
+      background: var(--cream);
+      min-height: 100vh;
+    }
+
+    /* ── HERO SWIPER ── */
+    .hero-swiper {
+      height: 62vw;
+      max-height: 285px;
+      position: relative;
+    }
+    .hero-swiper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.04) 60%, rgba(0,0,0,.28) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-swiper .swiper-slide {
+      background-size: cover;
+      background-position: center;
+      background-color: #3d5c34;
+    }
+    .hero-swiper .swiper-button-next,
+    .hero-swiper .swiper-button-prev {
+      color: rgba(255,255,255,.85);
+      z-index: 10;
+    }
+    .hero-swiper .swiper-button-next::after,
+    .hero-swiper .swiper-button-prev::after {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .hero-swiper .swiper-pagination-bullet {
+      background: rgba(255,255,255,.5);
+      opacity: 1;
+      width: 6px; height: 6px;
+    }
+    .hero-swiper .swiper-pagination-bullet-active {
+      background: var(--gold-light);
+      width: 20px;
+      border-radius: 3px;
+    }
+
+    /* ── HERO PILL (top-right: guardar, QR, instalar) ── */
+    .hero-pill {
+      position: absolute;
+      top: 14px; right: 14px;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 22px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .hero-pill-btn {
+      position: relative;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      color: #fff; font-size: 15px; border-radius: 50%;
+      transition: background .18s, transform .15s;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+    .hero-pill-btn:active { transform: scale(.85); background: rgba(255,255,255,.15); }
+    .hero-pill-sep {
+      width: 1px; height: 16px;
+      background: rgba(255,255,255,.25);
+      flex-shrink: 0;
+    }
+    .hero-pill-btn .tip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.82);
+      color: #fff; font-size: 10px; font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap; padding: 4px 9px; border-radius: 8px;
+      pointer-events: none; opacity: 0; transition: opacity .2s;
+      letter-spacing: .3px;
+    }
+    .hero-pill-btn .tip::after {
+      content: '';
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0,0,0,.82);
+    }
+    .hero-pill-btn .tip.show { opacity: 1; }
+
+    /* ── HERO GALLERY CTA (bottom-left) ── */
+    .hero-gallery-cta {
+      position: absolute;
+      bottom: 14px; left: 14px;
+      z-index: 6;
+      display: flex; align-items: center; gap: 7px;
+      cursor: pointer; border: none;
+      background: rgba(0,0,0,.38);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.88);
+      padding: 7px 16px 7px 13px;
+      border-radius: 20px;
+      transition: background .2s, transform .18s;
+      white-space: nowrap;
+    }
+    .hero-gallery-cta:active { transform: scale(.93); }
+    .hero-gallery-cta span { font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; }
+    .hero-gallery-cta i { font-size: 12px; }
+    .hero-gallery-cta .arrow-anim {
+      animation: arrowFade 2.5s ease-in-out infinite;
+    }
+    @keyframes arrowFade {
+      0%,100% { opacity: .4; transform: translateY(0); }
+      50%      { opacity: 1;  transform: translateY(2px); }
+    }
+
+    /* ── LOGO STRIP ── */
+    .logo-strip {
+      background: var(--white);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e8e2d8;
+      box-shadow: 0 2px 14px rgba(0,0,0,.07);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      min-height: 68px;
+      overflow: hidden;
+    }
+    .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; flex-shrink: 0; }
+
+    /* right side container — clips the flip */
+    .strip-right {
+      position: relative;
+      height: 44px;
+      min-width: 120px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* TAGLINE — visible on load, flips down on scroll */
+    .strip-tagline {
+      position: absolute;
+      top: 0; right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      height: 100%;
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .28s ease;
+    }
+    .strip-tagline .t-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--forest);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+    .strip-tagline .t-sub {
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+
+    /* PILL — hidden below on load, flips up on scroll */
+    .strip-pill {
+      position: absolute;
+      bottom: 0; right: 0;
+      display: flex; align-items: center;
+      background: var(--forest);
+      border-radius: 22px;
+      padding: 5px 8px;
+      transform: translateY(110%);
+      opacity: 0;
+      transition: transform .38s cubic-bezier(.4,0,.2,1), opacity .28s ease;
+    }
+
+    /* scrolled state — tagline exits down, pill enters from below */
+    .logo-strip.scrolled .strip-tagline {
+      transform: translateY(110%);
+      opacity: 0;
+    }
+    .logo-strip.scrolled .strip-pill {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .strip-pill-btn {
+      position: relative;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      color: #fff; font-size: 14px; border-radius: 50%;
+      transition: background .18s, transform .15s;
+      text-decoration: none; flex-shrink: 0;
+    }
+    .strip-pill-btn:active { transform: scale(.85); background: rgba(255,255,255,.18); }
+    .strip-pill-sep {
+      width: 1px; height: 14px;
+      background: rgba(255,255,255,.22);
+      flex-shrink: 0;
+    }
+    .strip-pill-btn .stip {
+      position: absolute;
+      bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.82);
+      color: #fff; font-size: 10px; font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap; padding: 4px 9px; border-radius: 8px;
+      pointer-events: none; opacity: 0; transition: opacity .2s;
+      letter-spacing: .3px; z-index: 60;
+    }
+    .strip-pill-btn .stip::after {
+      content: '';
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0,0,0,.82);
+    }
+    .strip-pill-btn .stip.show { opacity: 1; }
+
+    /* ── ACTION BUTTONS ── */
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 14px 16px 4px;
+    }
+    .action-btn {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 7px;
+      padding: 14px 8px; border-radius: 18px;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: transform .18s;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    }
+    .action-btn:active { transform: scale(.93); }
+    .action-btn .icon-wrap {
+      width: 46px; height: 46px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .action-btn .btn-label {
+      font-size: 11px; font-weight: 500;
+      color: var(--text); text-align: center; line-height: 1.25;
+    }
+    .iw-amber  { background: var(--gold);   color: #fff; }
+    .iw-bark   { background: var(--bark);   color: #fff; }
+    .iw-blue   { background: #1877f2;       color: #fff; }
+    .iw-green  { background: #25d366;       color: #fff; }
+    .iw-forest { background: var(--forest); color: #fff; }
+    .iw-cyan   { background: #00bcd4;       color: #fff; }
+
+    /* ── BIG CTA ── */
+    .big-cta { padding: 16px 16px 4px; }
+    .big-cta a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg,#25d366,#1da851);
+      color: #fff; text-decoration: none;
+      padding: 15px; border-radius: 18px;
+      font-size: 15px; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(37,211,102,.35);
+      animation: pulse-green 2.8s infinite;
+      transition: transform .18s;
+    }
+    .big-cta a:active { transform: scale(.97); }
+    .big-cta a i { font-size: 21px; }
+    @keyframes pulse-green {
+      0%,100% { box-shadow: 0 6px 20px rgba(37,211,102,.35); }
+      50%      { box-shadow: 0 6px 32px rgba(37,211,102,.65); }
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      padding: 20px 18px 10px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; width: 4px; height: 22px;
+      background: var(--gold); border-radius: 2px; flex-shrink: 0;
+    }
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px; color: var(--text); font-weight: 700;
+    }
+
+    /* ── DESCRIPTION ── */
+    .description-card {
+      margin: 0 16px 16px;
+      background: var(--white); border-radius: 20px;
+      padding: 18px; box-shadow: var(--shadow);
+    }
+    .description-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+    .description-card p + p { margin-top: 10px; }
+    .description-card strong { color: var(--text); }
+    .capacity-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--warm); border-radius: 20px;
+      padding: 6px 12px; font-size: 12px;
+      color: var(--forest); font-weight: 500;
+    }
+    .pill i { font-size: 11px; color: var(--gold); }
+
+    /* ── GALLERY SCROLL ── */
+    .gallery-scroll {
+      display: flex; gap: 10px;
+      padding: 0 16px 4px 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-scroll > * { scroll-snap-align: start; }
+    .gallery-thumb {
+      flex-shrink: 0;
+      width: 130px; height: 100px;
+      border-radius: 14px; overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform .4s;
+    }
+    .gallery-thumb:active img { transform: scale(1.06); }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      margin: 0 16px 16px;
+      background: var(--forest); border-radius: 22px;
+      padding: 20px; color: #fff;
+    }
+    .contact-strip .ct-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px; font-weight: 600; margin-bottom: 4px;
+    }
+    .contact-strip .ct-sub  { font-size: 12px; opacity: .72; margin-bottom: 14px; }
+    .contact-strip .owners  { font-size: 12.5px; font-weight: 500; opacity: .9; margin-bottom: 10px; }
+    .contact-strip .location {
+      font-size: 11.5px; opacity: .72; margin-bottom: 18px;
+      display: flex; align-items: flex-start; gap: 7px; line-height: 1.5;
+    }
+    .contact-strip .location i { margin-top: 2px; color: var(--gold-light); flex-shrink: 0; }
+    .contact-buttons { display: flex; gap: 10px; }
+    .ct-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 11px 6px; border-radius: 13px;
+      font-size: 12px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: transform .18s, opacity .18s;
+    }
+    .ct-btn:active { transform: scale(.94); opacity: .85; }
+    .ct-btn.wapp  { background: #25d366; color: #fff; }
+    .ct-btn.call  { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.28); }
+    .ct-btn.waze  { background: #00d4e8; color: #111; }
+
+    /* ── SHARE ROW ── */
+    .share-row {
+      margin: 0 16px 20px;
+      background: var(--warm); border-radius: 18px;
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+    }
+    .share-row .share-text { flex: 1; font-size: 12px; color: var(--muted); }
+    .share-row .share-text strong { color: var(--text); display: block; font-size: 13px; margin-bottom: 2px; }
+    .share-icons { display: flex; gap: 8px; flex-wrap: wrap; }
+    .share-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; text-decoration: none; transition: transform .18s;
+    }
+    .share-icon:active { transform: scale(.9); }
+    .si-wa  { background: #25d366; color: #fff; }
+    .si-fb  { background: #1877f2; color: #fff; }
+    .si-tg  { background: #2ca5e0; color: #fff; }
+    .si-ms  { background: #0084ff; color: #fff; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #ddd6cb, transparent);
+      margin: 4px 16px 8px;
+    }
+
+    /* ── FOOTER ── */
+    .card-footer {
+      background: #1a1a1a; color: rgba(255,255,255,.45);
+      font-size: 11px; text-align: center;
+      padding: 18px 16px; line-height: 1.8;
+    }
+    .card-footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* ── FLOATING BUTTONS ── */
+    .float-stack {
+      position: fixed; bottom: 22px; right: 16px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 12px; z-index: 100;
+    }
+    .float-btn {
+      width: 54px; height: 54px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: #fff; text-decoration: none;
+      border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      transition: transform .18s; position: relative;
+    }
+    .float-btn:active { transform: scale(.9); }
+    .float-btn::before {
+      content: attr(data-tip);
+      position: absolute; right: 62px;
+      background: rgba(0,0,0,.75); color: #fff;
+      font-size: 11px; font-weight: 500;
+      padding: 4px 10px; border-radius: 8px;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .float-btn:hover::before { opacity: 1; }
+    .float-wa {
+      width: 58px; height: 58px; font-size: 26px;
+      background: #25d366;
+      box-shadow: 0 4px 20px rgba(37,211,102,.55);
+      animation: bounce-wa 3s ease-in-out infinite;
+    }
+    @keyframes bounce-wa {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+    .float-brochure {
+      background: var(--gold);
+      box-shadow: 0 4px 16px rgba(184,144,58,.5);
+      font-size: 20px;
+    }
+
+    /* ── FADE-UP ── */
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MODAL OVERLAY ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(3px);
+      z-index: 200; align-items: flex-end; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-sheet {
+      background: var(--cream);
+      border-radius: 26px 26px 0 0;
+      width: 100%; max-width: 430px;
+      padding: 10px 20px 38px;
+      animation: slide-up .32s cubic-bezier(.4,0,.2,1);
+      max-height: 88vh; overflow-y: auto;
+    }
+    @keyframes slide-up {
+      from { transform: translateY(100%); }
+      to   { transform: translateY(0); }
+    }
+    .modal-handle {
+      width: 38px; height: 4px; background: #ccc;
+      border-radius: 2px; margin: 10px auto 18px;
+    }
+    .modal-sheet h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px; color: var(--text); margin-bottom: 6px;
+    }
+    .modal-sub {
+      font-size: 12.5px; color: var(--muted);
+      margin-bottom: 20px; line-height: 1.6;
+    }
+    .modal-list { display: flex; flex-direction: column; gap: 10px; }
+    .modal-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 16px; border-radius: 16px;
+      background: var(--white); text-decoration: none;
+      border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      transition: transform .18s; width: 100%; text-align: left;
+    }
+    .modal-row:active { transform: scale(.97); }
+    .modal-row.primary { background: var(--forest); }
+    .mr-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .mr-text { flex: 1; }
+    .mr-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 3px; }
+    .mr-desc  { font-size: 11px; color: var(--muted); }
+    .modal-row.primary .mr-title,
+    .modal-row.primary .mr-desc { color: #fff; }
+    .mr-arrow { color: #ccc; font-size: 13px; }
+    .modal-row.primary .mr-arrow { color: rgba(255,255,255,.5); }
+    .modal-cancel {
+      display: block; width: 100%; text-align: center;
+      margin-top: 14px; padding: 12px; border-radius: 14px;
+      background: transparent; border: none; cursor: pointer;
+      font-size: 13px; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── SERVICIOS LIST ── */
+    .servicios-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .servicios-list li {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; background: var(--white);
+      border-radius: 14px; font-size: 13px; color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
+    .servicios-list li i { color: var(--forest); font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+    /* ── QR BOX ── */
+    .qr-box { text-align: center; padding: 10px 0 8px; }
+    .qr-box img { width: 200px; height: 200px; border-radius: 16px; margin: 0 auto 12px; display: block; box-shadow: var(--shadow); }
+    .qr-box p { font-size: 12px; color: var(--muted); }
+
+    /* ── VIDEO EMBEDS ── */
+    .video-embed-list { display: flex; flex-direction: column; gap: 14px; }
+    .video-embed-item { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.08); }
+    .video-embed-item iframe { width: 100%; height: 200px; display: block; border: none; }
+    .video-embed-label { padding: 10px 14px; font-size: 12.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .video-embed-label i { font-size: 13px; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.93); z-index: 300;
+      align-items: center; justify-content: center; flex-direction: column;
+    }
+    .lightbox.open { display: flex; }
+    .lb-close {
+      position: absolute; top: 18px; right: 20px;
+      color: #fff; font-size: 22px; cursor: pointer; z-index: 301;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.12); border-radius: 50%;
+    }
+    #lbImg { max-width: 96vw; max-height: 72vh; border-radius: 14px; object-fit: contain; user-select: none; }
+    .lb-nav { display: flex; gap: 16px; margin-top: 18px; }
+    .lb-nav button {
+      background: rgba(255,255,255,.14); border: none; color: #fff;
+      width: 46px; height: 46px; border-radius: 50%;
+      font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lb-nav button:hover { background: rgba(255,255,255,.25); }
+    .lb-counter { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HERO SWIPER -->
+  <div class="hero-swiper swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image:url('img/img/1.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/2.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/3.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/4.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/5.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/6.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/7.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/8.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/9.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/10.jpeg')"></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
+
+    <!-- Píldora top-right: guardar, QR, instalar -->
+    <div class="hero-pill">
+      <button class="hero-pill-btn" onclick="showTip(this,'Guardar Contacto'); openModal('saveModal')">
+        <i class="fa fa-address-book"></i>
+        <span class="tip">Guardar Contacto</span>
+      </button>
+      <div class="hero-pill-sep"></div>
+      <button class="hero-pill-btn" onclick="showTip(this,'Código QR'); openModal('qrModal')">
+        <i class="fa fa-qrcode"></i>
+        <span class="tip">Código QR</span>
+      </button>
+      <div class="hero-pill-sep"></div>
+      <button class="hero-pill-btn" onclick="showTip(this,'Instalar App'); openModal('installModal')">
+        <i class="fa fa-mobile-screen"></i>
+        <span class="tip">Instalar App</span>
+      </button>
+    </div>
+
+    <!-- CTA bottom-left: ver galería -->
+    <button class="hero-gallery-cta" onclick="openLightbox(0)">
+      <i class="fa fa-images"></i>
+      <span>Ver galería</span>
+      <i class="fa fa-chevron-down arrow-anim"></i>
+    </button>
+  </div>
+
+  <!-- LOGO STRIP -->
+  <div class="logo-strip fade-up" id="logoStrip">
+    <img src="img/img/logoladrillera.gif" alt="Quinta Vacacional" onerror="this.style.display='none'" />
+
+    <div class="strip-right">
+
+      <!-- Tagline — visible al inicio -->
+      <div class="strip-tagline">
+        <span class="t-title">Casa Vacacional</span>
+        <span class="t-sub">El mejor clima de Atenas 🌿</span>
+      </div>
+
+      <!-- Píldora — aparece al hacer scroll -->
+      <div class="strip-pill">
+        <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20deseo%20info%20sobre%20Quinta%20Atenas"
+           target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fab fa-whatsapp"></i>
+          <span class="stip">WhatsApp</span>
+        </a>
+        <div class="strip-pill-sep"></div>
+        <a href="tel:+50687212050" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fa fa-phone"></i>
+          <span class="stip">Llamar</span>
+        </a>
+        <div class="strip-pill-sep"></div>
+        <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="strip-pill-btn" onclick="showStripTip(this)">
+          <i class="fa fa-location-dot"></i>
+          <span class="stip">Cómo llegar</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTONES: Videos · Servicios · Redes Sociales -->
+  <div class="actions fade-up">
+    <button class="action-btn" onclick="openModal('videosModal')">
+      <div class="icon-wrap iw-bark"><i class="fa fa-film"></i></div>
+      <span class="btn-label">Videos</span>
+    </button>
+    <button class="action-btn" onclick="openModal('serviciosModal')">
+      <div class="icon-wrap iw-forest"><i class="fa fa-list-check"></i></div>
+      <span class="btn-label">Servicios</span>
+    </button>
+    <button class="action-btn" onclick="openModal('socialModal')">
+      <div class="icon-wrap iw-blue"><i class="fa fa-share-nodes"></i></div>
+      <span class="btn-label">Redes Sociales</span>
+    </button>
+  </div>
+
+  <!-- BIG CTA -->
+  <div class="big-cta fade-up">
+    <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20consultar%20disponibilidad%20en%20Quinta%20Atenas" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+      Consultas y Reservas por WhatsApp
+    </a>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="section-title fade-up"><h2>La Propiedad</h2></div>
+  <div class="description-card fade-up">
+    <p>Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas. Ideal para vacacionar en familia, celebraciones y eventos sociales. También disponible como <strong>pase del día</strong> para matrimonios, cumpleaños y reuniones con opción de área social, rancho y piscina.</p>
+    <p>Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para teletrabajo en un entorno natural inigualable.</p>
+    <div class="capacity-pills">
+      <div class="pill"><i class="fa fa-users"></i> 20–25 personas hospedaje</div>
+      <div class="pill"><i class="fa fa-champagne-glasses"></i> Hasta 60 en eventos</div>
+      <div class="pill"><i class="fa fa-wifi"></i> Fibra 100 Mb</div>
+      <div class="pill"><i class="fa fa-shield-halved"></i> Protocolos Salud</div>
+    </div>
+  </div>
+
+  <!-- FOTOS -->
+  <div class="section-title fade-up"><h2>Fotos</h2></div>
+  <div class="gallery-scroll fade-up">
+    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/img/1.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/img/2.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/img/3.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/4.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/5.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/6.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/img/7.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(7)"><img src="img/img/8.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(8)"><img src="img/img/9.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(9)"><img src="img/img/10.jpeg" alt="" loading="lazy"></div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="section-title fade-up"><h2>Contacto</h2></div>
+  <div class="contact-strip fade-up">
+    <div class="ct-title">¿Listo para reservar?</div>
+    <div class="ct-sub">Respondemos rápido · disponibilidad inmediata</div>
+    <div class="owners"><i class="fa fa-user" style="margin-right:7px;opacity:.7"></i>William Mora &amp; Evelyn Morgan</div>
+    <div class="location">
+      <i class="fa fa-map-pin"></i>
+      <span>Barrio Jesús de Atenas, 600 oeste del Bar Las Brisas y 75 mts sur</span>
+    </div>
+    <div class="contact-buttons">
+      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20reservar%20Quinta%20Atenas" target="_blank" class="ct-btn wapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+50687212050" class="ct-btn call"><i class="fa fa-phone"></i> Llamar</a>
+      <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="ct-btn waze"><i class="fa fa-location-dot"></i> Waze</a>
+    </div>
+  </div>
+
+  <!-- COMPARTIR -->
+  <div class="share-row fade-up">
+    <div class="share-text">
+      <strong>Comparte este enlace</strong>
+      Envíalo a quien lo necesite
+    </div>
+    <div class="share-icons">
+      <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20%E2%80%94%20Atenas%20CR%20https://midbcard.com/QuintaAtenas" target="_blank" class="share-icon si-wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas" target="_blank" class="share-icon si-fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://telegram.me/share/url?url=https://midbcard.com/QuintaAtenas&text=Te%20recomiendo%20esta%20propiedad" target="_blank" class="share-icon si-tg" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+      <a href="fb-messenger://share/?link=https://midbcard.com/QuintaAtenas" class="share-icon si-ms" title="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <p>© 2025 Quinta Atenas · Atenas, Costa Rica</p>
+    <p>Tarjeta Digital por <a href="#">NovaMente Digital</a></p>
+  </div>
+
+</div><!-- /card -->
+
+<!-- FLOTANTES -->
+<div class="float-stack">
+  <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
+     target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure">
+    <i class="fa fa-book-open"></i>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
+     target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- MODAL: GUARDAR CONTACTO -->
+<div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>💾 Guardar Contacto</h3>
+    <p class="modal-sub">Agrega Quinta Atenas a tus contactos para tener siempre el número a mano.</p>
+    <div class="modal-list">
+      <a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AFN:Quinta%20Atenas%0AORG:Quinta%20Vacacional%20Atenas%0ATEL;TYPE=CELL:+50687212050%0ATEL;TYPE=CELL:+50688379488%0AADR;TYPE=WORK:;;Barrio%20Jes%C3%BAs%20de%20Atenas;;Atenas;Alajuela;Costa%20Rica%0AURL:https://midbcard.com/QuintaAtenas%0ANOTE:Casa%20Vacacional%20Atenas%2C%20Costa%20Rica%0AEND:VCARD"
+         download="QuintaAtenas.vcf" class="modal-row primary">
+        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fa fa-download" style="color:#fff"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Descargar Contacto (.vcf)</div>
+          <div class="mr-desc">Compatible con iPhone, Android y WhatsApp</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=50687212050" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e8f8ef"><i class="fab fa-whatsapp" style="color:#25d366"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Abrir en WhatsApp</div>
+          <div class="mr-desc">+506 8721 2050</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="tel:+50687212050" class="modal-row">
+        <div class="mr-icon" style="background:#eaf3ea"><i class="fa fa-phone" style="color:var(--forest)"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Llamar ahora</div>
+          <div class="mr-desc">+506 8721 2050</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('saveModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: QR -->
+<div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📱 Código QR</h3>
+    <p class="modal-sub">Muestra este código para que alguien escanee y abra la tarjeta digital al instante.</p>
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://midbcard.com/QuintaAtenas&color=2d4a2d&bgcolor=faf7f2" alt="QR Quinta Atenas" />
+      <p>Escanea para abrir la tarjeta digital de Quinta Atenas</p>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('qrModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: VIDEOS -->
+<div class="modal-overlay" id="videosModal" onclick="closeModal('videosModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🎬 Videos</h3>
+    <p class="modal-sub">Conocé la propiedad en video — recorrido completo y momentos especiales.</p>
+    <div class="video-embed-list">
+      <div class="video-embed-item">
+        <iframe src="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&showinfo=0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+        <div class="video-embed-label">
+          <i class="fab fa-youtube" style="color:#e53935"></i>
+          Recorrido completo · Quinta Atenas
+        </div>
+      </div>
+      <div class="video-embed-item">
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwillian.mora.520562%2Fvideos&show_text=false&width=380"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+        <div class="video-embed-label">
+          <i class="fab fa-facebook" style="color:#1877f2"></i>
+          Reels y momentos · Facebook
+        </div>
+      </div>
+      <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text">
+          <div class="mr-title">Ver todos los videos en Facebook</div>
+          <div class="mr-desc">Reels, eventos y más contenido</div>
+        </div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('videosModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: SERVICIOS -->
+<div class="modal-overlay" id="serviciosModal" onclick="closeModal('serviciosModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🏡 Servicios y Amenidades</h3>
+    <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada: ropa de cama, toallas, jabón líquido y más. Cumplimos los protocolos del Ministerio de Salud.</p>
+    <ul class="servicios-list">
+      <li><i class="fa fa-person-swimming"></i> Piscina con ducha y baños</li>
+      <li><i class="fa fa-bed"></i> 4 habitaciones grandes</li>
+      <li><i class="fa fa-bath"></i> 4 baños cómodos / Jacuzzi</li>
+      <li><i class="fa fa-utensils"></i> Cocina equipada y amplia</li>
+      <li><i class="fa fa-tv"></i> Sala TV bastante grande / Terrazas</li>
+      <li><i class="fa fa-shirt"></i> Área de lavadora y secadora</li>
+      <li><i class="fa fa-mountain"></i> Balcones con vista a las montañas</li>
+      <li><i class="fa fa-umbrella-beach"></i> Rancho equipado / Vestidores</li>
+      <li><i class="fa fa-fish"></i> Pileta de Tilapia / Amplio parqueo</li>
+      <li><i class="fa fa-wifi"></i> Internet WiFi Fibra Óptica 100 Mb</li>
+      <li><i class="fa fa-leaf"></i> Amplias zonas verdes</li>
+      <li><i class="fa fa-people-group"></i> Capacidad hasta 60 personas en eventos</li>
+    </ul>
+    <button class="modal-cancel" onclick="closeModal('serviciosModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: REDES SOCIALES -->
+<div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🌐 Redes Sociales</h3>
+    <p class="modal-sub">Síguenos en nuestras redes, mira el video de la propiedad y descarga el brochure digital.</p>
+    <div class="modal-list">
+      <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text"><div class="mr-title">Facebook</div><div class="mr-desc">Síguenos y mira todas nuestras publicaciones</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.instagram.com/villahermosaquintaatenas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:linear-gradient(135deg,#fdf3e3,#f7e2f0)">
+          <i class="fab fa-instagram" style="background:linear-gradient(135deg,#e1306c,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:22px"></i>
+        </div>
+        <div class="mr-text"><div class="mr-title">Instagram</div><div class="mr-desc">@villahermosaquintaatenas</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.tiktok.com/@villahermosaquintaatenas?is_from_webapp=1&sender_device=pc" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#f0f0f0"><i class="fab fa-tiktok" style="color:#010101"></i></div>
+        <div class="mr-text"><div class="mr-title">TikTok</div><div class="mr-desc">@villahermosaquintaatenas</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&autoplay=1" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fdecea"><i class="fab fa-youtube" style="color:#e53935"></i></div>
+        <div class="mr-text"><div class="mr-title">Video de la Propiedad</div><div class="mr-desc">Recorrido completo en YouTube</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fef7e7"><i class="fa fa-book-open" style="color:var(--gold)"></i></div>
+        <div class="mr-text"><div class="mr-title">Brochure Digital</div><div class="mr-desc">Revista digital descargable de la propiedad</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://m.me/100066473385289/" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#eef0ff"><i class="fab fa-facebook-messenger" style="color:#0084ff"></i></div>
+        <div class="mr-text"><div class="mr-title">Facebook Messenger</div><div class="mr-desc">Chatea directamente con nosotros</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: INSTALAR -->
+<div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📲 Agregar a Pantalla de Inicio</h3>
+    <p class="modal-sub">Instala esta tarjeta como si fuera una app y tendrás acceso directo con un ícono en tu teléfono.</p>
+    <div class="modal-list">
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#e8f5e9"><i class="fab fa-android" style="color:#3ddc84;font-size:22px"></i></div>
+          <div class="mr-text">
+            <div class="mr-title">Android (Chrome)</div>
+            <div class="mr-desc">Toca el menú → "Añadir a pantalla de inicio"</div>
+          </div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abre esta página en <strong>Google Chrome</strong><br>
+          2. Toca el ícono <strong>⋮</strong> (esquina superior derecha)<br>
+          3. Selecciona <strong>"Añadir a pantalla de inicio"</strong><br>
+          4. Presiona <strong>Añadir</strong> — ¡listo!
+        </div>
+      </div>
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#f0f0f5"><i class="fab fa-apple" style="color:#555;font-size:22px"></i></div>
+          <div class="mr-text">
+            <div class="mr-title">iPhone / iPad (Safari)</div>
+            <div class="mr-desc">Toca Compartir → "En pantalla de inicio"</div>
+          </div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abre esta página en <strong>Safari</strong><br>
+          2. Toca el ícono <strong>□↑</strong> (parte inferior de la pantalla)<br>
+          3. Toca <strong>"En pantalla de inicio"</strong><br>
+          4. Presiona <strong>Añadir</strong> — ¡listo!
+        </div>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()"><i class="fa fa-xmark"></i></div>
+  <img id="lbImg" src="" alt="Quinta Atenas" draggable="false" />
+  <div class="lb-nav">
+    <button onclick="lbPrev()"><i class="fa fa-chevron-left"></i></button>
+    <button onclick="lbNext()"><i class="fa fa-chevron-right"></i></button>
+  </div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+
+/* SCROLL FLIP — tagline ↓ pill ↑ desde el primer pixel */
+var logoStrip = document.getElementById('logoStrip');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 0) {
+    logoStrip.classList.add('scrolled');
+  } else {
+    logoStrip.classList.remove('scrolled');
+  }
+}, { passive: true });
+
+/* SWIPER */
+new Swiper('.hero-swiper', {
+  loop: true,
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+  autoplay: { delay: 3000, disableOnInteraction: false },
+  pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  lazy: true,
+});
+
+/* TOOLTIPS */
+function showTip(btn, label) {
+  const tip = btn.querySelector('.tip');
+  if (!tip) return;
+  tip.classList.add('show');
+  setTimeout(() => tip.classList.remove('show'), 1600);
+}
+function showStripTip(btn) {
+  const tip = btn.querySelector('.stip');
+  if (!tip) return;
+  tip.classList.add('show');
+  setTimeout(() => tip.classList.remove('show'), 1400);
+}
+
+/* IMÁGENES */
+const IMAGES = [
+  'img/img/1.jpeg','img/img/2.jpeg','img/img/3.jpeg','img/img/4.jpeg','img/img/5.jpeg',
+  'img/img/6.jpeg','img/img/7.jpeg','img/img/8.jpeg','img/img/9.jpeg','img/img/10.jpeg',
+  'img/img/11.jpeg','img/img/12.jpeg','img/img/13.jpeg','img/img/14.jpeg','img/img/15.jpeg',
+  'img/img/16.jpeg','img/img/17.jpeg','img/img/18.jpeg',
+];
+
+/* LIGHTBOX */
+let lbIdx = 0;
+function openLightbox(i) {
+  lbIdx = i;
+  document.getElementById('lbImg').src = IMAGES[i];
+  document.getElementById('lbCounter').textContent = (i+1) + ' / ' + IMAGES.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function lbPrev() {
+  lbIdx = (lbIdx - 1 + IMAGES.length) % IMAGES.length;
+  document.getElementById('lbImg').src = IMAGES[lbIdx];
+  document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + IMAGES.length;
+}
+function lbNext() {
+  lbIdx = (lbIdx + 1) % IMAGES.length;
+  document.getElementById('lbImg').src = IMAGES[lbIdx];
+  document.getElementById('lbCounter').textContent = (lbIdx+1) + ' / ' + IMAGES.length;
+}
+
+/* SWIPE lightbox */
+let ltx = 0;
+document.getElementById('lightbox').addEventListener('touchstart', function(e){ ltx = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', function(e){
+  var dx = e.changedTouches[0].clientX - ltx;
+  if (Math.abs(dx) > 40) { if (dx < 0) lbNext(); else lbPrev(); }
+}, { passive: true });
+
+/* TECLADO */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLightbox(); closeAllModals(); }
+  if (e.key === 'ArrowLeft') lbPrev();
+  if (e.key === 'ArrowRight') lbNext();
+});
+
+/* MODALS */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeAllModals() {
+  document.querySelectorAll('.modal-overlay.open').forEach(function(m){ m.classList.remove('open'); });
+  document.body.style.overflow = '';
+}
+
+/* FADE-UP */
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(function(el){ observer.observe(el); });
+
+</script>
+</body>
+</html>
