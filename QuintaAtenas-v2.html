@@ -254,28 +254,26 @@
     .big-cta a:hover  { box-shadow: 0 8px 26px rgba(37,211,102,.45); }
     .big-cta a i { font-size: 21px; }
 
-    /* ── FLOTANTES — estilo sticker con sombra 3D ── */
+    /* ── FLOTANTES — estilo sticker 3D, tamaño compacto ── */
     .float-stack {
       position: fixed; bottom: 24px; right: 14px;
       display: flex; flex-direction: column; align-items: center;
-      gap: 18px; z-index: 100;
+      gap: 16px; z-index: 100;
     }
     .float-btn {
-      width: 62px; height: 62px;
+      width: 54px; height: 54px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       text-decoration: none; border: none; cursor: pointer;
       transition: transform .18s;
       position: relative;
-      /* borde blanco como en el ícono original */
       outline: 3px solid #fff;
       outline-offset: 0px;
     }
     .float-btn:active { transform: scale(.92); }
-    /* tooltip */
     .float-btn::before {
       content: attr(data-tip);
-      position: absolute; right: 70px;
+      position: absolute; right: 62px;
       background: rgba(0,0,0,.78); color: #fff;
       font-size: 11px; font-weight: 500;
       padding: 4px 10px; border-radius: 8px;
@@ -285,34 +283,18 @@
     }
     .float-btn:hover::before { opacity: 1; }
 
-    /* WhatsApp — verde oficial, sombra verde oscura */
+    /* WhatsApp */
     .float-wa {
       background: #25d366;
-      box-shadow:
-        0 6px 0 #1a9e4e,
-        0 8px 18px rgba(0,0,0,.45),
-        0 2px 6px rgba(0,0,0,.25);
-      font-size: 30px; color: #fff;
+      box-shadow: 0 5px 0 #1a9e4e, 0 7px 16px rgba(0,0,0,.40), 0 2px 5px rgba(0,0,0,.22);
+      font-size: 26px; color: #fff;
     }
-
-    /* Brochure — terracota, sombra marrón oscura */
+    /* Brochure — sin label, solo ícono */
     .float-brochure {
       background: #c0432a;
-      box-shadow:
-        0 6px 0 #8b2e1a,
-        0 8px 18px rgba(0,0,0,.45),
-        0 2px 6px rgba(0,0,0,.25);
-      font-size: 22px; color: #fff;
-      /* texto "Brochure" pequeño debajo del ícono */
-      flex-direction: column; gap: 1px;
+      box-shadow: 0 5px 0 #8b2e1a, 0 7px 16px rgba(0,0,0,.40), 0 2px 5px rgba(0,0,0,.22);
+      font-size: 20px; color: #fff;
     }
-    .float-brochure .fb-label {
-      font-size: 8px; font-weight: 700;
-      font-family: 'DM Sans', sans-serif;
-      color: #fff; letter-spacing: .5px;
-      line-height: 1; text-transform: uppercase;
-    }
-    .float-brochure i { font-size: 22px; }
 
     .divider { height: 1px; background: linear-gradient(to right, transparent, #ddd6cb, transparent); margin: 4px 16px 8px; }
     .card-footer { background: #1a1a1a; color: rgba(255,255,255,.45); font-size: 11px; text-align: center; padding: 18px 16px; line-height: 1.8; }
@@ -320,7 +302,8 @@
 
     /* ── RESEÑAS — scroll horizontal ── */
     .reviews-scroll {
-      display: flex; gap: 12px;
+      display: flex; gap: 10px;
+      /* padding-right pequeño para que la última card no quede pegada al borde */
       padding: 0 16px 8px 16px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
@@ -332,41 +315,54 @@
 
     .review-card {
       flex-shrink: 0;
-      width: 230px;
+      /* 82vw muestra la card actual + ~18% de la siguiente asomándose */
+      width: 82vw;
+      max-width: 290px;
       background: var(--white);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: var(--shadow-card);
+      border-radius: 16px;
+      padding: 14px;
+      /* sombra más delgada/sutil */
+      box-shadow: 0 2px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
       scroll-snap-align: start;
-      display: flex; flex-direction: column; gap: 10px;
+      display: flex; flex-direction: column; gap: 8px;
     }
 
     .review-top {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 9px;
     }
     .review-avatar {
-      width: 38px; height: 38px; border-radius: 50%;
+      width: 34px; height: 34px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 700; color: #fff;
-      flex-shrink: 0;
+      font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
     }
     .review-meta { flex: 1; }
-    .review-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.1; }
-    .review-date { font-size: 10px; color: var(--muted); margin-top: 2px; }
-    .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px; }
-
-    .review-text {
-      font-size: 12px; color: var(--muted);
-      line-height: 1.6;
-      flex: 1;
-    }
+    .review-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.1; }
+    .review-date { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .review-stars { color: #f59e0b; font-size: 11px; letter-spacing: 1px; }
+    .review-text { font-size: 11.5px; color: var(--muted); line-height: 1.6; flex: 1; }
     .review-source {
       display: flex; align-items: center; gap: 5px;
       font-size: 10px; color: var(--muted);
-      padding-top: 8px;
-      border-top: 1px solid #f0ece6;
+      padding-top: 7px; border-top: 1px solid #f0ece6;
     }
     .review-source i { font-size: 11px; }
+
+    /* Flecha scroll hint — desaparece al primer scroll */
+    .review-hint {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 6px 0 14px;
+      font-size: 11px; color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .review-hint i {
+      color: var(--gold);
+      animation: nudgeRight 1.6s ease-in-out infinite;
+    }
+    @keyframes nudgeRight {
+      0%,100% { transform: translateX(0); opacity: .5; }
+      50%      { transform: translateX(5px); opacity: 1; }
+    }
+    .review-hint.hidden { display: none; }
     .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
@@ -593,6 +589,11 @@
     </div>
 
   </div>
+  <!-- Flecha que desaparece al primer scroll -->
+  <div class="review-hint fade-up" id="reviewHint">
+    <i class="fa fa-arrow-right"></i>
+    <span>Deslizá para ver más opiniones</span>
+  </div>
 
   <!-- CONTACTO -->
   <div class="section-title fade-up"><h2>Contacto</h2></div>
@@ -644,7 +645,6 @@
   <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
      target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure">
     <i class="fa fa-book-open"></i>
-    <span class="fb-label">Brochure</span>
   </a>
   <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
      target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
@@ -850,6 +850,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLightb
 function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
 function closeAllModals(){document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';}
+
+/* OCULTAR hint de reseñas al primer scroll */
+var reviewScroll = document.querySelector('.reviews-scroll');
+var reviewHint   = document.getElementById('reviewHint');
+if (reviewScroll && reviewHint) {
+  reviewScroll.addEventListener('scroll', function() {
+    reviewHint.classList.add('hidden');
+  }, { passive: true, once: true });
+}
 
 var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
 document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el);});
