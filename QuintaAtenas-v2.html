@@ -254,26 +254,119 @@
     .big-cta a:hover  { box-shadow: 0 8px 26px rgba(37,211,102,.45); }
     .big-cta a i { font-size: 21px; }
 
-    /* BROCHURE flotante — coral pastel */
-    .float-brochure {
-      background: #d4735e;
-      box-shadow: 0 4px 16px rgba(212,115,94,.45);
-      font-size: 20px;
+    /* ── FLOTANTES — estilo sticker con sombra 3D ── */
+    .float-stack {
+      position: fixed; bottom: 24px; right: 14px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 18px; z-index: 100;
     }
+    .float-btn {
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform .18s;
+      position: relative;
+      /* borde blanco como en el ícono original */
+      outline: 3px solid #fff;
+      outline-offset: 0px;
+    }
+    .float-btn:active { transform: scale(.92); }
+    /* tooltip */
+    .float-btn::before {
+      content: attr(data-tip);
+      position: absolute; right: 70px;
+      background: rgba(0,0,0,.78); color: #fff;
+      font-size: 11px; font-weight: 500;
+      padding: 4px 10px; border-radius: 8px;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .float-btn:hover::before { opacity: 1; }
+
+    /* WhatsApp — verde oficial, sombra verde oscura */
+    .float-wa {
+      background: #25d366;
+      box-shadow:
+        0 6px 0 #1a9e4e,
+        0 8px 18px rgba(0,0,0,.45),
+        0 2px 6px rgba(0,0,0,.25);
+      font-size: 30px; color: #fff;
+    }
+
+    /* Brochure — terracota, sombra marrón oscura */
+    .float-brochure {
+      background: #c0432a;
+      box-shadow:
+        0 6px 0 #8b2e1a,
+        0 8px 18px rgba(0,0,0,.45),
+        0 2px 6px rgba(0,0,0,.25);
+      font-size: 22px; color: #fff;
+      /* texto "Brochure" pequeño debajo del ícono */
+      flex-direction: column; gap: 1px;
+    }
+    .float-brochure .fb-label {
+      font-size: 8px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      color: #fff; letter-spacing: .5px;
+      line-height: 1; text-transform: uppercase;
+    }
+    .float-brochure i { font-size: 22px; }
+
     .divider { height: 1px; background: linear-gradient(to right, transparent, #ddd6cb, transparent); margin: 4px 16px 8px; }
     .card-footer { background: #1a1a1a; color: rgba(255,255,255,.45); font-size: 11px; text-align: center; padding: 18px 16px; line-height: 1.8; }
     .card-footer a { color: rgba(255,255,255,.55); text-decoration: none; }
 
-    /* FLOATING */
-    .float-stack { position: fixed; bottom: 22px; right: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; z-index: 100; }
-    .float-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #fff; text-decoration: none; border: none; cursor: pointer; transition: transform .18s; position: relative; }
-    .float-btn:active { transform: scale(.9); }
-    .float-btn::before { content: attr(data-tip); position: absolute; right: 62px; background: rgba(0,0,0,.75); color: #fff; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; }
-    .float-btn:hover::before { opacity: 1; }
-    .float-wa { width: 58px; height: 58px; font-size: 26px; background: #25d366; box-shadow: 0 4px 20px rgba(37,211,102,.55); animation: bounce-wa 3s ease-in-out infinite; }
-    @keyframes bounce-wa { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    /* ── RESEÑAS — scroll horizontal ── */
+    .reviews-scroll {
+      display: flex; gap: 12px;
+      padding: 0 16px 8px 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
 
-    /* FADE-UP */
+    .review-card {
+      flex-shrink: 0;
+      width: 230px;
+      background: var(--white);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      scroll-snap-align: start;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    .review-top {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .review-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .review-meta { flex: 1; }
+    .review-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.1; }
+    .review-date { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .review-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px; }
+
+    .review-text {
+      font-size: 12px; color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .review-source {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: var(--muted);
+      padding-top: 8px;
+      border-top: 1px solid #f0ece6;
+    }
+    .review-source i { font-size: 11px; }
     .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
@@ -430,6 +523,77 @@
     <div class="gallery-thumb" onclick="openLightbox(9)"><img src="img/img/10.jpeg" alt="" loading="lazy"></div>
   </div>
 
+  <!-- RESEÑAS -->
+  <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
+  <div class="reviews-scroll fade-up">
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#2d4a2d">M</div>
+        <div class="review-meta">
+          <div class="review-name">María Fernández</div>
+          <div class="review-date">Marzo 2025 · San José</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#b8903a">C</div>
+        <div class="review-meta">
+          <div class="review-name">Carlos Rodríguez</div>
+          <div class="review-date">Febrero 2025 · Alajuela</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!"</div>
+      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#5c3d1e">A</div>
+        <div class="review-meta">
+          <div class="review-name">Andrea Mora</div>
+          <div class="review-date">Enero 2025 · Heredia</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"El clima de Atenas es único y esta quinta lo aprovecha al máximo. Las habitaciones son amplias, la cocina está equipada con todo. Muy tranquilo y seguro."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#0d9488">R</div>
+        <div class="review-meta">
+          <div class="review-name">Roberto Salas</div>
+          <div class="review-date">Diciembre 2024 · Cartago</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Pasamos Nochebuena aquí con toda la familia. El Jacuzzi y la pileta de tilapia fueron el hit de la noche. Precio muy justo para todo lo que ofrece."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#7c3aed">L</div>
+        <div class="review-meta">
+          <div class="review-name">Laura Jiménez</div>
+          <div class="review-date">Noviembre 2024 · Escazú</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Mi boda soñada fue aquí. El lugar es hermoso para fotos y el espacio para 60 personas es perfecto. Los propietarios son muy amables y profesionales."</div>
+      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+    </div>
+
+  </div>
+
   <!-- CONTACTO -->
   <div class="section-title fade-up"><h2>Contacto</h2></div>
   <div class="contact-strip fade-up">
@@ -475,10 +639,17 @@
   </div>
 </div>
 
-<!-- FLOTANTES -->
+<!-- FLOTANTES — estilo sticker 3D -->
 <div class="float-stack">
-  <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1" target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure"><i class="fa fa-book-open"></i></a>
-  <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas" target="_blank" class="float-btn float-wa" data-tip="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
+     target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure">
+    <i class="fa fa-book-open"></i>
+    <span class="fb-label">Brochure</span>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
+     target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 </div>
 
 <!-- MODAL GUARDAR -->
