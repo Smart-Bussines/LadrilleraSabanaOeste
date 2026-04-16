@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verbos Portugueses — Conjugador</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0e0f13;
+  --surface: #16181f;
+  --surface2: #1e2029;
+  --border: #2a2c38;
+  --border2: #373a4a;
+  --accent: #5b8fff;
+  --accent2: #a78bfa;
+  --accent3: #34d399;
+  --text: #e8eaf0;
+  --text2: #9095a8;
+  --text3: #5c6070;
+  --reg-bg: #0f2a1a;
+  --reg-c: #34d399;
+  --irr-bg: #2a1a08;
+  --irr-c: #f59e0b;
+  --warn-bg: #2a1208;
+  --warn-c: #fb7185;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT ── */
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+header {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-mark {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+}
+
+.logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; }
+.logo-text span { color: var(--text2); font-weight: 400; font-size: 13px; margin-left: 8px; }
+
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+.mode-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .2s;
+}
+.mode-btn.active, .mode-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ── SIDEBAR ── */
+aside {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 73px);
+  position: sticky;
+  top: 0;
+}
+
+.sidebar-section { margin-bottom: 24px; }
+.sidebar-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.search-wrap { position: relative; margin-bottom: 10px; }
+.search-wrap svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  opacity: .4; pointer-events: none;
+}
+input[type="text"] {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 8px 10px 8px 32px;
+  outline: none;
+  transition: border-color .2s;
+}
+input[type="text"]:focus { border-color: var(--accent); }
+input[type="text"]::placeholder { color: var(--text3); }
+
+.verb-list { display: flex; flex-direction: column; gap: 2px; }
+.verb-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s;
+  font-size: 14px;
+}
+.verb-item:hover { background: var(--surface2); }
+.verb-item.active { background: rgba(91,143,255,.12); color: var(--accent); }
+.verb-item .vtag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.vtag.reg { background: var(--reg-bg); color: var(--reg-c); }
+.vtag.irr { background: var(--irr-bg); color: var(--irr-c); }
+
+.add-verb-btn {
+  width: 100%;
+  padding: 9px;
+  background: rgba(91,143,255,.1);
+  border: 1px dashed rgba(91,143,255,.3);
+  border-radius: var(--radius);
+  color: var(--accent);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all .2s;
+  margin-top: 6px;
+}
+.add-verb-btn:hover { background: rgba(91,143,255,.18); }
+
+/* ── MAIN ── */
+main {
+  overflow-y: auto;
+  max-height: calc(100vh - 73px);
+}
+
+.main-inner { padding: 28px 32px; max-width: 860px; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 5px;
+}
+.tab {
+  flex: 1;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  white-space: nowrap;
+}
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+.tab:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+/* Verb header */
+.verb-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.verb-big {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.verb-meta { padding-top: 4px; }
+.verb-type { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 20px; margin-bottom: 6px; font-weight: 500; }
+.verb-note { font-size: 13px; color: var(--text2); max-width: 480px; line-height: 1.5; }
+
+/* Table */
+.conj-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.conj-table th {
+  background: var(--surface2);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+}
+.conj-table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.conj-table tr:last-child td { border-bottom: none; }
+.conj-table tr:hover td { background: rgba(255,255,255,.02); }
+.pron { color: var(--text2); font-size: 13px; width: 200px; }
+.form { font-family: 'DM Mono', monospace; font-size: 15px; color: var(--text); }
+.form .root { color: var(--text3); }
+.form .ending { color: var(--accent3); font-weight: 500; }
+
+/* All tenses grid */
+.all-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.tense-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.tense-card-header {
+  padding: 10px 14px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text3);
+}
+.tense-card table { width: 100%; border-collapse: collapse; }
+.tense-card td { padding: 7px 14px; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,.03); }
+.tense-card tr:last-child td { border-bottom: none; }
+.tense-card .p { color: var(--text3); font-size: 12px; width: 130px; }
+.tense-card .f { font-family: 'DM Mono', monospace; }
+.tense-card .fe { color: var(--accent3); font-weight: 500; }
+
+/* Pattern tip */
+.pattern-box {
+  background: rgba(91,143,255,.07);
+  border: 1px solid rgba(91,143,255,.2);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.pattern-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.pattern-text h4 { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+.pattern-text p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.pattern-text code {
+  background: rgba(91,143,255,.15);
+  color: var(--accent);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ── ADD VERB MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  width: 480px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal h3 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+.modal .modal-sub { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; display: block; }
+.form-input {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color .2s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: var(--text3); font-family: 'DM Sans', sans-serif; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text3);
+  margin: 16px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.pronoun-label { font-size: 12px; color: var(--text2); margin-bottom: 4px; display: block; }
+.modal-btns { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
+.btn-cancel {
+  padding: 9px 18px;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-cancel:hover { border-color: var(--text2); color: var(--text); }
+.btn-save {
+  padding: 9px 22px;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-save:hover { opacity: .85; }
+.auto-note {
+  background: rgba(52,211,153,.07);
+  border: 1px solid rgba(52,211,153,.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #34d399;
+  margin-bottom: 14px;
+}
+select.form-input {
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+}
+
+/* ── TIPS PANEL ── */
+.tips-section { display: none; }
+.tips-section.active { display: block; }
+.conj-section { display: none; }
+.conj-section.active { display: block; }
+.info-section { display: none; }
+.info-section.active { display: block; }
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.tip-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.tip-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.tip-card.t1::before { background: var(--accent); }
+.tip-card.t2::before { background: var(--accent2); }
+.tip-card.t3::before { background: var(--accent3); }
+.tip-card.t4::before { background: #f59e0b; }
+.tip-n { font-size: 28px; font-family: 'Syne', sans-serif; font-weight: 800; opacity: .08; position: absolute; top: 12px; right: 14px; line-height: 1; }
+.tip-icon { font-size: 20px; margin-bottom: 10px; }
+.tip-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.tip-card p, .tip-card li { font-size: 13px; color: var(--text2); line-height: 1.65; }
+.tip-card ul { padding-left: 1rem; margin-top: 4px; }
+.tip-card li { margin-bottom: 2px; }
+
+/* patterns infographic */
+.pattern-infogram {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.pattern-infogram h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+.endings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.ending-col { background: var(--surface2); border-radius: var(--radius); overflow: hidden; }
+.ending-header {
+  padding: 10px 14px;
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.ending-header.ar { background: rgba(91,143,255,.15); color: var(--accent); border-bottom: 2px solid var(--accent); }
+.ending-header.er { background: rgba(167,139,250,.15); color: var(--accent2); border-bottom: 2px solid var(--accent2); }
+.ending-header.ir { background: rgba(52,211,153,.15); color: var(--accent3); border-bottom: 2px solid var(--accent3); }
+.ending-row { display: flex; justify-content: space-between; padding: 7px 14px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,.04); }
+.ending-row:last-child { border-bottom: none; }
+.ending-row .ep { color: var(--text3); }
+.ending-row .ef { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; }
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.tl-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.tl-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.tl-dot.d1 { background: rgba(91,143,255,.15); color: var(--accent); }
+.tl-dot.d2 { background: rgba(167,139,250,.15); color: var(--accent2); }
+.tl-dot.d3 { background: rgba(52,211,153,.15); color: var(--accent3); }
+.tl-dot.d4 { background: rgba(245,158,11,.15); color: #f59e0b; }
+.tl-dot.d5 { background: rgba(251,113,133,.15); color: #fb7185; }
+.tl-body h5 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.tl-body p { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.tl-body code {
+  background: rgba(255,255,255,.06);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* delete btn */
+.del-btn {
+  background: transparent;
+  border: 1px solid rgba(251,113,133,.3);
+  color: #fb7185;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.del-btn:hover { background: rgba(251,113,133,.1); }
+
+/* responsive */
+@media (max-width: 700px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; }
+  aside { max-height: 220px; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+  .main-inner { padding: 18px 16px; }
+  .verb-big { font-size: 28px; }
+  .endings-grid { grid-template-columns: 1fr; }
+  .all-grid { grid-template-columns: 1fr; }
+}
+
+/* tooltip on form split */
+.split-indicator {
+  font-size: 11px;
+  color: var(--accent3);
+  margin-top: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+<!-- HEADER -->
+<header>
+  <div class="logo-mark">VP</div>
+  <div class="logo-text">Verbos Portugueses <span>Conjugador de Estudio</span></div>
+  <div class="header-right">
+    <button class="mode-btn active" onclick="switchTab('conj')">Conjugar</button>
+    <button class="mode-btn" onclick="switchTab('info')">Patrones</button>
+    <button class="mode-btn" onclick="switchTab('tips')">Tips</button>
+  </div>
+</header>
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Buscar verbo</div>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="buscar..." oninput="filterVerbs()">
+    </div>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-label">Verbos guardados</div>
+    <div class="verb-list" id="verbList"></div>
+    <button class="add-verb-btn" onclick="openModal()">+ Agregar verbo</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+  <div class="main-inner">
+
+    <!-- CONJUGAR -->
+    <div class="conj-section active" id="conjSection">
+      <div class="tabs" id="tenseTabsRow">
+        <button class="tab active" onclick="setTense('pres',this)">Presente</button>
+        <button class="tab" onclick="setTense('pperf',this)">Pret. Perfeito</button>
+        <button class="tab" onclick="setTense('pimp',this)">Pret. Imperfeito</button>
+        <button class="tab" onclick="setTense('futpres',this)">Futuro Pres.</button>
+        <button class="tab" onclick="setTense('futpret',this)">Futuro Pret.</button>
+        <button class="tab" onclick="setTense('all',this)">Todos</button>
+      </div>
+
+      <div id="verbDisplay"></div>
+    </div>
+
+    <!-- PATRONES -->
+    <div class="info-section" id="infoSection">
+      <div class="pattern-infogram">
+        <h3>Terminaciones por clase verbal</h3>
+        <div class="endings-grid">
+          <div class="ending-col">
+            <div class="ending-header ar">-AR</div>
+            <div class="ending-row"><span class="ep">eu</span><span class="ef ar" style="color:var(--accent)">-o</span></div>
+            <div class="ending-row"><span class="ep">tu</span><span class="ef ar" style="color:var(--accent)">-as</span></div>
+            <div class="ending-row"><span class="ep">ele/você</span><span class="ef ar" style="color:var(--accent)">-a</span></div>
+            <div class="ending-row"><span class="ep">nós</span><span class="ef ar" style="color:var(--accent)">-amos</span></div>
+            <div class="ending-row"><span class="ep">vós</span><span class="ef ar" style="color:var(--accent)">-ais</span></div>
+            <div class="ending-row"><span class="ep">eles/vocês</span><span class="ef ar" style="color:var(--accent)">-am</span></div>
+          </div>
+          <div class="ending-col">
+            <div class="ending-header er">-ER</div>
+            <div class="ending-row"><span class="ep">eu</span><span class="ef" style="color:var(--accent2)">-o</span></div>
+            <div class="ending-row"><span class="ep">tu</span><span class="ef" style="color:var(--accent2)">-es</span></div>
+            <div class="ending-row"><span class="ep">ele/você</span><span class="ef" style="color:var(--accent2)">-e</span></div>
+            <div class="ending-row"><span class="ep">nós</span><span class="ef" style="color:var(--accent2)">-emos</span></div>
+            <div class="ending-row"><span class="ep">vós</span><span class="ef" style="color:var(--accent2)">-eis</span></div>
+            <div class="ending-row"><span class="ep">eles/vocês</span><span class="ef" style="color:var(--accent2)">-em</span></div>
+          </div>
+          <div class="ending-col">
+            <div class="ending-header ir">-IR</div>
+            <div class="ending-row"><span class="ep">eu</span><span class="ef" style="color:var(--accent3)">-o</span></div>
+            <div class="ending-row"><span class="ep">tu</span><span class="ef" style="color:var(--accent3)">-es</span></div>
+            <div class="ending-row"><span class="ep">ele/você</span><span class="ef" style="color:var(--accent3)">-e</span></div>
+            <div class="ending-row"><span class="ep">nós</span><span class="ef" style="color:var(--accent3)">-imos</span></div>
+            <div class="ending-row"><span class="ep">vós</span><span class="ef" style="color:var(--accent3)">-is</span></div>
+            <div class="ending-row"><span class="ep">eles/vocês</span><span class="ef" style="color:var(--accent3)">-em</span></div>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:14px;font-size:15px;">Los 5 tiempos verbales — Cómo se forman</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot d1">1</div>
+            <div class="tl-body">
+              <h5>Presente do indicativo</h5>
+              <p>Raíz + terminación según clase. Ej: <code>fal-</code> + <code>o/as/a/amos/ais/am</code> → falo, falas, fala...</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot d2">2</div>
+            <div class="tl-body">
+              <h5>Pretérito perfeito</h5>
+              <p>Acción completada. -AR: <code>-ei/-aste/-ou/-ámos/-astes/-aram</code>. -ER: <code>-i/-este/-eu/-emos/-estes/-eram</code>. -IR igual que -ER pero con -i/-iste/-iu.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot d3">3</div>
+            <div class="tl-body">
+              <h5>Pretérito imperfeito</h5>
+              <p>Acción habitual o continua en el pasado. -AR: <code>-ava/-avas/-ava/-ávamos/-áveis/-avam</code>. -ER/-IR: <code>-ia/-ias/-ia/-íamos/-íeis/-iam</code>.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot d4">4</div>
+            <div class="tl-body">
+              <h5>Futuro do presente</h5>
+              <p>Infinitivo completo + <code>-ei/-ás/-á/-emos/-eis/-ão</code>. Ej: falar + ei = <code>falarei</code>. Nunca cambia la raíz.</p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot d5">5</div>
+            <div class="tl-body">
+              <h5>Futuro do pretérito (condicional)</h5>
+              <p>Infinitivo completo + <code>-ia/-ias/-ia/-íamos/-íeis/-iam</code>. Ej: falar + ia = <code>falaria</code>. Mismo patrón para todos los verbos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pattern-infogram">
+        <h3 style="margin-bottom:12px;">Trucos de ortografía — Verbos -AR</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:var(--surface2);border-radius:8px;padding:14px;">
+            <div style="font-size:12px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">c → qu</div>
+            <p style="font-size:13px;color:var(--text2);">Cuando la raíz termina en <strong style="color:var(--text)">c</strong>, cambia a <strong style="color:var(--accent)">qu</strong> antes de <strong style="color:var(--text)">-ei</strong> en el pretérito.</p>
+            <p style="font-size:13px;margin-top:6px;font-family:'DM Mono',monospace;"><span style="color:var(--text3)">fi</span><span style="color:#fb7185">c</span><span style="color:var(--text3)">ar →</span> fi<span style="color:var(--accent)">qu</span>ei</p>
+          </div>
+          <div style="background:var(--surface2);border-radius:8px;padding:14px;">
+            <div style="font-size:12px;color:var(--text3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">g → gu</div>
+            <p style="font-size:13px;color:var(--text2);">Cuando la raíz termina en <strong style="color:var(--text)">g</strong>, cambia a <strong style="color:var(--accent2)">gu</strong> antes de <strong style="color:var(--text)">-ei</strong>.</p>
+            <p style="font-size:13px;margin-top:6px;font-family:'DM Mono',monospace;"><span style="color:var(--text3)">che</span><span style="color:#fb7185">g</span><span style="color:var(--text3)">ar →</span> che<span style="color:var(--accent2)">gu</span>ei</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="tips-section" id="tipsSection">
+      <div style="margin-bottom:24px;">
+        <div style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:6px;">Estrategias de aprendizaje</div>
+        <p style="font-size:14px;color:var(--text2);">Ideas clave para memorizar conjugaciones más rápido y retenerlas mejor.</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card t1">
+          <div class="tip-n">01</div>
+          <div class="tip-icon">🏗️</div>
+          <h4>Primero la estructura, luego el vocabulario</h4>
+          <p>Aprende las terminaciones de -AR, -ER, -IR con un solo verbo de cada grupo. Una vez tienes el molde, cualquier verbo regular nuevo se "encaja" solo.</p>
+        </div>
+        <div class="tip-card t2">
+          <div class="tip-n">02</div>
+          <div class="tip-icon">🔑</div>
+          <h4>"Eu" siempre termina en -o (presente)</h4>
+          <p>Para todos los verbos regulares: <strong>trabalho, bebo, assisto</strong>. Es tu ancla. Memoriza esta regla primero y aplícala sin pensar.</p>
+        </div>
+        <div class="tip-card t3">
+          <div class="tip-n">03</div>
+          <div class="tip-icon">⚡</div>
+          <h4>El futuro es el más fácil</h4>
+          <p>Infinitivo completo + desinencia. <strong>Falarei = falar + ei</strong>. Nunca cambia la raíz. Domina este tiempo primero para ganar confianza rápida.</p>
+        </div>
+        <div class="tip-card t1">
+          <div class="tip-n">04</div>
+          <div class="tip-icon">📘</div>
+          <h4>Imperfeito: alta regularidad</h4>
+          <p>-AR termina en <strong>-ava</strong> para eu/ele. -ER/-IR termina en <strong>-ia</strong>. Son muy predecibles. Úsalos para narrar rutinas del pasado.</p>
+        </div>
+        <div class="tip-card t4">
+          <div class="tip-n">05</div>
+          <div class="tip-icon">🔄</div>
+          <h4>Futuro do pretérito = condicional</h4>
+          <p>Equivale al "habría/haría" español. Mismo infinitivo + <strong>-ia/-ias/-ia/-íamos/-íeis/-iam</strong>. Igual para los 3 grupos verbales.</p>
+        </div>
+        <div class="tip-card t2">
+          <div class="tip-n">06</div>
+          <div class="tip-icon">💬</div>
+          <h4>Frases propias, no listas aisladas</h4>
+          <p>En vez de memorizar "falo, falas, fala...", crea frases tuyas: <em>"Eu trabalho em marketing digital"</em>, <em>"Ela fala muito bem"</em>. El contexto fija la memoria.</p>
+        </div>
+        <div class="tip-card t3">
+          <div class="tip-n">07</div>
+          <div class="tip-icon">🎯</div>
+          <h4>Regla del 80/20 de pronombres</h4>
+          <p>En conversación real usarás 80% del tiempo: <strong>eu, você/ele/ela, a gente/nós</strong>. Domina estas 3 personas antes de memorizar vós y ellos.</p>
+        </div>
+        <div class="tip-card t4">
+          <div class="tip-n">08</div>
+          <div class="tip-icon">🗓️</div>
+          <h4>Repetición espaciada: 5 verbos por día</h4>
+          <p>Agrega 5 verbos nuevos por día a esta app. Revisa los 5 del día anterior. En 30 días tienes 150 verbos dominados con sus 5 tiempos.</p>
+        </div>
+        <div class="tip-card t1">
+          <div class="tip-n">09</div>
+          <div class="tip-icon">🎵</div>
+          <h4>Ritmo y musicalidad</h4>
+          <ul>
+            <li>Repite las formas en voz alta con ritmo</li>
+            <li>Grábate y escúchate</li>
+            <li>El sonido refuerza la memoria motora</li>
+            <li>Usa música brasileña de fondo al estudiar</li>
+          </ul>
+        </div>
+        <div class="tip-card t2">
+          <div class="tip-n">10</div>
+          <div class="tip-icon">✍️</div>
+          <h4>Escribe 3 frases por verbo nuevo</h4>
+          <p>Cada vez que agregas un verbo: escribe una frase en presente, una en pretérito y una en futuro. Esto activa los 3 tiempos más usados en contexto real.</p>
+        </div>
+        <div class="tip-card t3">
+          <div class="tip-n">11</div>
+          <div class="tip-icon">🌊</div>
+          <h4>Similitudes con el español</h4>
+          <p>Português y español comparten ~89% de vocabulario. Aprovecha: <em>trabalhar ≈ trabajar, falar ≈ hablar, comprar ≈ comprar</em>. Los patrones de conjugación también son muy similares.</p>
+        </div>
+        <div class="tip-card t4">
+          <div class="tip-n">12</div>
+          <div class="tip-icon">🧩</div>
+          <h4>Un verbo comodín por clase</h4>
+          <p>Memoriza uno de referencia por grupo:<br><strong>-AR: falar / -ER: beber / -IR: assistir</strong><br>Cuando dudes, conjuga el comodín mentalmente y aplica el mismo patrón.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<!-- MODAL AGREGAR VERBO -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3>Agregar nuevo verbo</h3>
+    <p class="modal-sub">Para verbos regulares, solo necesitas el infinitivo y la clase. Las conjugaciones se generan automáticamente.</p>
+
+    <div class="auto-note">✨ Verbo regular detectado → se auto-conjuga al guardar</div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Infinitivo</label>
+        <input type="text" id="mInf" class="form-input" placeholder="ej: comprar">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Clase</label>
+        <select id="mClass" class="form-input" onchange="detectClass()">
+          <option value="ar">-AR</option>
+          <option value="er">-ER</option>
+          <option value="ir">-IR</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Significado (opcional)</label>
+      <input type="text" id="mMeaning" class="form-input" placeholder="ej: comprar, adquirir">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">¿Es irregular?</label>
+      <select id="mType" class="form-input" onchange="toggleIrrFields()">
+        <option value="reg">No, es regular (auto-conjugar)</option>
+        <option value="irr">Sí, ingresaré formas manualmente</option>
+      </select>
+    </div>
+
+    <div id="irrFields" style="display:none">
+      <div class="form-section-title">Presente do indicativo (manual)</div>
+      <div class="form-row">
+        <div class="form-group"><label class="pronoun-label">eu</label><input type="text" id="p0" class="form-input" placeholder=""></div>
+        <div class="form-group"><label class="pronoun-label">tu</label><input type="text" id="p1" class="form-input" placeholder=""></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="pronoun-label">ele/ela/você</label><input type="text" id="p2" class="form-input" placeholder=""></div>
+        <div class="form-group"><label class="pronoun-label">nós</label><input type="text" id="p3" class="form-input" placeholder=""></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="pronoun-label">vós</label><input type="text" id="p4" class="form-input" placeholder=""></div>
+        <div class="form-group"><label class="pronoun-label">eles/elas/vocês</label><input type="text" id="p5" class="form-input" placeholder=""></div>
+      </div>
+      <p class="split-indicator" style="margin-top:4px">Los otros tiempos se estimarán desde la raíz del infinitivo.</p>
+    </div>
+
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-save" onclick="saveVerb()">Guardar verbo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────────
+const pronouns = ['eu','tu','ele/ela/você','nós','vós','eles/elas/vocês'];
+
+const tenseLabels = {
+  pres: 'Presente do indicativo',
+  pperf: 'Pretérito perfeito',
+  pimp: 'Pretérito imperfeito',
+  futpres: 'Futuro do presente',
+  futpret: 'Futuro do pretérito',
+};
+
+// Auto-conjugation engine
+function autoConj(inf, cls) {
+  const root = inf.slice(0, -2); // remove -ar/-er/-ir
+
+  // Ortographic adjustments for -ar pretérito perfeito eu
+  function perfEu(r, c) {
+    if (c === 'ar') {
+      if (r.endsWith('c')) return r.slice(0,-1) + 'qu' + 'ei';
+      if (r.endsWith('g')) return r + 'u' + 'ei';
+      if (r.endsWith('ç')) return r.slice(0,-1) + 'c' + 'ei';
+      return r + 'ei';
+    }
+    return r + 'i';
+  }
+
+  if (cls === 'ar') {
+    return {
+      pres: [root+'o', root+'as', root+'a', root+'amos', root+'ais', root+'am'],
+      pperf: [perfEu(root,'ar'), root+'aste', root+'ou', root+'ámos', root+'astes', root+'aram'],
+      pimp: [root+'ava', root+'avas', root+'ava', root+'ávamos', root+'áveis', root+'avam'],
+      futpres: [inf+'ei', inf+'ás', inf+'á', inf+'emos', inf+'eis', inf+'ão'],
+      futpret: [inf+'ia', inf+'ias', inf+'ia', inf+'íamos', inf+'íeis', inf+'iam'],
+    };
+  } else if (cls === 'er') {
+    return {
+      pres: [root+'o', root+'es', root+'e', root+'emos', root+'eis', root+'em'],
+      pperf: [root+'i', root+'este', root+'eu', root+'emos', root+'estes', root+'eram'],
+      pimp: [root+'ia', root+'ias', root+'ia', root+'íamos', root+'íeis', root+'iam'],
+      futpres: [inf+'ei', inf+'ás', inf+'á', inf+'emos', inf+'eis', inf+'ão'],
+      futpret: [inf+'ia', inf+'ias', inf+'ia', inf+'íamos', inf+'íeis', inf+'iam'],
+    };
+  } else { // ir
+    return {
+      pres: [root+'o', root+'es', root+'e', root+'imos', root+'is', root+'em'],
+      pperf: [root+'i', root+'iste', root+'iu', root+'imos', root+'istes', root+'iram'],
+      pimp: [root+'ia', root+'ias', root+'ia', root+'íamos', root+'íeis', root+'iam'],
+      futpres: [inf+'ei', inf+'ás', inf+'á', inf+'emos', inf+'eis', inf+'ão'],
+      futpret: [inf+'ia', inf+'ias', inf+'ia', inf+'íamos', inf+'íeis', inf+'iam'],
+    };
+  }
+}
+
+// ─── VERB DATABASE ──────────────────────────────────────────
+let verbDB = {
+  'falar':    { type:'reg', cls:'ar', note:'Verbo de referencia -AR. Significa hablar.', ...autoConj('falar','ar') },
+  'trabalhar':{ type:'reg', cls:'ar', note:'Regular -AR. Significa trabajar.', ...autoConj('trabalhar','ar') },
+  'comprar':  { type:'reg', cls:'ar', note:'Regular -AR. Significa comprar.', ...autoConj('comprar','ar') },
+  'chegar':   { type:'reg', cls:'ar', note:'Regular -AR. c→gu ante -ei en pretérito (cheguei).', ...autoConj('chegar','ar') },
+  'ficar':    { type:'reg', cls:'ar', note:'Regular -AR. c→qu ante -ei en pretérito (fiquei). Significa quedarse.', ...autoConj('ficar','ar') },
+  'precisar': { type:'reg', cls:'ar', note:'Regular -AR. Significa necesitar.', ...autoConj('precisar','ar') },
+  'girar':    { type:'reg', cls:'ar', note:'Regular -AR. Significa girar.', ...autoConj('girar','ar') },
+  'tomar':    { type:'reg', cls:'ar', note:'Regular -AR. Significa tomar.', ...autoConj('tomar','ar') },
+  'arrumar':  { type:'reg', cls:'ar', note:'Regular -AR. Significa arreglar/ordenar.', ...autoConj('arrumar','ar') },
+  'escutar':  { type:'reg', cls:'ar', note:'Regular -AR. Significa escuchar.', ...autoConj('escutar','ar') },
+  'explicar': { type:'reg', cls:'ar', note:'Regular -AR. c→qu ante -ei (expliquei).', ...autoConj('explicar','ar') },
+  'contar':   { type:'reg', cls:'ar', note:'Regular -AR. Significa contar/narrar.', ...autoConj('contar','ar') },
+  'poupar':   { type:'reg', cls:'ar', note:'Regular -AR. Significa ahorrar.', ...autoConj('poupar','ar') },
+  'beber':    { type:'reg', cls:'er', note:'Verbo de referencia -ER. Significa beber.', ...autoConj('beber','er') },
+  'revender': { type:'reg', cls:'er', note:'Regular -ER. Significa revender.', ...autoConj('revender','er') },
+  'ascender': { type:'reg', cls:'er', note:'Regular -ER. Significa ascender.', ...autoConj('ascender','er') },
+  'assistir': { type:'reg', cls:'ir', note:'Regular -IR. Significa asistir/ver (TV).', ...autoConj('assistir','ir') },
+  'ser':      { type:'irr', cls:'er', note:'Verbo irregular fundamental. Identidad, origen, características.',
+    pres:['sou','és','é','somos','sois','são'],
+    pperf:['fui','foste','foi','fomos','fostes','foram'],
+    pimp:['era','eras','era','éramos','éreis','eram'],
+    futpres:['serei','serás','será','seremos','sereis','serão'],
+    futpret:['seria','serias','seria','seríamos','seríeis','seriam'],
+  },
+  'estar':    { type:'irr', cls:'ar', note:'Irregular. Estados temporales, ubicación, sentimientos pasajeros.',
+    pres:['estou','estás','está','estamos','estais','estão'],
+    pperf:['estive','estiveste','esteve','estivemos','estivestes','estiveram'],
+    pimp:['estava','estavas','estava','estávamos','estáveis','estavam'],
+    futpres:['estarei','estarás','estará','estaremos','estareis','estarão'],
+    futpret:['estaria','estarias','estaria','estaríamos','estaríeis','estariam'],
+  },
+  'ir':       { type:'irr', cls:'ir', note:'Irregular. Comparte formas con "ser" en pretérito.',
+    pres:['vou','vais','vai','vamos','ides','vão'],
+    pperf:['fui','foste','foi','fomos','fostes','foram'],
+    pimp:['ia','ias','ia','íamos','íeis','iam'],
+    futpres:['irei','irás','irá','iremos','ireis','irão'],
+    futpret:['iria','irias','iria','iríamos','iríeis','iriam'],
+  },
+  'ter':      { type:'irr', cls:'er', note:'Irregular esencial. Auxiliar en tiempos compuestos.',
+    pres:['tenho','tens','tem','temos','tendes','têm'],
+    pperf:['tive','tiveste','teve','tivemos','tivestes','tiveram'],
+    pimp:['tinha','tinhas','tinha','tínhamos','tínheis','tinham'],
+    futpres:['terei','terás','terá','teremos','tereis','terão'],
+    futpret:['teria','terias','teria','teríamos','teríeis','teriam'],
+  },
+  'fazer':    { type:'irr', cls:'er', note:'Irregular. Raíz "fiz-" en pretérito, "farei" en futuro.',
+    pres:['faço','fazes','faz','fazemos','fazeis','fazem'],
+    pperf:['fiz','fizeste','fez','fizemos','fizestes','fizeram'],
+    pimp:['fazia','fazias','fazia','fazíamos','fazíeis','faziam'],
+    futpres:['farei','farás','fará','faremos','fareis','farão'],
+    futpret:['faria','farias','faria','faríamos','faríeis','fariam'],
+  },
+  'poder':    { type:'irr', cls:'er', note:'Irregular en presente (posso). Raíz "pud-" en pretérito.',
+    pres:['posso','podes','pode','podemos','podeis','podem'],
+    pperf:['pude','pudeste','pôde','pudemos','pudestes','puderam'],
+    pimp:['podia','podias','podia','podíamos','podíeis','podiam'],
+    futpres:['poderei','poderás','poderá','poderemos','podereis','poderão'],
+    futpret:['poderia','poderias','poderia','poderíamos','poderíeis','poderiam'],
+  },
+  'vir':      { type:'irr', cls:'ir', note:'Irregular. Significa venir. Raíz muy cambiante.',
+    pres:['venho','vens','vem','vimos','vindes','vêm'],
+    pperf:['vim','vieste','veio','viemos','viestes','vieram'],
+    pimp:['vinha','vinhas','vinha','vínhamos','vínheis','vinham'],
+    futpres:['virei','virás','virá','viremos','vireis','virão'],
+    futpret:['viria','virias','viria','viríamos','viríeis','viriam'],
+  },
+  'ver':      { type:'irr', cls:'er', note:'Irregular. Raíz "vi-" en pretérito.',
+    pres:['vejo','vês','vê','vemos','vedes','veem'],
+    pperf:['vi','viste','viu','vimos','vistes','viram'],
+    pimp:['via','vias','via','víamos','víeis','viam'],
+    futpres:['verei','verás','verá','veremos','vereis','verão'],
+    futpret:['veria','verias','veria','veríamos','veríeis','veriam'],
+  },
+  'trazer':   { type:'irr', cls:'er', note:'Irregular. Raíz "trouxe-" en pretérito.',
+    pres:['trago','trazes','traz','trazemos','trazeis','trazem'],
+    pperf:['trouxe','trouxeste','trouxe','trouxemos','trouxestes','trouxeram'],
+    pimp:['trazia','trazias','trazia','trazíamos','trazíeis','traziam'],
+    futpres:['trarei','trarás','trará','traremos','trareis','trarão'],
+    futpret:['traria','trarias','traria','traríamos','traríeis','trariam'],
+  },
+  'sair':     { type:'irr', cls:'ir', note:'Irregular en presente (saio). Significa salir.',
+    pres:['saio','sais','sai','saímos','saís','saem'],
+    pperf:['saí','saíste','saiu','saímos','saístes','saíram'],
+    pimp:['saía','saías','saía','saíamos','saíeis','saíam'],
+    futpres:['sairei','sairás','sairá','sairemos','saireis','sairão'],
+    futpret:['sairia','sairias','sairia','saíríamos','saíríeis','sairiam'],
+  },
+  'conseguir':{ type:'irr', cls:'ir', note:'Irregular en presente (consigo). Significa lograr.',
+    pres:['consigo','consegues','consegue','conseguimos','conseguis','conseguem'],
+    pperf:['consegui','conseguiste','conseguiu','conseguimos','conseguistes','conseguiram'],
+    pimp:['conseguia','conseguias','conseguia','conseguíamos','conseguíeis','conseguiam'],
+    futpres:['conseguirei','conseguirás','conseguirá','conseguiremos','conseguireis','conseguirão'],
+    futpret:['conseguiria','conseguirias','conseguiria','conseguiríamos','conseguiríeis','conseguiriam'],
+  },
+  'conhecer': { type:'irr', cls:'er', note:'Irregular solo en eu presente (conheço). Significa conocer.',
+    pres:['conheço','conheces','conhece','conhecemos','conheceis','conhecem'],
+    pperf:['conheci','conheceste','conheceu','conhecemos','conhecestes','conheceram'],
+    pimp:['conhecia','conhecias','conhecia','conhecíamos','conhecíeis','conheciam'],
+    futpres:['conhecerei','conhecerás','conhecerá','conheceremos','conhecereis','conhecerão'],
+    futpret:['conheceria','conhecerias','conheceria','conheceríamos','conheceríeis','conheceriam'],
+  },
+};
+
+// ─── STATE ──────────────────────────────────────────────────
+let currentVerb = 'falar';
+let currentTense = 'pres';
+let currentTab = 'conj';
+let searchQ = '';
+
+// ─── SIDEBAR ────────────────────────────────────────────────
+function renderSidebar() {
+  const list = document.getElementById('verbList');
+  const keys = Object.keys(verbDB).filter(v => v.includes(searchQ));
+  list.innerHTML = keys.map(v => `
+    <div class="verb-item ${v===currentVerb?'active':''}" onclick="selectVerb('${v}')">
+      <span>${v}</span>
+      <span class="vtag ${verbDB[v].type}">${verbDB[v].type}</span>
+    </div>
+  `).join('');
+}
+
+function filterVerbs() {
+  searchQ = document.getElementById('search').value.toLowerCase();
+  renderSidebar();
+}
+
+function selectVerb(v) {
+  currentVerb = v;
+  switchTab('conj');
+  renderSidebar();
+  renderVerb();
+}
+
+// ─── CONJUGATION DISPLAY ────────────────────────────────────
+function highlightForm(form, inf, cls) {
+  if (!inf) return `<span class="form">${form}</span>`;
+  const root = inf.slice(0,-2);
+  if (form.startsWith(root)) {
+    const end = form.slice(root.length);
+    return `<span class="form"><span class="root">${root}</span><span class="ending">${end}</span></span>`;
+  }
+  return `<span class="form">${form}</span>`;
+}
+
+function renderTable(tenseId, verb) {
+  const data = verbDB[verb][tenseId];
+  if (!data) return '';
+  const inf = verb;
+  const rows = pronouns.map((p,i) => `
+    <tr>
+      <td class="pron">${p}</td>
+      <td>${highlightForm(data[i], verbDB[verb].type==='reg'?inf:null, verbDB[verb].cls)}</td>
+    </tr>
+  `).join('');
+  return `
+    <table class="conj-table">
+      <thead><tr><th>Pronome</th><th>Forma conjugada</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function renderVerb() {
+  const v = verbDB[currentVerb];
+  if (!v) return;
+  const badge = v.type === 'reg'
+    ? `<span class="verb-type" style="background:var(--reg-bg);color:var(--reg-c)">regular ${v.cls.toUpperCase()}</span>`
+    : `<span class="verb-type" style="background:var(--irr-bg);color:var(--irr-c)">irregular</span>`;
+
+  const header = `
+    <div class="verb-header">
+      <div class="verb-big">${currentVerb}</div>
+      <div class="verb-meta">
+        ${badge}
+        <div class="verb-note">${v.note||''}</div>
+      </div>
+      ${Object.keys(verbDB).length > 1 && !['ser','estar','ir','ter','fazer','poder','vir','ver','trazer','sair','conseguir','conhecer'].includes(currentVerb)
+        ? `<button class="del-btn" onclick="deleteVerb('${currentVerb}')" style="margin-left:auto">Eliminar</button>` : ''}
+    </div>
+  `;
+
+  if (currentTense === 'all') {
+    const cards = Object.keys(tenseLabels).map(tid => `
+      <div class="tense-card">
+        <div class="tense-card-header">${tenseLabels[tid]}</div>
+        <table>
+          ${pronouns.map((p,i)=>`
+            <tr>
+              <td class="p">${p}</td>
+              <td class="f"><span class="fe">${v[tid][i]}</span></td>
+            </tr>
+          `).join('')}
+        </table>
+      </div>
+    `).join('');
+
+    const tip = v.type === 'reg' ? `
+      <div class="pattern-box">
+        <div class="pattern-icon">💡</div>
+        <div class="pattern-text">
+          <h4>Patrón detectado: verbo regular -${v.cls.toUpperCase()}</h4>
+          <p>La raíz <code>${currentVerb.slice(0,-2)}-</code> nunca cambia. Solo varían las terminaciones según el pronombre y el tiempo verbal.</p>
+        </div>
+      </div>
+    ` : '';
+
+    document.getElementById('verbDisplay').innerHTML = header + tip + `<div class="all-grid">${cards}</div>`;
+  } else {
+    document.getElementById('verbDisplay').innerHTML = header + renderTable(currentTense, currentVerb);
+  }
+}
+
+function setTense(id, btn) {
+  currentTense = id;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderVerb();
+}
+
+// ─── TAB SWITCHING ──────────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('conjSection').classList.toggle('active', tab==='conj');
+  document.getElementById('infoSection').classList.toggle('active', tab==='info');
+  document.getElementById('tipsSection').classList.toggle('active', tab==='tips');
+  document.querySelectorAll('.mode-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['conj','info','tips'][i]===tab);
+  });
+  if(tab==='conj') renderVerb();
+}
+
+// ─── MODAL ──────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('mInf').value = '';
+  document.getElementById('mMeaning').value = '';
+  document.getElementById('mType').value = 'reg';
+  document.getElementById('irrFields').style.display = 'none';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+function toggleIrrFields() {
+  const irr = document.getElementById('mType').value === 'irr';
+  document.getElementById('irrFields').style.display = irr ? 'block' : 'none';
+}
+function detectClass() {
+  const inf = document.getElementById('mInf').value.trim().toLowerCase();
+  if (inf.endsWith('ar')) document.getElementById('mClass').value = 'ar';
+  else if (inf.endsWith('er')) document.getElementById('mClass').value = 'er';
+  else if (inf.endsWith('ir')) document.getElementById('mClass').value = 'ir';
+}
+document.getElementById('mInf').addEventListener('input', function(){
+  const inf = this.value.trim().toLowerCase();
+  if (inf.endsWith('ar')) document.getElementById('mClass').value = 'ar';
+  else if (inf.endsWith('er')) document.getElementById('mClass').value = 'er';
+  else if (inf.endsWith('ir')) document.getElementById('mClass').value = 'ir';
+});
+
+function saveVerb() {
+  const inf = document.getElementById('mInf').value.trim().toLowerCase();
+  const cls = document.getElementById('mClass').value;
+  const type = document.getElementById('mType').value;
+  const meaning = document.getElementById('mMeaning').value.trim();
+  if (!inf || inf.length < 3) { alert('Ingresa un infinitivo válido.'); return; }
+
+  let conj;
+  if (type === 'reg') {
+    conj = autoConj(inf, cls);
+  } else {
+    const manual = [0,1,2,3,4,5].map(i => document.getElementById('p'+i).value.trim());
+    const root = inf.slice(0,-2);
+    conj = {
+      pres: manual.every(x=>x) ? manual : autoConj(inf,cls).pres,
+      pperf: autoConj(inf,cls).pperf,
+      pimp: autoConj(inf,cls).pimp,
+      futpres: autoConj(inf,cls).futpres,
+      futpret: autoConj(inf,cls).futpret,
+    };
+  }
+
+  verbDB[inf] = {
+    type,
+    cls,
+    note: meaning ? `Significa: ${meaning}. Clase -${cls.toUpperCase()}.` : `Clase -${cls.toUpperCase()}.`,
+    ...conj,
+  };
+
+  closeModal();
+  currentVerb = inf;
+  renderSidebar();
+  renderVerb();
+  switchTab('conj');
+}
+
+function deleteVerb(v) {
+  if (!confirm(`¿Eliminar "${v}"?`)) return;
+  delete verbDB[v];
+  currentVerb = Object.keys(verbDB)[0];
+  renderSidebar();
+  renderVerb();
+}
+
+// ─── INIT ───────────────────────────────────────────────────
+renderSidebar();
+renderVerb();
+
+// Close modal on overlay click
+document.getElementById('modalOverlay').addEventListener('click', function(e){
+  if(e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
