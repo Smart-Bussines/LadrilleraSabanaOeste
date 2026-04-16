@@ -66,24 +66,23 @@
     }
     .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; flex-shrink: 0; }
 
-    /* Contenedor derecho — clip para el efecto */
+    /* ── Strip derecho: íconos sueltos con mini etiqueta ── */
     .strip-right {
       position: relative;
-      height: 44px;
-      min-width: 130px;
+      height: 52px;
+      min-width: 140px;
       overflow: hidden;
       flex-shrink: 0;
     }
 
-    /* TAGLINE — visible al inicio, se va al hacer scroll */
+    /* TAGLINE — visible hasta que el hero sale de pantalla */
     .strip-tagline {
       position: absolute;
       top: 0; right: 0;
       height: 100%;
       display: flex; flex-direction: column;
       align-items: flex-end; justify-content: center;
-      transform: translateY(0);
-      opacity: 1;
+      transform: translateY(0); opacity: 1;
       transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
     }
     .strip-tagline .t-title {
@@ -96,45 +95,46 @@
       white-space: nowrap; margin-top: 2px;
     }
 
-    /* Strip util pill — oculta abajo al inicio, sube al hacer scroll */
-    .strip-util-pill {
+    /* ÍCONOS SUELTOS — ocultos abajo al inicio */
+    .strip-icons {
       position: absolute;
       bottom: 0; right: 0;
-      display: flex; align-items: center;
-      background: rgba(45,74,45,.09); border: 1px solid rgba(45,74,45,.18);
-      border-radius: 22px; padding: 5px 8px;
-      transform: translateY(110%);
-      opacity: 0;
+      display: flex; align-items: flex-end;
+      gap: 16px;
+      transform: translateY(110%); opacity: 0;
       transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
     }
 
-    /* Estado scrolled — tagline baja, pill sube */
+    /* Estado scrolled — tagline baja, íconos suben */
     .logo-strip.scrolled .strip-tagline {
-      transform: translateY(110%);
-      opacity: 0;
+      transform: translateY(110%); opacity: 0;
     }
-    .logo-strip.scrolled .strip-util-pill {
-      transform: translateY(0);
-      opacity: 1;
+    .logo-strip.scrolled .strip-icons {
+      transform: translateY(0); opacity: 1;
     }
-    .sup-btn {
-      position: relative; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      background: none; border: none; cursor: pointer;
-      color: var(--forest); font-size: 15px; border-radius: 50%;
-      transition: background .18s, transform .15s; flex-shrink: 0;
-    }
-    .sup-btn:active { transform: scale(.85); background: rgba(45,74,45,.1); }
-    .sup-sep { width: 1px; height: 16px; background: rgba(45,74,45,.2); flex-shrink: 0; }
-    .sup-btn .stip {
-      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
-      background: rgba(0,0,0,.82); color: #fff; font-size: 10px; font-weight: 600;
-      font-family: 'DM Sans', sans-serif; white-space: nowrap; padding: 4px 9px; border-radius: 8px;
-      pointer-events: none; opacity: 0; transition: opacity .2s; letter-spacing: .3px; z-index: 60;
-    }
-    .sup-btn .stip::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: rgba(0,0,0,.82); }
-    .sup-btn .stip.show { opacity: 1; }
 
+    /* Cada ícono suelto */
+    .sicon {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      cursor: pointer; background: none;
+      border: none; font-family: 'DM Sans', sans-serif;
+      transition: transform .18s;
+      padding: 0;
+    }
+    .sicon:active { transform: scale(.85); }
+    .sicon .sicon-circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(45,74,45,.09);
+      border: 1px solid rgba(45,74,45,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--forest);
+    }
+    .sicon .sicon-label {
+      font-size: 9px; font-weight: 600;
+      color: var(--muted); white-space: nowrap;
+      letter-spacing: .2px;
+    }
     /* ACTION BUTTONS — estilo Airbnb */
     .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 16px 16px 4px; }
     .action-btn {
@@ -447,18 +447,19 @@
         <span class="t-sub">El mejor clima de Atenas 🌿</span>
       </div>
 
-      <!-- Píldora que aparece al hacer scroll -->
-      <div class="strip-util-pill">
-        <button class="sup-btn" onclick="showSupTip(this); openModal('saveModal')">
-          <i class="fa fa-address-book"></i><span class="stip">Guardar Contacto</span>
+      <!-- Íconos sueltos que aparecen al hacer scroll completo del hero -->
+      <div class="strip-icons">
+        <button class="sicon" onclick="showSupTip(this); openModal('saveModal')">
+          <div class="sicon-circle"><i class="fa fa-address-book"></i></div>
+          <span class="sicon-label">Guardar</span>
         </button>
-        <div class="sup-sep"></div>
-        <button class="sup-btn" onclick="showSupTip(this); openModal('qrModal')">
-          <i class="fa fa-qrcode"></i><span class="stip">Código QR</span>
+        <button class="sicon" onclick="showSupTip(this); openModal('qrModal')">
+          <div class="sicon-circle"><i class="fa fa-qrcode"></i></div>
+          <span class="sicon-label">QR</span>
         </button>
-        <div class="sup-sep"></div>
-        <button class="sup-btn" onclick="showSupTip(this); openModal('installModal')">
-          <i class="fa fa-mobile-screen"></i><span class="stip">Instalar App</span>
+        <button class="sicon" onclick="showSupTip(this); openModal('installModal')">
+          <div class="sicon-circle"><i class="fa fa-mobile-screen"></i></div>
+          <span class="sicon-label">Instalar</span>
         </button>
       </div>
 
@@ -825,14 +826,15 @@
 <script>
 new Swiper('.hero-swiper', { loop:true, effect:'fade', fadeEffect:{crossFade:true}, autoplay:{delay:3000,disableOnInteraction:false}, pagination:{el:'.swiper-pagination',clickable:true}, navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}, lazy:true });
 
-/* SCROLL FLIP — tagline baja, píldora sube desde el primer pixel */
-var logoStrip = document.getElementById('logoStrip');
+/* SCROLL FLIP — activa cuando el hero sale completamente de pantalla (~285px) */
+var logoStrip  = document.getElementById('logoStrip');
+var heroHeight = document.querySelector('.hero-swiper') ? document.querySelector('.hero-swiper').offsetHeight : 260;
 window.addEventListener('scroll', function() {
-  if (window.scrollY > 0) { logoStrip.classList.add('scrolled'); }
+  if (window.scrollY >= heroHeight) { logoStrip.classList.add('scrolled'); }
   else { logoStrip.classList.remove('scrolled'); }
 }, { passive: true });
 
-function showSupTip(btn) { var t=btn.querySelector('.stip'); if(!t)return; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},1500); }
+function showSupTip(btn) { /* labels always visible, no tooltip needed */ }
 
 var IMAGES=['img/img/1.jpeg','img/img/2.jpeg','img/img/3.jpeg','img/img/4.jpeg','img/img/5.jpeg','img/img/6.jpeg','img/img/7.jpeg','img/img/8.jpeg','img/img/9.jpeg','img/img/10.jpeg','img/img/11.jpeg','img/img/12.jpeg','img/img/13.jpeg','img/img/14.jpeg','img/img/15.jpeg','img/img/16.jpeg','img/img/17.jpeg','img/img/18.jpeg'];
 
