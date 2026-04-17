@@ -152,6 +152,33 @@
     .action-btn.ac-service::before { background: linear-gradient(90deg, var(--forest), #3d6b3d); }
     .action-btn.ac-social::before  { background: linear-gradient(90deg, #1877f2, #00b4d8); }
     .action-emoji { font-size: 44px; line-height: 1; margin-bottom: 10px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+
+    /* Ícono imagen personalizada 3D */
+    .action-icon-wrap {
+      width: 68px; height: 68px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+    /* Fondo negro — para íconos con fondo negro (videos, servicios) */
+    .action-icon-wrap.dark {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 5px 16px rgba(0,0,0,.28), 0 2px 5px rgba(0,0,0,.15);
+    }
+    .action-icon-wrap.dark img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    /* Fondo transparente — para íconos sin fondo (redes) */
+    .action-icon-wrap.clear {
+      background: transparent;
+    }
+    .action-icon-wrap.clear img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,.22));
+    }
     .action-label { font-size: 12px; font-weight: 600; color: var(--text); text-align: center; line-height: 1.2; }
     .action-sub { font-size: 10px; color: var(--muted); text-align: center; margin-top: 3px; line-height: 1.3; }
 
@@ -468,21 +495,31 @@
 
   <!-- BOTONES AIRBNB STYLE -->
   <div class="actions fade-up">
+
     <button class="action-btn ac-video" onclick="openModal('videosModal')">
-      <span class="action-emoji">🎬</span>
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-videos.png" alt="Videos" />
+      </div>
       <span class="action-label">Videos</span>
       <span class="action-sub">Recorrido y Reels</span>
     </button>
+
     <button class="action-btn ac-service" onclick="openModal('serviciosModal')">
-      <span class="action-emoji">🏡</span>
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-servicios.png" alt="Servicios" />
+      </div>
       <span class="action-label">Servicios</span>
       <span class="action-sub">Amenidades</span>
     </button>
+
     <button class="action-btn ac-social" onclick="openModal('socialModal')">
-      <span class="action-emoji">📲</span>
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-redes.png" alt="Redes" />
+      </div>
       <span class="action-label">Redes</span>
       <span class="action-sub">Síguenos</span>
     </button>
+
   </div>
 
   <!-- BIG CTA -->
