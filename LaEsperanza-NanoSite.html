@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Panadería La Esperanza — Pan artesanal y repostería, Coyol de Alajuela" />
+  <meta property="og:title" content="Panadería La Esperanza" />
+  <meta property="og:description" content="Pan artesanal, queques y repostería para eventos · Coyol de Alajuela" />
+  <title>Panadería La Esperanza</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --cream:      #fdf8f3;
+      --warm:       #f5ede0;
+      --gold:       #c8872a;
+      --gold-light: #e0a040;
+      --brown:      #5c3317;
+      --bark:       #8b4513;
+      --text:       #1a1a1a;
+      --muted:      #7a6652;
+      --white:      #ffffff;
+      --shadow-card: 0 6px 24px rgba(0,0,0,.09), 0 2px 6px rgba(0,0,0,.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #1a0f08; display: flex; justify-content: center; min-height: 100vh; }
+    .card { width: 100%; max-width: 430px; background: var(--cream); min-height: 100vh; }
+
+    /* ── HERO SWIPER ── */
+    .hero-swiper { height: 62vw; max-height: 285px; position: relative; }
+    .hero-swiper::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.04) 55%, rgba(0,0,0,.32) 100%);
+      z-index: 2; pointer-events: none;
+    }
+    .hero-swiper .swiper-slide { background-size: cover; background-position: center; }
+    .hero-swiper .swiper-button-next,
+    .hero-swiper .swiper-button-prev { color: rgba(255,255,255,.85); z-index: 10; }
+    .hero-swiper .swiper-button-next::after,
+    .hero-swiper .swiper-button-prev::after { font-size: 18px; font-weight: 700; }
+    .hero-swiper .swiper-pagination-bullet { background: rgba(255,255,255,.5); opacity: 1; width: 6px; height: 6px; }
+    .hero-swiper .swiper-pagination-bullet-active { background: var(--gold-light); width: 20px; border-radius: 3px; }
+
+    /* Hero pill "Ver galería" — top right */
+    .hero-gallery-pill {
+      position: absolute; top: 14px; right: 14px; z-index: 6;
+      display: flex; align-items: center; gap: 7px;
+      cursor: pointer; border: none;
+      background: rgba(0,0,0,.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.92);
+      padding: 7px 14px 7px 11px; border-radius: 22px;
+      transition: background .2s, transform .18s; white-space: nowrap;
+    }
+    .hero-gallery-pill:active { transform: scale(.93); }
+    .hero-gallery-pill .icon { font-size: 13px; }
+    .hero-gallery-pill span { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; }
+    .hero-gallery-pill .arrow { font-size: 11px; animation: arrowFade 2.5s ease-in-out infinite; }
+    @keyframes arrowFade { 0%,100%{opacity:.35;transform:translateY(0);}50%{opacity:1;transform:translateY(2px);} }
+
+    /* ── LOGO STRIP ── */
+    .logo-strip {
+      background: var(--white); padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #ede4d8;
+      box-shadow: 0 4px 20px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.07);
+      position: sticky; top: 0; z-index: 50; min-height: 68px;
+    }
+    .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; flex-shrink: 0; }
+
+    /* Strip right — tagline / íconos con flip */
+    .strip-right { position: relative; height: 52px; min-width: 140px; overflow: hidden; flex-shrink: 0; }
+    .strip-tagline {
+      position: absolute; top: 0; right: 0; height: 100%;
+      display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+      transform: translateY(0); opacity: 1;
+      transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    }
+    .strip-tagline .t-title {
+      font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 700;
+      color: var(--brown); line-height: 1.2; white-space: nowrap;
+    }
+    .strip-tagline .t-sub { font-size: 10px; color: var(--muted); white-space: nowrap; margin-top: 2px; }
+    .strip-icons {
+      position: absolute; bottom: 0; right: 0;
+      display: flex; align-items: flex-end; gap: 16px;
+      transform: translateY(110%); opacity: 0;
+      transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    }
+    .logo-strip.scrolled .strip-tagline { transform: translateY(110%); opacity: 0; }
+    .logo-strip.scrolled .strip-icons  { transform: translateY(0);    opacity: 1; }
+    .sicon {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      cursor: pointer; background: none; border: none;
+      font-family: 'DM Sans', sans-serif; transition: transform .18s; padding: 0;
+    }
+    .sicon:active { transform: scale(.85); }
+    .sicon .sicon-circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(92,51,23,.09); border: 1px solid rgba(92,51,23,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--brown);
+    }
+    .sicon .sicon-label { font-size: 9px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+
+    /* ── ACTION BUTTONS estilo Airbnb ── */
+    .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 16px 16px 4px; }
+    .action-btn {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 18px 8px 14px; border-radius: 20px;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; background: var(--white);
+      box-shadow: var(--shadow-card);
+      transition: transform .18s, box-shadow .18s;
+      position: relative; overflow: hidden;
+    }
+    .action-btn:active { transform: scale(.94); box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+    .action-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 20px 20px 0 0; }
+    .action-btn.ac-menu::before   { background: linear-gradient(90deg,var(--bark),#b05a1a); }
+    .action-btn.ac-promo::before  { background: linear-gradient(90deg,#c0392b,#e74c3c); }
+    .action-btn.ac-social::before { background: linear-gradient(90deg,#1877f2,#00b4d8); }
+    .action-emoji { font-size: 44px; line-height: 1; margin-bottom: 10px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+    .action-label { font-size: 12px; font-weight: 700; color: var(--text); text-align: center; line-height: 1.2; }
+    .action-sub   { font-size: 10px; color: var(--muted); text-align: center; margin-top: 3px; }
+
+    /* ── BIG CTA ── */
+    .big-cta { padding: 16px 16px 4px; }
+    .big-cta a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg,#25d366,#1da851);
+      color: #fff; text-decoration: none;
+      padding: 15px; border-radius: 18px; font-size: 15px; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(37,211,102,.30); transition: transform .18s;
+    }
+    .big-cta a:active { transform: scale(.97); }
+    .big-cta a i { font-size: 21px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title { padding: 20px 18px 10px; display: flex; align-items: center; gap: 10px; }
+    .section-title::before { content: ''; width: 4px; height: 22px; background: var(--gold); border-radius: 2px; flex-shrink: 0; }
+    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--text); font-weight: 700; }
+
+    /* ── DESCRIPTION ── */
+    .description-card {
+      margin: 0 16px 16px; background: var(--white);
+      border-radius: 20px; padding: 18px; box-shadow: var(--shadow-card);
+    }
+    .description-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+    .description-card p + p { margin-top: 10px; }
+    .description-card strong { color: var(--text); }
+    .capacity-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--warm); border-radius: 20px;
+      padding: 6px 12px; font-size: 12px; color: var(--brown); font-weight: 500;
+    }
+    .pill i { font-size: 11px; color: var(--gold); }
+
+    /* ── GALLERY SCROLL ── */
+    .gallery-scroll {
+      display: flex; gap: 10px; padding: 0 16px 4px 16px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-scroll > * { scroll-snap-align: start; }
+    .gallery-thumb {
+      flex-shrink: 0; width: 130px; height: 100px;
+      border-radius: 14px; overflow: hidden; cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,.12);
+    }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+    .gallery-thumb:active img { transform: scale(1.06); }
+
+    /* ── RESEÑAS ── */
+    .reviews-scroll {
+      display: flex; gap: 10px; padding: 0 16px 8px 16px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
+    .review-card {
+      flex-shrink: 0; width: 82vw; max-width: 290px;
+      background: var(--white); border-radius: 16px; padding: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04);
+      scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px;
+    }
+    .review-top { display: flex; align-items: center; gap: 9px; }
+    .review-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .review-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.1; }
+    .review-date { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .review-stars { color: #f59e0b; font-size: 11px; letter-spacing: 1px; }
+    .review-text { font-size: 11.5px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .review-source { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--muted); padding-top: 7px; border-top: 1px solid #f0ece6; }
+    .review-hint { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px 0 14px; font-size: 11px; color: var(--muted); }
+    .review-hint i { color: var(--gold); animation: nudgeRight 1.6s ease-in-out infinite; }
+    @keyframes nudgeRight { 0%,100%{transform:translateX(0);opacity:.5;}50%{transform:translateX(5px);opacity:1;} }
+    .review-hint.hidden { display: none; }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      margin: 0 16px 16px; background: var(--brown);
+      border-radius: 22px; padding: 20px; color: #fff;
+      box-shadow: 0 8px 28px rgba(92,51,23,.30);
+    }
+    .contact-strip .ct-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .contact-strip .ct-sub  { font-size: 12px; opacity: .72; margin-bottom: 14px; }
+    .contact-strip .owners  { font-size: 12.5px; font-weight: 500; opacity: .9; margin-bottom: 10px; }
+    .contact-strip .location { font-size: 11.5px; opacity: .72; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
+    .contact-strip .location i { margin-top: 2px; color: var(--gold-light); flex-shrink: 0; }
+    .contact-buttons { display: flex; gap: 10px; }
+    .ct-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 6px; border-radius: 13px; font-size: 12px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform .18s; }
+    .ct-btn:active { transform: scale(.94); }
+    .ct-btn.wapp { background: #25d366; color: #fff; }
+    .ct-btn.call { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.28); }
+    .ct-btn.waze { background: #00d4e8; color: #111; }
+
+    /* ── HORARIO ── */
+    .horario-card {
+      margin: 0 16px 16px; background: var(--white);
+      border-radius: 20px; padding: 18px; box-shadow: var(--shadow-card);
+    }
+    .horario-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f5ede0; font-size: 13px; }
+    .horario-row:last-child { border-bottom: none; }
+    .horario-row .dias { color: var(--text); font-weight: 500; }
+    .horario-row .horas { color: var(--brown); font-weight: 700; }
+    .horario-row .cerrado { color: #e53935; font-weight: 700; }
+
+    /* ── SHARE ── */
+    .share-row { margin: 0 16px 20px; background: var(--white); border-radius: 20px; padding: 18px 16px; box-shadow: var(--shadow-card); }
+    .share-row .share-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .share-row .share-sub { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+    .share-icons { display: flex; justify-content: space-around; }
+    .share-icon { display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; transition: transform .18s; flex: 1; }
+    .share-icon:active { transform: scale(.9); }
+    .share-icon .si-circle { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.15); }
+    .share-icon .si-label { font-size: 10px; font-weight: 500; color: var(--muted); }
+    .si-wa .si-circle { background: #25d366; }
+    .si-fb .si-circle { background: #1877f2; }
+    .si-tg .si-circle { background: #2ca5e0; }
+    .si-ms .si-circle { background: #0084ff; }
+
+    /* ── FOOTER ── */
+    .divider { height: 1px; background: linear-gradient(to right,transparent,#ddd6cb,transparent); margin: 4px 16px 8px; }
+    .card-footer { background: #1a0f08; color: rgba(255,255,255,.45); font-size: 11px; text-align: center; padding: 18px 16px; line-height: 1.8; }
+    .card-footer a { color: rgba(255,255,255,.6); text-decoration: none; }
+
+    /* ── FLOTANTES ── */
+    .float-stack { position: fixed; bottom: 24px; right: 14px; display: flex; flex-direction: column; align-items: center; gap: 16px; z-index: 100; }
+    .float-btn { width: 54px; height: 54px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; border: none; cursor: pointer; transition: transform .18s; position: relative; outline: 3px solid #fff; }
+    .float-btn:active { transform: scale(.92); }
+    .float-btn::before { content: attr(data-tip); position: absolute; right: 62px; background: rgba(0,0,0,.78); color: #fff; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 8px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; font-family: 'DM Sans', sans-serif; }
+    .float-btn:hover::before { opacity: 1; }
+    .float-wa { background: #25d366; box-shadow: 0 5px 0 #1a9e4e, 0 7px 16px rgba(0,0,0,.38); font-size: 26px; color: #fff; }
+    .float-menu { background: var(--bark); box-shadow: 0 5px 0 #5c3317, 0 7px 16px rgba(0,0,0,.38); font-size: 20px; color: #fff; }
+
+    /* ── FADE-UP ── */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MODALES ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(3px); z-index: 200; align-items: flex-end; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal-sheet { background: var(--cream); border-radius: 26px 26px 0 0; width: 100%; max-width: 430px; padding: 10px 20px 38px; animation: slide-up .32s cubic-bezier(.4,0,.2,1); max-height: 88vh; overflow-y: auto; }
+    @keyframes slide-up { from{transform:translateY(100%);}to{transform:translateY(0);} }
+    .modal-handle { width: 38px; height: 4px; background: #ccc; border-radius: 2px; margin: 10px auto 18px; }
+    .modal-sheet h3 { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--text); margin-bottom: 6px; }
+    .modal-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-list { display: flex; flex-direction: column; gap: 10px; }
+    .modal-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: var(--white); text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: transform .18s; width: 100%; text-align: left; }
+    .modal-row:active { transform: scale(.97); }
+    .modal-row.primary { background: var(--brown); }
+    .mr-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .mr-text { flex: 1; }
+    .mr-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 3px; }
+    .mr-desc  { font-size: 11px; color: var(--muted); }
+    .modal-row.primary .mr-title, .modal-row.primary .mr-desc { color: #fff; }
+    .mr-arrow { color: #ccc; font-size: 13px; }
+    .modal-row.primary .mr-arrow { color: rgba(255,255,255,.5); }
+    .modal-cancel { display: block; width: 100%; text-align: center; margin-top: 14px; padding: 12px; border-radius: 14px; background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+
+    /* ── MENU SWIPER (dentro del modal) ── */
+    .menu-swiper-wrap { border-radius: 16px; overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-card); }
+    .menu-swiper { width: 100%; }
+    .menu-swiper .swiper-slide {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--warm); min-height: 260px;
+      font-size: 60px;
+    }
+    .menu-swiper .swiper-pagination-bullet { background: var(--brown); }
+    .menu-swiper .swiper-pagination-bullet-active { background: var(--gold); }
+    .menu-swiper .swiper-button-next,
+    .menu-swiper .swiper-button-prev { color: var(--brown); }
+    .menu-swiper .swiper-button-next::after,
+    .menu-swiper .swiper-button-prev::after { font-size: 16px; font-weight: 700; }
+    .menu-note { font-size: 11.5px; color: var(--muted); text-align: center; line-height: 1.6; }
+
+    /* ── PROMOS GRID (dentro del modal) ── */
+    .promos-swiper-wrap { border-radius: 16px; overflow: hidden; margin-bottom: 14px; box-shadow: var(--shadow-card); }
+    .promos-swiper .swiper-slide {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 240px; background: var(--warm);
+      font-size: 60px; position: relative;
+    }
+    .promo-badge {
+      position: absolute; top: 12px; right: 12px;
+      background: #c0392b; color: #fff;
+      font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 20px;
+      letter-spacing: .5px;
+    }
+    .promo-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
+      color: #fff; padding: 16px 14px 10px;
+      font-size: 14px; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* QR box */
+    .qr-box { text-align: center; padding: 10px 0 8px; }
+    .qr-box img { width: 200px; height: 200px; border-radius: 16px; margin: 0 auto 12px; display: block; }
+    .qr-box p { font-size: 12px; color: var(--muted); }
+
+    /* SERVICIOS list */
+    .servicios-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .servicios-list li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--white); border-radius: 14px; font-size: 13px; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .servicios-list li i { color: var(--brown); font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 300; align-items: center; justify-content: center; flex-direction: column; }
+    .lightbox.open { display: flex; }
+    .lb-close { position: absolute; top: 18px; right: 20px; color: #fff; font-size: 22px; cursor: pointer; z-index: 301; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.12); border-radius: 50%; }
+    #lbImg { max-width: 96vw; max-height: 72vh; border-radius: 14px; object-fit: contain; user-select: none; }
+    .lb-nav { display: flex; gap: 16px; margin-top: 18px; }
+    .lb-nav button { background: rgba(255,255,255,.14); border: none; color: #fff; width: 46px; height: 46px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lb-counter { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- HERO SWIPER — placeholders coloridos -->
+  <div class="hero-swiper swiper" id="heroSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background:linear-gradient(135deg,#8b4513,#c8872a);display:flex;align-items:center;justify-content:center;font-size:80px;">🍞</div>
+      <div class="swiper-slide" style="background:linear-gradient(135deg,#c0392b,#e67e22);display:flex;align-items:center;justify-content:center;font-size:80px;">🎂</div>
+      <div class="swiper-slide" style="background:linear-gradient(135deg,#5c3317,#8b4513);display:flex;align-items:center;justify-content:center;font-size:80px;">🥐</div>
+      <div class="swiper-slide" style="background:linear-gradient(135deg,#c8872a,#f39c12);display:flex;align-items:center;justify-content:center;font-size:80px;">🍰</div>
+      <div class="swiper-slide" style="background:linear-gradient(135deg,#784212,#b7770d);display:flex;align-items:center;justify-content:center;font-size:80px;">🧁</div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
+    <button class="hero-gallery-pill" onclick="openLightbox(0)">
+      <i class="fa fa-images icon"></i>
+      <span>Ver galería</span>
+      <i class="fa fa-chevron-down arrow"></i>
+    </button>
+  </div>
+
+  <!-- LOGO STRIP -->
+  <div class="logo-strip fade-up" id="logoStrip">
+    <!-- Logo placeholder circular -->
+    <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#8b4513,#c8872a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🍞</div>
+
+    <div class="strip-right">
+      <div class="strip-tagline">
+        <span class="t-title">Panadería La Esperanza</span>
+        <span class="t-sub">Pan artesanal · Coyol, Alajuela 🥖</span>
+      </div>
+      <div class="strip-icons">
+        <button class="sicon" onclick="openModal('saveModal')">
+          <div class="sicon-circle"><i class="fa fa-address-book"></i></div>
+          <span class="sicon-label">Guardar</span>
+        </button>
+        <button class="sicon" onclick="openModal('qrModal')">
+          <div class="sicon-circle"><i class="fa fa-qrcode"></i></div>
+          <span class="sicon-label">QR</span>
+        </button>
+        <button class="sicon" onclick="openModal('installModal')">
+          <div class="sicon-circle"><i class="fa fa-mobile-screen"></i></div>
+          <span class="sicon-label">Instalar</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTONES AIRBNB -->
+  <div class="actions fade-up">
+    <button class="action-btn ac-menu" onclick="openModal('menuModal')">
+      <span class="action-emoji">📋</span>
+      <span class="action-label">Menú</span>
+      <span class="action-sub">Ver productos</span>
+    </button>
+    <button class="action-btn ac-promo" onclick="openModal('promoModal')">
+      <span class="action-emoji">🎉</span>
+      <span class="action-label">Promos</span>
+      <span class="action-sub">Ofertas activas</span>
+    </button>
+    <button class="action-btn ac-social" onclick="openModal('socialModal')">
+      <span class="action-emoji">📲</span>
+      <span class="action-label">Redes</span>
+      <span class="action-sub">Síguenos</span>
+    </button>
+  </div>
+
+  <!-- BIG CTA -->
+  <div class="big-cta fade-up">
+    <a href="https://api.whatsapp.com/send?phone=50686690664&text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20Panadera%C3%ADa%20La%20Esperanza%20%F0%9F%9E%82" target="_blank">
+      <i class="fab fa-whatsapp"></i> Pedidos y Cotizaciones por WhatsApp
+    </a>
+  </div>
+
+  <!-- DESCRIPCIÓN -->
+  <div class="section-title fade-up"><h2>Quiénes Somos</h2></div>
+  <div class="description-card fade-up">
+    <p>Panadería y repostería artesanal con más de <strong>20 años</strong> endulzando a Coyol de Alajuela. Elaboramos pan fresco diariamente, queques para eventos, tortas decoradas y todo tipo de repostería con ingredientes de primera calidad.</p>
+    <p>También atendemos pedidos para <strong>empresas, eventos y matrimonios</strong>. Contamos con servicio de entrega y pick-up en local.</p>
+    <div class="capacity-pills">
+      <div class="pill"><i class="fa fa-bread-slice"></i> Pan fresco diario</div>
+      <div class="pill"><i class="fa fa-cake-candles"></i> Queques y tortas</div>
+      <div class="pill"><i class="fa fa-truck"></i> Servicio a domicilio</div>
+      <div class="pill"><i class="fa fa-building"></i> Pedidos empresariales</div>
+    </div>
+  </div>
+
+  <!-- HORARIO -->
+  <div class="section-title fade-up"><h2>Horario</h2></div>
+  <div class="horario-card fade-up">
+    <div class="horario-row">
+      <span class="dias">Lunes a Sábado</span>
+      <span class="horas">5:00 AM – 7:00 PM</span>
+    </div>
+    <div class="horario-row">
+      <span class="dias">Domingo</span>
+      <span class="horas">6:00 AM – 12:00 MD</span>
+    </div>
+    <div class="horario-row">
+      <span class="dias">Feriados</span>
+      <span class="horas">6:00 AM – 11:00 AM</span>
+    </div>
+  </div>
+
+  <!-- FOTOS -->
+  <div class="section-title fade-up"><h2>Nuestros Productos</h2></div>
+  <div class="gallery-scroll fade-up">
+    <div class="gallery-thumb" onclick="openLightbox(0)" style="background:linear-gradient(135deg,#c8872a,#f39c12);display:flex;align-items:center;justify-content:center;font-size:44px;">🍞</div>
+    <div class="gallery-thumb" onclick="openLightbox(1)" style="background:linear-gradient(135deg,#8b4513,#c0392b);display:flex;align-items:center;justify-content:center;font-size:44px;">🎂</div>
+    <div class="gallery-thumb" onclick="openLightbox(2)" style="background:linear-gradient(135deg,#784212,#c8872a);display:flex;align-items:center;justify-content:center;font-size:44px;">🥐</div>
+    <div class="gallery-thumb" onclick="openLightbox(3)" style="background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:center;justify-content:center;font-size:44px;">🍰</div>
+    <div class="gallery-thumb" onclick="openLightbox(4)" style="background:linear-gradient(135deg,#5c3317,#8b4513);display:flex;align-items:center;justify-content:center;font-size:44px;">🧁</div>
+    <div class="gallery-thumb" onclick="openLightbox(5)" style="background:linear-gradient(135deg,#b7770d,#f39c12);display:flex;align-items:center;justify-content:center;font-size:44px;">🥖</div>
+    <div class="gallery-thumb" onclick="openLightbox(6)" style="background:linear-gradient(135deg,#c8872a,#e67e22);display:flex;align-items:center;justify-content:center;font-size:44px;">🍩</div>
+    <div class="gallery-thumb" onclick="openLightbox(7)" style="background:linear-gradient(135deg,#8b4513,#784212);display:flex;align-items:center;justify-content:center;font-size:44px;">🥧</div>
+  </div>
+
+  <!-- RESEÑAS -->
+  <div class="section-title fade-up"><h2>Lo que dicen nuestros clientes</h2></div>
+  <div class="reviews-scroll fade-up">
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#8b4513">M</div>
+        <div><div class="review-name">Melissa Campos</div><div class="review-date">Abril 2025 · Alajuela</div></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"El queque de bodas fue espectacular, todos los invitados preguntaron dónde lo compramos. La decoración perfecta y el sabor increíble."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#c0392b">J</div>
+        <div><div class="review-name">Jorge Elizondo</div><div class="review-date">Marzo 2025 · Coyol</div></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Compramos pan todas las mañanas aquí. Lo mejor es que siempre está recién hecho y el precio es muy accesible. ¡El mejor pan de la zona!"</div>
+      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#5c3317">P</div>
+        <div><div class="review-name">Patricia Mora</div><div class="review-date">Febrero 2025 · Naranjo</div></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Pedimos 200 cajitas de repostería para un evento corporativo y todo quedó perfecto. Muy profesionales y puntuales con la entrega."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#b7770d">A</div>
+        <div><div class="review-name">Ana Solís</div><div class="review-date">Enero 2025 · Alajuela Centro</div></div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Las empanadas de piña son adictivas, no puedo pasar sin comprar una docena cada semana. Atención muy amable y el local siempre limpio."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+  </div>
+  <div class="review-hint fade-up" id="reviewHint">
+    <i class="fa fa-arrow-right"></i>
+    <span>Deslizá para ver más opiniones</span>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="section-title fade-up"><h2>Contacto</h2></div>
+  <div class="contact-strip fade-up">
+    <div class="ct-title">¿Listo para ordenar?</div>
+    <div class="ct-sub">Respondemos rápido · pedidos desde ₡500</div>
+    <div class="owners"><i class="fa fa-user" style="margin-right:7px;opacity:.7"></i>Panadería La Esperanza</div>
+    <div class="location"><i class="fa fa-map-pin"></i><span>Urbanización Monterocoso, Coyol de Alajuela — frente a la entrada principal</span></div>
+    <div class="contact-buttons">
+      <a href="https://api.whatsapp.com/send?phone=50486690664&text=Hola%2C%20quiero%20hacer%20un%20pedido" target="_blank" class="ct-btn wapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+50486690664" class="ct-btn call"><i class="fa fa-phone"></i> Llamar</a>
+      <a href="https://waze.com/ul/hd1u158qkt" target="_blank" class="ct-btn waze"><i class="fa fa-location-dot"></i> Waze</a>
+    </div>
+  </div>
+
+  <!-- COMPARTIR -->
+  <div class="share-row fade-up">
+    <div class="share-title">Comparte este enlace</div>
+    <div class="share-sub">Recomienda La Esperanza a tus amigos 👇</div>
+    <div class="share-icons">
+      <a href="https://api.whatsapp.com/send?text=*Panadería%20La%20Esperanza*%20%F0%9F%9E%82%20Coyol%20de%20Alajuela%20https://nanosite.com/laesperanza" target="_blank" class="share-icon si-wa">
+        <div class="si-circle"><i class="fab fa-whatsapp"></i></div><span class="si-label">WhatsApp</span>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://nanosite.com/laesperanza" target="_blank" class="share-icon si-fb">
+        <div class="si-circle"><i class="fab fa-facebook-f"></i></div><span class="si-label">Facebook</span>
+      </a>
+      <a href="https://telegram.me/share/url?url=https://nanosite.com/laesperanza" target="_blank" class="share-icon si-tg">
+        <div class="si-circle"><i class="fab fa-telegram-plane"></i></div><span class="si-label">Telegram</span>
+      </a>
+      <a href="fb-messenger://share/?link=https://nanosite.com/laesperanza" class="share-icon si-ms">
+        <div class="si-circle"><i class="fab fa-facebook-messenger"></i></div><span class="si-label">Messenger</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-footer">
+    <p>© 2025 Panadería La Esperanza · Coyol de Alajuela</p>
+    <p>Tarjeta Digital por <a href="#">NovaMente Digital · NanoSite</a></p>
+  </div>
+</div>
+
+<!-- FLOTANTES -->
+<div class="float-stack">
+  <a href="img/img/menupanaderialaesperanza.pdf" target="_blank" class="float-btn float-menu" data-tip="Ver Menú PDF">
+    <i class="fa fa-utensils"></i>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50486690664&text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%9E%82" target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- MODAL: GUARDAR CONTACTO -->
+<div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>💾 Guardar Contacto</h3>
+    <p class="modal-sub">Agrega Panadería La Esperanza a tus contactos para tener siempre el número a mano.</p>
+    <div class="modal-list">
+      <a href="img/img/LaEsperanza.vcf" download class="modal-row primary">
+        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fa fa-download" style="color:#fff"></i></div>
+        <div class="mr-text"><div class="mr-title">Descargar Contacto (.vcf)</div><div class="mr-desc">Compatible con iPhone, Android y WhatsApp</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=50486690664" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e8f8ef"><i class="fab fa-whatsapp" style="color:#25d366"></i></div>
+        <div class="mr-text"><div class="mr-title">Abrir en WhatsApp</div><div class="mr-desc">+506 8669-0664</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="tel:+50486690664" class="modal-row">
+        <div class="mr-icon" style="background:#fef3e7"><i class="fa fa-phone" style="color:var(--brown)"></i></div>
+        <div class="mr-text"><div class="mr-title">Llamar ahora</div><div class="mr-desc">+506 8669-0664 · 4031-2632</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('saveModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: QR -->
+<div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📱 Código QR</h3>
+    <p class="modal-sub">Escanea para abrir o compartir la tarjeta digital de La Esperanza.</p>
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://nanosite.com/laesperanza&color=5c3317&bgcolor=fdf8f3" alt="QR La Esperanza" />
+      <p>Mostrá este código para que cualquiera pueda acceder</p>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('qrModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: MENÚ — slider interno página por página -->
+<div class="modal-overlay" id="menuModal" onclick="closeModal('menuModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📋 Nuestro Menú</h3>
+    <p class="modal-sub">Deslizá para ver todas las categorías. Toca la imagen para ampliar.</p>
+
+    <div class="menu-swiper-wrap">
+      <div class="swiper menu-swiper" id="menuSwiper">
+        <div class="swiper-wrapper">
+          <!-- Página 1: Pan del día — placeholder emoji -->
+          <div class="swiper-slide" style="flex-direction:column;gap:8px;background:linear-gradient(135deg,#fdf3e3,#fae0c0);">
+            <div style="font-size:64px;line-height:1">🍞</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#5c3317">Pan del Día</div>
+            <div style="font-size:11px;color:#7a6652;text-align:center;padding:0 20px">Baguettes · Franceses · Integrales · Palitos · Panes dulces</div>
+            <div style="font-size:10px;color:#c8872a;font-weight:700">Desde ₡300 la unidad</div>
+          </div>
+          <!-- Página 2: Repostería -->
+          <div class="swiper-slide" style="flex-direction:column;gap:8px;background:linear-gradient(135deg,#fff0f0,#ffe0e0);">
+            <div style="font-size:64px;line-height:1">🎂</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#5c3317">Queques y Tortas</div>
+            <div style="font-size:11px;color:#7a6652;text-align:center;padding:0 20px">Cumpleaños · Bodas · Corporativos · Decorados a pedido</div>
+            <div style="font-size:10px;color:#c8872a;font-weight:700">Desde ₡8.500</div>
+          </div>
+          <!-- Página 3: Empanadas y bocadillos -->
+          <div class="swiper-slide" style="flex-direction:column;gap:8px;background:linear-gradient(135deg,#f3f0e3,#e8e0c0);">
+            <div style="font-size:64px;line-height:1">🥐</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#5c3317">Empanadas y Bocadillos</div>
+            <div style="font-size:11px;color:#7a6652;text-align:center;padding:0 20px">Empanadas de piña · Natilla · Queso · Cajetas · Rellenos</div>
+            <div style="font-size:10px;color:#c8872a;font-weight:700">Desde ₡500 c/u · Docena ₡5.500</div>
+          </div>
+          <!-- Página 4: Pedidos para eventos -->
+          <div class="swiper-slide" style="flex-direction:column;gap:8px;background:linear-gradient(135deg,#e3f0e3,#c0e0c0);">
+            <div style="font-size:64px;line-height:1">🎉</div>
+            <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#5c3317">Pedidos para Eventos</div>
+            <div style="font-size:11px;color:#7a6652;text-align:center;padding:0 20px">Cajas surtidas · Bandejas · Catering · Empresas · Mayoreo</div>
+            <div style="font-size:10px;color:#c8872a;font-weight:700">Cotizar por WhatsApp</div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+    <p class="menu-note">📌 Reemplazá estas páginas con las imágenes 1350×1080 de tu menú real — misma estructura, solo cambiás el contenido de cada slide.</p>
+
+    <div class="modal-list" style="margin-top:14px">
+      <a href="https://api.whatsapp.com/send?phone=50486690664&text=Hola%2C%20quiero%20cotizar%20un%20pedido%20%F0%9F%9E%82" target="_blank" class="modal-row primary">
+        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fab fa-whatsapp" style="color:#fff"></i></div>
+        <div class="mr-text"><div class="mr-title">Hacer un pedido</div><div class="mr-desc">Escribinos con lo que necesitás</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('menuModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: PROMOCIONES — slider de imágenes Canva 1350x1080 -->
+<div class="modal-overlay" id="promoModal" onclick="closeModal('promoModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🎉 Promociones</h3>
+    <p class="modal-sub">Ofertas especiales de esta semana. ¡No te las perdás!</p>
+
+    <div class="promos-swiper-wrap">
+      <div class="swiper promos-swiper" id="promosSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide" style="background:linear-gradient(135deg,#c0392b,#e74c3c);">
+            <div style="font-size:64px">🎂</div>
+            <div class="promo-badge">🔥 Esta semana</div>
+            <div class="promo-label">Queque de cumpleaños · 2da mitad de precio</div>
+          </div>
+          <div class="swiper-slide" style="background:linear-gradient(135deg,#8b4513,#c8872a);">
+            <div style="font-size:64px">🥐</div>
+            <div class="promo-badge">⏰ Lunes y Martes</div>
+            <div class="promo-label">Docena de empanadas ₡4.800 (ahorrás ₡700)</div>
+          </div>
+          <div class="swiper-slide" style="background:linear-gradient(135deg,#5c3317,#784212);">
+            <div style="font-size:64px">🎉</div>
+            <div class="promo-badge">📦 Mayoreo</div>
+            <div class="promo-label">Pedidos +100 unidades · 15% de descuento</div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </div>
+
+    <p class="menu-note" style="margin-top:12px">📌 Reemplazá cada slide con tus imágenes de promo de Canva (1350×1080). El slider las pasa automáticamente.</p>
+
+    <div class="modal-list" style="margin-top:14px">
+      <a href="https://api.whatsapp.com/send?phone=50486690664&text=Hola%2C%20vi%20las%20promociones%20y%20quiero%20aprovechar%20una%20oferta%20%F0%9F%8E%89" target="_blank" class="modal-row primary">
+        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fab fa-whatsapp" style="color:#fff"></i></div>
+        <div class="mr-text"><div class="mr-title">Quiero aprovechar una promo</div><div class="mr-desc">Escribinos antes que se agote</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('promoModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: REDES SOCIALES -->
+<div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>🌐 Redes Sociales</h3>
+    <p class="modal-sub">Síguenos para ver nuestras ofertas diarias y novedades.</p>
+    <div class="modal-list">
+      <a href="https://www.facebook.com/profile.php?id=100064782247116" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text"><div class="mr-title">Facebook</div><div class="mr-desc">Panadería La Esperanza</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.instagram.com/hope.cakes_cr/" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:linear-gradient(135deg,#fdf3e3,#f7e2f0)">
+          <i class="fab fa-instagram" style="background:linear-gradient(135deg,#e1306c,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:22px"></i>
+        </div>
+        <div class="mr-text"><div class="mr-title">Instagram</div><div class="mr-desc">@hope.cakes_cr</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=50486690664" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e8f8ef"><i class="fab fa-whatsapp" style="color:#25d366"></i></div>
+        <div class="mr-text"><div class="mr-title">WhatsApp</div><div class="mr-desc">+506 8669-0664</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: INSTALAR -->
+<div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <h3>📲 Agregar a Pantalla de Inicio</h3>
+    <p class="modal-sub">Instalá esta tarjeta como app — acceso directo sin descargar nada.</p>
+    <div class="modal-list">
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#e8f5e9"><i class="fab fa-android" style="color:#3ddc84;font-size:22px"></i></div>
+          <div class="mr-text"><div class="mr-title">Android (Chrome)</div><div class="mr-desc">Menú ⋮ → "Añadir a pantalla de inicio"</div></div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abrí en <strong>Chrome</strong><br>2. Tocá <strong>⋮</strong> arriba a la derecha<br>3. <strong>"Añadir a pantalla de inicio"</strong><br>4. Presioná <strong>Añadir</strong>
+        </div>
+      </div>
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#f0f0f5"><i class="fab fa-apple" style="color:#555;font-size:22px"></i></div>
+          <div class="mr-text"><div class="mr-title">iPhone (Safari)</div><div class="mr-desc">Compartir □↑ → "En pantalla de inicio"</div></div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">
+          1. Abrí en <strong>Safari</strong><br>2. Tocá <strong>□↑</strong> abajo al centro<br>3. <strong>"En pantalla de inicio"</strong><br>4. Presioná <strong>Añadir</strong>
+        </div>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()"><i class="fa fa-xmark"></i></div>
+  <img id="lbImg" src="" alt="La Esperanza" draggable="false" />
+  <div class="lb-nav">
+    <button onclick="lbPrev()"><i class="fa fa-chevron-left"></i></button>
+    <button onclick="lbNext()"><i class="fa fa-chevron-right"></i></button>
+  </div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+/* HERO SWIPER */
+new Swiper('#heroSwiper', {
+  loop:true, effect:'fade', fadeEffect:{crossFade:true},
+  autoplay:{delay:3000,disableOnInteraction:false},
+  pagination:{el:'.swiper-pagination',clickable:true},
+  navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'},
+  lazy:true
+});
+
+/* MENU SWIPER — se inicia al abrir el modal */
+var menuSwiperInst = null;
+var promosSwiperInst = null;
+
+/* SCROLL FLIP */
+var logoStrip = document.getElementById('logoStrip');
+var heroHeight = document.getElementById('heroSwiper') ? document.getElementById('heroSwiper').offsetHeight : 260;
+window.addEventListener('scroll', function() {
+  logoStrip.classList.toggle('scrolled', window.scrollY >= heroHeight);
+}, { passive:true });
+
+/* LIGHTBOX — placeholders de emojis */
+var IMAGES = ['🍞','🎂','🥐','🍰','🧁','🥖','🍩','🥧'];
+var LABELS = ['Pan del Día','Queques y Tortas','Pan Artesanal','Repostería Fina','Muffins','Baguette','Donas','Pie'];
+var lbIdx = 0;
+
+function openLightbox(i) {
+  lbIdx = i;
+  /* Muestra emoji grande en lugar de imagen hasta tener fotos reales */
+  document.getElementById('lbImg').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="300" height="300" fill="%23f5ede0" rx="20"/><text x="150" y="170" text-anchor="middle" font-size="120">' + IMAGES[i] + '</text><text x="150" y="220" text-anchor="middle" font-size="18" fill="%235c3317" font-family="sans-serif">' + LABELS[i] + '</text></svg>';
+  document.getElementById('lbCounter').textContent = (i+1) + ' / ' + IMAGES.length;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+function lbPrev() { lbIdx=(lbIdx-1+IMAGES.length)%IMAGES.length; openLightbox(lbIdx); }
+function lbNext() { lbIdx=(lbIdx+1)%IMAGES.length; openLightbox(lbIdx); }
+
+var ltx=0;
+document.getElementById('lightbox').addEventListener('touchstart',function(e){ltx=e.touches[0].clientX;},{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-ltx;if(Math.abs(dx)>40){dx<0?lbNext():lbPrev();}},{passive:true});
+
+/* MODALS */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+  /* Iniciar swipers internos al abrir su modal */
+  if (id === 'menuModal' && !menuSwiperInst) {
+    menuSwiperInst = new Swiper('#menuSwiper', {
+      loop:true, effect:'slide',
+      autoplay:{delay:4000,disableOnInteraction:false},
+      pagination:{el:'#menuModal .swiper-pagination',clickable:true},
+      navigation:{nextEl:'#menuModal .swiper-button-next',prevEl:'#menuModal .swiper-button-prev'}
+    });
+  }
+  if (id === 'promoModal' && !promosSwiperInst) {
+    promosSwiperInst = new Swiper('#promosSwiper', {
+      loop:true, effect:'fade', fadeEffect:{crossFade:true},
+      autoplay:{delay:3500,disableOnInteraction:false},
+      pagination:{el:'#promoModal .swiper-pagination',clickable:true},
+      navigation:{nextEl:'#promoModal .swiper-button-next',prevEl:'#promoModal .swiper-button-prev'}
+    });
+  }
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeLightbox();document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';}
+  if(e.key==='ArrowLeft')lbPrev();
+  if(e.key==='ArrowRight')lbNext();
+});
+
+/* REVIEW HINT */
+var rHint = document.getElementById('reviewHint');
+document.querySelector('.reviews-scroll').addEventListener('scroll',function(){rHint.classList.add('hidden');},{passive:true,once:true});
+
+/* FADE-UP */
+var obs = new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
