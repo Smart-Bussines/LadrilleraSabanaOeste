@@ -367,16 +367,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   font-size:.72rem;font-weight:700;letter-spacing:.04em}
 .share-cp:hover{background:#0f2444}
 .share-copied{background:var(--grn,#16a34a)!important}
-
-/* Scroll hint button animation */
-.scroll-hint{
-  animation: bounceDown 2s ease-in-out infinite;
-  display:inline-flex;align-items:center;gap:6px;
-}
-@keyframes bounceDown{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(5px)}
-}
 </style>
 </head>
 <body>
@@ -396,12 +386,12 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="hbg" id="heroBg"></div>
   <div class="hov"></div>
   <div class="hcon">
-    <div class="hpill"><span class="hdot"></span><span>&#9928; Temporada lluviosa &mdash; Revisi&oacute;n de techo GRATIS esta semana</span></div>
-    <h1>Vendemos e instalamos<em>tejas de arcilla en toda Costa Rica</em></h1>
-    <p class="hdesc">M&aacute;s de 500 techos instalados en Costa Rica. Arcilla 100% natural, garantía de producto e instalaci&oacute;n incluida. Llevamos muestras a su proyecto sin costo &mdash; cubrimos todo el pa&iacute;s.</p> 
+    <div class="hpill"><span>INSTALACION PAQUETE COMPLETO</span></div>
+    <h1>TECHOS QUE<em>HABLAN POR SI SOLOS</em></h1>
+    <p class="hdesc">Vendemos e instalamos tejas de arcilla en cualquier rincón de Costa Rica. Resistentes, autenticas y con garantía de instalación. Además ofrecemos el servicio espercializado de reparación y mantenimiento de Techos</p> 
     <div class="hbtns">
-      <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejas" target="_blank" class="bor">&#128172; Quiero mi techo nuevo &mdash; WhatsApp</a>
-      <a href="#productos" class="bgh scroll-hint">&#8595; Ver los 10 tipos de teja disponibles</a>
+      <a href="https://wa.me/50663995641?text=Hola,%20quiero%20cotizar%20tejas.%20Los%20contacto%20desde%20ladrillerasabanaoeste.com%2Ftejas" target="_blank" class="bor">&#128172; Cotiza por WhatsApp HOY</a>
+      <a href="#catalogo" class="bgh">Ver Catalogo técnico</a>
     </div>
     <div class="hstats">
       <div class="hs"><div class="hs-n">+25</div><div class="hs-l">Años Exp.</div></div>
@@ -420,15 +410,15 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   </div>
   <div class="pgrid">
     <div class="pc reveal">
-      <div class="pci"><img src="img/Landing/tarjetacolonial.jpg?w=560&h=440&fit=crop&q=60" alt="Teja Colonial" loading="lazy"/><span class="pcbadge">&#11088; Mas vendida</span></div>
+      <div class="pci"><img src="img/Landing/tarjetacolonial.jpg?w=560&h=440&fit=crop&q=80" alt="Teja Colonial" loading="lazy"/><span class="pcbadge">&#11088; Mas vendida</span></div>
       <div class="pcb"><h3>Teja Tipo Colonial</h3><p>La clasica teja canal de perfil curvo. Ideal para ranchos, fincas, hoteles y proyectos con estetica colonial autentica.</p><div class="pctags"><span class="ptg">Rustica</span><span class="ptg">Colonial</span><span class="ptg">Alta durabilidad</span></div><a href="#catalogo" class="pclink" onclick="activateSpec('colonial');return false">Ver especificaciones &rarr;</a></div>
     </div>
     <div class="pc reveal" style="transition-delay:.1s">
-      <div class="pci"><img src="img/Landing/tarjetaimperial.jpg?w=560&h=440&fit=crop&q=60" alt="Teja Imperial Nacional" loading="lazy"/><span class="pcbadge">&#127942; Premium</span></div>
+      <div class="pci"><img src="img/Landing/tarjetaimperial.jpg?w=560&h=440&fit=crop&q=80" alt="Teja Imperial Nacional" loading="lazy"/><span class="pcbadge">&#127942; Premium</span></div>
       <div class="pcb"><h3>Teja Imperial Nacional</h3><p>Perfil mixto de canal y copete, acabado rustico de alta calidad. Muy utilizada en residencias y proyectos turisticos de nivel medio-alto.</p><div class="pctags"><span class="ptg">Rustico</span><span class="ptg">Elegante</span><span class="ptg">Muy Resistente</span></div><a href="#catalogo" class="pclink" onclick="activateSpec('imperial');return false">Ver especificaciones &rarr;</a></div>
     </div>
     <div class="pc reveal" style="transition-delay:.2s">
-      <div class="pci"><img src="img/Landing/tarjetaplana.jpg?w=560&h=440&fit=crop&q=60" alt="Teja Plana Colombiana" loading="lazy"/><span class="pcbadge">Arquitectura moderna</span></div>
+      <div class="pci"><img src="img/Landing/tarjetaplana.jpg?w=560&h=440&fit=crop&q=80" alt="Teja Plana Colombiana" loading="lazy"/><span class="pcbadge">Arquitectura moderna</span></div>
       <div class="pcb"><h3>Teja Plana Colombiana</h3><p>Perfil plano de lineas limpias. Ideal para arquitectura contemporanea que busca la textura del barro con acabado ordenado y moderno.</p><div class="pctags"><span class="ptg">Moderno</span><span class="ptg">Resistente</span><span class="ptg">Matizada</span></div><a href="#catalogo" class="pclink" onclick="activateSpec('plana');return false">Ver especificaciones &rarr;</a></div>
     </div>
   </div>
@@ -878,10 +868,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
       <div class="faqitem">
         <button class="faqq" onclick="toggleFaq(this)"><span>Tienen garantia en el producto y la instalacion?</span><span class="faqarrow">&#9660;</span></button>
         <div class="faqa">Si. Ofrecemos garantia de producto segun cada tipo de teja y garantia de instalacion en mano de obra. Si hay algun problema con nuestra instalacion, regresamos a resolverlo sin costo adicional.</div>
-      </div>
-      <div class="faqitem">
-        <button class="faqq" onclick="toggleFaq(this)"><span>&#10067; &iquest;Cu&aacute;nto cuesta instalar un techo de tejas?</span><span class="faqarrow">&#9660;</span></button>
-        <div class="faqa">El costo depende del &aacute;rea en m&sup2;, el tipo de teja elegida y si necesita instalaci&oacute;n completa o parcial. Env&iacute;enos las medidas aproximadas por WhatsApp y le enviamos un presupuesto exacto en menos de 24 horas, completamente sin compromiso y sin costo.</div>
       </div>
     </div>
 
