@@ -4,434 +4,527 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Productos — Ladrillera Sabana Oeste</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --cream:    #F5EFE4;
-    --clay:     #C4794A;
-    --brick:    #8B3A2A;
-    --earth:    #4A3728;
-    --sand:     #D9C5A8;
-    --stone:    #7A7065;
-    --charcoal: #1E1A17;
-    --white:    #FDFAF6;
-  }
+:root {
+  --cream:    #F5EFE4;
+  --clay:     #C4794A;
+  --brick:    #8B3A2A;
+  --earth:    #4A3728;
+  --sand:     #D9C5A8;
+  --stone:    #7A7065;
+  --charcoal: #1E1A17;
+  --white:    #FDFAF6;
+  --navy:     #071c34;
+  --navy2:    #0f2744;
+  --orange:   #fe7c00;
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--charcoal);
+  color: var(--cream);
+  overflow-x: hidden;
+}
 
-  body {
-    font-family: 'Barlow', sans-serif;
-    background: var(--charcoal);
-    color: var(--cream);
-    overflow-x: hidden;
-  }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 48px;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(254,124,0,.15);
+}
+.nav-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: transparent; border: 2px solid #8aaad4; color: #8aaad4;
+  padding: 8px 18px; border-radius: 2px;
+  font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; font-weight: 600;
+  transition: all .25s;
+}
+.nav-back svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.nav-back:hover { background: #8aaad4; color: var(--navy); }
+.nav-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--white); letter-spacing: .02em;
+}
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--orange); color: var(--white);
+  padding: 8px 18px; border-radius: 2px;
+  font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; font-weight: 600;
+  transition: background .25s;
+}
+.nav-cta svg { width: 14px; height: 14px; fill: currentColor; }
+.nav-cta:hover { background: #d96700; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 48px;
-    background: #071c34;
-    border-bottom: 1px solid rgba(254,124,0,.2);
+/* ── SEARCH BAR ── */
+.search-wrap {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(7,28,52,.97); backdrop-filter: blur(12px);
+  padding: 20px 48px;
+  display: none; align-items: center; gap: 16px;
+  border-bottom: 2px solid var(--orange);
+}
+.search-wrap.open { display: flex; }
+.search-input {
+  flex: 1; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-family: 'Barlow', sans-serif; font-size: 1.1rem;
+  padding: 12px 18px; border-radius: 4px; outline: none;
+  transition: border-color .25s;
+}
+.search-input::placeholder { color: #4a6a8a; }
+.search-input:focus { border-color: var(--orange); }
+.search-close {
+  background: none; border: 1px solid rgba(255,255,255,.2); color: var(--sand);
+  width: 38px; height: 38px; border-radius: 50%; font-size: 1.1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .2s; flex-shrink: 0;
+}
+.search-close:hover { background: rgba(255,255,255,.1); }
+.search-results {
+  position: fixed; top: 86px; left: 48px; right: 48px; z-index: 199;
+  background: rgba(7,28,52,.98); border: 1px solid rgba(254,124,0,.25);
+  border-radius: 4px; max-height: 60vh; overflow-y: auto;
+  display: none; box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.search-results.open { display: block; }
+.search-result-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,.06);
+  transition: background .2s;
+}
+.search-result-item:last-child { border-bottom: none; }
+.search-result-item:hover { background: rgba(254,124,0,.1); }
+.search-result-img {
+  width: 52px; height: 40px; object-fit: cover; border-radius: 3px;
+  flex-shrink: 0; opacity: .85;
+}
+.search-result-info { flex: 1; }
+.search-result-name { font-size: .88rem; color: var(--white); margin-bottom: 2px; }
+.search-result-cat {
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--orange);
+}
+.search-result-empty {
+  padding: 24px 18px; color: #4a6a8a; font-size: .9rem; text-align: center;
+}
+.search-btn {
+  background: none; border: none; color: #8aaad4; cursor: pointer;
+  padding: 4px; display: flex; align-items: center;
+  transition: color .2s;
+}
+.search-btn:hover { color: var(--orange); }
+.search-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 42vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 48px 52px;
+  margin-top: 66px;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.68) 70%),
+    url('https://ladrillerasabanaoeste.com/img/piedra1.png') center/cover no-repeat;
+  position: relative; overflow: hidden;
+}
+.hero h1 {
+  font-family: 'Merriweather', serif;
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  line-height: 1.15; font-weight: 700;
+  color: var(--white); max-width: 680px;
+}
+.hero h1 em { color: var(--orange); font-style: italic; font-weight: 300; }
+.hero-sub {
+  margin-top: 14px; max-width: 480px;
+  color: var(--sand); font-size: .95rem; font-weight: 300; line-height: 1.7;
+}
+.hero-search {
+  margin-top: 22px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-search-box {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.1); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2); border-radius: 3px;
+  padding: 10px 16px; cursor: pointer; transition: border-color .25s;
+  max-width: 360px; width: 100%;
+}
+.hero-search-box:hover { border-color: var(--orange); }
+.hero-search-box svg { width: 16px; height: 16px; fill: none; stroke: #8aaad4; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; }
+.hero-search-box span { color: #4a6a8a; font-size: .88rem; letter-spacing: .04em; }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  position: sticky; top: 66px; z-index: 90;
+  background: var(--navy2);
+  border-bottom: 1px solid rgba(0,0,0,.3);
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+}
+.filter-main {
+  display: flex; align-items: center;
+  padding: 0 48px;
+}
+.filter-label {
+  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--orange); white-space: nowrap; flex-shrink: 0; font-weight: 700;
+  padding: 13px 14px 13px 0;
+  border-right: 1px solid rgba(254,124,0,.25);
+  margin-right: 14px;
+  display: flex; align-items: center; gap: 4px;
+}
+.filter-label-arrow {
+  font-size: 1.3rem; line-height: 1;
+  animation: arrowPulse 1.4s ease-in-out infinite;
+}
+@keyframes arrowPulse {
+  0%, 100% { opacity: .4; transform: translateX(0); }
+  50%       { opacity: 1; transform: translateX(4px); }
+}
+.filter-scroll {
+  display: flex; gap: 6px; align-items: center;
+  overflow-x: auto; padding: 12px 0;
+  scrollbar-width: none; flex: 1;
+}
+.filter-scroll::-webkit-scrollbar { display: none; }
+.filter-btn {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #a8c4e0; font-family: 'Barlow', sans-serif;
+  font-size: .73rem; letter-spacing: .07em; text-transform: uppercase;
+  padding: 6px 16px; border-radius: 3px; cursor: pointer;
+  transition: all .22s; white-space: nowrap;
+}
+.filter-btn:hover { background: rgba(254,124,0,.12); border-color: rgba(254,124,0,.4); color: var(--orange); }
+.filter-btn.active {
+  background: var(--orange); border-color: var(--orange); color: #fff;
+  box-shadow: 0 2px 10px rgba(254,124,0,.3); font-weight: 600;
+}
+
+/* ── SUBCATEGORY BAR ── */
+.subcat-bar {
+  display: none;
+  align-items: center;
+  padding: 0 48px;
+  background: rgba(7,28,52,.6);
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+.subcat-bar.open { display: flex; }
+.subcat-scroll {
+  display: flex; gap: 6px; align-items: center;
+  overflow-x: auto; padding: 9px 0;
+  scrollbar-width: none; flex: 1;
+}
+.subcat-scroll::-webkit-scrollbar { display: none; }
+.subcat-label {
+  font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
+  color: #4a6a8a; white-space: nowrap; flex-shrink: 0;
+  padding-right: 12px; margin-right: 8px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+.subcat-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.1);
+  color: #ffffff; font-family: 'Barlow', sans-serif;
+  font-size: .68rem; letter-spacing: .06em; text-transform: uppercase;
+  padding: 5px 13px; border-radius: 20px; cursor: pointer;
+  transition: all .2s; white-space: nowrap;
+}
+.subcat-btn:hover { border-color: rgba(254,124,0,.35); color: #a8c4e0; }
+.subcat-btn.active {
+  background: rgba(254,124,0,.15); border-color: var(--orange);
+  color: var(--orange); font-weight: 600;
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  padding: 36px 48px 8px;
+  display: none;
+}
+.section-header.visible { display: block; }
+.section-header h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.6rem; font-weight: 700; color: var(--white);
+  margin-bottom: 4px;
+}
+.section-header p { color: var(--stone); font-size: .85rem; font-weight: 300; }
+.section-divider {
+  height: 2px; background: linear-gradient(to right, var(--orange), transparent);
+  margin: 12px 48px 0; display: none;
+}
+.section-divider.visible { display: block; }
+
+/* ── GRID ── */
+.catalog {
+  padding: 20px 48px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+  background: var(--charcoal);
+}
+
+/* ── CARD ── */
+.card {
+  background: #211d1a;
+  overflow: hidden; position: relative;
+  cursor: pointer; border-radius: 3px;
+  transition: transform .3s, box-shadow .3s;
+  border: 1px solid rgba(255,255,255,.04);
+}
+.card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.5); }
+.card.hidden { display: none; }
+.card-img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover;
+  display: block;
+  transition: transform .5s ease, filter .4s;
+  filter: brightness(.88) saturate(.8);
+}
+.card:hover .card-img { transform: scale(1.05); filter: brightness(1) saturate(1); }
+.card-body {
+  padding: 16px 18px 18px;
+  border-top: 2px solid transparent;
+  transition: border-color .3s;
+}
+.card:hover .card-body { border-color: var(--orange); }
+.card-cat {
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 5px;
+}
+.card-name {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem; font-weight: 700; color: var(--white); line-height: 1.3;
+  margin-bottom: 7px;
+}
+.card-desc {
+  font-size: .8rem; color: var(--stone); line-height: 1.6; font-weight: 300;
+  margin-bottom: 13px;
+}
+.card-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.card-tag {
+  font-size: .65rem; letter-spacing: .08em; text-transform: uppercase;
+  background: rgba(196,121,74,.1); color: var(--sand);
+  padding: 3px 9px; border-radius: 2px; flex-shrink: 0;
+}
+.card-wa {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: transparent; border: 1px solid rgba(254,124,0,.4);
+  color: var(--orange); font-size: .7rem; letter-spacing: .07em;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 2px;
+  text-decoration: none; transition: all .22s; flex-shrink: 0;
+}
+.card-wa:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+.card-wa svg { width: 12px; height: 12px; fill: currentColor; }
+
+/* ── SEARCH HIGHLIGHT ── */
+.card.search-match { box-shadow: 0 0 0 2px var(--orange), 0 12px 40px rgba(254,124,0,.25); }
+.card.search-dim { opacity: .3; pointer-events: none; }
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  display: none; grid-column: 1/-1;
+  padding: 60px 20px; text-align: center;
+}
+.empty-state.visible { display: block; }
+.empty-state p { color: var(--stone); font-size: 1rem; }
+.empty-state span { color: var(--orange); }
+
+/* ── FEATURED ── */
+.featured {
+  margin: 0;
+  padding: 28px 10%;
+  background: linear-gradient(135deg, var(--brick) 0%, var(--earth) 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; text-align: center;
+}
+.featured::after {
+  content: '25'; position: absolute; right: -20px; top: -40px;
+  font-family: 'Merriweather', serif; font-size: 180px;
+  color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
+}
+.featured-content { max-width: 720px; }
+.featured h2 {
+  font-family: 'Merriweather', serif; font-size: 1.7rem; font-weight: 700;
+  color: var(--white); line-height: 1.25; margin-bottom: 10px;
+}
+.featured p { color: var(--sand); font-weight: 300; line-height: 1.7; font-size: .9rem; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(254,124,0,.2);
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: .76rem; color: #4a6a8a; }
+.footer-copy span { color: var(--orange); }
+.footer-actions { display: flex; gap: 10px; align-items: center; }
+.footer-btn-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1.5px solid #4a6a8a; color: #8aaad4;
+  font-family: 'Barlow', sans-serif; font-size: .72rem; letter-spacing: .09em;
+  text-transform: uppercase; padding: 7px 16px; border-radius: 2px;
+  text-decoration: none; font-weight: 600; transition: all .25s;
+}
+.footer-btn-back svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.footer-btn-back:hover { border-color: #8aaad4; color: #fff; background: rgba(138,170,212,.1); }
+.footer-btn-wa {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--orange); color: #fff; font-family: 'Barlow', sans-serif;
+  font-size: .72rem; letter-spacing: .09em; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 2px; text-decoration: none;
+  font-weight: 600; transition: background .25s;
+}
+.footer-btn-wa svg { width: 12px; height: 12px; fill: currentColor; }
+.footer-btn-wa:hover { background: #d96700; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card { animation: fadeUp .45s ease both; }
+.card:nth-child(1)  { animation-delay: .04s; }
+.card:nth-child(2)  { animation-delay: .08s; }
+.card:nth-child(3)  { animation-delay: .12s; }
+.card:nth-child(4)  { animation-delay: .16s; }
+.card:nth-child(5)  { animation-delay: .20s; }
+.card:nth-child(6)  { animation-delay: .24s; }
+.card:nth-child(7)  { animation-delay: .28s; }
+.card:nth-child(8)  { animation-delay: .32s; }
+.card:nth-child(9)  { animation-delay: .36s; }
+.card:nth-child(10) { animation-delay: .40s; }
+.card:nth-child(11) { animation-delay: .44s; }
+.card:nth-child(12) { animation-delay: .48s; }
+
+/* ── LIGHTBOX ── */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(7,28,52,.96); backdrop-filter: blur(8px);
+  align-items: center; justify-content: center; flex-direction: column;
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-header {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 28px;
+  background: linear-gradient(to bottom, rgba(7,28,52,1), transparent);
+}
+.lightbox-cat { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--orange); margin-bottom: 3px; }
+.lightbox-title { font-family: 'Merriweather', serif; font-size: 1.1rem; color: var(--white); }
+.lightbox-close {
+  background: none; border: 1px solid rgba(255,255,255,.2); color: var(--sand);
+  width: 36px; height: 36px; border-radius: 50%; font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .2s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,.1); }
+.lightbox-img-wrap {
+  max-width: 80vw; max-height: 70vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.lightbox-img-wrap img {
+  max-width: 80vw; max-height: 70vh; object-fit: contain; border-radius: 4px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.6); transition: opacity .28s;
+}
+.lightbox-counter-badge {
+  position: absolute; bottom: 10px; right: 12px;
+  background: rgba(7,28,52,.8); backdrop-filter: blur(4px);
+  color: #a8c4e0; font-size: .72rem; letter-spacing: .1em;
+  padding: 3px 10px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,.08); pointer-events: none;
+}
+.lightbox-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(7,28,52,.75); border: 1px solid rgba(196,121,74,.4);
+  color: var(--sand); width: 44px; height: 44px; border-radius: 50%;
+  font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s;
+}
+.lightbox-btn:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+.lightbox-prev { left: -58px; }
+.lightbox-next { right: -58px; }
+.lightbox-footer {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 26px 18px;
+  background: linear-gradient(to top, rgba(7,28,52,.98), rgba(7,28,52,.6) 60%, transparent);
+}
+.lightbox-desc { color: var(--sand); font-size: .86rem; font-weight: 300; max-width: 440px; line-height: 1.6; }
+.lightbox-wa {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--orange); color: #fff;
+  padding: 8px 16px; border-radius: 2px;
+  font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
+  text-decoration: none; font-weight: 600; transition: background .22s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.lightbox-wa svg { width: 13px; height: 13px; fill: currentColor; }
+.lightbox-wa:hover { background: #d96700; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  nav { padding: 11px 16px; position: fixed; }
+  .nav-back, .nav-cta {
+    padding: 6px 11px; font-size: .68rem; letter-spacing: .05em;
+    min-width: 68px; justify-content: center;
   }
-  .nav-back {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: transparent; border: 2px solid #8aaad4; color: #8aaad4;
-    padding: 9px 22px; border-radius: 2px;
-    font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
-    text-decoration: none; font-weight: 600;
-    transition: background .25s, color .25s, border-color .25s, transform .2s;
-  }
-  .nav-back svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .nav-back:hover { background: #8aaad4; color: #071c34; border-color: #8aaad4; transform: translateY(-1px); }
+  .nav-back { border-width: 1.5px; }
   .nav-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: .04em;
+    position: absolute; left: 50%; transform: translateX(-50%);
+    font-size: .88rem; white-space: nowrap;
   }
-  .nav-cta {
-    background: #fe7c00; color: var(--white);
-    padding: 10px 24px; border-radius: 2px;
-    font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
-    text-decoration: none; font-weight: 600;
-    transition: background .3s, transform .2s;
-  }
-  .nav-cta:hover { background: #d96700; transform: translateY(-1px); }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 52vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 0 48px 60px;
-    margin-top: 72px;
-    background:
-      linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 70%),
-      url('https://ladrillerasabanaoeste.com/img/piedra1.png') center/cover no-repeat;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(
-      90deg, transparent, transparent 80px,
-      rgba(196,121,74,.03) 80px, rgba(196,121,74,.03) 81px
-    );
-  }
-  .hero-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 16px;
-  }
-  .hero-eyebrow::before {
-    content: ''; width: 32px; height: 1px; background: var(--clay);
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
-    line-height: 1.1; font-weight: 400;
-    color: var(--white); max-width: 700px;
-  }
-  .hero h1 em { color: var(--clay); font-style: italic; }
-  .hero-sub {
-    margin-top: 18px; max-width: 500px;
-    color: var(--sand); font-size: 1rem; font-weight: 300; line-height: 1.7;
-  }
-
-  /* ── FILTER BAR ── */
-  .filter-bar {
-    position: sticky; top: 72px; z-index: 90;
-    display: flex; align-items: center;
-    padding: 0 48px;
-    background: #0f2744;
-    border-bottom: 1px solid rgba(254,124,0,.2);
-    box-shadow: 0 4px 16px rgba(0,0,0,.35);
-  }
-  .filter-label {
-    font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
-    color: #fe7c00; white-space: nowrap; flex-shrink: 0; font-weight: 700;
-    padding: 18px 18px 18px 0;
-    border-right: 1px solid rgba(254,124,0,.3);
-    margin-right: 16px; font-size: .7rem; letter-spacing: .2em;
-  }
-  .filter-scroll {
-    display: flex; gap: 8px; align-items: center;
-    overflow-x: auto; padding: 14px 0;
-    scrollbar-width: none; flex: 1;
-  }
-  .filter-scroll::-webkit-scrollbar { display: none; }
-  .filter-btn {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.14);
-    color: #a8c4e0; font-family: 'Barlow', sans-serif;
-    font-size: .75rem; letter-spacing: .08em; text-transform: uppercase;
-    padding: 7px 18px; border-radius: 20px; cursor: pointer;
-    transition: all .22s; white-space: nowrap;
-  }
-  .filter-btn:hover {
-    background: rgba(254,124,0,.15); border-color: rgba(254,124,0,.5);
-    color: #fe7c00;
-  }
-  .filter-btn.active {
-    background: #fe7c00; border-color: #fe7c00; color: #fff;
-    box-shadow: 0 3px 12px rgba(254,124,0,.35); font-weight: 600;
-  }
-
-  /* ── GRID ── */
-  .catalog {
-    padding: 52px 48px 80px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 14px;
-    background: var(--charcoal);
-  }
-
-  /* ── CARD ── */
-  .card {
-    background: var(--charcoal);
-    overflow: hidden; position: relative;
-    cursor: pointer;
-    transition: transform .3s;
-  }
-  .card:hover { z-index: 2; transform: scale(1.015); }
-  .card-img {
-    width: 100%; aspect-ratio: 4/3; object-fit: cover;
-    display: block;
-    transition: transform .5s ease, filter .4s;
-    filter: brightness(.9) saturate(.85);
-  }
-  .card:hover .card-img { transform: scale(1.06); filter: brightness(1) saturate(1); }
-  .card-body {
-    padding: 20px 22px 22px;
-    border-top: 2px solid transparent;
-    transition: border-color .3s;
-  }
-  .card:hover .card-body { border-color: var(--clay); }
-  .card-cat {
-    font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 6px;
-  }
-  .card-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem; color: var(--white); line-height: 1.3;
-    margin-bottom: 8px;
-  }
-  .card-desc {
-    font-size: .82rem; color: var(--stone); line-height: 1.6; font-weight: 300;
-    margin-bottom: 14px;
-  }
-  .card-footer {
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .card-tag {
-    font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
-    background: rgba(196,121,74,.12); color: var(--sand);
-    padding: 4px 10px; border-radius: 2px;
-  }
-  .card-wa {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: transparent; border: 1px solid rgba(254,124,0,.5);
-    color: #fe7c00; font-size: .75rem; letter-spacing: .08em;
-    text-transform: uppercase; padding: 7px 14px; border-radius: 2px;
-    text-decoration: none; transition: all .25s;
-  }
-  .card-wa:hover { background: #fe7c00; color: var(--white); border-color: #fe7c00; }
-  .card-wa svg { width: 14px; height: 14px; fill: currentColor; }
-
-  /* ── FEATURED BANNER ── */
-  .featured {
-    margin: 0;
-    padding: 48px 52px;
-    background: linear-gradient(135deg, var(--brick) 0%, var(--earth) 100%);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    position: relative; overflow: hidden;
-  }
-  .featured::after {
-    content: '25';
-    position: absolute; right: -10px; top: -30px;
-    font-family: 'Playfair Display', serif; font-size: 200px;
-    color: rgba(255,255,255,.04); line-height: 1; pointer-events: none;
-  }
-  .featured-eyebrow {
-    font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
-  }
-  .featured-eyebrow::before { content: '★'; }
-  .featured h2 {
-    font-family: 'Playfair Display', serif; font-size: 2.2rem;
-    color: var(--white); line-height: 1.2; margin-bottom: 14px;
-  }
-  .featured p { color: var(--sand); font-weight: 300; line-height: 1.7; font-size: .95rem; }
-  .featured-img { border-radius: 2px; width: 100%; height: 260px; object-fit: cover; }
-
-  /* ── FOOTER ── */
-  footer {
-    background: #071c34;
-    border-top: 1px solid rgba(254,124,0,.25);
-    padding: 40px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 20px;
-  }
-  footer p { color: var(--stone); font-size: .82rem; }
-  footer a { color: var(--clay); text-decoration: none; }
-
-  /* HIDDEN */
-  .card[data-cat] { display: block; }
-  .card.hidden { display: none; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .card { animation: fadeUp .5s ease both; }
-  .card:nth-child(1)  { animation-delay: .05s; }
-  .card:nth-child(2)  { animation-delay: .10s; }
-  .card:nth-child(3)  { animation-delay: .15s; }
-  .card:nth-child(4)  { animation-delay: .20s; }
-  .card:nth-child(5)  { animation-delay: .25s; }
-  .card:nth-child(6)  { animation-delay: .30s; }
-  .card:nth-child(7)  { animation-delay: .35s; }
-  .card:nth-child(8)  { animation-delay: .40s; }
-  .card:nth-child(9)  { animation-delay: .45s; }
-  .card:nth-child(10) { animation-delay: .50s; }
-  .card:nth-child(11) { animation-delay: .55s; }
-  .card:nth-child(12) { animation-delay: .60s; }
-
-  /* ── MOBILE ── */
-  @media (max-width: 768px) {
-    /* Nav compacto */
-    nav {
-      padding: 12px 16px;
-    }
-    .nav-back {
-      padding: 7px 14px;
-      font-size: .72rem; letter-spacing: .08em;
-      border-width: 1.5px;
-    }
-    .nav-back svg { width: 13px; height: 13px; }
-    .nav-title {
-      font-size: 1rem; letter-spacing: .02em;
-    }
-    .nav-cta {
-      padding: 7px 14px;
-      font-size: .72rem; letter-spacing: .08em;
-    }
-
-    /* Hero más compacto */
-    .hero {
-      min-height: 38vh;
-      padding: 0 20px 36px;
-      margin-top: 60px;
-    }
-    .hero h1 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
-    .hero-sub { font-size: .88rem; margin-top: 10px; }
-
-    /* Filter sticky justo debajo del nav móvil */
-    .filter-bar {
-      top: 60px;
-      padding: 0 16px;
-    }
-    .filter-label {
-      font-size: .62rem; padding: 14px 12px 14px 0; margin-right: 10px;
-    }
-    .filter-scroll { padding: 11px 0; gap: 6px; }
-    .filter-btn {
-      font-size: .68rem; padding: 5px 13px; letter-spacing: .04em;
-    }
-
-    /* Grid 1 columna */
-    .catalog {
-      padding: 20px 14px 48px;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    /* Cards más limpias en móvil */
-    .card-body { padding: 14px 16px 16px; }
-    .card-name { font-size: 1rem; }
-    .card-desc { font-size: .8rem; }
-    .card-tag { font-size: .65rem; padding: 3px 8px; }
-    .card-wa { font-size: .7rem; padding: 6px 11px; }
-
-    /* Featured stack vertical */
-    .featured {
-      padding: 32px 20px;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    .featured::after { display: none; }
-    .featured h2 { font-size: 1.6rem; }
-    .featured-img { height: 200px; }
-
-    /* Footer */
-    footer {
-      padding: 28px 20px;
-      flex-direction: column; align-items: flex-start; gap: 8px;
-    }
-
-    /* Lightbox móvil */
-    .lightbox-prev { left: 6px; }
-    .lightbox-next { right: 6px; }
-    .lightbox-img-wrap { max-width: 100vw; }
-    .lightbox-header { padding: 14px 16px; }
-    .lightbox-footer {
-      flex-direction: column; gap: 10px; padding: 16px;
-      align-items: flex-start;
-    }
-    .lightbox-title { font-size: 1rem; }
-    .lightbox-desc { font-size: .82rem; }
-    .lightbox-wa { width: 100%; justify-content: center; }
-  }
-
-  /* ── LIGHTBOX / SLIDER ── */
-  .lightbox-overlay {
-    display: none; position: fixed; inset: 0; z-index: 999;
-    background: rgba(7,28,52,.96);
-    backdrop-filter: blur(8px);
-    align-items: center; justify-content: center;
-    flex-direction: column;
-  }
-  .lightbox-overlay.open { display: flex; }
-  .lightbox-header {
-    position: absolute; top: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 32px;
-    background: linear-gradient(to bottom, rgba(7,28,52,1), transparent);
-  }
-  .lightbox-title {
-    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--white);
-  }
-  .lightbox-cat {
-    font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
-    color: var(--clay); margin-bottom: 4px;
-  }
-  .lightbox-close {
-    background: none; border: 1px solid rgba(255,255,255,.2); color: var(--sand);
-    width: 38px; height: 38px; border-radius: 50%; font-size: 1.2rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: background .2s;
-  }
-  .lightbox-close:hover { background: rgba(255,255,255,.1); }
-  .lightbox-img-wrap {
-    max-width: 80vw; max-height: 70vh;
-    display: flex; align-items: center; justify-content: center;
-    position: relative;
-  }
-  .lightbox-img-wrap img {
-    max-width: 80vw; max-height: 70vh;
-    object-fit: contain; border-radius: 4px;
-    box-shadow: 0 24px 80px rgba(0,0,0,.6);
-    transition: opacity .3s;
-  }
-  .lightbox-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(7,28,52,.7); border: 1px solid rgba(196,121,74,.4);
-    color: var(--sand); width: 46px; height: 46px; border-radius: 50%;
-    font-size: 1.2rem; cursor: pointer; display: flex;
-    align-items: center; justify-content: center;
-    transition: background .2s, border-color .2s;
-  }
-  .lightbox-btn:hover { background: var(--clay); border-color: var(--clay); color: #fff; }
-  .lightbox-prev { left: -60px; }
-  .lightbox-next { right: -60px; }
-  .lightbox-footer {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 32px 24px;
-    background: linear-gradient(to top, rgba(7,28,52,1), transparent);
-  }
-  .lightbox-desc { color: var(--sand); font-size: .9rem; font-weight: 300; max-width: 500px; }
-  .lightbox-counter { color: var(--stone); font-size: .8rem; letter-spacing: .1em; }
-  .lightbox-wa {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: #fe7c00; color: var(--white);
-    padding: 10px 20px; border-radius: 2px;
-    font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
-    text-decoration: none; font-weight: 600; transition: background .25s;
-  }
-  .lightbox-wa:hover { background: #d96700; }
-  .lightbox-dots {
-    display: flex; gap: 8px; justify-content: center; margin-top: 16px;
-  }
-  .lightbox-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,.25); cursor: pointer;
-    transition: background .25s, transform .25s;
-  }
-  .lightbox-dot.active { background: var(--clay); transform: scale(1.3); }
-  .card-img { cursor: zoom-in; }
-
-  @media (max-width: 768px) {
-    .lightbox-prev { left: 4px; }
-    .lightbox-next { right: 4px; }
-    .lightbox-img-wrap { max-width: 95vw; }
-  }
-
+  .hero { min-height: 36vh; padding: 0 20px 32px; margin-top: 56px; }
+  .hero h1 { font-size: clamp(1.5rem, 6.5vw, 2.2rem); }
+  .hero-sub { font-size: .84rem; margin-top: 8px; display: none; }
+  .hero-search-box { max-width: 100%; }
+  .filter-bar { top: 56px; }
+  .filter-main { padding: 0 14px; }
+  .filter-label { font-size: .58rem; padding: 10px 10px 10px 0; margin-right: 8px; }
+  .filter-label-arrow { font-size: 1.4rem; }
+  .filter-scroll { padding: 10px 0; gap: 5px; }
+  .filter-btn { font-size: .65rem; padding: 5px 11px; }
+  .subcat-bar { padding: 0 14px; }
+  .subcat-scroll { padding: 8px 0; gap: 5px; }
+  .subcat-btn { font-size: .63rem; padding: 4px 10px; }
+  .section-header { padding: 24px 16px 6px; }
+  .section-header h2 { font-size: 1.25rem; }
+  .section-divider { margin: 10px 16px 0; }
+  .catalog { padding: 14px 12px 48px; grid-template-columns: 1fr; gap: 10px; }
+  .card-body { padding: 12px 14px 14px; }
+  .card-name { font-size: .9rem; }
+  .card-desc { font-size: .78rem; }
+  .search-wrap { padding: 14px 16px; }
+  .search-results { left: 16px; right: 16px; top: 78px; }
+  .featured { padding: 22px 18px; }
+  .featured h2 { font-size: 1.25rem; }
+  .featured::after { display: none; }
+  footer { padding: 16px 18px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .footer-copy { text-align: center; }
+  .footer-actions { justify-content: center; }
+  .lightbox-prev { left: 5px; }
+  .lightbox-next { right: 5px; }
+  .lightbox-img-wrap { max-width: 96vw; }
+  .lightbox-header { padding: 12px 14px; }
+  .lightbox-footer { flex-direction: column; gap: 10px; padding: 14px; align-items: flex-start; }
+  .lightbox-wa { align-self: flex-end; }
+}
 </style>
 </head>
 <body>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-wrap" id="searchWrap">
+  <svg style="width:20px;height:20px;fill:none;stroke:#4a6a8a;stroke-width:2;stroke-linecap:round;flex-shrink:0" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <input class="search-input" id="searchInput" type="text" placeholder="Buscar producto... ej: Teja Imperial, Wire Cut, Molejón...">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+</div>
+<div class="search-results" id="searchResults"></div>
 
 <!-- NAV -->
 <nav>
@@ -439,385 +532,555 @@
     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     Volver
   </a>
-  <span class="nav-title">Catálogo de Productos</span>
-  <a class="nav-cta"
-     href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20cotizar%20un%20producto."
-     target="_blank">Cotizar Ahora</a>
+  <span class="nav-title">Ladrillera Sabana Oeste</span>
+  <a class="nav-cta" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20cotizar%20un%20producto." target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+    Cotizar
+  </a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <h1>Materiales que <em>transforman</em><br>cada espacio</h1>
   <p class="hero-sub">Enchapes, tejas y pisos de alta calidad para proyectos residenciales, comerciales y turísticos. Más de 25 años de experiencia.</p>
+  <div class="hero-search">
+    <div class="hero-search-box" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Buscar producto o categoría...</span>
+    </div>
+  </div>
 </section>
 
-<!-- FILTER -->
+<!-- FILTER BAR -->
 <div class="filter-bar">
-  <span class="filter-label">Filtrar por:</span>
-  <div class="filter-scroll">
-    <button class="filter-btn active" onclick="filter('all', this)">Todos</button>
-    <button class="filter-btn" onclick="filter('enchape', this)">Enchapes</button>
-    <button class="filter-btn" onclick="filter('teja', this)">Tejas</button>
-    <button class="filter-btn" onclick="filter('piso', this)">Pisos</button>
-    <button class="filter-btn" onclick="filter('piedra', this)">Piedras Naturales</button>
-    <button class="filter-btn" onclick="filter('sellador', this)">Selladores</button>
-    <button class="filter-btn" onclick="filter('accesorio', this)">Accesorios</button>
-    <button class="filter-btn" onclick="filter('instalacion', this)">Otros</button>
+  <div class="filter-main">
+    <span class="filter-label">Filtro <span class="filter-label-arrow">›</span></span>
+    <div class="filter-scroll">
+      <button class="filter-btn active" onclick="filterCat('enchape-apilable', this)">Enchapes Apilables</button>
+      <button class="filter-btn" onclick="filterCat('piedra', this)">Piedras Naturales</button>
+      <button class="filter-btn" onclick="filterCat('enchape-ladrillo', this)">Enchape Ladrillo</button>
+      <button class="filter-btn" onclick="filterCat('teja', this)">Tejas</button>
+      <button class="filter-btn" onclick="filterCat('ladrillo', this)">Ladrillos</button>
+      <button class="filter-btn" onclick="filterCat('refractario', this)">Refractario</button>
+      <button class="filter-btn" onclick="filterCat('piso', this)">Pisos</button>
+      <button class="filter-btn" onclick="filterCat('mortero', this)">Morteros</button>
+      <button class="filter-btn" onclick="filterCat('cementicio', this)">Cementicios</button>
+      <button class="filter-btn" onclick="filterCat('jardin', this)">Jardín</button>
+      <button class="filter-btn" onclick="filterCat('otros', this)">Otros</button>
+    </div>
+  </div>
+  <!-- SUBCATEGORY BAR -->
+  <div class="subcat-bar" id="subcatBar">
+    <span class="subcat-label">Estilo:</span>
+    <div class="subcat-scroll" id="subcatScroll"></div>
   </div>
 </div>
 
-<!-- CATALOG GRID -->
+<!-- SECTION HEADER -->
+<div class="section-header" id="sectionHeader">
+  <h2 id="sectionTitle"></h2>
+  <p id="sectionDesc"></p>
+</div>
+<div class="section-divider" id="sectionDivider"></div>
+
+<!-- CATALOG -->
 <section class="catalog" id="catalog">
 
-  <!-- ENCHAPES -->
-  <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra2.png" alt="Loseta Ladrillo Cooper WC" loading="lazy">
+  <!-- ══ ENCHAPES APILABLES ══ -->
+  <div class="card" data-cat="enchape-apilable" data-sub="Quick Fit" data-name="Montaña Amarilla Quick Fit" data-desc="Enchape apilable en tonos dorados y ocres naturales. Sistema de instalación rápida sin mortero visible. Ideal para fachadas y muros exteriores." data-tag="Apilable · Exterior" data-wa="Montaña%20Amarilla%20Quick%20Fit">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra6.png" alt="Montaña Amarilla Quick Fit" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Loseta Ladrillo Cooper WC</div>
-      <p class="card-desc">Acabado artesanal con tonos cobrizos cálidos. Ideal para muros interiores y fachadas contemporáneas.</p>
+      <div class="card-cat">Enchapes Apilables · Quick Fit</div>
+      <div class="card-name">Montaña Amarilla Quick Fit</div>
+      <p class="card-desc">Tonos dorados y ocres naturales. Sistema de instalación rápida sin mortero visible.</p>
       <div class="card-footer">
-        <span class="card-tag">Interior · Exterior</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Loseta%20Ladrillo%20Cooper%20WC.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Apilable · Exterior</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Montaña%20Amarilla%20Quick%20Fit.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra4.png" alt="Enchape Ladrillo Cooper CH" loading="lazy">
+  <div class="card" data-cat="enchape-apilable" data-sub="Quick Fit" data-name="Ozark Quick Fit" data-desc="Piedra apilable en tonos grises con vetas naturales. Sistema Quick Fit de alta durabilidad para exteriores e interiores." data-tag="Apilable · Premium" data-wa="Ozark%20Quick%20Fit">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra7.png" alt="Ozark Quick Fit" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Enchape Ladrillo Cooper CH</div>
-      <p class="card-desc">Formato alargado de ladrillo, textura rústica pronunciada. Muy usado en fachadas residenciales modernas.</p>
+      <div class="card-cat">Enchapes Apilables · Quick Fit</div>
+      <div class="card-name">Ozark Quick Fit</div>
+      <p class="card-desc">Tonos grises con vetas naturales. Alta durabilidad para exteriores e interiores.</p>
       <div class="card-footer">
-        <span class="card-tag">Fachada · Muro</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Cooper%20CH.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Apilable · Premium</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ozark%20Quick%20Fit.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="enchape">
+  <div class="card" data-cat="enchape-apilable" data-sub="Fast Fit" data-name="Fast Fit Miel" data-desc="Enchape apilable en tono miel beige cálido. Sistema Fast Fit de instalación sencilla. Acabado rústico contemporáneo para cualquier ambiente." data-tag="Fast Fit · Cálido" data-wa="Fast%20Fit%20Miel">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra1.png" alt="Fast Fit Miel" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Fast Fit</div>
+      <div class="card-name">Fast Fit Miel</div>
+      <p class="card-desc">Tono miel beige cálido. Instalación sencilla, acabado rústico contemporáneo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Fast Fit · Cálido</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Fast%20Fit%20Miel.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+   <div class="card" data-cat="enchape-apilable" data-sub="Fast Fit" data-name="Fast Fit Miel" data-desc="Enchape apilable en tono miel beige cálido. Sistema Fast Fit de instalación sencilla. Acabado rústico contemporáneo para cualquier ambiente." data-tag="Fast Fit · Cálido" data-wa="Fast%20Fit%20Miel">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra1.png" alt="Fast Fit Miel" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Fast Fit</div>
+      <div class="card-name">Fast Fit Miel</div>
+      <p class="card-desc">Tono miel beige cálido. Instalación sencilla, acabado rústico contemporáneo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Fast Fit · Cálido</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Fast%20Fit%20Miel.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-apilable" data-sub="Fast Fit" data-name="Fast Fit Miel" data-desc="Enchape apilable en tono miel beige cálido. Sistema Fast Fit de instalación sencilla. Acabado rústico contemporáneo para cualquier ambiente." data-tag="Fast Fit · Cálido" data-wa="Fast%20Fit%20Miel">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra1.png" alt="Fast Fit Miel" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Fast Fit</div>
+      <div class="card-name">Fast Fit Miel</div>
+      <p class="card-desc">Tono miel beige cálido. Instalación sencilla, acabado rústico contemporáneo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Fast Fit · Cálido</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Fast%20Fit%20Miel.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-apilable" data-sub="Hackett" data-name="Montaña Amarilla Hackett" data-desc="Enchape apilable estilo Hackett en tonos amarillos cálidos. Textura pronunciada y perfil irregular para muros de alto impacto visual." data-tag="Hackett · Natural" data-wa="Montaña%20Amarilla%20Hackett">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra3.png" alt="Montaña Amarilla Hackett" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Hackett</div>
+      <div class="card-name">Montaña Amarilla Hackett</div>
+      <p class="card-desc">Tonos amarillos cálidos, textura pronunciada. Muros de alto impacto visual.</p>
+      <div class="card-footer">
+        <span class="card-tag">Hackett · Natural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Montaña%20Amarilla%20Hackett.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-apilable" data-sub="Irishstone" data-name="Ozark Irishstone" data-desc="Enchape apilable Irishstone en tonos grises con vetas. Acabado natural sofisticado. Muy solicitado en proyectos residenciales de lujo." data-tag="Irishstone · Lujo" data-wa="Ozark%20Irishstone">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra7.png" alt="Ozark Irishstone" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Irishstone</div>
+      <div class="card-name">Ozark Irishstone</div>
+      <p class="card-desc">Tonos grises con vetas, acabado sofisticado para proyectos residenciales de lujo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Irishstone · Lujo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ozark%20Irishstone.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-apilable" data-sub="Thinstone" data-name="Thinstone Grafito" data-desc="Enchape apilable delgado en tono grafito oscuro. Perfil fino ideal para interiores modernos y fachadas contemporáneas de bajo relieve." data-tag="Thinstone · Moderno" data-wa="Thinstone%20Grafito">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Thinstone Grafito" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchapes Apilables · Thinstone</div>
+      <div class="card-name">Thinstone Grafito</div>
+      <p class="card-desc">Perfil fino en grafito oscuro. Ideal para interiores modernos y fachadas contemporáneas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Thinstone · Moderno</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Thinstone%20Grafito.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PIEDRAS NATURALES ══ -->
+  <div class="card" data-cat="piedra" data-sub="Molejón" data-name="Molejón Irregular Rústico Amarillo" data-desc="Piedra de molejón en color amarillo veteado, formato irregular rústico. Ideal para pisos exteriores, senderos, jardines y muros ornamentales. 50 kgs/m2." data-tag="Molejón · Natural" data-wa="Molejón%20Irregular%20Rústico%20Amarillo">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra3.png" alt="Molejón Irregular Rústico" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piedras Naturales · Molejón</div>
+      <div class="card-name">Molejón Irregular Rústico Amarillo</div>
+      <p class="card-desc">Color amarillo veteado, formato irregular. Senderos, jardines y muros ornamentales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Molejón · Natural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Molejón%20Irregular%20Rústico%20Amarillo.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="piedra" data-sub="Sánchez Volcánica" data-name="Sánchez Volcánica Multiformato" data-desc="Enchape natural volcánico en multiformato rústico. Textura única y dureza excepcional. Originaria de Costa Rica, ideal para fachadas de alta durabilidad." data-tag="Volcánica · Nacional" data-wa="Sánchez%20Volcánica%20Multiformato">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/crurrasquera2.png" alt="Sánchez Volcánica" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piedras Naturales · Sánchez Volcánica</div>
+      <div class="card-name">Sánchez Volcánica Multiformato</div>
+      <p class="card-desc">Enchape volcánico nacional, textura única y dureza excepcional para fachadas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Volcánica · Nacional</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Sánchez%20Volcánica%20Multiformato.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="piedra" data-sub="Laja Negra" data-name="Laja Negra Rústica Irregular" data-desc="Laja negra oxidada en formato irregular rústico. Alto contraste visual para muros de diseño, jardines y terrazas contemporáneas." data-tag="Laja · Diseño" data-wa="Laja%20Negra%20Rústica%20Irregular">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Laja Negra Rústica" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piedras Naturales · Laja Negra</div>
+      <div class="card-name">Laja Negra Rústica Irregular</div>
+      <p class="card-desc">Alto contraste visual para muros de diseño, jardines y terrazas contemporáneas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Laja · Diseño</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Laja%20Negra%20Rústica%20Irregular.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="piedra" data-sub="Laja Gris" data-name="Laja Gris Multiformato" data-desc="Laja gris en multiformato rústico. Textura contemporánea con tono neutro versátil. Perfecta para terrazas, exteriores y senderos modernos." data-tag="Laja · Contemporáneo" data-wa="Laja%20Gris%20Multiformato">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Laja Gris Multiformato" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Piedras Naturales · Laja Gris</div>
+      <div class="card-name">Laja Gris Multiformato</div>
+      <p class="card-desc">Tono neutro versátil. Terrazas, exteriores y senderos modernos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Laja · Contemporáneo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Laja%20Gris%20Multiformato.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ENCHAPE LADRILLO ══ -->
+  <div class="card" data-cat="enchape-ladrillo" data-sub="Wire Cut" data-name="Cooper Wire Cut" data-desc="Fachaleta Wire Cut en tono cobre cobrizo. Acabado artesanal con textura de corte de alambre. Muy usado en fachadas residenciales modernas y comerciales." data-tag="Wire Cut · Cobre" data-wa="Cooper%20Wire%20Cut">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra2.png" alt="Cooper Wire Cut" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchape Ladrillo · Wire Cut</div>
+      <div class="card-name">Cooper Wire Cut</div>
+      <p class="card-desc">Tono cobre cobrizo, textura de corte de alambre. Fachadas residenciales y comerciales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Wire Cut · Cobre</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Cooper%20Wire%20Cut.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-ladrillo" data-sub="Chicago Brick" data-name="Cooper Chicago" data-desc="Enchape ladrillo estilo Chicago en tono cobre. Acabado artesanal añejado con irregularidades únicas. Perfecto para interiores industriales y rústicos." data-tag="Chicago · Industrial" data-wa="Cooper%20Chicago">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra4.png" alt="Cooper Chicago" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Enchape Ladrillo · Chicago Brick</div>
+      <div class="card-name">Cooper Chicago</div>
+      <p class="card-desc">Acabado añejado con irregularidades únicas. Interiores industriales y rústicos.</p>
+      <div class="card-footer">
+        <span class="card-tag">Chicago · Industrial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Cooper%20Chicago.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="enchape-ladrillo" data-sub="Demolición" data-name="Ladrillo Naranja Demolición" data-desc="Enchape ladrillo estilo demolición en tono naranja añejado. Acabado vintage con irregularidades únicas. Muy valorado en diseño de interiores industrial y rústico." data-tag="Demolición · Vintage" data-wa="Ladrillo%20Naranja%20Demolición">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra5.png" alt="Ladrillo Naranja Demolición" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
+      <div class="card-cat">Enchape Ladrillo · Demolición</div>
       <div class="card-name">Ladrillo Naranja Demolición</div>
-      <p class="card-desc">Acabado vintage con irregularidades únicas. Muy valorado en diseño de interiores industriales y rústicos.</p>
+      <p class="card-desc">Acabado vintage añejado, irregularidades únicas. Diseño industrial y rústico.</p>
       <div class="card-footer">
-        <span class="card-tag">Vintage · Industrial</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Ladrillo%20Naranja%20Demolición.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Demolición · Vintage</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%20Naranja%20Demolición.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="enchape">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra6.png" alt="Apilable Ozark WF" loading="lazy">
+  <div class="card" data-cat="enchape-ladrillo" data-sub="Cartago Rústica" data-name="Fachaleta Cartago Antiguo" data-desc="Fachaleta de arcilla horneada estilo Cartago antiguo. Formato 7.5x24 cms con textura rugosa y acabado añejado ideal para fachadas de estilo colonial." data-tag="Cartago · Colonial" data-wa="Fachaleta%20Cartago%20Antiguo">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/brava.png" alt="Fachaleta Cartago Antiguo" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Enchapes</div>
-      <div class="card-name">Apilable Ozark WF</div>
-      <p class="card-desc">Piedra apilable de gran impacto visual. Perfecta para muros divisorios, chimeneas y jardines verticales.</p>
+      <div class="card-cat">Enchape Ladrillo · Cartago Rústica</div>
+      <div class="card-name">Fachaleta Cartago Antiguo</div>
+      <p class="card-desc">Arcilla horneada 7.5x24 cms, textura rugosa añejada. Estilo colonial costarricense.</p>
       <div class="card-footer">
-        <span class="card-tag">Muro · Jardín</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Enchape%20Apilable%20Ozark%20WF.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Cartago · Colonial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Fachaleta%20Cartago%20Antiguo.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- TEJAS -->
-  <div class="card" data-cat="teja">
+  <!-- ══ TEJAS ══ -->
+  <div class="card" data-cat="teja" data-sub="" data-name="Teja Plana Importada" data-desc="Teja plana de arcilla importada. Superficie lisa y uniforme con excelente resistencia a la intemperie. Ideal para proyectos modernos con líneas arquitectónicas limpias." data-tag="Plana · Importada" data-wa="Teja%20Plana%20Importada">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja1.png" alt="Teja Plana Importada" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Tejas</div>
       <div class="card-name">Teja Plana Importada</div>
-      <p class="card-desc">Elegancia y durabilidad en cubierta. Superficie lisa y uniforme con excelente resistencia a la intemperie.</p>
+      <p class="card-desc">Superficie lisa y uniforme, alta resistencia. Proyectos modernos con líneas limpias.</p>
       <div class="card-footer">
-        <span class="card-tag">Cubierta · Residencial</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Plana%20Importada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Plana · Importada</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Plana%20Importada.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="teja">
+  <div class="card" data-cat="teja" data-sub="" data-name="Teja Imperial Matizada" data-desc="Teja imperial con perfil curvo clásico y acabado matizado artesanal. Combina estética colonial con alta resistencia a la lluvia. Para proyectos premium." data-tag="Imperial · Colonial" data-wa="Teja%20Imperial%20Matizada">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja2.png" alt="Teja Imperial Matizada" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Tejas</div>
       <div class="card-name">Teja Imperial Matizada</div>
-      <p class="card-desc">Perfil curvo clásico con acabado matizado. Combina estética colonial con alta resistencia a la lluvia.</p>
+      <p class="card-desc">Perfil curvo clásico, acabado matizado. Estética colonial con alta resistencia a la lluvia.</p>
       <div class="card-footer">
-        <span class="card-tag">Colonial · Premium</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Imperial%20Matizada.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Imperial · Colonial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Imperial%20Matizada.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="teja">
+  <div class="card" data-cat="teja" data-sub="" data-name="Teja Nicaragüense Nueva" data-desc="Teja artesanal de arcilla Nicaragüense, coloración uniforme. 27 unidades por m2. Excelente para proyectos turísticos, residencias de campo y hoteles boutique." data-tag="Nicaragüense · Artesanal" data-wa="Teja%20Nicaragüense%20Nueva">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/teja6.png" alt="Teja Nicaragüense Nueva" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Tejas</div>
       <div class="card-name">Teja Nicaragüense Nueva</div>
-      <p class="card-desc">Teja artesanal de arcilla, coloración uniforme. Excelente para proyectos turísticos y residencias de campo.</p>
+      <p class="card-desc">Arcilla artesanal, 27 uds/m2. Turismo, residencias de campo y hoteles boutique.</p>
       <div class="card-footer">
-        <span class="card-tag">Artesanal · Campo</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Nicaragüense%20Nueva.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Nicaragüense · Artesanal</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Teja%20Nicaragüense%20Nueva.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- PISOS -->
-  <div class="card" data-cat="piso">
+  <!-- ══ LADRILLOS ══ -->
+  <div class="card" data-cat="ladrillo" data-sub="" data-name="Ladrillo Rojo Sólido 5x10x22" data-desc="Ladrillo rojo sólido rústico de arcilla horneada 5x10x22 cms. 72 unidades por m2. Alta resistencia estructural para muros, fachadas y obras residenciales." data-tag="Sólido · Estructural" data-wa="Ladrillo%20Rojo%20Sólido%205x10x22">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Ladrillo+Sólido" alt="Ladrillo Rojo Sólido" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillos</div>
+      <div class="card-name">Ladrillo Rojo Sólido 5×10×22</div>
+      <p class="card-desc">Arcilla horneada, 72 uds/m2. Alta resistencia para muros y fachadas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Sólido · Estructural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%20Rojo%20Sólido.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="ladrillo" data-sub="" data-name="Ladrillo 2 Huecos 5x10x22" data-desc="Ladrillo de dos huecos liso o decorado 5x10x22 cms. Menor peso y excelente aislación térmica. Muros divisorios y fachadas livianas." data-tag="2 Huecos · Decorativo" data-wa="Ladrillo%202%20Huecos">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Ladrillo+2+Huecos" alt="Ladrillo 2 Huecos" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillos</div>
+      <div class="card-name">Ladrillo 2 Huecos 5×10×22</div>
+      <p class="card-desc">Liso o decorado, menor peso, excelente aislación térmica. Muros divisorios.</p>
+      <div class="card-footer">
+        <span class="card-tag">2 Huecos · Decorativo</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%202%20Huecos.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="ladrillo" data-sub="" data-name="Block Estructural BG 12x20x40" data-desc="Block de concreto estructural de alta resistencia. Dimensiones estándar 12x20x40 cms para construcciones formales, muros de carga y proyectos de ingeniería." data-tag="Block · Estructural" data-wa="Block%20BG%2012x20x40">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Block+BG+12x20x40" alt="Block Estructural BG" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Ladrillos</div>
+      <div class="card-name">Block Estructural BG 12×20×40</div>
+      <p class="card-desc">Alta resistencia, 12x20x40 cms. Muros de carga y proyectos de ingeniería.</p>
+      <div class="card-footer">
+        <span class="card-tag">Block · Estructural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Block%20BG%2012x20x40.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ REFRACTARIO ══ -->
+  <div class="card" data-cat="refractario" data-sub="" data-name="Ladrillo Refractario SK-32" data-desc="Ladrillo refractario SK-32, 6.5x11.5x23 cms. Alta resistencia al calor extremo. Ideal para chimeneas, hornos de leña, parrillas y asadores artesanales. 62 uds/m2 pared." data-tag="Refractario · Chimenea" data-wa="Ladrillo%20Refractario%20SK-32">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/refractario.png" alt="Ladrillo Refractario SK-32" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Ladrillo Refractario SK-32</div>
+      <p class="card-desc">Alta resistencia al calor extremo. Chimeneas, hornos de leña y parrillas artesanales.</p>
+      <div class="card-footer">
+        <span class="card-tag">Refractario · Chimenea</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%20Refractario%20SK-32.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="refractario" data-sub="" data-name="Loseta Refractaria N.2" data-desc="Loseta refractaria N.2, 4.5x11.5x23 cms. Perfecta como piso de hornos y chimeneas. Soporta temperaturas extremas. 38 unidades por m2 de piso." data-tag="Loseta · Horno" data-wa="Loseta%20Refractaria%20N.2">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Loseta+Refractaria" alt="Loseta Refractaria N.2" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Loseta Refractaria N.2</div>
+      <p class="card-desc">4.5x11.5x23 cms. Piso de hornos y chimeneas, soporta temperaturas extremas.</p>
+      <div class="card-footer">
+        <span class="card-tag">Loseta · Horno</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Loseta%20Refractaria%20N.2.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-cat="refractario" data-sub="" data-name="Mortero Refractario 5050 20kg" data-desc="Mortero refractario de uso industrial 5050 en saco de 20 kgs. Para juntas y repellos en hornos y chimeneas. Alta resistencia a temperaturas extremas." data-tag="Mortero · Industrial" data-wa="Mortero%20Refractario%205050">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Mortero+Refractario" alt="Mortero Refractario" loading="lazy">
+    <div class="card-body">
+      <div class="card-cat">Refractario</div>
+      <div class="card-name">Mortero Refractario 5050 20kg</div>
+      <p class="card-desc">Para juntas y repellos en hornos y chimeneas. Alta resistencia al calor extremo.</p>
+      <div class="card-footer">
+        <span class="card-tag">Mortero · Industrial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Mortero%20Refractario%205050.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PISOS ══ -->
+  <div class="card" data-cat="piso" data-sub="" data-name="Piso Betania 30x30" data-desc="Piso de barro cocido artesanal Betania 30x30 cms, 11 piezas por m2. Acabado poroso ideal para espacios con carácter rústico y mediterráneo. Sellado recomendado." data-tag="Betania · Rústico" data-wa="Piso%20Betania%2030x30">
     <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso1.png" alt="Piso Betania 30x30" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Pisos</div>
       <div class="card-name">Piso Betania 30×30</div>
-      <p class="card-desc">Formato clásico en arcilla natural. Acabado poroso ideal para espacios con carácter rústico y mediterráneo.</p>
+      <p class="card-desc">Barro cocido artesanal, 11 pzs/m2. Carácter rústico y mediterráneo.</p>
       <div class="card-footer">
-        <span class="card-tag">Interior · Rústico</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Piso%20Betania%2030x30.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Betania · Rústico</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Piso%20Betania%2030x30.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="piso">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso3.png" alt="Piso Terrazo" loading="lazy">
+  <div class="card" data-cat="piso" data-sub="" data-name="Piso Quarry Tile Industrial 15x15" data-desc="Piso Quarry Tile rojo de arcilla sin esmaltar 15x15 cms. Alta resistencia al desgaste, antideslizante. Cocinas industriales, exteriores y áreas de alto tráfico." data-tag="Quarry · Industrial" data-wa="Piso%20Quarry%20Tile%2015x15">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/quarrytile.png" alt="Quarry Tile Industrial" loading="lazy">
     <div class="card-body">
       <div class="card-cat">Pisos</div>
-      <div class="card-name">Piso Terrazo</div>
-      <p class="card-desc">Composición de mármol y cemento con patrones únicos. Alta durabilidad y resistencia al tráfico intenso.</p>
+      <div class="card-name">Quarry Tile Industrial 15×15</div>
+      <p class="card-desc">Arcilla sin esmaltar, antideslizante. Cocinas industriales y alto tráfico.</p>
       <div class="card-footer">
-        <span class="card-tag">Terrazo · Alto Tráfico</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Piso%20Terrazo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Quarry · Industrial</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Quarry%20Tile%20Industrial%2015x15.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- PIEDRAS -->
-  <div class="card" data-cat="piedra">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra1.png" alt="Piedra Apilable Rustic" loading="lazy">
+  <!-- ══ MORTEROS ══ -->
+  <div class="card" data-cat="mortero" data-sub="" data-name="Mortero Plus Porcelánico Gress 387" data-desc="Mortero premium Gress 387 para instalación de porcelanatos, cerámicas y piedras naturales. Alta adherencia y resistencia. Saco estándar de construcción." data-tag="Adhesivo · Premium" data-wa="Mortero%20Plus%20Gress%20387">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Mortero Gress 387" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
-      <div class="card-name">Piedra Apilable Rustic</div>
-      <p class="card-desc">Piedra natural apilada a mano. Cada instalación es única. Muy solicitada en fachadas y muros de jardín.</p>
+      <div class="card-cat">Morteros</div>
+      <div class="card-name">Mortero Plus Porcelánico Gress 387</div>
+      <p class="card-desc">Alta adherencia para porcelanatos y piedras naturales. Uso profesional.</p>
       <div class="card-footer">
-        <span class="card-tag">Natural · Jardín</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Apilable%20Rustic.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Adhesivo · Premium</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Mortero%20Gress%20387.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="piedra">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra3.png" alt="Molejón Amarillo Irregular" loading="lazy">
+  <div class="card" data-cat="mortero" data-sub="" data-name="Fragua con Arena de Color" data-desc="Fragua lista para usar con arena de color. Disponible en: blanco, gris, negro, tabaco, chocolate, terracota, caramelo y más. Para todo tipo de juntas." data-tag="Fragua · Multicolor" data-wa="Fragua%20con%20Arena%20de%20Color">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Fragua+Color" alt="Fragua con Arena de Color" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
-      <div class="card-name">Molejón Amarillo Irregular</div>
-      <p class="card-desc">Piedra de río en tonos amarillos y ocres. Ideal para pisos exteriores, senderos y muros ornamentales.</p>
+      <div class="card-cat">Morteros</div>
+      <div class="card-name">Fragua con Arena de Color</div>
+      <p class="card-desc">Lista para usar. Blanco, gris, negro, tabaco, chocolate, terracota y más.</p>
       <div class="card-footer">
-        <span class="card-tag">Exterior · Ornamental</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Molejón%20Amarillo%20Irregular.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.998-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Fragua · Multicolor</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Fragua%20con%20Arena%20de%20Color.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="piedra">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piedra8.png" alt="Piedra Natural Laja Gris" loading="lazy">
+  <!-- ══ CEMENTICIOS ══ -->
+  <div class="card" data-cat="cementicio" data-sub="" data-name="Huella 45x45 Cinturón de Juego" data-desc="Huella de concreto prefabricada 45x45 cms. Resistente y decorativa para senderos, jardines y zonas de juego. Disponible en gris y colores." data-tag="Huella · Jardín" data-wa="Huella%2045x45%20Cinturón%20de%20Juego">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Huella+45x45" alt="Huella 45x45" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Piedras Naturales</div>
-      <div class="card-name">Piedra Natural Laja Gris</div>
-      <p class="card-desc">Lajas de piedra natural gris. Aspecto contemporáneo con textura orgánica, ideal para terrazas y exteriores.</p>
+      <div class="card-cat">Cementicios</div>
+      <div class="card-name">Huella 45×45 Cinturón de Juego</div>
+      <p class="card-desc">Concreto prefabricado, senderos y zonas de juego. Gris o color.</p>
       <div class="card-footer">
-        <span class="card-tag">Contemporáneo · Terraza</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Natural%20Laja%20Gris.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Huella · Jardín</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Huella%2045x45.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- SELLADORES -->
-  <div class="card" data-cat="sellador">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Sellador para Pisos Rústicos" loading="lazy">
+  <!-- ══ JARDÍN ══ -->
+  <div class="card" data-cat="jardin" data-sub="" data-name="Piedra Cuarta Blanca" data-desc="Grava decorativa blanca fina por cubeta de 20 kgs. Perfecta para jardines zen, senderos, camas de plantas y decoración exterior. Aspecto limpio y luminoso." data-tag="Cuarta · Decorativa" data-wa="Piedra%20Cuarta%20Blanca">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Piedra+Cuarta+Blanca" alt="Piedra Cuarta Blanca" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Selladores</div>
-      <div class="card-name">Sellador para Pisos Rústicos</div>
-      <p class="card-desc">Protege y realza el color natural de pisos y paredes de arcilla. Acabado satinado resistente a la humedad.</p>
+      <div class="card-cat">Jardín</div>
+      <div class="card-name">Piedra Cuarta Blanca</div>
+      <p class="card-desc">Grava blanca por cubeta. Jardines zen, senderos y camas de plantas.</p>
       <div class="card-footer">
-        <span class="card-tag">Protección · Interior</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Sellador%20para%20Pisos%20Rústicos.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Cuarta · Decorativa</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Cuarta%20Blanca.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="sellador">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/piso8.png" alt="Sellador Rústico Acabado Natural" loading="lazy">
+  <div class="card" data-cat="jardin" data-sub="" data-name="Piedra Bola Río Gris" data-desc="Piedra de río redondeada en tono gris. Cubeta de 20 kgs aprox. Ideal para drenajes, jardines decorativos, senderos y bordillos naturales." data-tag="Río · Natural" data-wa="Piedra%20Bola%20Río%20Gris">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Piedra+Río+Gris" alt="Piedra Bola Río Gris" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Selladores</div>
-      <div class="card-name">Sellador Rústico Acabado Natural</div>
-      <p class="card-desc">Fórmula de penetración profunda que prolonga la vida útil de enchapes y piedras naturales expuestas.</p>
+      <div class="card-cat">Jardín</div>
+      <div class="card-name">Piedra Bola Río Gris</div>
+      <p class="card-desc">Piedra de río redondeada, cubeta. Drenajes, jardines y senderos naturales.</p>
       <div class="card-footer">
-        <span class="card-tag">Exterior · Enchapes</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Sellador%20Rústico%20Acabado%20Natural.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Río · Natural</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Piedra%20Bola%20Río%20Gris.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- ACCESORIOS -->
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/refractario.png" alt="Ladrillo Refractario" loading="lazy">
+  <!-- ══ OTROS ══ -->
+  <div class="card" data-cat="otros" data-sub="" data-name="Duya Manga para Fraguar" data-desc="Duya especial para fraguar silicón flex 20. Aplicación precisa en juntas de pisos y paredes. Herramienta indispensable para obra fina y acabados profesionales." data-tag="Herramienta · Fraguado" data-wa="Duya%20Manga%20para%20Fraguar">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Duya+Fraguar" alt="Duya Manga Fraguar" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Ladrillo Refractario</div>
-      <p class="card-desc">Alta resistencia al calor extremo. Ideal para chimeneas, hornos de leña, parrillas y asadores artesanales.</p>
+      <div class="card-cat">Otros</div>
+      <div class="card-name">Duya / Manga para Fraguar</div>
+      <p class="card-desc">Aplicación precisa en juntas. Indispensable para obra fina y acabados profesionales.</p>
       <div class="card-footer">
-        <span class="card-tag">Alta Temp · Chimenea</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Ladrillo%20Refractario.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Herramienta · Obra</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Duya%20para%20Fraguar.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/quarrytile.png" alt="Quarry Tile" loading="lazy">
+  <div class="card" data-cat="otros" data-sub="" data-name="Sellador LSO Alto Tránsito" data-desc="Sellador base agua de alto tránsito para pisos y paredes de arcilla. Disponible en brillo o mate. Protege, realza el color y facilita la limpieza del material." data-tag="Sellador · Protección" data-wa="Sellador%20LSO%20Alto%20Tránsito">
+    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/selladores.png" alt="Sellador LSO" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Quarry Tile</div>
-      <p class="card-desc">Baldosa de arcilla sin esmaltar, muy resistente al desgaste. Perfecta para cocinas industriales y exteriores.</p>
+      <div class="card-cat">Otros</div>
+      <div class="card-name">Sellador LSO Alto Tránsito</div>
+      <p class="card-desc">Base agua, brillo o mate. Protege y realza el color de pisos y paredes de arcilla.</p>
       <div class="card-footer">
-        <span class="card-tag">Industrial · Cocina</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Quarry%20Tile.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Sellador · Protección</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Sellador%20LSO%20Alto%20Tránsito.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.si-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <div class="card" data-cat="accesorio">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/mediterraneo.png" alt="Serie Mediterráneo" loading="lazy">
+  <div class="card" data-cat="otros" data-sub="" data-name="Lavamanos Rústico Molejón" data-desc="Lavamanos artesanal tallado en piedra molejón natural. Pieza única que eleva cualquier baño, área de lavado o espacio de diseño rústico de alto impacto." data-tag="Artesanal · Diseño" data-wa="Lavamanos%20Rústico%20Molejón">
+    <img class="card-img" onclick="openLightbox(this)" src="https://via.placeholder.com/600x450/1E1A17/fe7c00?text=Lavamanos+Molejón" alt="Lavamanos Rústico" loading="lazy">
     <div class="card-body">
-      <div class="card-cat">Accesorios</div>
-      <div class="card-name">Serie Mediterráneo</div>
-      <p class="card-desc">Colección inspirada en el mediterráneo europeo. Tonos cálidos con acabado artesanal único en cada pieza.</p>
+      <div class="card-cat">Otros</div>
+      <div class="card-name">Lavamanos Rústico Molejón</div>
+      <p class="card-desc">Tallado en piedra molejón natural. Pieza única para baños de alto diseño.</p>
       <div class="card-footer">
-        <span class="card-tag">Artesanal · Premium</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20la%20Serie%20Mediterráneo.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
+        <span class="card-tag">Artesanal · Único</span>
+        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20Lavamanos%20Rústico%20Molejón.%20¿Información%20y%20precio?" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg> Cotizar</a>
       </div>
     </div>
   </div>
 
-  <!-- INSTALACIÓN -->
-  <div class="card" data-cat="instalacion">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img1.png" alt="Instalación de Enchapes" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Instalación</div>
-      <div class="card-name">Instalación de Enchapes</div>
-      <p class="card-desc">Servicio profesional de instalación de enchapes en fachadas, muros y espacios interiores. Incluye mano de obra y acabados.</p>
-      <div class="card-footer">
-        <span class="card-tag">Servicio · Profesional</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Instalación%20de%20Enchapes.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="instalacion">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img2.png" alt="Instalación de Tejas" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Instalación</div>
-      <div class="card-name">Instalación de Tejas</div>
-      <p class="card-desc">Colocación profesional de tejas coloniales, imperiales y planas. Garantizamos estanqueidad y acabado impecable.</p>
-      <div class="card-footer">
-        <span class="card-tag">Servicio · Techo</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Instalación%20de%20Tejas.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" data-cat="instalacion">
-    <img class="card-img" onclick="openLightbox(this)" src="https://ladrillerasabanaoeste.com/img/img3.png" alt="Mantenimiento Correctivo" loading="lazy">
-    <div class="card-body">
-      <div class="card-cat">Instalación</div>
-      <div class="card-name">Mantenimiento Correctivo y Preventivo</div>
-      <p class="card-desc">Reparación y conservación de superficies en tejas, enchapes y pisos. Prolongamos la vida útil de su inversión.</p>
-      <div class="card-footer">
-        <span class="card-tag">Mantenimiento · Reparación</span>
-        <a class="card-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20el%20servicio%20de%20Mantenimiento.%20¿Podrían%20darme%20información%20y%20precio?" target="_blank">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-          Cotizar
-        </a>
-      </div>
-    </div>
+  <!-- empty state -->
+  <div class="empty-state" id="emptyState">
+    <p>No se encontraron productos para <span id="emptyQuery"></span></p>
   </div>
 
 </section>
 
-<!-- FEATURED BANNER -->
+<!-- FEATURED -->
 <div class="featured">
-  <div>
-    <div class="featured-eyebrow">Destacado del Catálogo</div>
+  <div class="featured-content">
     <h2>+25 años transformando espacios en Costa Rica</h2>
     <p>Desde proyectos residenciales hasta desarrollos turísticos y comerciales. Trabajamos con constructoras, arquitectos y clientes directos, garantizando materiales de alta calidad con instalación profesional.</p>
   </div>
-  <img class="featured-img" src="https://ladrillerasabanaoeste.com/img/local2.png" alt="Showroom Ladrillera Sabana Oeste">
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <div>
-    <p style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--sand);margin-bottom:4px;">Ladrillera Sabana Oeste</p>
-    <p>450 mts oeste de Ucimed, San José · <a href="tel:50663995641">(506) 6399-5641</a></p>
+  <p class="footer-copy">© 2026 <span>Ladrillera Sabana Oeste</span> · 450 mts oeste de Ucimed, San José</p>
+  <div class="footer-actions">
+    <a class="footer-btn-back" href="https://ladrillerasabanaoeste.com/index.html">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Página Principal
+    </a>
+    <a class="footer-btn-wa" href="https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20cotizar%20un%20producto." target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+      Cotizar
+    </a>
   </div>
-  <p>© 2025 Ladrillera Sabana Oeste</p>
 </footer>
-
-
 
 <!-- LIGHTBOX -->
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightboxOutside(event)">
@@ -831,105 +1094,244 @@
   <div class="lightbox-img-wrap">
     <button class="lightbox-btn lightbox-prev" onclick="slideDir(-1)">&#8592;</button>
     <img id="lb-img" src="" alt="">
+    <div class="lightbox-counter-badge" id="lb-badge">1 / 1</div>
     <button class="lightbox-btn lightbox-next" onclick="slideDir(1)">&#8594;</button>
   </div>
-  <div class="lightbox-dots" id="lb-dots"></div>
   <div class="lightbox-footer">
     <p class="lightbox-desc" id="lb-desc"></p>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <span class="lightbox-counter" id="lb-counter"></span>
-      <a class="lightbox-wa" id="lb-wa" href="#" target="_blank">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
-        Cotizar este producto
-      </a>
-    </div>
+    <a class="lightbox-wa" id="lb-wa" href="#" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.14.564 4.148 1.55 5.888L.057 23.99l6.304-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.003-1.368l-.36-.213-3.721.976.993-3.628-.234-.373A9.818 9.818 0 1 1 12 21.818z"/></svg>
+      Cotizar
+    </a>
   </div>
 </div>
 
 <script>
-  // ── FILTER ──
-  function filter(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
-    });
+// ════════════════════════════════════════════
+// DATA CONFIG — subcategories per main category
+// ════════════════════════════════════════════
+const SUBCATS = {
+  'enchape-apilable': ['Quick Fit','Fast Fit','Hackett','Irishstone','Thinstone','Jerusalén','Fossil Rock','Otros'],
+  'piedra':           ['Molejón','Sánchez Volcánica','Laja Negra','Laja Gris','Piedra Caliza','Importadas'],
+  'enchape-ladrillo': ['Wire Cut','Chicago Brick','Mini Chicago','Demolición','Perdura Stone','Cartago Rústica','Otros'],
+};
+
+const CAT_META = {
+  'enchape-apilable': { title:'Enchapes Apilables', desc:'Piedra natural apilada con diferentes sistemas de instalación. Tonos y texturas para cada estilo.' },
+  'piedra':           { title:'Piedras Naturales',  desc:'Molejón, laja, sánchez volcánica y más. Materiales extraídos directamente de la naturaleza costarricense.' },
+  'enchape-ladrillo': { title:'Enchape Ladrillo',   desc:'Wire cut, Chicago brick, demolición y fachaletas. Estilos desde colonial hasta industrial moderno.' },
+  'teja':             { title:'Tejas',              desc:'Imperial, colonial, plana y más. Nacional e importada para todo tipo de proyecto.' },
+  'ladrillo':         { title:'Ladrillos',          desc:'Sólidos, de huecos y block estructural. La base de toda construcción.' },
+  'refractario':      { title:'Material Refractario', desc:'Para chimeneas, hornos y parrillas. Alta resistencia al calor extremo.' },
+  'piso':             { title:'Pisos',              desc:'Barro cocido, quarry tile, terrazo y más. Rústicos y contemporáneos.' },
+  'mortero':          { title:'Morteros y Fraguas', desc:'Adhesivos, morteros de instalación y fraguas en múltiples colores.' },
+  'cementicio':       { title:'Productos Cementicios', desc:'Huellas, baldosas y mosaicos hidráulicos. Fabricados artesanalmente.' },
+  'jardin':           { title:'Jardín',             desc:'Piedras decorativas, cuarta, quinta y bola de río. Para exteriores con carácter.' },
+  'otros':            { title:'Otros Productos',    desc:'Selladores, duyas, lavamanos rústicos y accesorios complementarios.' },
+};
+
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let activeCat = 'enchape-apilable';
+let activeSub = '';
+let lbCards = [], lbIndex = 0;
+
+// ════════════════════════════════════════════
+// FILTER
+// ════════════════════════════════════════════
+function filterCat(cat, btn) {
+  activeCat = cat; activeSub = '';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  buildSubcatBar(cat);
+  applyFilters();
+  updateSectionHeader(cat);
+}
+
+function filterSub(sub, btn) {
+  activeSub = (activeSub === sub) ? '' : sub;
+  document.querySelectorAll('.subcat-btn').forEach(b => b.classList.remove('active'));
+  if (activeSub) btn.classList.add('active');
+  applyFilters();
+}
+
+function buildSubcatBar(cat) {
+  const bar    = document.getElementById('subcatBar');
+  const scroll = document.getElementById('subcatScroll');
+  const subs   = SUBCATS[cat];
+  if (!subs || subs.length === 0) { bar.classList.remove('open'); return; }
+
+  scroll.innerHTML = '';
+  subs.forEach(sub => {
+    const btn = document.createElement('button');
+    btn.className = 'subcat-btn';
+    btn.textContent = sub;
+    btn.onclick = () => filterSub(sub, btn);
+    scroll.appendChild(btn);
+  });
+  bar.classList.add('open');
+}
+
+function applyFilters() {
+  const cards = document.querySelectorAll('.card[data-cat]');
+  let visible = 0;
+  cards.forEach(card => {
+    const catMatch = card.dataset.cat === activeCat;
+    const subMatch = !activeSub || card.dataset.sub === activeSub;
+    const show = catMatch && subMatch;
+    card.classList.toggle('hidden', !show);
+    card.classList.remove('search-match', 'search-dim');
+    if (show) visible++;
+  });
+  document.getElementById('emptyState').classList.toggle('visible', visible === 0);
+}
+
+function updateSectionHeader(cat) {
+  const meta  = CAT_META[cat] || {};
+  const hdr   = document.getElementById('sectionHeader');
+  const div   = document.getElementById('sectionDivider');
+  document.getElementById('sectionTitle').textContent = meta.title || '';
+  document.getElementById('sectionDesc').textContent  = meta.desc  || '';
+  hdr.classList.add('visible');
+  div.classList.add('visible');
+}
+
+// ════════════════════════════════════════════
+// SEARCH
+// ════════════════════════════════════════════
+function openSearch() {
+  document.getElementById('searchWrap').classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 50);
+}
+function closeSearch() {
+  document.getElementById('searchWrap').classList.remove('open');
+  document.getElementById('searchResults').classList.remove('open');
+  document.getElementById('searchInput').value = '';
+  // remove search highlights
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('search-match','search-dim'));
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  const resultsEl = document.getElementById('searchResults');
+  if (q.length < 2) { resultsEl.classList.remove('open'); return; }
+
+  const all = Array.from(document.querySelectorAll('.card[data-cat]'));
+  const matches = all.filter(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const cat  = (card.dataset.cat  || '').toLowerCase();
+    const sub  = (card.dataset.sub  || '').toLowerCase();
+    const desc = (card.dataset.desc || '').toLowerCase();
+    const tag  = (card.dataset.tag  || '').toLowerCase();
+    return name.includes(q) || cat.includes(q) || sub.includes(q) || desc.includes(q) || tag.includes(q);
+  });
+
+  if (matches.length === 0) {
+    resultsEl.innerHTML = `<div class="search-result-empty">Sin resultados para "<strong>${q}</strong>"</div>`;
+    resultsEl.classList.add('open');
+    return;
   }
 
-  // ── LIGHTBOX ──
-  let lbCards = [], lbIndex = 0;
-
-  function openLightbox(imgEl) {
-    const card = imgEl.closest('.card');
-    const cat  = card.dataset.cat;
-
-    // Collect all visible cards of same category
-    lbCards = Array.from(document.querySelectorAll(`.card[data-cat="${cat}"]:not(.hidden)`));
-    lbIndex = lbCards.indexOf(card);
-
-    showSlide(lbIndex);
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function showSlide(i) {
-    lbIndex = (i + lbCards.length) % lbCards.length;
-    const card = lbCards[lbIndex];
-
+  resultsEl.innerHTML = '';
+  matches.slice(0,8).forEach(card => {
     const img  = card.querySelector('.card-img');
-    const name = card.querySelector('.card-name').textContent;
-    const cat  = card.querySelector('.card-cat').textContent;
-    const desc = card.querySelector('.card-desc').textContent;
-    const wa   = card.querySelector('.card-wa').href;
+    const item = document.createElement('div');
+    item.className = 'search-result-item';
+    item.innerHTML = `
+      <img class="search-result-img" src="${img.src}" alt="">
+      <div class="search-result-info">
+        <div class="search-result-name">${card.dataset.name}</div>
+        <div class="search-result-cat">${(card.dataset.cat||'').replace(/-/g,' ')}${card.dataset.sub ? ' · '+card.dataset.sub : ''}</div>
+      </div>`;
+    item.onclick = () => goToCard(card);
+    resultsEl.appendChild(item);
+  });
+  resultsEl.classList.add('open');
+});
 
-    const lbImg = document.getElementById('lb-img');
-    lbImg.style.opacity = '0';
-    setTimeout(() => {
-      lbImg.src = img.src;
-      lbImg.alt = name;
-      lbImg.style.opacity = '1';
-    }, 150);
+function goToCard(card) {
+  closeSearch();
+  // activate the right category filter
+  const cat = card.dataset.cat;
+  const btn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.getAttribute('onclick').includes(`'${cat}'`));
+  if (btn) { filterCat(cat, btn); }
+  // scroll card into view
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('search-match');
+    setTimeout(() => card.classList.remove('search-match'), 2200);
+    // open lightbox directly
+    setTimeout(() => openLightbox(card.querySelector('.card-img')), 500);
+  }, 120);
+}
 
-    document.getElementById('lb-name').textContent    = name;
-    document.getElementById('lb-cat').textContent     = cat;
-    document.getElementById('lb-desc').textContent    = desc;
-    document.getElementById('lb-wa').href             = wa;
-    document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbCards.length;
-
-    // Dots
-    const dotsEl = document.getElementById('lb-dots');
-    dotsEl.innerHTML = '';
-    lbCards.forEach((_, idx) => {
-      const d = document.createElement('div');
-      d.className = 'lightbox-dot' + (idx === lbIndex ? ' active' : '');
-      d.onclick = () => showSlide(idx);
-      dotsEl.appendChild(d);
-    });
+// Close search on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightbox').classList.contains('open')) closeLightbox();
+    else closeSearch();
   }
-
-  function slideDir(dir) { showSlide(lbIndex + dir); }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeLightboxOutside(e) {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  }
-
-  // Keyboard nav
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (document.getElementById('lightbox').classList.contains('open')) {
     if (e.key === 'ArrowRight') slideDir(1);
     if (e.key === 'ArrowLeft')  slideDir(-1);
-    if (e.key === 'Escape')     closeLightbox();
-  });
-</script>
+  }
+});
 
+// ════════════════════════════════════════════
+// LIGHTBOX
+// ════════════════════════════════════════════
+function openLightbox(imgEl) {
+  const card = imgEl.closest('.card');
+  const cat  = card.dataset.cat;
+  const sub  = card.dataset.sub;
+
+  // collect visible cards: same cat + same sub (if sub active)
+  lbCards = Array.from(document.querySelectorAll(`.card[data-cat="${cat}"]:not(.hidden)`)).filter(c => {
+    if (sub) return c.dataset.sub === sub;
+    return true;
+  });
+  lbIndex = lbCards.indexOf(card);
+  showSlide(lbIndex);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showSlide(i) {
+  lbIndex = (i + lbCards.length) % lbCards.length;
+  const card = lbCards[lbIndex];
+  const img  = card.querySelector('.card-img');
+  const lbImg = document.getElementById('lb-img');
+  lbImg.style.opacity = '0';
+  setTimeout(() => { lbImg.src = img.src; lbImg.alt = card.dataset.name; lbImg.style.opacity = '1'; }, 140);
+  document.getElementById('lb-name').textContent = card.dataset.name;
+  document.getElementById('lb-cat').textContent  = (card.dataset.cat||'').replace(/-/g,' ') + (card.dataset.sub ? ' · '+card.dataset.sub : '');
+  document.getElementById('lb-desc').textContent = card.dataset.desc;
+  document.getElementById('lb-badge').textContent = (lbIndex+1)+' / '+lbCards.length;
+  document.getElementById('lb-wa').href = `https://api.whatsapp.com/send?phone=50663995641&text=Hola,%20me%20interesa%20${card.dataset.wa || encodeURIComponent(card.dataset.name)}.%20¿Información%20y%20precio?`;
+}
+
+function slideDir(dir) { showSlide(lbIndex + dir); }
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+// ════════════════════════════════════════════
+// INIT — show first category on load
+// ════════════════════════════════════════════
+(function init() {
+  const firstBtn = document.querySelector('.filter-btn.active');
+  if (firstBtn) {
+    buildSubcatBar(activeCat);
+    applyFilters();
+    updateSectionHeader(activeCat);
+  }
+})();
+</script>
 </body>
 </html>
