@@ -510,12 +510,30 @@
     .show-more-reviews{display:block;width:calc(100% - 32px);margin:10px 16px 8px;padding:13px;background:var(--white);border-radius:14px;border:1.5px solid #c8c0b4;font-size:13px;font-weight:600;color:var(--text);text-align:center;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .18s,transform .18s;}
     .show-more-reviews:active{transform:scale(.97);background:var(--warm);}
 
-    /* ── MODAL TOPBAR (new) ── */
-    .modal-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 20px 12px;border-bottom:1px solid #e8e2d8;position:sticky;top:0;background:var(--cream);z-index:10;border-radius:26px 26px 0 0;}
-    .modal-back-btn{width:34px;height:34px;border-radius:50%;background:var(--warm);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--text);transition:background .18s;flex-shrink:0;}
-    .modal-back-btn:active{background:#e0d8cc;}
-    .modal-topbar-h{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);font-weight:700;}
-    .modal-topbar-spacer{width:34px;}
+    /* ── DISPONIBILIDAD ROW ── */
+    .disp-row{display:flex;align-items:center;justify-content:space-between;margin:0 16px 16px;padding:16px 18px;background:var(--white);border-radius:18px;box-shadow:var(--shadow-card);cursor:pointer;border:none;width:calc(100% - 32px);font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .disp-row:active{transform:scale(.98);}
+    .disp-row-sub{font-size:12px;color:var(--muted);}
+    .disp-row-arrow{font-size:14px;color:var(--muted);flex-shrink:0;}
+
+    /* ── MODAL FLOATING BACK BUTTON ── */
+    .modal-float-back{
+      position:absolute;top:14px;left:14px;z-index:20;
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(0,0,0,.18);backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:14px;
+      transition:background .18s,transform .18s;
+    }
+    .modal-float-back:active{transform:scale(.88);background:rgba(0,0,0,.32);}
+    .modal-body-pad{padding:52px 20px 0;}
+
+    /* Modal sheet needs relative for absolute button */
+    .modal-sheet{position:relative;}
+
+
     .modal-inner{padding:20px 20px 0;}
 
     /* ── CALENDARIO MODAL ── */
@@ -634,12 +652,7 @@
 
   </div>
 
-  <!-- BIG CTA -->
-  <div class="big-cta fade-up">
-    <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20consultar%20disponibilidad%20en%20Quinta%20Atenas" target="_blank">
-      <i class="fab fa-whatsapp"></i> Consultar Disponibilidad
-    </a>
-  </div>
+
 
   <!-- ¿QUÉ NECESITÁS? -->
   <div class="section-title fade-up"><h2>¿Cómo podemos ayudarte?</h2></div>
@@ -659,11 +672,6 @@
       <div class="ib-text"><div class="ib-title">Eventos</div><div class="ib-sub">Bodas · Cumpleaños · Empresas</div></div>
       <i class="fab fa-whatsapp ib-wa"></i>
     </a>
-    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Quisiera%20saber%20los%20*precios*%20de%20Quinta%20Atenas." target="_blank">
-      <span class="ib-emoji">💰</span>
-      <div class="ib-text"><div class="ib-title">Ver Precios</div><div class="ib-sub">Tarifas y paquetes</div></div>
-      <i class="fab fa-whatsapp ib-wa"></i>
-    </a>
   </div>
 
 
@@ -672,12 +680,7 @@
   <div class="description-card fade-up">
     <p>Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas. Ideal para vacacionar en familia, celebraciones y eventos sociales. También disponible como <strong>pase del día</strong> para matrimonios, cumpleaños y reuniones con opción de área social, rancho y piscina.</p>
     <p>Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para teletrabajo en un entorno natural inigualable.</p>
-    <div class="capacity-pills">
-      <div class="pill"><i class="fa fa-users"></i> 20–25 personas hospedaje</div>
-      <div class="pill"><i class="fa fa-champagne-glasses"></i> Hasta 60 en eventos</div>
-      <div class="pill"><i class="fa fa-wifi"></i> Fibra 100 Mb</div>
-      <div class="pill"><i class="fa fa-shield-halved"></i> Protocolos Salud</div>
-    <div class="desc-btns">
+        <div class="desc-btns">
       <button class="desc-btn db-info" onclick="openModal('masInfoModal')">
         <i class="fa fa-circle-info"></i> Más detalles
       </button>
@@ -690,20 +693,12 @@
 
   <!-- DISPONIBILIDAD -->
   <div class="section-title fade-up"><h2>Disponibilidad</h2></div>
-  <div class="disp-section fade-up">
-    <p class="disp-desc">Consultá las fechas disponibles y reservá directamente con los anfitriones.</p>
-    <div class="cal-iframe-wrap">
-      <!-- Reemplazar src con el Google Calendar ID del cliente -->
-      <iframe src="https://calendar.google.com/calendar/embed?src=es.cr%23holiday%40group.v.calendar.google.com&ctz=America%2FCosta_Rica&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&bgcolor=%23ffffff&color=%232d4a2d" frameborder="0" scrolling="no" title="Disponibilidad"></iframe>
+  <button class="disp-row fade-up" onclick="openModal('disponibilidadModal')">
+    <div class="disp-row-left">
+      <p class="disp-row-sub">Ver fechas disponibles · Reservar</p>
     </div>
-    <div class="cal-legend">
-      <div class="cal-legend-item"><div class="cal-dot libre"></div> Disponible</div>
-      <div class="cal-legend-item"><div class="cal-dot ocupado"></div> Reservado</div>
-    </div>
-    <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Vi%20el%20calendario%20de%20*Quinta%20Atenas*%20y%20me%20interesa%20reservar.%0A%0A%F0%9F%93%85%20*Fechas:*%20%0A%F0%9F%91%A5%20*Personas:*%20" target="_blank" class="cal-reserve-btn">
-      <i class="fab fa-whatsapp"></i> Reservar estas fechas
-    </a>
-  </div>
+    <i class="fa fa-chevron-right disp-row-arrow"></i>
+  </button>
 
   <!-- FOTOS -->
   <div class="section-title fade-up"><h2>Fotos</h2></div>
@@ -723,12 +718,6 @@
   <!-- RESEÑAS estilo Airbnb — scroll horizontal con líneas -->
   <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
 
-  <!-- Rating badge -->
-  <div class="reviews-badge fade-up">
-    <span class="rb-stars">★★★★★</span>
-    <span class="rb-score">4.92</span>
-    <span class="rb-label">· Favorito entre huéspedes · 26 reseñas</span>
-  </div>
 
   <!-- Scroll horizontal con 3 cards estilo Airbnb (separadas por líneas) -->
   <div class="reviews-scroll fade-up" id="reviewsScroll">
@@ -855,12 +844,8 @@
 <!-- MODAL GUARDAR -->
 <div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('saveModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">💾 Guardar Contacto</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('saveModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">💾 Guardar Contacto</h3>
     <p class="modal-sub">Agrega Quinta Atenas a tus contactos para tener siempre el número a mano.</p>
     <div class="modal-list">
@@ -880,7 +865,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('saveModal')">Cerrar</button>
   </div>
 </div>
@@ -888,19 +873,15 @@
 <!-- MODAL QR -->
 <div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('qrModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">📱 Código QR</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('qrModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">📱 Código QR</h3>
     <p class="modal-sub">Muestra este código para que alguien escanee y abra la tarjeta digital al instante.</p>
     <div class="qr-box">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://midbcard.com/QuintaAtenas&color=2d4a2d&bgcolor=faf7f2" alt="QR Quinta Atenas" />
       <p>Escanea para abrir la tarjeta digital de Quinta Atenas</p>
     </div>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('qrModal')">Cerrar</button>
   </div>
 </div>
@@ -908,12 +889,8 @@
 <!-- MODAL VIDEOS -->
 <div class="modal-overlay" id="videosModal" onclick="closeModal('videosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('videosModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">🎬 Videos</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('videosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">🎬 Videos</h3>
     <p class="modal-sub">Conocé la propiedad en video — recorrido completo y momentos especiales.</p>
     <div class="video-embed-list">
@@ -931,7 +908,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('videosModal')">Cerrar</button>
   </div>
 </div>
@@ -939,12 +916,8 @@
 <!-- MODAL SERVICIOS -->
 <div class="modal-overlay" id="serviciosModal" onclick="closeModal('serviciosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('serviciosModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">🏡 Servicios y Amenidades</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('serviciosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">🏡 Servicios y Amenidades</h3>
     <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada: ropa de cama, toallas, jabón líquido y más. Protocolos del Ministerio de Salud.</p>
     <ul class="servicios-list">
@@ -961,7 +934,7 @@
       <li><i class="fa fa-leaf"></i> Amplias zonas verdes</li>
       <li><i class="fa fa-people-group"></i> Capacidad hasta 60 personas en eventos</li>
     </ul>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('serviciosModal')">Cerrar</button>
   </div>
 </div>
@@ -969,12 +942,8 @@
 <!-- MODAL REDES -->
 <div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('socialModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">🌐 Redes Sociales</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('socialModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">🌐 Redes Sociales</h3>
     <p class="modal-sub">Síguenos en nuestras redes, mira el video y descarga el brochure digital.</p>
     <div class="modal-list">
@@ -1009,7 +978,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
   </div>
 </div>
@@ -1017,12 +986,8 @@
 <!-- MODAL INSTALAR -->
 <div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('installModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">📲 Agregar a Pantalla de Inicio</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('installModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
     <h3 style="display:none">📲 Agregar a Pantalla de Inicio</h3>
     <p class="modal-sub">Instala esta tarjeta como app — acceso directo en tu teléfono sin descargar nada.</p>
     <div class="modal-list">
@@ -1041,7 +1006,7 @@
         <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">1. Abre en <strong>Safari</strong><br>2. Toca <strong>□↑</strong> abajo al centro<br>3. <strong>"En pantalla de inicio"</strong><br>4. Presiona <strong>Añadir</strong></div>
       </div>
     </div>
-    </div><!-- /modal-inner -->
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
   </div>
 </div>
@@ -1050,12 +1015,8 @@
 <!-- MODAL: DISPONIBILIDAD -->
 <div class="modal-overlay" id="disponibilidadModal" onclick="closeModal('disponibilidadModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('disponibilidadModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">📅 Disponibilidad</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('disponibilidadModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
       <p class="modal-sub">Días en blanco = disponibles. Días marcados = reservados. Tocá una fecha libre y escribinos.</p>
       <div class="cal-legend">
         <div class="cal-legend-item"><div class="cal-dot libre"></div> Disponible</div>
@@ -1076,12 +1037,8 @@
 <!-- MODAL: MÁS INFORMACIÓN -->
 <div class="modal-overlay" id="masInfoModal" onclick="closeModal('masInfoModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('masInfoModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">🏡 Más sobre la Propiedad</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('masInfoModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
       <div class="info-section">
         <h4><i class="fa fa-house" style="color:var(--forest)"></i> El espacio</h4>
         <ul class="info-list">
@@ -1127,12 +1084,8 @@
 <!-- MODAL: NORMAS -->
 <div class="modal-overlay" id="normasModal" onclick="closeModal('normasModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('normasModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">📋 Normas y Políticas</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('normasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
       <div class="info-section">
         <h4><i class="fa fa-clock" style="color:var(--forest)"></i> Check-in y Check-out</h4>
         <ul class="info-list">
@@ -1175,12 +1128,8 @@
 <!-- MODAL: RESEÑAS COMPLETAS -->
 <div class="modal-overlay" id="resenasModal" onclick="closeModal('resenasModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-topbar">
-      <button class="modal-back-btn" onclick="closeModal('resenasModal')"><i class="fa fa-arrow-left"></i></button>
-      <span class="modal-topbar-h">⭐ 26 Reseñas · 4.92</span>
-      <div class="modal-topbar-spacer"></div>
-    </div>
-    <div class="modal-inner">
+    <button class="modal-float-back" onclick="closeModal('resenasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
       <div class="modal-reviews-list">
         <div class="modal-review-item">
           <div class="review-top"><div class="review-avatar" style="background:#2d4a2d">S</div><div><div class="review-name">Sebastian</div><div class="review-airbnb">2 años en Airbnb</div></div></div>
