@@ -491,7 +491,6 @@
 
     .review-top{display:flex;align-items:center;gap:10px;}
     .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
-    .review-meta{flex:1;}
     .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
     .review-airbnb{font-size:10px;color:var(--muted);}
     .review-meta-row{display:flex;align-items:center;gap:6px;}
@@ -499,19 +498,6 @@
     .review-date{font-size:10px;color:var(--muted);}
     .review-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);flex-shrink:0;}
     .review-text{font-size:12.5px;color:var(--text);line-height:1.65;flex:1;}
-    .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
-
-    /* ── REVIEW CARDS scroll ── */
-    .reviews-scroll{display:flex;gap:12px;padding:0 16px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-    .reviews-scroll::-webkit-scrollbar{display:none;}
-    .review-card{flex-shrink:0;width:82vw;max-width:290px;background:var(--white);border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;}
-    .review-top{display:flex;align-items:center;gap:10px;}
-    .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
-    .review-meta .review-meta{flex:1;}
-    .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
-    .review-meta .review-date{font-size:10px;color:var(--muted);margin-top:1px;}
-    .review-stars{color:#f59e0b;font-size:12px;letter-spacing:1px;}
-    .review-text{font-size:12px;color:var(--muted);line-height:1.65;flex:1;}
     .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
 
     /* Hint flecha */
@@ -597,12 +583,7 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-pagination"></div>
-    <!-- Share button — top left -->
-    <button class="hero-share-btn" onclick="shareCard()" aria-label="Compartir">
-      <i class="fa fa-share-nodes"></i>
-    </button>
-
-    <!-- "Ver galería" top right -->
+    <!-- "Ver galería" reemplaza la píldora de guardar/QR/instalar -->
     <button class="hero-gallery-pill" onclick="openLightbox(0)">
       <i class="fa fa-images icon"></i>
       <span>Ver galería</span>
@@ -734,51 +715,67 @@
     <div class="gallery-thumb" onclick="openLightbox(9)"><img src="img/img/10.jpeg" alt="" loading="lazy"></div>
   </div>
 
-  <!-- RESEÑAS -->
+  <!-- RESEÑAS estilo Airbnb — scroll horizontal con líneas -->
   <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
+
+
+  <!-- Scroll horizontal con 3 cards estilo Airbnb (separadas por líneas) -->
   <div class="reviews-scroll fade-up" id="reviewsScroll">
 
-    <div class="review-card">
+    <div class="review-card-ab">
       <div class="review-top">
-        <div class="review-avatar" style="background:#2d4a2d">M</div>
-        <div class="review-meta">
-          <div class="review-name">María Fernández</div>
-          <div class="review-date">Marzo 2025 · San José</div>
+        <div class="review-avatar" style="background:#2d4a2d">S</div>
+        <div>
+          <div class="review-name">Sebastian</div>
+          <div class="review-airbnb">2 años en Airbnb</div>
         </div>
       </div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad."</div>
-      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+      <div class="review-meta-row">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-dot"></div>
+        <span class="review-date">Febrero 2026 · Una noche</span>
+      </div>
+      <div class="review-text">"Excelente estadía y recibimiento, la casa estaba hermosa, aseada, muy buena ubicación, la tranquilidad y paz que hay en el lugar es impresionante y los anfitriones muy atentos."</div>
+      <div class="review-source"><i class="fab fa-airbnb" style="color:#ff385c"></i> Reseña verificada en Airbnb</div>
     </div>
 
-    <div class="review-card">
+    <div class="review-card-ab">
       <div class="review-top">
-        <div class="review-avatar" style="background:#b8903a">C</div>
-        <div class="review-meta">
-          <div class="review-name">Carlos Rodríguez</div>
-          <div class="review-date">Febrero 2025 · Alajuela</div>
+        <div class="review-avatar" style="background:#b8903a">A</div>
+        <div>
+          <div class="review-name">Aaron</div>
+          <div class="review-airbnb">5 años en Airbnb</div>
         </div>
       </div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!"</div>
-      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+      <div class="review-meta-row">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-dot"></div>
+        <span class="review-date">Febrero 2026 · Una noche</span>
+      </div>
+      <div class="review-text">"El lugar es muy muy lindo e impecable, todo estaba exactamente como lo describe en el anuncio. La llegada autónoma sería espectacular — aparte de eso todo perfecto."</div>
+      <div class="review-source"><i class="fab fa-airbnb" style="color:#ff385c"></i> Reseña verificada en Airbnb</div>
     </div>
 
-    <div class="review-card">
+    <div class="review-card-ab">
       <div class="review-top">
         <div class="review-avatar" style="background:#5c3d1e">A</div>
-        <div class="review-meta">
-          <div class="review-name">Andrea Mora</div>
-          <div class="review-date">Enero 2025 · Heredia</div>
+        <div>
+          <div class="review-name">Andrés</div>
+          <div class="review-airbnb">8 años en Airbnb</div>
         </div>
       </div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"El clima de Atenas es único y esta quinta lo aprovecha al máximo. Las habitaciones son amplias, la cocina está equipada con todo. Muy tranquilo y seguro."</div>
-      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+      <div class="review-meta-row">
+        <span class="review-stars">★★★★★</span>
+        <div class="review-dot"></div>
+        <span class="review-date">Diciembre 2025 · Varias noches</span>
+      </div>
+      <div class="review-text">"Este ha sido el mejor lugar en el que he tenido la oportunidad de hospedarme, no solo por la belleza del departamento sino también por la atención de los anfitriones. Totalmente recomendado."</div>
+      <div class="review-source"><i class="fab fa-airbnb" style="color:#ff385c"></i> Reseña verificada en Airbnb</div>
     </div>
 
   </div>
 
+  <!-- Hint + botón mostrar más -->
   <div class="review-hint fade-up" id="reviewHint">
     <i class="fa fa-arrow-right"></i>
     <span>Deslizá para ver más opiniones</span>
@@ -1188,19 +1185,11 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-/* SHARE — incluye foto actual del slide */
+/* SHARE */
 function shareCard(){
-  var url='https://midbcard.com/QuintaAtenas';
-  var d={
-    title:'Quinta Atenas · Casa Vacacional',
-    text:'🏡 Quinta Atenas · Atenas, Costa Rica\nExclusive & Wellness Experience · Piscina · Jacuzzi · Rancho · Hasta 60 personas 🌿\n'+url,
-    url:url
-  };
-  if(navigator.share){
-    navigator.share(d).then(function(){showToast('✅ ¡Compartido!');}).catch(function(){});
-  } else {
-    navigator.clipboard.writeText(url).then(function(){showToast('📋 Link copiado');}).catch(function(){showToast('🔗 midbcard.com/QuintaAtenas');});
-  }
+  var d={title:'Quinta Atenas · Casa Vacacional',text:'🏡 Quinta Atenas · Atenas, Costa Rica\nExclusive & Wellness Experience · Piscina · Jacuzzi · Rancho · Hasta 60 personas 🌿',url:'https://midbcard.com/QuintaAtenas'};
+  if(navigator.share){navigator.share(d).then(function(){showToast('✅ ¡Compartido!');}).catch(function(){});}
+  else{navigator.clipboard.writeText(d.url).then(function(){showToast('📋 Link copiado al portapapeles');}).catch(function(){showToast('🔗 midbcard.com/QuintaAtenas');});}
 }
 function showToast(msg){var t=document.getElementById('shareToast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
 
