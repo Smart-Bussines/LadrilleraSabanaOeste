@@ -432,6 +432,149 @@
     .lb-nav { display: flex; gap: 16px; margin-top: 18px; }
     .lb-nav button { background: rgba(255,255,255,.14); border: none; color: #fff; width: 46px; height: 46px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .lb-counter { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 12px; }
+
+    /* ── HERO BADGE ── */
+    .hero-badge{position:absolute;top:14px;left:14px;z-index:6;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:22px;padding:6px 12px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+    .hero-badge .badge-stars{color:#ff385c;font-size:11px;letter-spacing:.5px;font-weight:700;}
+    .hero-badge .badge-text{font-size:10px;font-weight:700;color:var(--text);white-space:nowrap;}
+
+    /* ── HERO SHARE ── */
+    .hero-share-btn{position:absolute;top:14px;left:14px;z-index:6;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.92);font-size:14px;cursor:pointer;transition:transform .18s;}
+    .hero-share-btn:active{transform:scale(.88);}
+
+    /* ── INTENT GRID ── */
+    .intent-grid{display:flex;flex-direction:column;gap:10px;padding:0 16px 8px;}
+    .intent-btn{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:18px;padding:14px 16px;text-decoration:none;box-shadow:var(--shadow-card);transition:transform .18s;border:none;cursor:pointer;}
+    .intent-btn:active{transform:scale(.98);}
+    .ib-emoji{font-size:28px;flex-shrink:0;line-height:1;}
+    .ib-text{flex:1;}
+    .ib-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.2;}
+    .ib-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .ib-wa{font-size:24px;color:#25d366;flex-shrink:0;}
+
+    /* ── DESC BUTTONS ── */
+    .desc-btns{display:flex;gap:10px;margin-top:16px;}
+    .desc-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:13px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .desc-btn:active{transform:scale(.95);}
+    .desc-btn.db-info{background:var(--forest);color:#fff;}
+    .desc-btn.db-normas{background:var(--warm);color:var(--forest);border:1px solid rgba(45,74,45,.2);}
+
+    /* ── DISPONIBILIDAD BUTTON ── */
+    .disponibilidad-btn{margin:0 16px 16px;display:flex;align-items:center;gap:14px;background:var(--white);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow-card);cursor:pointer;border:none;width:calc(100% - 32px);font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .disponibilidad-btn:active{transform:scale(.98);}
+    .db-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--forest),#3d6b3d);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;}
+    .db-info-text{flex:1;text-align:left;}
+    .db-info-text h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+    .db-info-text p{font-size:11px;color:var(--muted);}
+    .db-arrow{color:var(--muted);font-size:16px;}
+
+    /* ── RESEÑAS SCROLL AIRBNB ── */
+    .reviews-badge{display:flex;align-items:center;gap:6px;padding:0 18px 12px;font-size:12px;color:var(--muted);}
+    .rb-stars{color:#ff385c;font-size:13px;}
+    .rb-score{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);}
+    .rb-label{font-size:11px;color:var(--muted);}
+
+    .reviews-scroll{display:flex;gap:0;padding:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-top:1px solid #e8e2d8;}
+    .reviews-scroll::-webkit-scrollbar{display:none;}
+
+    /* Cards con separadores verticales tipo Airbnb */
+    .review-card-ab{
+      flex-shrink:0;
+      width:85vw;max-width:310px;
+      padding:18px 18px;
+      scroll-snap-align:start;
+      border-right:1px solid #e8e2d8;
+      display:flex;flex-direction:column;gap:10px;
+      background:var(--white);
+    }
+    .review-card-ab:last-child{border-right:none;}
+
+    .review-top{display:flex;align-items:center;gap:10px;}
+    .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+    .review-meta{flex:1;}
+    .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
+    .review-airbnb{font-size:10px;color:var(--muted);}
+    .review-meta-row{display:flex;align-items:center;gap:6px;}
+    .review-stars{color:#ff385c;font-size:11px;}
+    .review-date{font-size:10px;color:var(--muted);}
+    .review-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+    .review-text{font-size:12.5px;color:var(--text);line-height:1.65;flex:1;}
+    .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
+
+    /* ── REVIEW CARDS scroll ── */
+    .reviews-scroll{display:flex;gap:12px;padding:0 16px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .reviews-scroll::-webkit-scrollbar{display:none;}
+    .review-card{flex-shrink:0;width:82vw;max-width:290px;background:var(--white);border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;}
+    .review-top{display:flex;align-items:center;gap:10px;}
+    .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+    .review-meta .review-meta{flex:1;}
+    .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
+    .review-meta .review-date{font-size:10px;color:var(--muted);margin-top:1px;}
+    .review-stars{color:#f59e0b;font-size:12px;letter-spacing:1px;}
+    .review-text{font-size:12px;color:var(--muted);line-height:1.65;flex:1;}
+    .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
+
+    /* Hint flecha */
+    .review-hint{display:flex;align-items:center;gap:6px;padding:10px 18px 4px;font-size:11px;color:var(--muted);}
+    .review-hint i{color:var(--gold);animation:nudgeRight 1.6s ease-in-out infinite;}
+    @keyframes nudgeRight{0%,100%{transform:translateX(0);opacity:.5;}50%{transform:translateX(5px);opacity:1;}}
+    .review-hint.hidden{display:none;}
+
+    /* Botón mostrar más reseñas */
+    .show-more-reviews{display:block;width:calc(100% - 32px);margin:10px 16px 8px;padding:13px;background:var(--white);border-radius:14px;border:1.5px solid #c8c0b4;font-size:13px;font-weight:600;color:var(--text);text-align:center;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .18s,transform .18s;}
+    .show-more-reviews:active{transform:scale(.97);background:var(--warm);}
+
+    /* ── DISPONIBILIDAD ROW ── */
+    .disp-row{display:flex;align-items:center;justify-content:space-between;margin:0 16px 16px;padding:16px 18px;background:var(--white);border-radius:18px;box-shadow:var(--shadow-card);cursor:pointer;border:none;width:calc(100% - 32px);font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .disp-row:active{transform:scale(.98);}
+    .disp-row-sub{font-size:12px;color:var(--muted);}
+    .disp-row-arrow{font-size:14px;color:var(--muted);flex-shrink:0;}
+
+    /* ── MODAL FLOATING BACK BUTTON ── */
+    .modal-float-back{
+      position:absolute;top:14px;left:14px;z-index:20;
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(0,0,0,.18);backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:14px;
+      transition:background .18s,transform .18s;
+    }
+    .modal-float-back:active{transform:scale(.88);background:rgba(0,0,0,.32);}
+    .modal-body-pad{padding:52px 20px 0;}
+
+    /* Modal sheet needs relative for absolute button */
+    .modal-sheet{position:relative;}
+
+
+    .modal-inner{padding:20px 20px 0;}
+
+    /* ── CALENDARIO MODAL ── */
+    .cal-iframe-wrap iframe{width:100%;height:320px;border:none;display:block;border-radius:12px;overflow:hidden;}
+    .cal-legend{display:flex;gap:16px;padding:10px 0;justify-content:center;}
+    .cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+    .cal-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .cal-dot.libre{background:#4caf50;}
+    .cal-dot.ocupado{background:#e0d8cc;}
+    .cal-reserve-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;text-decoration:none;padding:14px;border-radius:14px;font-size:14px;font-weight:700;margin-top:14px;transition:transform .18s;}
+    .cal-reserve-btn:active{transform:scale(.97);}
+
+    /* ── INFO LIST ── */
+    .info-section{margin-bottom:20px;}
+    .info-section h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+    .info-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .info-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.5;}
+    .info-list li i{color:var(--forest);font-size:12px;width:16px;text-align:center;flex-shrink:0;margin-top:2px;}
+
+    /* ── TOAST ── */
+    .share-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.82);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:500;}
+    .share-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* Modal reviews list */
+    .modal-reviews-list{display:flex;flex-direction:column;}
+    .modal-review-item{padding:18px 0;border-bottom:1px solid #e8e2d8;}
+    .modal-review-item:last-child{border-bottom:none;}
   </style>
 </head>
 <body>
@@ -454,13 +597,19 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
     <div class="swiper-pagination"></div>
-    <!-- "Ver galería" reemplaza la píldora de guardar/QR/instalar -->
+    <!-- Share button — top left -->
+    <button class="hero-share-btn" onclick="shareCard()" aria-label="Compartir">
+      <i class="fa fa-share-nodes"></i>
+    </button>
+
+    <!-- "Ver galería" top right -->
     <button class="hero-gallery-pill" onclick="openLightbox(0)">
       <i class="fa fa-images icon"></i>
       <span>Ver galería</span>
       <i class="fa fa-chevron-down arrow"></i>
     </button>
   </div>
+
 
   <!-- LOGO STRIP — logo izq + tagline/pill der con efecto scroll -->
   <div class="logo-strip fade-up" id="logoStrip">
@@ -522,25 +671,53 @@
 
   </div>
 
-  <!-- BIG CTA -->
-  <div class="big-cta fade-up">
-    <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20consultar%20disponibilidad%20en%20Quinta%20Atenas" target="_blank">
-      <i class="fab fa-whatsapp"></i> Consultas y Reservas por WhatsApp
+
+
+  <!-- ¿QUÉ NECESITÁS? -->
+  <div class="section-title fade-up"><h2>¿Cómo podemos ayudarte?</h2></div>
+  <div class="intent-grid fade-up">
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Quiero%20consultar%20*hospedaje*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fechas:*%20%0A%F0%9F%91%A5%20*Personas:*%20%0A%0A%C2%BFHay%20disponibilidad%3F" target="_blank">
+      <span class="ib-emoji">🏠</span>
+      <div class="ib-text"><div class="ib-title">Hospedaje</div><div class="ib-sub">Consultar fechas y precio</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
+    </a>
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Me%20interesa%20el%20*pase%20del%20d%C3%ADa*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fecha:*%20%0A%F0%9F%91%A5%20*Personas:*%20%0A%0A%C2%BFQu%C3%A9%20incluye%3F" target="_blank">
+      <span class="ib-emoji">☀️</span>
+      <div class="ib-text"><div class="ib-title">Pase del Día</div><div class="ib-sub">Piscina · Rancho · Social</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
+    </a>
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Quiero%20info%20para%20un%20*evento*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%8E%89%20*Tipo:*%20%0A%F0%9F%93%85%20*Fecha:*%20%0A%F0%9F%91%A5%20*Invitados:*%20" target="_blank">
+      <span class="ib-emoji">🎉</span>
+      <div class="ib-text"><div class="ib-title">Eventos</div><div class="ib-sub">Bodas · Cumpleaños · Empresas</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
     </a>
   </div>
+
 
   <!-- DESCRIPCIÓN -->
   <div class="section-title fade-up"><h2>La Propiedad</h2></div>
   <div class="description-card fade-up">
     <p>Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas. Ideal para vacacionar en familia, celebraciones y eventos sociales. También disponible como <strong>pase del día</strong> para matrimonios, cumpleaños y reuniones con opción de área social, rancho y piscina.</p>
     <p>Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para teletrabajo en un entorno natural inigualable.</p>
-    <div class="capacity-pills">
-      <div class="pill"><i class="fa fa-users"></i> 20–25 personas hospedaje</div>
-      <div class="pill"><i class="fa fa-champagne-glasses"></i> Hasta 60 en eventos</div>
-      <div class="pill"><i class="fa fa-wifi"></i> Fibra 100 Mb</div>
-      <div class="pill"><i class="fa fa-shield-halved"></i> Protocolos Salud</div>
+        <div class="desc-btns">
+      <button class="desc-btn db-info" onclick="openModal('masInfoModal')">
+        <i class="fa fa-circle-info"></i> Más detalles
+      </button>
+      <button class="desc-btn db-normas" onclick="openModal('normasModal')">
+        <i class="fa fa-clipboard-list"></i> Normas
+      </button>
     </div>
   </div>
+
+
+  <!-- DISPONIBILIDAD -->
+  <div class="section-title fade-up"><h2>Disponibilidad</h2></div>
+  <button class="disp-row fade-up" onclick="openModal('disponibilidadModal')">
+    <div class="disp-row-left">
+      <p class="disp-row-sub">Ver fechas disponibles · Reservar</p>
+    </div>
+    <i class="fa fa-chevron-right disp-row-arrow"></i>
+  </button>
 
   <!-- FOTOS -->
   <div class="section-title fade-up"><h2>Fotos</h2></div>
@@ -559,7 +736,7 @@
 
   <!-- RESEÑAS -->
   <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
-  <div class="reviews-scroll fade-up">
+  <div class="reviews-scroll fade-up" id="reviewsScroll">
 
     <div class="review-card">
       <div class="review-top">
@@ -600,40 +777,17 @@
       <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
     </div>
 
-    <div class="review-card">
-      <div class="review-top">
-        <div class="review-avatar" style="background:#0d9488">R</div>
-        <div class="review-meta">
-          <div class="review-name">Roberto Salas</div>
-          <div class="review-date">Diciembre 2024 · Cartago</div>
-        </div>
-      </div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Pasamos Nochebuena aquí con toda la familia. El Jacuzzi y la pileta de tilapia fueron el hit de la noche. Precio muy justo para todo lo que ofrece."</div>
-      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-top">
-        <div class="review-avatar" style="background:#7c3aed">L</div>
-        <div class="review-meta">
-          <div class="review-name">Laura Jiménez</div>
-          <div class="review-date">Noviembre 2024 · Escazú</div>
-        </div>
-      </div>
-      <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Mi boda soñada fue aquí. El lugar es hermoso para fotos y el espacio para 60 personas es perfecto. Los propietarios son muy amables y profesionales."</div>
-      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
-    </div>
-
   </div>
-  <!-- Flecha que desaparece al primer scroll -->
+
   <div class="review-hint fade-up" id="reviewHint">
     <i class="fa fa-arrow-right"></i>
     <span>Deslizá para ver más opiniones</span>
   </div>
+  <button class="show-more-reviews fade-up" onclick="openModal('resenasModal')">
+    Mostrar las 26 reseñas
+  </button>
 
-  <!-- CONTACTO -->
+  <!-- CONTACTO -->  <!-- CONTACTO -->
   <div class="section-title fade-up"><h2>Contacto</h2></div>
   <div class="contact-strip fade-up">
     <div class="ct-title">¿Listo para reservar?</div>
@@ -693,8 +847,9 @@
 <!-- MODAL GUARDAR -->
 <div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>💾 Guardar Contacto</h3>
+    <button class="modal-float-back" onclick="closeModal('saveModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">💾 Guardar Contacto</h3>
     <p class="modal-sub">Agrega Quinta Atenas a tus contactos para tener siempre el número a mano.</p>
     <div class="modal-list">
       <a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AFN:Quinta%20Atenas%0AORG:Quinta%20Vacacional%20Atenas%0ATEL;TYPE=CELL:+50687212050%0ATEL;TYPE=CELL:+50688379488%0AADR;TYPE=WORK:;;Barrio%20Jes%C3%BAs%20de%20Atenas;;Atenas;Alajuela;Costa%20Rica%0AURL:https://midbcard.com/QuintaAtenas%0ANOTE:Casa%20Vacacional%20Atenas%2C%20Costa%20Rica%0AEND:VCARD" download="QuintaAtenas.vcf" class="modal-row primary">
@@ -713,6 +868,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('saveModal')">Cerrar</button>
   </div>
 </div>
@@ -720,13 +876,15 @@
 <!-- MODAL QR -->
 <div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>📱 Código QR</h3>
+    <button class="modal-float-back" onclick="closeModal('qrModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">📱 Código QR</h3>
     <p class="modal-sub">Muestra este código para que alguien escanee y abra la tarjeta digital al instante.</p>
     <div class="qr-box">
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://midbcard.com/QuintaAtenas&color=2d4a2d&bgcolor=faf7f2" alt="QR Quinta Atenas" />
       <p>Escanea para abrir la tarjeta digital de Quinta Atenas</p>
     </div>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('qrModal')">Cerrar</button>
   </div>
 </div>
@@ -734,8 +892,9 @@
 <!-- MODAL VIDEOS -->
 <div class="modal-overlay" id="videosModal" onclick="closeModal('videosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🎬 Videos</h3>
+    <button class="modal-float-back" onclick="closeModal('videosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🎬 Videos</h3>
     <p class="modal-sub">Conocé la propiedad en video — recorrido completo y momentos especiales.</p>
     <div class="video-embed-list">
       <div class="video-embed-item">
@@ -752,6 +911,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('videosModal')">Cerrar</button>
   </div>
 </div>
@@ -759,8 +919,9 @@
 <!-- MODAL SERVICIOS -->
 <div class="modal-overlay" id="serviciosModal" onclick="closeModal('serviciosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🏡 Servicios y Amenidades</h3>
+    <button class="modal-float-back" onclick="closeModal('serviciosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🏡 Servicios y Amenidades</h3>
     <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada: ropa de cama, toallas, jabón líquido y más. Protocolos del Ministerio de Salud.</p>
     <ul class="servicios-list">
       <li><i class="fa fa-person-swimming"></i> Piscina con ducha y baños</li>
@@ -776,6 +937,7 @@
       <li><i class="fa fa-leaf"></i> Amplias zonas verdes</li>
       <li><i class="fa fa-people-group"></i> Capacidad hasta 60 personas en eventos</li>
     </ul>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('serviciosModal')">Cerrar</button>
   </div>
 </div>
@@ -783,8 +945,9 @@
 <!-- MODAL REDES -->
 <div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🌐 Redes Sociales</h3>
+    <button class="modal-float-back" onclick="closeModal('socialModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🌐 Redes Sociales</h3>
     <p class="modal-sub">Síguenos en nuestras redes, mira el video y descarga el brochure digital.</p>
     <div class="modal-list">
       <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
@@ -818,6 +981,7 @@
         <i class="fa fa-chevron-right mr-arrow"></i>
       </a>
     </div>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
   </div>
 </div>
@@ -825,8 +989,9 @@
 <!-- MODAL INSTALAR -->
 <div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>📲 Agregar a Pantalla de Inicio</h3>
+    <button class="modal-float-back" onclick="closeModal('installModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">📲 Agregar a Pantalla de Inicio</h3>
     <p class="modal-sub">Instala esta tarjeta como app — acceso directo en tu teléfono sin descargar nada.</p>
     <div class="modal-list">
       <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
@@ -844,9 +1009,171 @@
         <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">1. Abre en <strong>Safari</strong><br>2. Toca <strong>□↑</strong> abajo al centro<br>3. <strong>"En pantalla de inicio"</strong><br>4. Presiona <strong>Añadir</strong></div>
       </div>
     </div>
+    </div><!-- /modal-body-pad -->
     <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
   </div>
 </div>
+
+
+<!-- MODAL: DISPONIBILIDAD -->
+<div class="modal-overlay" id="disponibilidadModal" onclick="closeModal('disponibilidadModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('disponibilidadModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <p class="modal-sub">Días en blanco = disponibles. Días marcados = reservados. Tocá una fecha libre y escribinos.</p>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-dot libre"></div> Disponible</div>
+        <div class="cal-legend-item"><div class="cal-dot ocupado"></div> Reservado</div>
+      </div>
+      <div class="cal-iframe-wrap">
+        <!-- ACTIVAR: reemplazar src con el ID del Google Calendar del cliente -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=es.cr%23holiday%40group.v.calendar.google.com&ctz=America%2FCosta_Rica&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&bgcolor=%23faf7f2&color=%232d4a2d" frameborder="0" scrolling="no" title="Disponibilidad"></iframe>
+      </div>
+      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Vi%20el%20calendario%20y%20me%20interesa%20reservar%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fechas:*%20%0A%F0%9F%91%A5%20*Personas:*%20" target="_blank" class="cal-reserve-btn">
+        <i class="fab fa-whatsapp"></i> Reservar estas fechas
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('disponibilidadModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: MÁS INFORMACIÓN -->
+<div class="modal-overlay" id="masInfoModal" onclick="closeModal('masInfoModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('masInfoModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-house" style="color:var(--forest)"></i> El espacio</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Casa rústica estilo Colonial Español completamente amueblada</li>
+          <li><i class="fa fa-check"></i> 4 habitaciones amplias con ropa de cama incluida</li>
+          <li><i class="fa fa-check"></i> 4 baños modernos + Jacuzzi exterior</li>
+          <li><i class="fa fa-check"></i> Cocina completamente equipada con electrodomésticos</li>
+          <li><i class="fa fa-check"></i> Sala TV amplia con terraza panorámica</li>
+          <li><i class="fa fa-check"></i> Área de lavadora y secadora</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-umbrella-beach" style="color:var(--gold)"></i> Áreas exteriores</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Piscina privada con ducha y baños</li>
+          <li><i class="fa fa-check"></i> Rancho equipado para eventos y reuniones</li>
+          <li><i class="fa fa-check"></i> Pileta de tilapia y amplias zonas verdes</li>
+          <li><i class="fa fa-check"></i> Balcones con vista a las montañas de Atenas</li>
+          <li><i class="fa fa-check"></i> Amplio parqueo para varios vehículos</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-wifi" style="color:#1877f2"></i> Conectividad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Internet WiFi Fibra Óptica 100 Mb simétrico</li>
+          <li><i class="fa fa-check"></i> Toallas, jabón y amenities incluidos</li>
+          <li><i class="fa fa-check"></i> Ideal para teletrabajo en entorno natural</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-people-group" style="color:var(--bark)"></i> Capacidad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Hospedaje: hasta 20–25 personas</li>
+          <li><i class="fa fa-check"></i> Eventos y celebraciones: hasta 60 personas</li>
+          <li><i class="fa fa-check"></i> Pase del día disponible para grupos</li>
+        </ul>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('masInfoModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: NORMAS -->
+<div class="modal-overlay" id="normasModal" onclick="closeModal('normasModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('normasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-clock" style="color:var(--forest)"></i> Check-in y Check-out</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-arrow-right-to-bracket"></i> Check-in: a partir de las 3:00 p.m.</li>
+          <li><i class="fa fa-arrow-right-from-bracket"></i> Check-out: antes de las 12:00 m.d.</li>
+          <li><i class="fa fa-clock"></i> Check-in tardío disponible con coordinación previa</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-clipboard-list" style="color:var(--gold)"></i> Reglas de la casa</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> No se permite fumar dentro de la propiedad</li>
+          <li><i class="fa fa-check"></i> Mascotas: consultar disponibilidad previamente</li>
+          <li><i class="fa fa-check"></i> Música hasta las 11:00 p.m.</li>
+          <li><i class="fa fa-check"></i> Respetar la capacidad máxima permitida</li>
+          <li><i class="fa fa-check"></i> Cuidado de instalaciones y mobiliario</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-ban" style="color:#e53935"></i> Política de cancelación</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-circle-check" style="color:#4caf50"></i> Cancelación con +7 días: reembolso del 50%</li>
+          <li><i class="fa fa-circle-xmark" style="color:#e53935"></i> Cancelación con menos de 7 días: sin reembolso</li>
+          <li><i class="fa fa-info-circle"></i> Depósito requerido para confirmar reserva</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-shield-halved" style="color:#1877f2"></i> Seguridad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Extintor y botiquín disponibles</li>
+          <li><i class="fa fa-check"></i> Propiedad cercada con acceso controlado</li>
+          <li><i class="fa fa-check"></i> Supervisión de menores en piscina requerida</li>
+        </ul>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('normasModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: RESEÑAS COMPLETAS -->
+<div class="modal-overlay" id="resenasModal" onclick="closeModal('resenasModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('resenasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="modal-reviews-list">
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#2d4a2d">S</div><div><div class="review-name">Sebastian</div><div class="review-airbnb">2 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
+          <div class="review-text">Excelente estadía y recibimiento, la casa estaba hermosa, aseada, muy buena ubicación, la tranquilidad y paz que hay en el lugar es impresionante y los anfitriones muy atentos.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#b8903a">A</div><div><div class="review-name">Aaron</div><div class="review-airbnb">5 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
+          <div class="review-text">El lugar es muy muy lindo e impecable, todo estaba exactamente como lo describe en el anuncio. La llegada autónoma sería espectacular para mayor facilidad — aparte de eso todo perfecto.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#5c3d1e">A</div><div><div class="review-name">Andrés</div><div class="review-airbnb">8 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Diciembre 2025</span></div>
+          <div class="review-text">Este ha sido el mejor lugar en el que he tenido la oportunidad de hospedarme, no solo por la belleza del departamento sino también por la atención de los anfitriones. Totalmente recomendado.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#1877f2">M</div><div><div class="review-name">María</div><div class="review-airbnb">3 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Noviembre 2025</span></div>
+          <div class="review-text">Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#0d9488">C</div><div><div class="review-name">Carlos</div><div class="review-airbnb">6 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Octubre 2025</span></div>
+          <div class="review-text">Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#7c3aed">L</div><div><div class="review-name">Laura</div><div class="review-airbnb">4 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Septiembre 2025</span></div>
+          <div class="review-text">Mi boda soñada fue aquí. El lugar es hermoso para fotos y el espacio para 60 personas es perfecto. Los propietarios son muy amables y profesionales.</div>
+        </div>
+      </div>
+      <a href="https://www.airbnb.com" target="_blank" class="cal-reserve-btn" style="background:linear-gradient(135deg,#ff385c,#ff6b6b)">
+        <i class="fab fa-airbnb"></i> Ver todas las reseñas en Airbnb
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('resenasModal')">Cerrar</button>
+  </div>
+</div>
+
+<div class="share-toast" id="shareToast"></div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
@@ -861,6 +1188,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+/* SHARE — incluye foto actual del slide */
+function shareCard(){
+  var url='https://midbcard.com/QuintaAtenas';
+  var d={
+    title:'Quinta Atenas · Casa Vacacional',
+    text:'🏡 Quinta Atenas · Atenas, Costa Rica\nExclusive & Wellness Experience · Piscina · Jacuzzi · Rancho · Hasta 60 personas 🌿\n'+url,
+    url:url
+  };
+  if(navigator.share){
+    navigator.share(d).then(function(){showToast('✅ ¡Compartido!');}).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url).then(function(){showToast('📋 Link copiado');}).catch(function(){showToast('🔗 midbcard.com/QuintaAtenas');});
+  }
+}
+function showToast(msg){var t=document.getElementById('shareToast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
 new Swiper('.hero-swiper', { loop:true, effect:'fade', fadeEffect:{crossFade:true}, autoplay:{delay:3000,disableOnInteraction:false}, pagination:{el:'.swiper-pagination',clickable:true}, navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}, lazy:true });
 
 /* SCROLL FLIP — activa cuando el hero sale completamente de pantalla (~285px) */
