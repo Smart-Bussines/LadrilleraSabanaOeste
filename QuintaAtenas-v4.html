@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Quinta Atenas — Casa Vacacional en las Montañas de Atenas, Costa Rica" />
+  <meta property="og:title" content="Quinta Atenas" />
+  <meta property="og:description" content="Hermosa propiedad para alquiler, Atenas Costa Rica" />
+  <meta property="og:image" content="img/img/logovilla2.webp" />
+  <title>Quinta Atenas</title>
+  <link rel="icon" href="img/img/logovilla2.webp" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --cream:      #faf7f2;
+      --warm:       #f0ebe1;
+      --gold:       #b8903a;
+      --gold-light: #d4a84b;
+      --forest:     #2d4a2d;
+      --bark:       #5c3d1e;
+      --text:       #1a1a1a;
+      --muted:      #6b6457;
+      --white:      #ffffff;
+      --shadow:     0 8px 32px rgba(0,0,0,.13);
+      --shadow-card: 0 6px 24px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #111; display: flex; justify-content: center; min-height: 100vh; }
+    .card { width: 100%; max-width: 430px; background: var(--cream); min-height: 100vh; }
+
+    /* HERO */
+    .hero-swiper { height: 62vw; max-height: 285px; position: relative; }
+    .hero-swiper::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,.04) 55%, rgba(0,0,0,.30) 100%); z-index: 2; pointer-events: none; }
+    .hero-swiper .swiper-slide { background-size: cover; background-position: center; background-color: #3d5c34; }
+    .hero-swiper .swiper-button-next, .hero-swiper .swiper-button-prev { color: rgba(255,255,255,.85); z-index: 10; }
+    .hero-swiper .swiper-button-next::after, .hero-swiper .swiper-button-prev::after { font-size: 18px; font-weight: 700; }
+    .hero-swiper .swiper-pagination-bullet { background: rgba(255,255,255,.5); opacity: 1; width: 6px; height: 6px; }
+    .hero-swiper .swiper-pagination-bullet-active { background: var(--gold-light); width: 20px; border-radius: 3px; }
+
+    /* Hero pill — "Ver galería" top-right */
+    .hero-gallery-pill {
+      position: absolute; top: 14px; right: 14px; z-index: 6;
+      display: flex; align-items: center; gap: 7px;
+      cursor: pointer; border: none;
+      background: rgba(0,0,0,.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.92);
+      padding: 7px 14px 7px 11px; border-radius: 22px;
+      transition: background .2s, transform .18s; white-space: nowrap;
+    }
+    .hero-gallery-pill:active { transform: scale(.93); }
+    .hero-gallery-pill .icon { font-size: 13px; }
+    .hero-gallery-pill span { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; }
+    .hero-gallery-pill .arrow { font-size: 11px; animation: arrowFade 2.5s ease-in-out infinite; }
+    @keyframes arrowFade { 0%,100% { opacity:.35; transform:translateY(0); } 50% { opacity:1; transform:translateY(2px); } }
+
+    /* LOGO STRIP */
+    .logo-strip {
+      background: var(--white); padding: 10px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid #e8e2d8;
+      box-shadow: 0 4px 20px rgba(0,0,0,.14), 0 1px 4px rgba(0,0,0,.08);
+      position: sticky; top: 0; z-index: 50; min-height: 80px;
+    }
+    .logo-strip img { height: 48px; width: auto; max-width: 160px; object-fit: contain; flex-shrink: 0; }
+
+    /* ── Strip derecho: íconos sueltos con mini etiqueta ── */
+    .strip-right {
+      position: relative;
+      height: 52px;
+      min-width: 140px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* TAGLINE — visible hasta que el hero sale de pantalla */
+    .strip-tagline {
+      position: absolute;
+      top: 0; right: 0;
+      height: 100%;
+      display: flex; flex-direction: column;
+      align-items: flex-end; justify-content: center;
+      transform: translateY(0); opacity: 1;
+      transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    }
+    .strip-tagline .t-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; font-weight: 700;
+      color: var(--forest); line-height: 1.2; white-space: nowrap;
+    }
+    .strip-tagline .t-sub {
+      font-size: 10px; color: var(--muted);
+      white-space: nowrap; margin-top: 2px;
+    }
+
+    /* ÍCONOS SUELTOS — ocultos abajo al inicio */
+    .strip-icons {
+      position: absolute;
+      bottom: 0; right: 0;
+      display: flex; align-items: flex-end;
+      gap: 16px;
+      transform: translateY(110%); opacity: 0;
+      transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    }
+
+    /* Estado scrolled — tagline baja, íconos suben */
+    .logo-strip.scrolled .strip-tagline {
+      transform: translateY(110%); opacity: 0;
+    }
+    .logo-strip.scrolled .strip-icons {
+      transform: translateY(0); opacity: 1;
+    }
+
+    /* Cada ícono suelto */
+    .sicon {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 3px;
+      cursor: pointer; background: none;
+      border: none; font-family: 'DM Sans', sans-serif;
+      transition: transform .18s;
+      padding: 0;
+    }
+    .sicon:active { transform: scale(.85); }
+    .sicon .sicon-circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(45,74,45,.09);
+      border: 1px solid rgba(45,74,45,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: var(--forest);
+    }
+    .sicon .sicon-label {
+      font-size: 9px; font-weight: 600;
+      color: var(--muted); white-space: nowrap;
+      letter-spacing: .2px;
+    }
+    /* ACTION BUTTONS — estilo Airbnb */
+    .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 18px 16px 4px; }
+    .action-btn {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 18px 8px 14px; border-radius: 20px;
+      text-decoration: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; background: var(--white);
+      box-shadow: var(--shadow-card);
+      transition: transform .18s, box-shadow .18s;
+      position: relative; overflow: hidden;
+    }
+    .action-btn:active { transform: scale(.94); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .action-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 20px 20px 0 0; }
+    .action-btn.ac-video::before  { background: linear-gradient(90deg, var(--bark), #8b5e3c); }
+    .action-btn.ac-service::before { background: linear-gradient(90deg, var(--forest), #3d6b3d); }
+    .action-btn.ac-social::before  { background: linear-gradient(90deg, #1877f2, #00b4d8); }
+    .action-emoji { font-size: 44px; line-height: 1; margin-bottom: 10px; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,.18)); }
+
+    /* Ícono imagen personalizada 3D */
+    .action-icon-wrap {
+      width: 73px; height: 73px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+    /* Fondo negro — para íconos con fondo negro (videos, servicios) */
+    .action-icon-wrap.dark {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 5px 16px rgba(0,0,0,.28), 0 2px 5px rgba(0,0,0,.15);
+    }
+    .action-icon-wrap.dark img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    /* Fondo transparente — para íconos sin fondo (redes) */
+    .action-icon-wrap.clear {
+      background: transparent;
+    }
+    .action-icon-wrap.clear img {
+      width: 100%; height: 100%;
+      object-fit: contain; display: block;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,.22));
+    }
+    .action-label { font-size: 12px; font-weight: 600; color: var(--text); text-align: center; line-height: 1.2; }
+    .action-sub { font-size: 10px; color: var(--muted); text-align: center; margin-top: 3px; line-height: 1.3; }
+
+    /* BIG CTA */
+    .big-cta { padding: 16px 16px 4px; }
+    .big-cta a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg,#25d366,#1da851); color: #fff; text-decoration: none;
+      padding: 15px; border-radius: 18px; font-size: 15px; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(37,211,102,.30); transition: transform .18s, box-shadow .18s;
+    }
+    .big-cta a:active { transform: scale(.97); }
+    .big-cta a i { font-size: 21px; }
+
+    /* SECTION TITLE */
+    .section-title { padding: 20px 18px 10px; display: flex; align-items: center; gap: 10px; }
+    .section-title::before { content: ''; width: 4px; height: 22px; background: var(--gold); border-radius: 2px; flex-shrink: 0; }
+    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--text); font-weight: 700; }
+
+    /* DESCRIPTION */
+    .description-card { margin: 0 16px 16px; background: var(--white); border-radius: 20px; padding: 18px; box-shadow: var(--shadow-card); }
+    .description-card p { font-size: 13.5px; line-height: 1.75; color: var(--muted); }
+    .description-card p + p { margin-top: 10px; }
+    .description-card strong { color: var(--text); }
+    .capacity-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill { display: flex; align-items: center; gap: 6px; background: var(--warm); border-radius: 20px; padding: 6px 12px; font-size: 12px; color: var(--forest); font-weight: 500; }
+    .pill i { font-size: 11px; color: var(--gold); }
+
+    /* GALLERY SCROLL */
+    .gallery-scroll { display: flex; gap: 10px; padding: 0 16px 4px 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gallery-scroll::-webkit-scrollbar { display: none; }
+    .gallery-scroll > * { scroll-snap-align: start; }
+    .gallery-thumb { flex-shrink: 0; width: 130px; height: 100px; border-radius: 14px; overflow: hidden; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+    .gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+    .gallery-thumb:active img { transform: scale(1.06); }
+
+    /* CONTACT STRIP */
+    .contact-strip { margin: 0 16px 16px; background: var(--forest); border-radius: 22px; padding: 20px; color: #fff; box-shadow: 0 8px 28px rgba(45,74,45,.30); }
+    .contact-strip .ct-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .contact-strip .ct-sub { font-size: 12px; opacity: .72; margin-bottom: 14px; }
+    .contact-strip .owners { font-size: 12.5px; font-weight: 500; opacity: .9; margin-bottom: 10px; }
+    .contact-strip .location { font-size: 11.5px; opacity: .72; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 7px; line-height: 1.5; }
+    .contact-strip .location i { margin-top: 2px; color: var(--gold-light); flex-shrink: 0; }
+    .contact-buttons { display: flex; gap: 10px; }
+    .ct-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px; padding: 11px 6px; border-radius: 13px; font-size: 12px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform .18s, opacity .18s; }
+    .ct-btn:active { transform: scale(.94); opacity: .85; }
+    .ct-btn.wapp { background: #25d366; color: #fff; }
+    .ct-btn.call { background: rgba(255,255,255,.15); color: #fff; border: 1px solid rgba(255,255,255,.28); }
+    .ct-btn.waze { background: #00d4e8; color: #111; }
+
+    /* SHARE — iconos circulares con label */
+    .share-row {
+      margin: 0 16px 20px;
+      background: var(--white); border-radius: 20px;
+      padding: 18px 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .share-row .share-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px; font-weight: 700; color: var(--text);
+      margin-bottom: 4px;
+    }
+    .share-row .share-sub {
+      font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    }
+    .share-icons {
+      display: flex; justify-content: space-around; gap: 8px;
+    }
+    .share-icon {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      text-decoration: none; transition: transform .18s; flex: 1;
+    }
+    .share-icon:active { transform: scale(.9); }
+    .share-icon .si-circle {
+      width: 46px; height: 46px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #fff;
+      box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    }
+    .share-icon .si-label {
+      font-size: 10px; font-weight: 500; color: var(--muted);
+    }
+    .si-wa   .si-circle { background: #25d366; }
+    .si-fb   .si-circle { background: #1877f2; }
+    .si-tg   .si-circle { background: #2ca5e0; }
+    .si-ms   .si-circle { background: #0084ff; }
+
+    /* BIG CTA — sin pulse, solo el flotante anima */
+    .big-cta { padding: 16px 16px 4px; }
+    .big-cta a {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: linear-gradient(135deg,#25d366,#1da851);
+      color: #fff; text-decoration: none;
+      padding: 15px; border-radius: 18px;
+      font-size: 15px; font-weight: 700;
+      box-shadow: 0 6px 20px rgba(37,211,102,.30);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .big-cta a:active { transform: scale(.97); }
+    .big-cta a:hover  { box-shadow: 0 8px 26px rgba(37,211,102,.45); }
+    .big-cta a i { font-size: 21px; }
+
+    /* ── FLOTANTES — estilo sticker 3D, tamaño compacto ── */
+    .float-stack {
+      position: fixed; bottom: 24px; right: 14px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 16px; z-index: 100;
+    }
+    .float-btn {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform .18s;
+      position: relative;
+      outline: 3px solid #fff;
+      outline-offset: 0px;
+    }
+    .float-btn:active { transform: scale(.92); }
+    .float-btn::before {
+      content: attr(data-tip);
+      position: absolute; right: 62px;
+      background: rgba(0,0,0,.78); color: #fff;
+      font-size: 11px; font-weight: 500;
+      padding: 4px 10px; border-radius: 8px;
+      white-space: nowrap; opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .float-btn:hover::before { opacity: 1; }
+
+    /* WhatsApp */
+    .float-wa {
+      background: #25d366;
+      box-shadow: 0 5px 0 #1a9e4e, 0 7px 16px rgba(0,0,0,.40), 0 2px 5px rgba(0,0,0,.22);
+      font-size: 26px; color: #fff;
+    }
+    /* Brochure — sin label, solo ícono */
+    .float-brochure {
+      background: #c0432a;
+      box-shadow: 0 5px 0 #8b2e1a, 0 7px 16px rgba(0,0,0,.40), 0 2px 5px rgba(0,0,0,.22);
+      font-size: 20px; color: #fff;
+    }
+
+    .divider { height: 1px; background: linear-gradient(to right, transparent, #ddd6cb, transparent); margin: 4px 16px 8px; }
+    .card-footer { background: #1a1a1a; color: rgba(255,255,255,.45); font-size: 11px; text-align: center; padding: 18px 16px; line-height: 1.8; }
+    .card-footer a { color: rgba(255,255,255,.55); text-decoration: none; }
+
+    /* ── RESEÑAS — scroll horizontal ── */
+    .reviews-scroll {
+      display: flex; gap: 10px;
+      /* padding-right pequeño para que la última card no quede pegada al borde */
+      padding: 0 16px 8px 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .reviews-scroll::-webkit-scrollbar { display: none; }
+
+    .review-card {
+      flex-shrink: 0;
+      /* 82vw muestra la card actual + ~18% de la siguiente asomándose */
+      width: 82vw;
+      max-width: 290px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 14px;
+      /* sombra más delgada/sutil */
+      box-shadow: 0 2px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.05);
+      scroll-snap-align: start;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+
+    .review-top {
+      display: flex; align-items: center; gap: 9px;
+    }
+    .review-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .review-meta { flex: 1; }
+    .review-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.1; }
+    .review-date { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .review-stars { color: #f59e0b; font-size: 11px; letter-spacing: 1px; }
+    .review-text { font-size: 11.5px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .review-source {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 10px; color: var(--muted);
+      padding-top: 7px; border-top: 1px solid #f0ece6;
+    }
+    .review-source i { font-size: 11px; }
+
+    /* Flecha scroll hint — desaparece al primer scroll */
+    .review-hint {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 6px 0 14px;
+      font-size: 11px; color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .review-hint i {
+      color: var(--gold);
+      animation: nudgeRight 1.6s ease-in-out infinite;
+    }
+    @keyframes nudgeRight {
+      0%,100% { transform: translateX(0); opacity: .5; }
+      50%      { transform: translateX(5px); opacity: 1; }
+    }
+    .review-hint.hidden { display: none; }
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* MODALS */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(3px); z-index: 200; align-items: flex-end; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal-sheet { background: var(--cream); border-radius: 26px 26px 0 0; width: 100%; max-width: 430px; padding: 10px 20px 38px; animation: slide-up .32s cubic-bezier(.4,0,.2,1); max-height: 88vh; overflow-y: auto; }
+    @keyframes slide-up { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    .modal-handle { width: 38px; height: 4px; background: #ccc; border-radius: 2px; margin: 10px auto 18px; }
+    .modal-sheet h3 { font-family: 'Playfair Display', serif; font-size: 19px; color: var(--text); margin-bottom: 6px; }
+    .modal-sub { font-size: 12.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-list { display: flex; flex-direction: column; gap: 10px; }
+    .modal-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: var(--white); text-decoration: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: transform .18s; width: 100%; text-align: left; }
+    .modal-row:active { transform: scale(.97); }
+    .modal-row.primary { background: var(--forest); }
+    .mr-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .mr-text { flex: 1; }
+    .mr-title { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 3px; }
+    .mr-desc { font-size: 11px; color: var(--muted); }
+    .modal-row.primary .mr-title, .modal-row.primary .mr-desc { color: #fff; }
+    .mr-arrow { color: #ccc; font-size: 13px; }
+    .modal-row.primary .mr-arrow { color: rgba(255,255,255,.5); }
+    .modal-cancel { display: block; width: 100%; text-align: center; margin-top: 14px; padding: 12px; border-radius: 14px; background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+    .servicios-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .servicios-list li { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--white); border-radius: 14px; font-size: 13px; color: var(--text); box-shadow: 0 2px 8px rgba(0,0,0,.05); }
+    .servicios-list li i { color: var(--forest); font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .qr-box { text-align: center; padding: 10px 0 8px; }
+    .qr-box img { width: 200px; height: 200px; border-radius: 16px; margin: 0 auto 12px; display: block; box-shadow: var(--shadow); }
+    .qr-box p { font-size: 12px; color: var(--muted); }
+    .video-embed-list { display: flex; flex-direction: column; gap: 14px; }
+    .video-embed-item { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card); }
+    .video-embed-item iframe { width: 100%; height: 200px; display: block; border: none; }
+    .video-embed-label { padding: 10px 14px; font-size: 12.5px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.93); z-index: 300; align-items: center; justify-content: center; flex-direction: column; }
+    .lightbox.open { display: flex; }
+    .lb-close { position: absolute; top: 18px; right: 20px; color: #fff; font-size: 22px; cursor: pointer; z-index: 301; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.12); border-radius: 50%; }
+    #lbImg { max-width: 96vw; max-height: 72vh; border-radius: 14px; object-fit: contain; user-select: none; }
+    .lb-nav { display: flex; gap: 16px; margin-top: 18px; }
+    .lb-nav button { background: rgba(255,255,255,.14); border: none; color: #fff; width: 46px; height: 46px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lb-counter { color: rgba(255,255,255,.55); font-size: 12px; margin-top: 12px; }
+
+    /* ── HERO BADGE ── */
+    .hero-badge{position:absolute;top:14px;left:14px;z-index:6;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:22px;padding:6px 12px;box-shadow:0 2px 12px rgba(0,0,0,.25);}
+    .hero-badge .badge-stars{color:#ff385c;font-size:11px;letter-spacing:.5px;font-weight:700;}
+    .hero-badge .badge-text{font-size:10px;font-weight:700;color:var(--text);white-space:nowrap;}
+
+    /* ── HERO SHARE ── */
+    .hero-share-btn{position:absolute;top:14px;left:14px;z-index:6;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.92);font-size:14px;cursor:pointer;transition:transform .18s;}
+    .hero-share-btn:active{transform:scale(.88);}
+
+    /* ── INTENT GRID ── */
+    .intent-grid{display:flex;flex-direction:column;gap:10px;padding:0 16px 8px;}
+    .intent-btn{display:flex;align-items:center;gap:14px;background:var(--white);border-radius:18px;padding:14px 16px;text-decoration:none;box-shadow:var(--shadow-card);transition:transform .18s;border:none;cursor:pointer;}
+    .intent-btn:active{transform:scale(.98);}
+    .ib-emoji{font-size:28px;flex-shrink:0;line-height:1;}
+    .ib-text{flex:1;}
+    .ib-title{font-size:14px;font-weight:700;color:var(--text);line-height:1.2;}
+    .ib-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .ib-wa{font-size:24px;color:#25d366;flex-shrink:0;}
+
+    /* ── DESC BUTTONS ── */
+    .desc-btns{display:flex;gap:10px;margin-top:16px;}
+    .desc-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:10px;border-radius:13px;font-size:12px;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .desc-btn:active{transform:scale(.95);}
+    .desc-btn.db-info{background:var(--forest);color:#fff;}
+    .desc-btn.db-normas{background:var(--warm);color:var(--forest);border:1px solid rgba(45,74,45,.2);}
+
+    /* ── DISPONIBILIDAD BUTTON ── */
+    .disponibilidad-btn{margin:0 16px 16px;display:flex;align-items:center;gap:14px;background:var(--white);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow-card);cursor:pointer;border:none;width:calc(100% - 32px);font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .disponibilidad-btn:active{transform:scale(.98);}
+    .db-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--forest),#3d6b3d);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;}
+    .db-info-text{flex:1;text-align:left;}
+    .db-info-text h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+    .db-info-text p{font-size:11px;color:var(--muted);}
+    .db-arrow{color:var(--muted);font-size:16px;}
+
+    /* ── RESEÑAS SCROLL AIRBNB ── */
+    .reviews-badge{display:flex;align-items:center;gap:6px;padding:0 18px 12px;font-size:12px;color:var(--muted);}
+    .rb-stars{color:#ff385c;font-size:13px;}
+    .rb-score{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text);}
+    .rb-label{font-size:11px;color:var(--muted);}
+
+    .reviews-scroll{display:flex;gap:0;padding:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-top:1px solid #e8e2d8;}
+    .reviews-scroll::-webkit-scrollbar{display:none;}
+
+    /* Cards con separadores verticales tipo Airbnb */
+    .review-card-ab{
+      flex-shrink:0;
+      width:85vw;max-width:310px;
+      padding:18px 18px;
+      scroll-snap-align:start;
+      border-right:1px solid #e8e2d8;
+      display:flex;flex-direction:column;gap:10px;
+      background:var(--white);
+    }
+    .review-card-ab:last-child{border-right:none;}
+
+    .review-top{display:flex;align-items:center;gap:10px;}
+    .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+    .review-meta{flex:1;}
+    .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
+    .review-airbnb{font-size:10px;color:var(--muted);}
+    .review-meta-row{display:flex;align-items:center;gap:6px;}
+    .review-stars{color:#ff385c;font-size:11px;}
+    .review-date{font-size:10px;color:var(--muted);}
+    .review-dot{width:3px;height:3px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+    .review-text{font-size:12.5px;color:var(--text);line-height:1.65;flex:1;}
+    .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
+
+    /* ── REVIEW CARDS scroll ── */
+    .reviews-scroll{display:flex;gap:12px;padding:0 16px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    .reviews-scroll::-webkit-scrollbar{display:none;}
+    .review-card{flex-shrink:0;width:82vw;max-width:290px;background:var(--white);border-radius:18px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);scroll-snap-align:start;display:flex;flex-direction:column;gap:10px;}
+    .review-top{display:flex;align-items:center;gap:10px;}
+    .review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+    .review-meta .review-meta{flex:1;}
+    .review-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.2;}
+    .review-meta .review-date{font-size:10px;color:var(--muted);margin-top:1px;}
+    .review-stars{color:#f59e0b;font-size:12px;letter-spacing:1px;}
+    .review-text{font-size:12px;color:var(--muted);line-height:1.65;flex:1;}
+    .review-source{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);padding-top:8px;border-top:1px solid #f0ece6;}
+
+    /* Hint flecha */
+    .review-hint{display:flex;align-items:center;gap:6px;padding:10px 18px 4px;font-size:11px;color:var(--muted);}
+    .review-hint i{color:var(--gold);animation:nudgeRight 1.6s ease-in-out infinite;}
+    @keyframes nudgeRight{0%,100%{transform:translateX(0);opacity:.5;}50%{transform:translateX(5px);opacity:1;}}
+    .review-hint.hidden{display:none;}
+
+    /* Botón mostrar más reseñas */
+    .show-more-reviews{display:block;width:calc(100% - 32px);margin:10px 16px 8px;padding:13px;background:var(--white);border-radius:14px;border:1.5px solid #c8c0b4;font-size:13px;font-weight:600;color:var(--text);text-align:center;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .18s,transform .18s;}
+    .show-more-reviews:active{transform:scale(.97);background:var(--warm);}
+
+    /* ── DISPONIBILIDAD ROW ── */
+    .disp-row{display:flex;align-items:center;justify-content:space-between;margin:0 16px 16px;padding:16px 18px;background:var(--white);border-radius:18px;box-shadow:var(--shadow-card);cursor:pointer;border:none;width:calc(100% - 32px);font-family:'DM Sans',sans-serif;transition:transform .18s;}
+    .disp-row:active{transform:scale(.98);}
+    .disp-row-sub{font-size:12px;color:var(--muted);}
+    .disp-row-arrow{font-size:14px;color:var(--muted);flex-shrink:0;}
+
+    /* ── MODAL FLOATING BACK BUTTON ── */
+    .modal-float-back{
+      position:absolute;top:14px;left:14px;z-index:20;
+      width:34px;height:34px;border-radius:50%;
+      background:rgba(0,0,0,.18);backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);
+      border:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      color:#fff;font-size:14px;
+      transition:background .18s,transform .18s;
+    }
+    .modal-float-back:active{transform:scale(.88);background:rgba(0,0,0,.32);}
+    .modal-body-pad{padding:52px 20px 0;}
+
+    /* Modal sheet needs relative for absolute button */
+    .modal-sheet{position:relative;}
+
+
+    .modal-inner{padding:20px 20px 0;}
+
+    /* ── CALENDARIO MODAL ── */
+    .cal-iframe-wrap iframe{width:100%;height:320px;border:none;display:block;border-radius:12px;overflow:hidden;}
+    .cal-legend{display:flex;gap:16px;padding:10px 0;justify-content:center;}
+    .cal-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);}
+    .cal-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .cal-dot.libre{background:#4caf50;}
+    .cal-dot.ocupado{background:#e0d8cc;}
+    .cal-reserve-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;text-decoration:none;padding:14px;border-radius:14px;font-size:14px;font-weight:700;margin-top:14px;transition:transform .18s;}
+    .cal-reserve-btn:active{transform:scale(.97);}
+
+    /* ── INFO LIST ── */
+    .info-section{margin-bottom:20px;}
+    .info-section h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+    .info-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .info-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);line-height:1.5;}
+    .info-list li i{color:var(--forest);font-size:12px;width:16px;text-align:center;flex-shrink:0;margin-top:2px;}
+
+    /* ── TOAST ── */
+    .share-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(0,0,0,.82);color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;white-space:nowrap;z-index:500;}
+    .share-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* Modal reviews list */
+    .modal-reviews-list{display:flex;flex-direction:column;}
+    .modal-review-item{padding:18px 0;border-bottom:1px solid #e8e2d8;}
+    .modal-review-item:last-child{border-bottom:none;}
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <!-- HERO -->
+  <div class="hero-swiper swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" style="background-image:url('img/img/1.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/2.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/3.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/4.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/5.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/6.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/7.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/8.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/9.jpeg')"></div>
+      <div class="swiper-slide" style="background-image:url('img/img/10.jpeg')"></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
+    <!-- Share button — top left -->
+    <button class="hero-share-btn" onclick="shareCard()" aria-label="Compartir">
+      <i class="fa fa-share-nodes"></i>
+    </button>
+
+    <!-- "Ver galería" top right -->
+    <button class="hero-gallery-pill" onclick="openLightbox(0)">
+      <i class="fa fa-images icon"></i>
+      <span>Ver galería</span>
+      <i class="fa fa-chevron-down arrow"></i>
+    </button>
+  </div>
+
+
+  <!-- LOGO STRIP — logo izq + tagline/pill der con efecto scroll -->
+  <div class="logo-strip fade-up" id="logoStrip">
+    <img src="img/img/logovilla.webp" alt="Quinta Vacacional" onerror="this.style.display='none'" />
+
+    <div class="strip-right">
+
+      <!-- Tagline visible al inicio -->
+      <div class="strip-tagline">
+        <span class="t-title">Casa Vacacional</span>
+        <span class="t-sub">El mejor clima de Atenas 🌿</span>
+      </div>
+
+      <!-- Íconos sueltos que aparecen al hacer scroll completo del hero -->
+      <div class="strip-icons">
+        <button class="sicon" onclick="showSupTip(this); openModal('saveModal')">
+          <div class="sicon-circle"><i class="fa fa-address-book"></i></div>
+          <span class="sicon-label">Guardar</span>
+        </button>
+        <button class="sicon" onclick="showSupTip(this); openModal('qrModal')">
+          <div class="sicon-circle"><i class="fa fa-qrcode"></i></div>
+          <span class="sicon-label">QR</span>
+        </button>
+        <button class="sicon" onclick="showSupTip(this); openModal('installModal')">
+          <div class="sicon-circle"><i class="fa fa-mobile-screen"></i></div>
+          <span class="sicon-label">Instalar</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTONES AIRBNB STYLE -->
+  <div class="actions fade-up">
+
+    <button class="action-btn ac-video" onclick="openModal('videosModal')">
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-videos.png" alt="Videos" />
+      </div>
+      <span class="action-label">Videos</span>
+      <span class="action-sub">Recorrido y Reels</span>
+    </button>
+
+    <button class="action-btn ac-service" onclick="openModal('serviciosModal')">
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-servicios.png" alt="Servicios" />
+      </div>
+      <span class="action-label">Servicios</span>
+      <span class="action-sub">Amenidades</span>
+    </button>
+
+    <button class="action-btn ac-social" onclick="openModal('socialModal')">
+      <div class="action-icon-wrap clear">
+        <img src="img/img/icono-redes.png" alt="Redes" />
+      </div>
+      <span class="action-label">Redes S.</span>
+      <span class="action-sub">Síguenos</span>
+    </button>
+
+  </div>
+
+
+
+  <!-- ¿QUÉ NECESITÁS? -->
+  <div class="section-title fade-up"><h2>¿Cómo podemos ayudarte?</h2></div>
+  <div class="intent-grid fade-up">
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Quiero%20consultar%20*hospedaje*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fechas:*%20%0A%F0%9F%91%A5%20*Personas:*%20%0A%0A%C2%BFHay%20disponibilidad%3F" target="_blank">
+      <span class="ib-emoji">🏠</span>
+      <div class="ib-text"><div class="ib-title">Hospedaje</div><div class="ib-sub">Consultar fechas y precio</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
+    </a>
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Me%20interesa%20el%20*pase%20del%20d%C3%ADa*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fecha:*%20%0A%F0%9F%91%A5%20*Personas:*%20%0A%0A%C2%BFQu%C3%A9%20incluye%3F" target="_blank">
+      <span class="ib-emoji">☀️</span>
+      <div class="ib-text"><div class="ib-title">Pase del Día</div><div class="ib-sub">Piscina · Rancho · Social</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
+    </a>
+    <a class="intent-btn" href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Quiero%20info%20para%20un%20*evento*%20en%20Quinta%20Atenas.%0A%0A%F0%9F%8E%89%20*Tipo:*%20%0A%F0%9F%93%85%20*Fecha:*%20%0A%F0%9F%91%A5%20*Invitados:*%20" target="_blank">
+      <span class="ib-emoji">🎉</span>
+      <div class="ib-text"><div class="ib-title">Eventos</div><div class="ib-sub">Bodas · Cumpleaños · Empresas</div></div>
+      <i class="fab fa-whatsapp ib-wa"></i>
+    </a>
+  </div>
+
+
+  <!-- DESCRIPCIÓN -->
+  <div class="section-title fade-up"><h2>La Propiedad</h2></div>
+  <div class="description-card fade-up">
+    <p>Casa rústica estilo <strong>Colonial Español</strong> en las montañas de Atenas. Ideal para vacacionar en familia, celebraciones y eventos sociales. También disponible como <strong>pase del día</strong> para matrimonios, cumpleaños y reuniones con opción de área social, rancho y piscina.</p>
+    <p>Cuenta con <strong>Internet Fibra Óptica 100 Mb</strong> — perfecta también para teletrabajo en un entorno natural inigualable.</p>
+        <div class="desc-btns">
+      <button class="desc-btn db-info" onclick="openModal('masInfoModal')">
+        <i class="fa fa-circle-info"></i> Más detalles
+      </button>
+      <button class="desc-btn db-normas" onclick="openModal('normasModal')">
+        <i class="fa fa-clipboard-list"></i> Normas
+      </button>
+    </div>
+  </div>
+
+
+  <!-- DISPONIBILIDAD -->
+  <div class="section-title fade-up"><h2>Disponibilidad</h2></div>
+  <button class="disp-row fade-up" onclick="openModal('disponibilidadModal')">
+    <div class="disp-row-left">
+      <p class="disp-row-sub">Ver fechas disponibles · Reservar</p>
+    </div>
+    <i class="fa fa-chevron-right disp-row-arrow"></i>
+  </button>
+
+  <!-- FOTOS -->
+  <div class="section-title fade-up"><h2>Fotos</h2></div>
+  <div class="gallery-scroll fade-up">
+    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="img/img/1.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="img/img/2.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="img/img/3.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="img/img/4.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="img/img/5.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="img/img/6.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="img/img/7.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(7)"><img src="img/img/8.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(8)"><img src="img/img/9.jpeg" alt="" loading="lazy"></div>
+    <div class="gallery-thumb" onclick="openLightbox(9)"><img src="img/img/10.jpeg" alt="" loading="lazy"></div>
+  </div>
+
+  <!-- RESEÑAS -->
+  <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
+  <div class="reviews-scroll fade-up" id="reviewsScroll">
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#2d4a2d">M</div>
+        <div class="review-meta">
+          <div class="review-name">María Fernández</div>
+          <div class="review-date">Marzo 2025 · San José</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#b8903a">C</div>
+        <div class="review-meta">
+          <div class="review-name">Carlos Rodríguez</div>
+          <div class="review-date">Febrero 2025 · Alajuela</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!"</div>
+      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-top">
+        <div class="review-avatar" style="background:#5c3d1e">A</div>
+        <div class="review-meta">
+          <div class="review-name">Andrea Mora</div>
+          <div class="review-date">Enero 2025 · Heredia</div>
+        </div>
+      </div>
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"El clima de Atenas es único y esta quinta lo aprovecha al máximo. Las habitaciones son amplias, la cocina está equipada con todo. Muy tranquilo y seguro."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
+    </div>
+
+  </div>
+
+  <div class="review-hint fade-up" id="reviewHint">
+    <i class="fa fa-arrow-right"></i>
+    <span>Deslizá para ver más opiniones</span>
+  </div>
+  <button class="show-more-reviews fade-up" onclick="openModal('resenasModal')">
+    Mostrar las 26 reseñas
+  </button>
+
+  <!-- CONTACTO -->  <!-- CONTACTO -->
+  <div class="section-title fade-up"><h2>Contacto</h2></div>
+  <div class="contact-strip fade-up">
+    <div class="ct-title">¿Listo para reservar?</div>
+    <div class="ct-sub">Respondemos rápido · disponibilidad inmediata</div>
+    <div class="owners"><i class="fa fa-user" style="margin-right:7px;opacity:.7"></i>William Mora &amp; Evelyn Morgan</div>
+    <div class="location"><i class="fa fa-map-pin"></i><span>Barrio Jesús de Atenas, 600 oeste del Bar Las Brisas y 75 mts sur</span></div>
+    <div class="contact-buttons">
+      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20quiero%20reservar%20Quinta%20Atenas" target="_blank" class="ct-btn wapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+50687212050" class="ct-btn call"><i class="fa fa-phone"></i> Llamar</a>
+      <a href="https://waze.com/ul/hd1gbwxpn5" target="_blank" class="ct-btn waze"><i class="fa fa-location-dot"></i> Waze</a>
+    </div>
+  </div>
+
+  <!-- COMPARTIR -->
+  <div class="share-row fade-up">
+    <div class="share-title">Comparte este enlace</div>
+    <div class="share-sub">Envíalo a quien lo necesite 👇</div>
+    <div class="share-icons">
+      <a href="https://api.whatsapp.com/send?text=*Quinta%20Atenas*%20%E2%80%94%20Atenas%20CR%20https://midbcard.com/QuintaAtenas" target="_blank" class="share-icon si-wa">
+        <div class="si-circle"><i class="fab fa-whatsapp"></i></div>
+        <span class="si-label">WhatsApp</span>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://midbcard.com/QuintaAtenas" target="_blank" class="share-icon si-fb">
+        <div class="si-circle"><i class="fab fa-facebook-f"></i></div>
+        <span class="si-label">Facebook</span>
+      </a>
+      <a href="https://telegram.me/share/url?url=https://midbcard.com/QuintaAtenas" target="_blank" class="share-icon si-tg">
+        <div class="si-circle"><i class="fab fa-telegram-plane"></i></div>
+        <span class="si-label">Telegram</span>
+      </a>
+      <a href="fb-messenger://share/?link=https://midbcard.com/QuintaAtenas" class="share-icon si-ms">
+        <div class="si-circle"><i class="fab fa-facebook-messenger"></i></div>
+        <span class="si-label">Messenger</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card-footer">
+    <p>© 2025 Quinta Atenas · Atenas, Costa Rica</p>
+    <p>Tarjeta Digital por <a href="#">NovaMente Digital</a></p>
+  </div>
+</div>
+
+<!-- FLOTANTES — estilo sticker 3D -->
+<div class="float-stack">
+  <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1"
+     target="_blank" class="float-btn float-brochure" data-tip="Ver Brochure">
+    <i class="fa fa-book-open"></i>
+  </a>
+  <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20vi%20su%20tarjeta%20de%20Quinta%20Atenas"
+     target="_blank" class="float-btn float-wa" data-tip="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- MODAL GUARDAR -->
+<div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('saveModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">💾 Guardar Contacto</h3>
+    <p class="modal-sub">Agrega Quinta Atenas a tus contactos para tener siempre el número a mano.</p>
+    <div class="modal-list">
+      <a href="data:text/vcard;charset=utf-8,BEGIN:VCARD%0AVERSION:3.0%0AFN:Quinta%20Atenas%0AORG:Quinta%20Vacacional%20Atenas%0ATEL;TYPE=CELL:+50687212050%0ATEL;TYPE=CELL:+50688379488%0AADR;TYPE=WORK:;;Barrio%20Jes%C3%BAs%20de%20Atenas;;Atenas;Alajuela;Costa%20Rica%0AURL:https://midbcard.com/QuintaAtenas%0ANOTE:Casa%20Vacacional%20Atenas%2C%20Costa%20Rica%0AEND:VCARD" download="QuintaAtenas.vcf" class="modal-row primary">
+        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fa fa-download" style="color:#fff"></i></div>
+        <div class="mr-text"><div class="mr-title">Descargar Contacto (.vcf)</div><div class="mr-desc">Compatible con iPhone, Android y WhatsApp</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?phone=50687212050" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e8f8ef"><i class="fab fa-whatsapp" style="color:#25d366"></i></div>
+        <div class="mr-text"><div class="mr-title">Abrir en WhatsApp</div><div class="mr-desc">+506 8721 2050</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="tel:+50687212050" class="modal-row">
+        <div class="mr-icon" style="background:#eaf3ea"><i class="fa fa-phone" style="color:var(--forest)"></i></div>
+        <div class="mr-text"><div class="mr-title">Llamar ahora</div><div class="mr-desc">+506 8721 2050</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('saveModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL QR -->
+<div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('qrModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">📱 Código QR</h3>
+    <p class="modal-sub">Muestra este código para que alguien escanee y abra la tarjeta digital al instante.</p>
+    <div class="qr-box">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://midbcard.com/QuintaAtenas&color=2d4a2d&bgcolor=faf7f2" alt="QR Quinta Atenas" />
+      <p>Escanea para abrir la tarjeta digital de Quinta Atenas</p>
+    </div>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('qrModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL VIDEOS -->
+<div class="modal-overlay" id="videosModal" onclick="closeModal('videosModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('videosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🎬 Videos</h3>
+    <p class="modal-sub">Conocé la propiedad en video — recorrido completo y momentos especiales.</p>
+    <div class="video-embed-list">
+      <div class="video-embed-item">
+        <iframe src="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&showinfo=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="video-embed-label"><i class="fab fa-youtube" style="color:#e53935"></i> Recorrido completo · Quinta Atenas</div>
+      </div>
+      <div class="video-embed-item">
+        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fwillian.mora.520562%2Fvideos&show_text=false&width=380" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        <div class="video-embed-label"><i class="fab fa-facebook" style="color:#1877f2"></i> Reels y momentos · Facebook</div>
+      </div>
+      <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text"><div class="mr-title">Ver todos los videos en Facebook</div><div class="mr-desc">Reels, eventos y más contenido</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('videosModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL SERVICIOS -->
+<div class="modal-overlay" id="serviciosModal" onclick="closeModal('serviciosModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('serviciosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🏡 Servicios y Amenidades</h3>
+    <p class="modal-sub"><strong>Casa Rústica Estilo Colonial Español</strong> — full equipada: ropa de cama, toallas, jabón líquido y más. Protocolos del Ministerio de Salud.</p>
+    <ul class="servicios-list">
+      <li><i class="fa fa-person-swimming"></i> Piscina con ducha y baños</li>
+      <li><i class="fa fa-bed"></i> 4 habitaciones grandes</li>
+      <li><i class="fa fa-bath"></i> 4 baños cómodos / Jacuzzi</li>
+      <li><i class="fa fa-utensils"></i> Cocina equipada y amplia</li>
+      <li><i class="fa fa-tv"></i> Sala TV bastante grande / Terrazas</li>
+      <li><i class="fa fa-shirt"></i> Área de lavadora y secadora</li>
+      <li><i class="fa fa-mountain"></i> Balcones con vista a las montañas</li>
+      <li><i class="fa fa-umbrella-beach"></i> Rancho equipado / Vestidores</li>
+      <li><i class="fa fa-fish"></i> Pileta de Tilapia / Amplio parqueo</li>
+      <li><i class="fa fa-wifi"></i> Internet WiFi Fibra Óptica 100 Mb</li>
+      <li><i class="fa fa-leaf"></i> Amplias zonas verdes</li>
+      <li><i class="fa fa-people-group"></i> Capacidad hasta 60 personas en eventos</li>
+    </ul>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('serviciosModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL REDES -->
+<div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('socialModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">🌐 Redes Sociales</h3>
+    <p class="modal-sub">Síguenos en nuestras redes, mira el video y descarga el brochure digital.</p>
+    <div class="modal-list">
+      <a href="https://www.facebook.com/profile.php?id=100086365393592" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#e7f0fd"><i class="fab fa-facebook-f" style="color:#1877f2"></i></div>
+        <div class="mr-text"><div class="mr-title">Facebook</div><div class="mr-desc">Síguenos y mira nuestras publicaciones</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.instagram.com/villahermosaquintaatenas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:linear-gradient(135deg,#fdf3e3,#f7e2f0)"><i class="fab fa-instagram" style="background:linear-gradient(135deg,#e1306c,#833ab4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:22px"></i></div>
+        <div class="mr-text"><div class="mr-title">Instagram</div><div class="mr-desc">@villahermosaquintaatenas</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.tiktok.com/@villahermosaquintaatenas?is_from_webapp=1&sender_device=pc" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#f0f0f0"><i class="fab fa-tiktok" style="color:#010101"></i></div>
+        <div class="mr-text"><div class="mr-title">TikTok</div><div class="mr-desc">@villahermosaquintaatenas</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://www.youtube.com/embed/8z0jp0ADIgg?rel=0&controls=1&autoplay=1" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fdecea"><i class="fab fa-youtube" style="color:#e53935"></i></div>
+        <div class="mr-text"><div class="mr-title">Video de la Propiedad</div><div class="mr-desc">Recorrido completo en YouTube</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://designrr.page/?id=134327&token=1803142796&type=FP&h=4544&singlePage=1&startPage=1" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#fef7e7"><i class="fa fa-book-open" style="color:var(--gold)"></i></div>
+        <div class="mr-text"><div class="mr-title">Brochure Digital</div><div class="mr-desc">Revista digital descargable</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+      <a href="https://m.me/100066473385289/" target="_blank" class="modal-row">
+        <div class="mr-icon" style="background:#eef0ff"><i class="fab fa-facebook-messenger" style="color:#0084ff"></i></div>
+        <div class="mr-text"><div class="mr-title">Facebook Messenger</div><div class="mr-desc">Chatea directamente con nosotros</div></div>
+        <i class="fa fa-chevron-right mr-arrow"></i>
+      </a>
+    </div>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('socialModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL INSTALAR -->
+<div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('installModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+    <h3 style="display:none">📲 Agregar a Pantalla de Inicio</h3>
+    <p class="modal-sub">Instala esta tarjeta como app — acceso directo en tu teléfono sin descargar nada.</p>
+    <div class="modal-list">
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#e8f5e9"><i class="fab fa-android" style="color:#3ddc84;font-size:22px"></i></div>
+          <div class="mr-text"><div class="mr-title">Android (Chrome)</div><div class="mr-desc">Menú ⋮ → "Añadir a pantalla de inicio"</div></div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">1. Abre en <strong>Chrome</strong><br>2. Toca <strong>⋮</strong> arriba a la derecha<br>3. <strong>"Añadir a pantalla de inicio"</strong><br>4. Presiona <strong>Añadir</strong></div>
+      </div>
+      <div class="modal-row" style="cursor:default;flex-direction:column;align-items:flex-start;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="mr-icon" style="background:#f0f0f5"><i class="fab fa-apple" style="color:#555;font-size:22px"></i></div>
+          <div class="mr-text"><div class="mr-title">iPhone / iPad (Safari)</div><div class="mr-desc">Compartir □↑ → "En pantalla de inicio"</div></div>
+        </div>
+        <div style="background:var(--warm);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7;width:100%">1. Abre en <strong>Safari</strong><br>2. Toca <strong>□↑</strong> abajo al centro<br>3. <strong>"En pantalla de inicio"</strong><br>4. Presiona <strong>Añadir</strong></div>
+      </div>
+    </div>
+    </div><!-- /modal-body-pad -->
+    <button class="modal-cancel" onclick="closeModal('installModal')">Entendido</button>
+  </div>
+</div>
+
+
+<!-- MODAL: DISPONIBILIDAD -->
+<div class="modal-overlay" id="disponibilidadModal" onclick="closeModal('disponibilidadModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('disponibilidadModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <p class="modal-sub">Días en blanco = disponibles. Días marcados = reservados. Tocá una fecha libre y escribinos.</p>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-dot libre"></div> Disponible</div>
+        <div class="cal-legend-item"><div class="cal-dot ocupado"></div> Reservado</div>
+      </div>
+      <div class="cal-iframe-wrap">
+        <!-- ACTIVAR: reemplazar src con el ID del Google Calendar del cliente -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=es.cr%23holiday%40group.v.calendar.google.com&ctz=America%2FCosta_Rica&mode=MONTH&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&bgcolor=%23faf7f2&color=%232d4a2d" frameborder="0" scrolling="no" title="Disponibilidad"></iframe>
+      </div>
+      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%20%F0%9F%91%8B%20Vi%20el%20calendario%20y%20me%20interesa%20reservar%20en%20Quinta%20Atenas.%0A%0A%F0%9F%93%85%20*Fechas:*%20%0A%F0%9F%91%A5%20*Personas:*%20" target="_blank" class="cal-reserve-btn">
+        <i class="fab fa-whatsapp"></i> Reservar estas fechas
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('disponibilidadModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: MÁS INFORMACIÓN -->
+<div class="modal-overlay" id="masInfoModal" onclick="closeModal('masInfoModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('masInfoModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-house" style="color:var(--forest)"></i> El espacio</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Casa rústica estilo Colonial Español completamente amueblada</li>
+          <li><i class="fa fa-check"></i> 4 habitaciones amplias con ropa de cama incluida</li>
+          <li><i class="fa fa-check"></i> 4 baños modernos + Jacuzzi exterior</li>
+          <li><i class="fa fa-check"></i> Cocina completamente equipada con electrodomésticos</li>
+          <li><i class="fa fa-check"></i> Sala TV amplia con terraza panorámica</li>
+          <li><i class="fa fa-check"></i> Área de lavadora y secadora</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-umbrella-beach" style="color:var(--gold)"></i> Áreas exteriores</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Piscina privada con ducha y baños</li>
+          <li><i class="fa fa-check"></i> Rancho equipado para eventos y reuniones</li>
+          <li><i class="fa fa-check"></i> Pileta de tilapia y amplias zonas verdes</li>
+          <li><i class="fa fa-check"></i> Balcones con vista a las montañas de Atenas</li>
+          <li><i class="fa fa-check"></i> Amplio parqueo para varios vehículos</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-wifi" style="color:#1877f2"></i> Conectividad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Internet WiFi Fibra Óptica 100 Mb simétrico</li>
+          <li><i class="fa fa-check"></i> Toallas, jabón y amenities incluidos</li>
+          <li><i class="fa fa-check"></i> Ideal para teletrabajo en entorno natural</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-people-group" style="color:var(--bark)"></i> Capacidad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Hospedaje: hasta 20–25 personas</li>
+          <li><i class="fa fa-check"></i> Eventos y celebraciones: hasta 60 personas</li>
+          <li><i class="fa fa-check"></i> Pase del día disponible para grupos</li>
+        </ul>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('masInfoModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: NORMAS -->
+<div class="modal-overlay" id="normasModal" onclick="closeModal('normasModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('normasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-clock" style="color:var(--forest)"></i> Check-in y Check-out</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-arrow-right-to-bracket"></i> Check-in: a partir de las 3:00 p.m.</li>
+          <li><i class="fa fa-arrow-right-from-bracket"></i> Check-out: antes de las 12:00 m.d.</li>
+          <li><i class="fa fa-clock"></i> Check-in tardío disponible con coordinación previa</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-clipboard-list" style="color:var(--gold)"></i> Reglas de la casa</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> No se permite fumar dentro de la propiedad</li>
+          <li><i class="fa fa-check"></i> Mascotas: consultar disponibilidad previamente</li>
+          <li><i class="fa fa-check"></i> Música hasta las 11:00 p.m.</li>
+          <li><i class="fa fa-check"></i> Respetar la capacidad máxima permitida</li>
+          <li><i class="fa fa-check"></i> Cuidado de instalaciones y mobiliario</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-ban" style="color:#e53935"></i> Política de cancelación</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-circle-check" style="color:#4caf50"></i> Cancelación con +7 días: reembolso del 50%</li>
+          <li><i class="fa fa-circle-xmark" style="color:#e53935"></i> Cancelación con menos de 7 días: sin reembolso</li>
+          <li><i class="fa fa-info-circle"></i> Depósito requerido para confirmar reserva</li>
+        </ul>
+      </div>
+      <div class="info-section">
+        <h4><i class="fa fa-shield-halved" style="color:#1877f2"></i> Seguridad</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Extintor y botiquín disponibles</li>
+          <li><i class="fa fa-check"></i> Propiedad cercada con acceso controlado</li>
+          <li><i class="fa fa-check"></i> Supervisión de menores en piscina requerida</li>
+        </ul>
+      </div>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('normasModal')">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL: RESEÑAS COMPLETAS -->
+<div class="modal-overlay" id="resenasModal" onclick="closeModal('resenasModal')">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button class="modal-float-back" onclick="closeModal('resenasModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="modal-reviews-list">
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#2d4a2d">S</div><div><div class="review-name">Sebastian</div><div class="review-airbnb">2 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
+          <div class="review-text">Excelente estadía y recibimiento, la casa estaba hermosa, aseada, muy buena ubicación, la tranquilidad y paz que hay en el lugar es impresionante y los anfitriones muy atentos.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#b8903a">A</div><div><div class="review-name">Aaron</div><div class="review-airbnb">5 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
+          <div class="review-text">El lugar es muy muy lindo e impecable, todo estaba exactamente como lo describe en el anuncio. La llegada autónoma sería espectacular para mayor facilidad — aparte de eso todo perfecto.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#5c3d1e">A</div><div><div class="review-name">Andrés</div><div class="review-airbnb">8 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Diciembre 2025</span></div>
+          <div class="review-text">Este ha sido el mejor lugar en el que he tenido la oportunidad de hospedarme, no solo por la belleza del departamento sino también por la atención de los anfitriones. Totalmente recomendado.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#1877f2">M</div><div><div class="review-name">María</div><div class="review-airbnb">3 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Noviembre 2025</span></div>
+          <div class="review-text">Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad.</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#0d9488">C</div><div><div class="review-name">Carlos</div><div class="review-airbnb">6 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Octubre 2025</span></div>
+          <div class="review-text">Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!</div>
+        </div>
+        <div class="modal-review-item">
+          <div class="review-top"><div class="review-avatar" style="background:#7c3aed">L</div><div><div class="review-name">Laura</div><div class="review-airbnb">4 años en Airbnb</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Septiembre 2025</span></div>
+          <div class="review-text">Mi boda soñada fue aquí. El lugar es hermoso para fotos y el espacio para 60 personas es perfecto. Los propietarios son muy amables y profesionales.</div>
+        </div>
+      </div>
+      <a href="https://www.airbnb.com" target="_blank" class="cal-reserve-btn" style="background:linear-gradient(135deg,#ff385c,#ff6b6b)">
+        <i class="fab fa-airbnb"></i> Ver todas las reseñas en Airbnb
+      </a>
+    </div>
+    <button class="modal-cancel" onclick="closeModal('resenasModal')">Cerrar</button>
+  </div>
+</div>
+
+<div class="share-toast" id="shareToast"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-close" onclick="closeLightbox()"><i class="fa fa-xmark"></i></div>
+  <img id="lbImg" src="" alt="Quinta Atenas" draggable="false" />
+  <div class="lb-nav">
+    <button onclick="lbPrev()"><i class="fa fa-chevron-left"></i></button>
+    <button onclick="lbNext()"><i class="fa fa-chevron-right"></i></button>
+  </div>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+/* SHARE — incluye foto actual del slide */
+function shareCard(){
+  var url='https://midbcard.com/QuintaAtenas';
+  var d={
+    title:'Quinta Atenas · Casa Vacacional',
+    text:'🏡 Quinta Atenas · Atenas, Costa Rica\nExclusive & Wellness Experience · Piscina · Jacuzzi · Rancho · Hasta 60 personas 🌿\n'+url,
+    url:url
+  };
+  if(navigator.share){
+    navigator.share(d).then(function(){showToast('✅ ¡Compartido!');}).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url).then(function(){showToast('📋 Link copiado');}).catch(function(){showToast('🔗 midbcard.com/QuintaAtenas');});
+  }
+}
+function showToast(msg){var t=document.getElementById('shareToast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
+new Swiper('.hero-swiper', { loop:true, effect:'fade', fadeEffect:{crossFade:true}, autoplay:{delay:3000,disableOnInteraction:false}, pagination:{el:'.swiper-pagination',clickable:true}, navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}, lazy:true });
+
+/* SCROLL FLIP — activa cuando el hero sale completamente de pantalla (~285px) */
+var logoStrip  = document.getElementById('logoStrip');
+var heroHeight = document.querySelector('.hero-swiper') ? document.querySelector('.hero-swiper').offsetHeight : 260;
+window.addEventListener('scroll', function() {
+  if (window.scrollY >= heroHeight) { logoStrip.classList.add('scrolled'); }
+  else { logoStrip.classList.remove('scrolled'); }
+}, { passive: true });
+
+function showSupTip(btn) { /* labels always visible, no tooltip needed */ }
+
+var IMAGES=['img/img/1.jpeg','img/img/2.jpeg','img/img/3.jpeg','img/img/4.jpeg','img/img/5.jpeg','img/img/6.jpeg','img/img/7.jpeg','img/img/8.jpeg','img/img/9.jpeg','img/img/10.jpeg','img/img/11.jpeg','img/img/12.jpeg','img/img/13.jpeg','img/img/14.jpeg','img/img/15.jpeg','img/img/16.jpeg','img/img/17.jpeg','img/img/18.jpeg'];
+
+var lbIdx=0;
+function openLightbox(i){lbIdx=i;document.getElementById('lbImg').src=IMAGES[i];document.getElementById('lbCounter').textContent=(i+1)+' / '+IMAGES.length;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function lbPrev(){lbIdx=(lbIdx-1+IMAGES.length)%IMAGES.length;document.getElementById('lbImg').src=IMAGES[lbIdx];document.getElementById('lbCounter').textContent=(lbIdx+1)+' / '+IMAGES.length;}
+function lbNext(){lbIdx=(lbIdx+1)%IMAGES.length;document.getElementById('lbImg').src=IMAGES[lbIdx];document.getElementById('lbCounter').textContent=(lbIdx+1)+' / '+IMAGES.length;}
+
+var ltx=0;
+document.getElementById('lightbox').addEventListener('touchstart',function(e){ltx=e.touches[0].clientX;},{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-ltx;if(Math.abs(dx)>40){if(dx<0)lbNext();else lbPrev();}},{passive:true});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLightbox();closeAllModals();}if(e.key==='ArrowLeft')lbPrev();if(e.key==='ArrowRight')lbNext();});
+
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function closeAllModals(){document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');});document.body.style.overflow='';}
+
+/* OCULTAR hint de reseñas al primer scroll */
+var reviewScroll = document.querySelector('.reviews-scroll');
+var reviewHint   = document.getElementById('reviewHint');
+if (reviewScroll && reviewHint) {
+  reviewScroll.addEventListener('scroll', function() {
+    reviewHint.classList.add('hidden');
+  }, { passive: true, once: true });
+}
+
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(function(el){obs.observe(el);});
+</script>
+</body>
+</html>
