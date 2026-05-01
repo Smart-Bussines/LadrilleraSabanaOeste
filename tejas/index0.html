@@ -463,12 +463,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   color:#fff!important;
 }
 .bor-green:hover{background:#15803d!important;border-color:#15803d!important}
-
-.hero-rep-tap{
-  font-size:.52rem;color:rgba(22,163,74,.6);
-  letter-spacing:.1em;font-weight:400;margin-left:2px;
-  text-transform:lowercase;font-style:italic;
-}
 </style>
 </head>
 <body>
@@ -490,10 +484,9 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="hcon">
     <div class="hpill"><span class="hdot"></span><span class="hpill-main">&#9928; Temporada lluviosa</span><span class="hpill-sub">Evaluaci&oacute;n, Reembolsable!</span></div>
     <h1>VENDEMOS E INSTALAMOS <em>TEJAS EN TODA<br class="mob-br"/> COSTA RICA</em></h1>
-    <a href="#reparaciones" class="hero-rep-link hero-rep-green" onclick="document.getElementById('reparaciones').scrollIntoView({behavior:'smooth'});return false;" title="Ver servicio de reparacion">
-      <span class="hero-rep-arrow">&#9660;</span>
-      Reparaci&oacute;n y Mantenimiento
-      <span class="hero-rep-tap">toca aqu&iacute; &rarr;</span>
+    <a href="#reparaciones" class="hero-rep-link hero-rep-green" onclick="document.getElementById('reparaciones').scrollIntoView({behavior:'smooth'});return false;">
+      CLIC Reparaci&oacute;n y Mantenimiento
+      <span class="hero-rep-arrow hero-rep-arrow2">&#9660;</span>
     </a>
     <p class="hdesc">M&aacute;s de 800 techos instalados. Garant&iacute;a de instalaci&oacute;n incluida. Le llevamos muestras.</p>
     <div class="hbtns">
@@ -543,7 +536,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
         <button class="stab on"  onclick="showSpec('colonial',this)">Colonial Nacional</button>
         <button class="stab"     onclick="showSpec('imperial',this)">Imperial Nacional</button>
         <button class="stab"     onclick="showSpec('plana',this)">Plana Colombiana</button>
-        <button class="stab"     onclick="showSpec('oxford',this)">Plana Gris Oxford</button>
         <button class="stab"     onclick="showSpec('nicanew',this)">Nicaraguense Nueva</button>
         <button class="stab"     onclick="showSpec('nicaold',this)">Nicaraguense Antigua</button>
         <button class="stab"     onclick="showSpec('sal',this)">Imperial Romana</button>
@@ -574,36 +566,6 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
   <div class="spanel" id="sp-plana">
     <div class="spimg reveal"><img src="img/Landing/tecnicaplanacol.webp??w=800&h=600&fit=crop&q=82" alt="Teja Plana" loading="lazy"/><div class="spimgov"><h3>Teja Plana Colombiana</h3></div></div>
     <div class="spc reveal" style="transition-delay:.1s"><h4>Teja Plana Colombiana</h4><p class="spdesc">Importada de Colombia, perfil plano con superficie texturizada. Elegida en arquitectura contemporanea o minimalista que desea el caracter del barro con lineas limpias y ordenadas.</p><div class="spbdg"><span class="sbg">Colombia</span><span class="sbg">Perfil plano</span><span class="sbg">Varios colores</span><span class="sbg">Moderno</span></div><table class="sptbl"><tr><td>Largo</td><td>30 cm</td></tr><tr><td>Ancho</td><td>20 cm</td></tr><tr><td>Grosor</td><td>14 - 18 mm</td></tr><tr><td>Peso por pieza</td><td>Aprox. 1.4 kg</td></tr><tr><td>Peso total m2</td><td>35 - 40 kg/m2</td></tr><tr><td>Absorcion de agua</td><td>menos 5%</td></tr><tr><td>Colores</td><td>Natural, Gris, Matizada</td></tr></table><div class="spacts"><a href="#cotizar" class="bsm" onclick="setTeja('Teja Plana Colombiana')">Cotizar esta teja</a><a href="#" class="bcat" onclick="openCatalog('plana');return false">Ver catalogo digital</a></div></div>
-  </div>
-
-  <div class="spanel" id="sp-oxford">
-    <div class="spimg reveal">
-      <img src="img/Landing/tecnicaplanaoxf.webp??w=800&h=600&fit=crop&q=82" alt="Teja Plana Gris Oxford" loading="lazy"/>
-      <div class="spimgov"><h3>Teja Plana Gris Oxford</h3></div>
-    </div>
-    <div class="spc reveal" style="transition-delay:.1s">
-      <h4>Teja Plana Gris Oxford</h4>
-      <p class="spdesc">Teja plana de arcilla mecanizada con textura lisa y color gris oxford intenso. Perfecta para techos modernos y minimalistas. Su tono gris uniforme le da un acabado contemporaneo y elegante, ideal para arquitectura actual y proyectos residenciales o comerciales de alta gama.</p>
-      <div class="spbdg">
-        <span class="sbg">Arcilla cocida</span>
-        <span class="sbg">Perfil plano liso</span>
-        <span class="sbg">Gris Oxford</span>
-        <span class="sbg">Contemporanea</span>
-      </div>
-      <table class="sptbl">
-        <tr><td>Largo</td><td>48.1 cm</td></tr>
-        <tr><td>Ancho</td><td>25.1 cm</td></tr>
-        <tr><td>Grosor</td><td>10 mm</td></tr>
-        <tr><td>Peso por pieza</td><td>3.19 kg</td></tr>
-        <tr><td>Absorcion de agua</td><td>Baja</td></tr>
-        <tr><td>Color</td><td>Gris Oxford intenso</td></tr>
-        <tr><td>Textura</td><td>Lisa mecanizada</td></tr>
-      </table>
-      <div class="spacts">
-        <a href="#cotizar" class="bsm" onclick="setTeja('Teja Plana Gris Oxford')">Cotizar esta teja</a>
-        <a href="#" class="bcat" onclick="openCatalog('oxford');return false">Ver catalogo digital</a>
-      </div>
-    </div>
   </div>
 
   <div class="spanel" id="sp-nicanew">
@@ -1047,9 +1009,7 @@ footer{background:var(--dk);color:rgba(255,255,255,.33);padding:46px 5vw 24px;bo
           <select name="subject" id="tejaSelect">
             <option value="Consulta general">-- Seleccione --</option>
             <option>Teja Colonial Nacional</option><option>Teja Imperial Nacional</option>
-            <option>Teja Plana Colombiana</option>
-              <option>Teja Plana Gris Oxford</option>
-            <option>Teja Plana Gris Oxford</option><option>Teja Nicaraguense Nueva</option>
+            <option>Teja Plana Colombiana</option><option>Teja Nicaraguense Nueva</option>
             <option>Teja Nicaraguense Usada</option>
             <option>Teja Salvadorena</option><option>Teja Renacimiento Terracota</option>
             <option>Teja Santa Fe Ecuatoriana</option><option>Teja Plastica en Paneles</option>
@@ -1139,8 +1099,8 @@ setTimeout(function(){var b=document.getElementById('heroBg');if(b)b.classList.a
 var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 /* ── SPEC TABS ── */
-var specIds  = ['colonial','imperial','plana','oxford','nicanew','nicaold','sal','ren','sf','plas'];
-var specNames= ['Colonial Nacional','Imperial Nacional','Plana Colombiana','Plana Gris Oxford','Nicaraguense Nueva','Nicaraguense Antigua','Salvadoreña','Renacimiento Terracota','Santa Fe Ecuatoriana','Plastica en Paneles'];
+var specIds  = ['colonial','imperial','plana','nicanew','nicaold','sal','ren','sf','plas'];
+var specNames= ['Colonial Nacional','Imperial Nacional','Plana Colombiana','Nicaraguense Nueva','Nicaraguense Antigua','Salvadoreña','Renacimiento Terracota','Santa Fe Ecuatoriana','Plastica en Paneles'];
 var specIdx  = 0;
 var tabOffset= 0;
 
