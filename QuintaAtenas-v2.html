@@ -124,16 +124,17 @@
     }
     .sicon:active { transform: scale(.85); }
     .sicon .sicon-circle {
-      width: 34px; height: 34px; border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%;
       background: rgba(45,74,45,.09);
       border: 1px solid rgba(45,74,45,.18);
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; color: var(--forest);
+      font-size: 15px; color: var(--forest);
+      flex-shrink: 0;
     }
     .sicon .sicon-label {
       font-size: 9px; font-weight: 600;
       color: var(--muted); white-space: nowrap;
-      letter-spacing: .2px;
+      text-align: center;
     }
     /* ACTION BUTTONS — estilo Airbnb */
     .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 18px 16px 4px; }
@@ -652,7 +653,7 @@
       <!-- Íconos sueltos que aparecen al hacer scroll completo del hero -->
       <div class="strip-icons">
         <button class="sicon" onclick="showSupTip(this); openModal('saveModal')">
-          <div class="sicon-circle"><i class="fa fa-address-book"></i></div>
+          <div class="sicon-circle"><i class="fa fa-bookmark"></i></div>
           <span class="sicon-label">Guardar</span>
         </button>
         <button class="sicon" onclick="showSupTip(this); openModal('ubicacionModal')">
