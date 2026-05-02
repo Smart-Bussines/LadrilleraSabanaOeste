@@ -67,13 +67,7 @@
     .logo-strip img { height: 58px; width: auto; max-width: 175px; object-fit: contain; flex-shrink: 0; }
 
     /* ── Strip derecho: íconos sueltos con mini etiqueta ── */
-    .strip-right {
-      position: relative;
-      height: 52px;
-      min-width: 160px;
-      overflow: visible;
-      flex-shrink: 0;
-    }
+    .strip-right { position: relative; height: 52px; min-width: 160px; overflow: visible; flex-shrink: 0; }
 
     /* TAGLINE — visible hasta que el hero sale de pantalla */
     .strip-tagline {
@@ -96,14 +90,7 @@
     }
 
     /* ÍCONOS SUELTOS — ocultos abajo al inicio */
-    .strip-icons {
-      position: absolute;
-      bottom: 0; right: 0;
-      display: flex; align-items: flex-end;
-      gap: 10px;
-      transform: translateY(110%); opacity: 0;
-      transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
-    }
+    .strip-icons { position: absolute; bottom: 0; right: 0; display: flex; align-items: flex-end; gap: 10px; transform: translateY(110%); opacity: 0; transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
 
     /* Estado scrolled — tagline baja, íconos suben */
     .logo-strip.scrolled .strip-tagline {
@@ -123,19 +110,8 @@
       padding: 0;
     }
     .sicon:active { transform: scale(.85); }
-    .sicon .sicon-circle {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: rgba(45,74,45,.09);
-      border: 1px solid rgba(45,74,45,.18);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: var(--forest);
-      flex-shrink: 0;
-    }
-    .sicon .sicon-label {
-      font-size: 9px; font-weight: 600;
-      color: var(--muted); white-space: nowrap;
-      text-align: center;
-    }
+    .sicon .sicon-circle { width: 34px; height: 34px; border-radius: 50%; background: rgba(45,74,45,.09); border: 1px solid rgba(45,74,45,.18); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--forest); flex-shrink: 0; }
+    .sicon .sicon-label { font-size: 9px; font-weight: 600; color: var(--muted); white-space: nowrap; text-align: center; }
     /* ACTION BUTTONS — estilo Airbnb */
     .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 18px 16px 4px; }
     .action-btn {
@@ -764,54 +740,49 @@
   <!-- RESEÑAS -->
   <div class="section-title fade-up"><h2>Lo que dicen nuestros huéspedes</h2></div>
   <div class="reviews-scroll fade-up" id="reviewsScroll">
-
     <div class="review-card">
       <div class="review-top">
-        <div class="review-avatar" style="background:#2d4a2d">M</div>
+        <div class="review-avatar" style="background:#2d4a2d">S</div>
         <div class="review-meta">
-          <div class="review-name">María Fernández</div>
-          <div class="review-date">Marzo 2025 · San José</div>
+          <div class="review-name">Sebastian Mora</div>
+          <div class="review-date">Hace 2 años · Google</div>
         </div>
       </div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad."</div>
+      <div class="review-text">"Conozco este lugar y sus dueños y son personas respetables y muy formales, la finca y casa son hermosas indiscutiblemente. Como em..."</div>
       <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
     </div>
-
     <div class="review-card">
       <div class="review-top">
-        <div class="review-avatar" style="background:#b8903a">C</div>
+        <div class="review-avatar" style="background:#b8903a">L</div>
         <div class="review-meta">
-          <div class="review-name">Carlos Rodríguez</div>
-          <div class="review-date">Febrero 2025 · Alajuela</div>
+          <div class="review-name">Lilliam AriSib.</div>
+          <div class="review-date">Hace un año · Google</div>
         </div>
       </div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">"Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!"</div>
-      <div class="review-source"><i class="fab fa-facebook" style="color:#1877f2"></i> Reseña en Facebook</div>
+      <div class="review-text">"Un lugar hermoso, amplio, cómodo y seguro. Los administradores son personas muy responsables, atentos, amables y de buenos princip..."</div>
+      <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
     </div>
-
     <div class="review-card">
       <div class="review-top">
         <div class="review-avatar" style="background:#5c3d1e">A</div>
         <div class="review-meta">
-          <div class="review-name">Andrea Mora</div>
-          <div class="review-date">Enero 2025 · Heredia</div>
+          <div class="review-name">Accel Arguedas</div>
+          <div class="review-date">Hace un año · Google</div>
         </div>
       </div>
       <div class="review-stars">★★★★★</div>
-      <div class="review-text">"El clima de Atenas es único y esta quinta lo aprovecha al máximo. Las habitaciones son amplias, la cocina está equipada con todo. Muy tranquilo y seguro."</div>
+      <div class="review-text">"Excelente lugar para actividades familiares y sociales, la casa es super linda y cómoda. Los dueños muy amables y atentos en todo ..."</div>
       <div class="review-source"><i class="fab fa-google" style="color:#4285f4"></i> Reseña en Google</div>
     </div>
-
   </div>
-
   <div class="review-hint fade-up" id="reviewHint">
     <i class="fa fa-arrow-right"></i>
     <span>Deslizá para ver más opiniones</span>
   </div>
   <button class="show-more-reviews fade-up" onclick="openModal('resenasModal')">
-    Mostrar las 26 reseñas
+    Ver todas las reseñas
   </button>
 
   <!-- CONTACTO -->  <!-- CONTACTO -->
@@ -1152,99 +1123,61 @@
 </div>
 
 <!-- MODAL: RESEÑAS COMPLETAS -->
+<!-- MODAL: RESEÑAS -->
 <div class="modal-overlay" id="resenasModal" onclick="closeModal('resenasModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
     <button class="modal-float-back" onclick="closeModal('resenasModal')"><i class="fa fa-arrow-left"></i></button>
     <div class="modal-body-pad">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:4px">⭐ Reseñas de Google</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:6px">
+        <i class="fab fa-google" style="color:#4285f4"></i> Reseñas verificadas en Google
+      </p>
       <div class="modal-reviews-list">
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#2d4a2d">S</div><div><div class="review-name">Sebastian</div><div class="review-airbnb">2 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
-          <div class="review-text">Excelente estadía y recibimiento, la casa estaba hermosa, aseada, muy buena ubicación, la tranquilidad y paz que hay en el lugar es impresionante y los anfitriones muy atentos.</div>
+          <div class="review-top"><div class="review-avatar" style="background:#2d4a2d">S</div>
+          <div><div class="review-name">Sebastian Mora</div><div class="review-airbnb">Hace 2 años · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Conozco este lugar y sus dueños y son personas respetables y muy formales, la finca y casa son hermosas indiscutiblemente. Como empresario doy mi opinión positiva a ésta Quinta porque la conozco y sé que los dueños son personas honorables, trabajadoras y de respeto."</div>
         </div>
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#b8903a">A</div><div><div class="review-name">Aaron</div><div class="review-airbnb">5 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Febrero 2026</span></div>
-          <div class="review-text">El lugar es muy muy lindo e impecable, todo estaba exactamente como lo describe en el anuncio. La llegada autónoma sería espectacular para mayor facilidad — aparte de eso todo perfecto.</div>
+          <div class="review-top"><div class="review-avatar" style="background:#b8903a">L</div>
+          <div><div class="review-name">Lilliam AriSib.</div><div class="review-airbnb">Hace un año · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Un lugar hermoso, amplio, cómodo y seguro. Los administradores son personas muy responsables, atentos, amables y de buenos principios y valores. Nos encanta visitar ésta quinta, se las recomiendo."</div>
         </div>
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#5c3d1e">A</div><div><div class="review-name">Andrés</div><div class="review-airbnb">8 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Diciembre 2025</span></div>
-          <div class="review-text">Este ha sido el mejor lugar en el que he tenido la oportunidad de hospedarme, no solo por la belleza del departamento sino también por la atención de los anfitriones. Totalmente recomendado.</div>
+          <div class="review-top"><div class="review-avatar" style="background:#5c3d1e">A</div>
+          <div><div class="review-name">Accel Arguedas</div><div class="review-airbnb">Hace un año · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Excelente lugar para actividades familiares y sociales, la casa es super linda y cómoda. Los dueños muy amables y atentos en todo momento. Estamos seguros que volveremos."</div>
         </div>
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#1877f2">M</div><div><div class="review-name">María</div><div class="review-airbnb">3 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Noviembre 2025</span></div>
-          <div class="review-text">Lugar increíble, superó todas nuestras expectativas. La piscina, el rancho y las vistas son espectaculares. Definitivamente volvemos para Navidad.</div>
+          <div class="review-top"><div class="review-avatar" style="background:#344e6e">Y</div>
+          <div><div class="review-name">Yesenia Rojas</div><div class="review-airbnb">Hace un año · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Es un lugar demasiado lindo y tranquilo, excelente servicio, las comodidades, todo es una maravilla sobre todas las atenciones, de los dueños son muy especiales, un excelente lugar 100 por siento recomendado para grandes y chicos, el lugar es muy seguro."</div>
         </div>
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#0d9488">C</div><div><div class="review-name">Carlos</div><div class="review-airbnb">6 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Octubre 2025</span></div>
-          <div class="review-text">Celebramos el cumpleaños de mi mamá con 30 personas y todo salió perfecto. William y Evelyn son excelentes anfitriones. ¡100% recomendado!</div>
+          <div class="review-top"><div class="review-avatar" style="background:#1a4a2a">M</div>
+          <div><div class="review-name">María Mercedes Rojas Rojas</div><div class="review-airbnb">Hace un año · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Lugar hermoso para vacacionar con la familia. La comodidad, elegancia y atención de sus administradores, es excelente. Lo recomiendo con toda certeza."</div>
         </div>
         <div class="modal-review-item">
-          <div class="review-top"><div class="review-avatar" style="background:#7c3aed">L</div><div><div class="review-name">Laura</div><div class="review-airbnb">4 años en Airbnb</div></div></div>
-          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">Septiembre 2025</span></div>
-          <div class="review-text">Mi boda soñada fue aquí. El lugar es hermoso para fotos y el espacio para 60 personas es perfecto. Los propietarios son muy amables y profesionales.</div>
+          <div class="review-top"><div class="review-avatar" style="background:#7c3aed">M</div>
+          <div><div class="review-name">Miriam Mora Picado</div><div class="review-airbnb">Hace 2 años · Google</div></div></div>
+          <div class="review-meta-row"><span class="review-stars">★★★★★</span><div class="review-dot"></div><span class="review-date">5/5</span></div>
+          <div class="review-text">"Recomiendo el lugar, es precioso para compartir con familia y amigos, lo he visitado en 2 ocasiones, los administradores son muy amables y atentos con los visitantes."</div>
         </div>
       </div>
-      <a href="https://www.airbnb.com" target="_blank" class="cal-reserve-btn" style="background:linear-gradient(135deg,#ff385c,#ff6b6b)">
-        <i class="fab fa-airbnb"></i> Ver todas las reseñas en Airbnb
+      <a href="https://www.google.com/maps/search/Villa+Hermosa+Quinta+Atenas+Costa+Rica" target="_blank"
+         style="display:flex;align-items:center;justify-content:center;gap:8px;background:#4285f4;color:#fff;padding:14px;border-radius:14px;font-size:13px;font-weight:700;text-decoration:none;margin-top:16px">
+        <i class="fab fa-google"></i> Ver todas las reseñas en Google
       </a>
     </div>
     <button class="modal-cancel" onclick="closeModal('resenasModal')">Cerrar</button>
   </div>
-</div>
-
-<div class="share-toast" id="shareToast"></div>
-
-
-<!-- MODAL: UBICACIÓN -->
-<div class="modal-overlay" id="ubicacionModal" onclick="closeModal('ubicacionModal')">
-  <div class="modal-sheet" onclick="event.stopPropagation()" style="padding-bottom:0">
-    <button class="modal-float-back" onclick="closeModal('ubicacionModal')">
-      <i class="fa fa-arrow-left"></i>
-    </button>
-    <!-- Mapa Google Maps embebido -->
-    <div style="width:100%;height:320px;overflow:hidden;border-radius:26px 26px 0 0;">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.1!2d-84.3786!3d9.9834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBarrio+Jes%C3%BAs%2C+Atenas%2C+Costa+Rica!5e0!3m2!1ses!2scr!4v1234567890"
-        width="100%" height="320"
-        style="border:0;display:block;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación Quinta Atenas">
-      </iframe>
-    </div>
-    <div style="padding:20px 20px 0">
-      <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:4px">📍 Quinta Atenas</h3>
-      <p style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:16px">
-        Barrio Jesús de Atenas, 600 m oeste del Bar Las Brisas y 75 m sur.<br/>
-        Atenas, Alajuela · Costa Rica
-      </p>
-      <!-- Botones de navegación -->
-      <div style="display:flex;gap:10px;margin-bottom:16px">
-        <a href="https://waze.com/ul/hd1gbwxpn5"
-           target="_blank"
-           style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#00d4e8;color:#111;padding:13px;border-radius:14px;font-size:13px;font-weight:700;text-decoration:none">
-          <i class="fa fa-location-arrow"></i> Waze
-        </a>
-        <a href="https://maps.google.com/?q=Barrio+Jesus+Atenas+Costa+Rica"
-           target="_blank"
-           style="flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:#4285f4;color:#fff;padding:13px;border-radius:14px;font-size:13px;font-weight:700;text-decoration:none">
-          <i class="fab fa-google"></i> Google Maps
-        </a>
-      </div>
-      <a href="https://api.whatsapp.com/send?phone=50687212050&text=Hola%2C%20necesito%20indicaciones%20para%20llegar%20a%20Quinta%20Atenas%20%F0%9F%93%8D"
-         target="_blank"
-         style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--forest);color:#fff;padding:13px;border-radius:14px;font-size:13px;font-weight:700;text-decoration:none;margin-bottom:16px">
-        <i class="fab fa-whatsapp"></i> Pedir indicaciones por WhatsApp
-      </a>
-    </div>
-    <button class="modal-cancel" onclick="closeModal('ubicacionModal')">Cerrar</button>
-  </div>
-</div>
+</div></div>
 
 <!-- MODAL: HORARIOS -->
 <div class="modal-overlay" id="horariosModal" onclick="closeModal('horariosModal')">
