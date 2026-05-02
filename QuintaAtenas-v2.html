@@ -70,8 +70,8 @@
     .strip-right {
       position: relative;
       height: 52px;
-      min-width: 140px;
-      overflow: hidden;
+      min-width: 160px;
+      overflow: visible;
       flex-shrink: 0;
     }
 
@@ -100,7 +100,7 @@
       position: absolute;
       bottom: 0; right: 0;
       display: flex; align-items: flex-end;
-      gap: 16px;
+      gap: 10px;
       transform: translateY(110%); opacity: 0;
       transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .3s ease;
     }
@@ -124,11 +124,11 @@
     }
     .sicon:active { transform: scale(.85); }
     .sicon .sicon-circle {
-      width: 36px; height: 36px; border-radius: 50%;
+      width: 34px; height: 34px; border-radius: 50%;
       background: rgba(45,74,45,.09);
       border: 1px solid rgba(45,74,45,.18);
       display: flex; align-items: center; justify-content: center;
-      font-size: 15px; color: var(--forest);
+      font-size: 14px; color: var(--forest);
       flex-shrink: 0;
     }
     .sicon .sicon-label {
@@ -640,7 +640,7 @@
 
   <!-- LOGO STRIP — logo izq + tagline/pill der con efecto scroll -->
   <div class="logo-strip fade-up" id="logoStrip">
-    <img src="img/img/logovilla.webp" alt="Quinta Vacacional" onerror="this.style.display='none'" />
+    <img src="img/img/villaatenas.png" alt="Quinta Vacacional" onerror="this.style.display='none'" />
 
     <div class="strip-right">
 
