@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamburguesas La Corte 🍔</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#0f0f0f;font-family:'Poppins',sans-serif;color:#fff;max-width:480px;margin:0 auto;overflow-x:hidden}
+
+/* ── HERO PARALLAX ── */
+.hero{position:relative;width:100%;height:300px;overflow:hidden}
+.hero-img{width:100%;height:140%;object-fit:cover;display:block;will-change:transform;transform:translateY(0)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.8) 100%)}
+.hero-bottom{position:absolute;bottom:0;left:0;right:0;padding:16px}
+.hero-follow{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.35);color:#fff;font-family:'Poppins',sans-serif;font-size:0.75rem;font-weight:600;padding:0.35rem 1rem;border-radius:100px;cursor:pointer;text-decoration:none;transition:background 0.2s}
+.hero-follow:hover{background:rgba(255,255,255,0.3)}
+.hero-live{display:inline-flex;align-items:center;gap:6px;background:rgba(200,16,46,0.85);backdrop-filter:blur(6px);padding:5px 12px;border-radius:100px;font-size:0.68rem;font-weight:700;letter-spacing:0.05em;margin-bottom:8px}
+.hero-live-dot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+
+/* ── PROFILE ── */
+.profile{background:#0f0f0f;padding:0 16px 16px;text-align:center}
+.profile-name{font-family:'Montserrat',sans-serif;font-size:1.55rem;font-weight:900;color:#fff;margin-bottom:4px;display:flex;align-items:center;justify-content:center;gap:7px}
+.verified{width:20px;height:20px;background:#1DA1F2;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;flex-shrink:0}
+.profile-desc{font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.6;max-width:300px;margin:0 auto 14px}
+.profile-chip{display:inline-flex;align-items:center;gap:8px;background:#FFD100;color:#111;border-radius:100px;padding:0.4rem 1.1rem;font-size:0.78rem;font-weight:700}
+.chip-dot{width:8px;height:8px;background:#C8102E;border-radius:50%}
+
+/* ── URGENCY BAR ── */
+.urgency{background:linear-gradient(90deg,#C8102E,#a00d24);margin:0 12px;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:0.78rem;font-weight:600}
+.urgency-icon{font-size:1.1rem;animation:shake 2s infinite}
+@keyframes shake{0%,90%,100%{transform:rotate(0)}92%,96%{transform:rotate(-8deg)}94%,98%{transform:rotate(8deg)}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.18s}
+.reveal-delay-3{transition-delay:0.26s}
+.reveal-delay-4{transition-delay:0.34s}
+.reveal-delay-5{transition-delay:0.42s}
+.reveal-delay-6{transition-delay:0.5s}
+
+/* ── SECTION BOX ── */
+.section-box{margin:12px 12px 0;border-radius:18px;overflow:hidden}
+
+/* ── MENU BOX ── */
+.menu-box{background:#FFD100;padding:16px 14px}
+.menu-box-title{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:900;color:#111;text-align:center;margin-bottom:2px}
+.menu-box-sub{font-size:0.72rem;font-weight:700;color:rgba(0,0,0,0.55);text-align:center;margin-bottom:14px}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* ── MENU CARD ── */
+.menu-card{background:#111;border-radius:14px;overflow:hidden;cursor:pointer;position:relative;transition:transform 0.2s}
+.menu-card:active{transform:scale(0.97)}
+.card-img-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease}
+.menu-card:hover .card-img-wrap img,
+.menu-card:active .card-img-wrap img{transform:scale(1.08)}
+.card-img-placeholder{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1c1c1c,#2a2a2a);display:flex;align-items:center;justify-content:center;font-size:3.2rem;transition:transform 0.4s ease}
+.menu-card:hover .card-img-placeholder{transform:scale(1.06)}
+.card-shimmer{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.08) 50%,transparent 60%);background-size:200% 100%;background-position:200% 0;transition:background-position 0s}
+.menu-card:hover .card-shimmer{background-position:-200% 0;transition:background-position 0.6s ease}
+.card-badge{position:absolute;top:8px;left:8px;background:#C8102E;color:#fff;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:800;padding:3px 7px;border-radius:6px;letter-spacing:0.04em;text-transform:uppercase}
+.card-body{padding:8px 10px 10px}
+.card-name{font-family:'Montserrat',sans-serif;font-size:0.78rem;font-weight:800;color:#fff;margin-bottom:2px;line-height:1.2}
+.card-price{font-size:0.7rem;font-weight:700;color:#FFD100;margin-bottom:7px}
+.card-btn{display:block;width:100%;background:#fff;color:#111;font-family:'Poppins',sans-serif;font-size:0.6rem;font-weight:700;text-align:center;padding:5px 0;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s,transform 0.1s}
+.card-btn:active{transform:scale(0.97)}
+.card-btn:hover{background:#FFD100}
+
+/* ── VER MÁS ── */
+.ver-mas{width:100%;margin-top:12px;background:#111;color:#FFD100;font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;padding:11px;border-radius:12px;border:none;cursor:pointer;letter-spacing:0.04em;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 0.15s,transform 0.1s}
+.ver-mas:hover{background:#1a1a1a}
+.ver-mas:active{transform:scale(0.98)}
+
+/* ── DRINKS BOX ── */
+.drinks-box{background:#C8102E;padding:14px}
+.drinks-box-title{font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:900;color:#fff;text-align:center;margin-bottom:12px}
+.drinks-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.drink-card{background:rgba(0,0,0,0.3);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform 0.2s}
+.drink-card:active{transform:scale(0.96)}
+.drink-img{width:100%;aspect-ratio:1;object-fit:cover;display:block;transition:transform 0.4s}
+.drink-card:hover .drink-img{transform:scale(1.08)}
+.drink-placeholder{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:rgba(0,0,0,0.2);transition:transform 0.4s}
+.drink-card:hover .drink-placeholder{transform:scale(1.06)}
+.drink-body{padding:5px 7px 8px}
+.drink-name{font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;color:#fff;margin-bottom:2px;line-height:1.2}
+.drink-price{font-size:0.58rem;font-weight:700;color:rgba(255,255,255,0.75);margin-bottom:5px}
+.drink-btn{display:block;width:100%;background:#FFD100;color:#111;font-family:'Poppins',sans-serif;font-size:0.55rem;font-weight:700;text-align:center;padding:4px 0;border-radius:6px;border:none;cursor:pointer;transition:background 0.15s}
+.drink-btn:hover{background:#ffe033}
+
+/* ── APPS ── */
+.apps-box{background:#1a1a1a;padding:18px 14px}
+.apps-title{font-size:0.78rem;font-weight:700;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.1em}
+.apps-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.app-card{display:flex;flex-direction:column;align-items:center;gap:7px;text-decoration:none;cursor:pointer;transition:transform 0.2s}
+.app-card:active{transform:scale(0.95)}
+.app-card:hover{transform:translateY(-3px)}
+.app-logo{width:64px;height:64px;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+.app-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.app-logo-fallback{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+.app-label{font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;color:#fff}
+.app-sub{font-size:0.6rem;color:rgba(255,255,255,0.4);margin-top:-4px;font-weight:500}
+
+/* ── WA STRIP ── */
+.wa-strip{margin:12px 12px 0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:background 0.15s,transform 0.15s}
+.wa-strip:hover{background:#222;transform:translateY(-1px)}
+.wa-strip:active{transform:scale(0.98)}
+.wa-strip-icon{width:42px;height:42px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 0 14px rgba(37,211,102,0.3)}
+.wa-strip-text{font-size:0.8rem;color:rgba(255,255,255,0.6)}
+.wa-strip-text b{color:#25D366;font-weight:700}
+
+/* ── SOCIAL ── */
+.social-section{padding:20px 16px 8px;text-align:center}
+.social-title{font-size:0.7rem;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px}
+.social-row{display:flex;justify-content:center;gap:12px}
+.social-btn{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;cursor:pointer;transition:transform 0.2s}
+.social-btn:hover{transform:translateY(-4px) scale(1.08)}
+.social-btn:active{transform:scale(0.92)}
+.social-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;position:relative;overflow:hidden}
+.social-icon::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,0);transition:background 0.2s}
+.social-btn:hover .social-icon::after{background:rgba(255,255,255,0.12)}
+.ig-icon{background:linear-gradient(135deg,#833AB4,#C13584,#E1306C,#FD8D14)}
+.wa-icon{background:#25D366}
+.fb-icon{background:#1877F2}
+.tt-icon{background:#000;border:1px solid #333}
+.social-label{font-size:0.62rem;font-weight:700;color:rgba(255,255,255,0.5)}
+
+/* ── SUCURSALES ── */
+.suc-box{margin:12px 12px 0;background:#1a1a1a;border-radius:18px;padding:16px}
+.suc-title{font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:900;color:#FFD100;text-align:center;margin-bottom:12px}
+.suc-list{display:flex;flex-direction:column;gap:8px}
+.suc-item{display:flex;justify-content:space-between;align-items:center;background:#111;border-radius:12px;padding:11px 14px;transition:background 0.15s}
+.suc-item:hover{background:#161616}
+.suc-left{display:flex;align-items:center;gap:8px}
+.suc-dot{width:8px;height:8px;background:#C8102E;border-radius:50%}
+.suc-name{font-size:0.82rem;font-weight:700;color:#fff}
+.suc-phone{font-size:0.82rem;color:#FFD100;font-weight:700;text-decoration:none;transition:color 0.15s}
+.suc-phone:hover{color:#ffe033}
+
+/* ── CAPTURE ── */
+.capture-box{margin:12px 12px 0;background:linear-gradient(135deg,#1a0808,#1a1a1a);border-radius:18px;padding:22px 16px;text-align:center;border:1px solid rgba(200,16,46,0.25)}
+.capture-top{font-size:2.2rem;margin-bottom:6px}
+.capture-title{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:900;color:#FFD100;margin-bottom:4px}
+.capture-sub{font-size:0.73rem;color:rgba(255,255,255,0.45);margin-bottom:16px;line-height:1.6}
+.capture-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:'Poppins',sans-serif;font-size:0.85rem;padding:0.72rem 1rem;border-radius:12px;outline:none;margin-bottom:8px;transition:border-color 0.2s}
+.capture-input:focus{border-color:#FFD100}
+.capture-input::placeholder{color:rgba(255,255,255,0.2)}
+.capture-btn{width:100%;background:#FFD100;color:#111;font-family:'Montserrat',sans-serif;font-size:0.92rem;font-weight:900;padding:0.78rem;border:none;border-radius:12px;cursor:pointer;transition:background 0.15s,transform 0.1s;letter-spacing:0.03em}
+.capture-btn:hover{background:#ffe033}
+.capture-btn:active{transform:scale(0.98)}
+.capture-privacy{font-size:0.67rem;color:rgba(255,255,255,0.2);margin-top:8px}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:22px 16px 36px;font-size:0.67rem;color:rgba(255,255,255,0.18);font-weight:600;letter-spacing:0.04em}
+footer span{color:#C8102E}
+
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:9999;display:none;flex-direction:column;align-items:center;justify-content:flex-end;max-width:480px;margin:0 auto;transition:background 0.3s}
+.lightbox.open{display:flex;background:rgba(0,0,0,0.9)}
+.lb-sheet{background:#161616;border-radius:24px 24px 0 0;width:100%;padding:0 0 36px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1)}
+.lightbox.open .lb-sheet{transform:translateY(0)}
+.lb-handle{width:40px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:12px auto 16px}
+.lb-img-wrap{width:100%;height:200px;overflow:hidden;position:relative}
+.lb-img-wrap img,.lb-img-wrap .lb-emoji{width:100%;height:100%;object-fit:cover;display:block}
+.lb-emoji-big{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(135deg,#1c1c1c,#2a2a2a)}
+.lb-close{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);border:none;color:#fff;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10}
+.lb-body{padding:16px 20px 0}
+.lb-name{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:4px}
+.lb-desc{font-size:0.8rem;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:10px}
+.lb-price{font-family:'Montserrat',sans-serif;font-size:2rem;font-weight:900;color:#FFD100;margin-bottom:18px}
+.lb-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:#fff;font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:900;padding:0.9rem;border-radius:14px;text-decoration:none;transition:background 0.15s,transform 0.1s}
+.lb-wa:hover{background:#1ebe5d}
+.lb-wa:active{transform:scale(0.98)}
+
+/* ── FULL MENU ── */
+.full-menu{position:fixed;inset:0;background:#0f0f0f;z-index:9998;overflow-y:auto;display:none;max-width:480px;margin:0 auto;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1)}
+.full-menu.open{display:block;transform:translateX(0)}
+.fm-header{background:#FFD100;padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+.fm-back{background:#111;border:none;color:#FFD100;width:36px;height:36px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900;transition:background 0.15s}
+.fm-back:hover{background:#222}
+.fm-title{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:900;color:#111}
+.fm-list{padding:12px;display:flex;flex-direction:column;gap:10px}
+.fm-item{background:#1a1a1a;border-radius:16px;display:flex;align-items:center;gap:12px;padding:12px;cursor:pointer;transition:background 0.15s,transform 0.15s;overflow:hidden;position:relative}
+.fm-item:hover{background:#222;transform:translateX(3px)}
+.fm-item:active{transform:scale(0.98)}
+.fm-item-thumb{width:70px;height:70px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;flex-shrink:0;overflow:hidden}
+.fm-item-thumb img{width:100%;height:100%;object-fit:cover}
+.fm-item-info{flex:1;min-width:0}
+.fm-item-name{font-family:'Montserrat',sans-serif;font-size:0.9rem;font-weight:800;color:#fff;margin-bottom:2px}
+.fm-item-desc{font-size:0.7rem;color:rgba(255,255,255,0.38);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fm-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.fm-price{font-family:'Montserrat',sans-serif;font-size:0.95rem;font-weight:900;color:#FFD100}
+.fm-btn{background:#C8102E;color:#fff;font-family:'Poppins',sans-serif;font-size:0.65rem;font-weight:700;padding:5px 10px;border-radius:100px;border:none;cursor:pointer;white-space:nowrap;transition:background 0.15s}
+.fm-btn:hover{background:#e5112f}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <img class="hero-img" id="heroImg"
+    src="img/Bacon Cheeseburger.JFIF"
+    alt="Hamburguesa La Corte">
+  <div class="hero-overlay"></div>
+  <a href="https://www.instagram.com/hamburguesaslacortecr" target="_blank" class="hero-follow">Seguir</a>
+  <div class="hero-bottom">
+    <div class="hero-live" id="heroLive">🔥 <span id="liveCount">12</span> personas ordenaron hoy</div>
+  </div>
+</div>
+
+<!-- ── PROFILE ── -->
+<div class="profile reveal">
+  <div class="profile-name">
+    Hamburguesas La Corte
+    <span class="verified">✓</span>
+  </div>
+  <p class="profile-desc">Ya probaste las mejores de Alajuela 🍔<br>Descubrí nuestros sabores #LegalmenteDeliciosas</p>
+  <div class="profile-chip">
+    <div class="chip-dot"></div>
+    Sabor auténtico en cada bocado.
+  </div>
+</div>
+
+<!-- ── URGENCY ── -->
+<div class="urgency reveal" style="transition-delay:0.08s">
+  <span class="urgency-icon">⚡</span>
+  <span>¡Pedidos rápidos! Entrega en <strong>30–45 min</strong> a tu zona.</span>
+</div>
+
+<!-- ── MENÚ BOX ── -->
+<div class="section-box reveal" style="transition-delay:0.15s">
+  <div class="menu-box">
+    <div class="menu-box-title">Menú delicioso:</div>
+    <div class="menu-box-sub">¡Elige tu favorito!</div>
+    <div class="menu-grid" id="mainMenuGrid"></div>
+    <button class="ver-mas" onclick="openFullMenu()">
+      Ver Menú Completo &#x2192;
+    </button>
+  </div>
+</div>
+
+<!-- ── BEBIDAS ── -->
+<div class="section-box reveal" style="transition-delay:0.2s">
+  <div class="drinks-box">
+    <div class="drinks-box-title">Aprovecha y haz tu pedido también:</div>
+    <div class="drinks-grid" id="drinksGrid"></div>
+  </div>
+</div>
+
+<!-- ── APPS DE ENTREGA ── -->
+<div class="section-box reveal" style="transition-delay:0.25s">
+  <div class="apps-box">
+    <div class="apps-title">Aplicaciones de entrega</div>
+    <div class="apps-grid">
+      <a href="https://wa.me/50662118389?text=Hola!%20Quiero%20hacer%20un%20pedido" target="_blank" class="app-card">
+        <div class="app-logo">
+          <img src="img/app-whatsapp.png" alt="WhatsApp">
+        </div>
+        <div class="app-label">WhatsApp</div>
+        <div class="app-sub">Haz tu pedido ahora</div>
+      </a>
+      <a href="https://www.ifood.cr" target="_blank" class="app-card">
+        <div class="app-logo" style="background:#EA1D2C">
+          <img src="img/app-ifood.png" alt="iFood" style="padding:8px">
+        </div>
+        <div class="app-label">iFood</div>
+        <div class="app-sub">Haz tu pedido ahora</div>
+      </a>
+      <a href="https://www.rappi.co.cr" target="_blank" class="app-card">
+        <div class="app-logo" style="background:#FF441F">
+          <img src="img/app-rappi.png" alt="Rappi" style="padding:6px">
+        </div>
+        <div class="app-label">Rappi</div>
+        <div class="app-sub">Haz tu pedido ahora</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── WA STRIP ── -->
+<a href="https://wa.me/50662118389?text=Hola!%20Tengo%20una%20pregunta" target="_blank" class="wa-strip reveal" style="transition-delay:0.28s">
+  <div class="wa-strip-icon">💬</div>
+  <div class="wa-strip-text">¿Aún tienes preguntas? <b>Contáctame por WhatsApp.</b></div>
+</a>
+
+<!-- ── SOCIAL ── -->
+<div class="social-section reveal" style="transition-delay:0.3s">
+  <div class="social-title">Seguinos en</div>
+  <div class="social-row">
+    <a href="https://www.instagram.com/hamburguesaslacortecr" target="_blank" class="social-btn">
+      <div class="social-icon ig-icon">📸</div>
+      <div class="social-label">Instagram</div>
+    </a>
+    <a href="https://wa.me/50662118389" target="_blank" class="social-btn">
+      <div class="social-icon wa-icon">💬</div>
+      <div class="social-label">WhatsApp</div>
+    </a>
+    <a href="https://www.facebook.com/HamburguesaLaCorte/" target="_blank" class="social-btn">
+      <div class="social-icon fb-icon">📘</div>
+      <div class="social-label">Facebook</div>
+    </a>
+    <a href="https://www.tiktok.com" target="_blank" class="social-btn">
+      <div class="social-icon tt-icon">🎵</div>
+      <div class="social-label">TikTok</div>
+    </a>
+  </div>
+</div>
+
+<!-- ── SUCURSALES ── -->
+<div class="suc-box reveal" style="transition-delay:0.32s">
+  <div class="suc-title">📍 Nuestras Sucursales</div>
+  <div class="suc-list">
+    <div class="suc-item">
+      <div class="suc-left"><div class="suc-dot"></div><div class="suc-name">La Agonía</div></div>
+      <a href="tel:+50662118389" class="suc-phone">6211-8389</a>
+    </div>
+    <div class="suc-item">
+      <div class="suc-left"><div class="suc-dot"></div><div class="suc-name">La Corte</div></div>
+      <a href="tel:+50624312224" class="suc-phone">2431-2224</a>
+    </div>
+    <div class="suc-item">
+      <div class="suc-left"><div class="suc-dot"></div><div class="suc-name">Poás</div></div>
+      <a href="tel:+50670639570" class="suc-phone">7063-9570</a>
+    </div>
+    <div class="suc-item">
+      <div class="suc-left"><div class="suc-dot"></div><div class="suc-name">El Coyol</div></div>
+      <a href="tel:+50660659838" class="suc-phone">6065-9838</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── CAPTURE ── -->
+<div class="capture-box reveal" style="transition-delay:0.35s">
+  <div class="capture-top">🎁</div>
+  <div class="capture-title">Recibí Promos Exclusivas</div>
+  <p class="capture-sub">Dejanos tu nombre y WhatsApp y te avisamos de combos, descuentos y novedades antes que nadie.</p>
+  <input type="text" class="capture-input" placeholder="Tu nombre" id="capName">
+  <input type="tel" class="capture-input" placeholder="Tu WhatsApp (ej: 8888-8888)" id="capPhone">
+  <button class="capture-btn" onclick="handleCapture()">📲 ¡Quiero las Promos!</button>
+  <p class="capture-privacy">🔒 Sin spam. Solo promos reales. Salite cuando quieras.</p>
+</div>
+
+<footer class="reveal" style="transition-delay:0.38s">
+  © 2025 Hamburguesas La Corte · Alajuela, CR · <span>#LegalmenteDeliciosas</span>
+</footer>
+
+<!-- ── LIGHTBOX BOTTOM SHEET ── -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-sheet" id="lbSheet">
+    <div class="lb-handle"></div>
+    <div style="position:relative">
+      <div class="lb-img-wrap" id="lbImgWrap"></div>
+      <button class="lb-close" onclick="closeLightbox()">✕</button>
+    </div>
+    <div class="lb-body">
+      <div class="lb-name" id="lbName">-</div>
+      <div class="lb-desc" id="lbDesc">-</div>
+      <div class="lb-price" id="lbPrice">-</div>
+      <a href="#" class="lb-wa" id="lbWa" target="_blank">💬 Pedir por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FULL MENU ── -->
+<div class="full-menu" id="fullMenu">
+  <div class="fm-header">
+    <button class="fm-back" onclick="closeFullMenu()">&#8592;</button>
+    <div class="fm-title">🍔 Menú Completo</div>
+  </div>
+  <div class="fm-list" id="fmList"></div>
+</div>
+
+<script>
+/* ── DATA ── */
+const MENU = [
+  {emoji:'🍔',img:'img/hambur1.JFIF',       name:'La Corte Clásica',  desc:'Torta de carne, queso amarillo, salsas y papas tostadas.',                 price:'₡3,200',badge:'Popular',  wa:'Quiero pedir la La Corte Clásica'},
+  {emoji:'🧀',img:'img/hambur2.JFIF',  name:'Doble Cheese',      desc:'Doble torta, tocineta, queso amarillo y mozzarella, papas tostadas.',      price:'₡4,500',badge:'Favorita', wa:'Quiero pedir la Doble Cheese'},
+  {emoji:'🍍',img:'img/tropical.jpg',      name:'Tropical',          desc:'Carne, piña cocida, tocineta, mozzarella, salsas y papas tostadas.',       price:'₡4,200',badge:'Especial', wa:'Quiero pedir la Tropical'},
+  {emoji:'🐔',img:'img/pollo-grill.jpg',   name:'Pollo Grill',       desc:'Filete de pollo a la plancha, mozzarella, papas tostadas, salsas.',        price:'₡3,800',badge:null,       wa:'Quiero pedir la Pollo Grill'},
+  {emoji:'🥩',img:'img/mechada.jpg',       name:'La Mechada',        desc:'Carne mechada, queso amarillo, papas a la francesa, salsas.',              price:'₡3,500',badge:null,       wa:'Quiero pedir La Mechada'},
+  {emoji:'🏆',img:'img/suprema.jpg',       name:'La Suprema',        desc:'Triple torta, tres quesos, tocineta doble, salsas especiales.',            price:'₡5,200',badge:'🔥 Top',   wa:'Quiero pedir La Suprema'},
+];
+
+const DRINKS = [
+  {emoji:'🥤',img:'img/jugos.jpg',         name:'Jugos naturales',   desc:'Varios sabores frescos.',  price:'₡1,500',wa:'Quiero jugos naturales'},
+  {emoji:'🥤',img:'img/coca-cola.jpg',     name:'Coca Cola 500ml',   desc:'Refresco frío.',           price:'₡1,200',wa:'Quiero una Coca Cola'},
+  {emoji:'🍺',img:'img/cerveza.jpg',       name:'Cerveza',           desc:'Marcas nacionales.',       price:'₡1,800',wa:'Quiero una cerveza'},
+];
+
+/* ── RENDER MAIN GRID (6 items, 2 cols) ── */
+const mainGrid = document.getElementById('mainMenuGrid');
+MENU.forEach((item,i) => {
+  const d = document.createElement('div');
+  d.className = 'menu-card reveal reveal-delay-'+(i+1);
+  d.innerHTML = `
+    <div class="card-img-wrap">
+      ${item.img
+        ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease">`
+        : `<div class="card-img-placeholder">${item.emoji}</div>`}
+      <div class="card-shimmer"></div>
+      ${item.badge ? `<div class="card-badge">${item.badge}</div>` : ''}
+    </div>
+    <div class="card-body">
+      <div class="card-name">${item.name}</div>
+      <div class="card-price">${item.price}</div>
+      <button class="card-btn" onclick="event.stopPropagation();openLightbox(MENU[${i}])">realizar pedido</button>
+    </div>`;
+  d.addEventListener('click', () => openLightbox(item));
+  mainGrid.appendChild(d);
+});
+
+/* ── RENDER DRINKS ── */
+const drinksGrid = document.getElementById('drinksGrid');
+DRINKS.forEach((item,i) => {
+  const d = document.createElement('div');
+  d.className = 'drink-card';
+  d.innerHTML = `
+    ${item.img
+      ? `<div class="card-img-wrap" style="aspect-ratio:1"><img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease"></div>`
+      : `<div class="drink-placeholder">${item.emoji}</div>`}
+    <div class="drink-body">
+      <div class="drink-name">${item.name}</div>
+      <div class="drink-price">${item.price}</div>
+      <button class="drink-btn" onclick="event.stopPropagation();openLightbox(DRINKS[${i}])">realizar pedido</button>
+    </div>`;
+  d.addEventListener('click', () => openLightbox(item));
+  drinksGrid.appendChild(d);
+});
+
+/* ── FULL MENU ── */
+const fmList = document.getElementById('fmList');
+MENU.forEach((item,i) => {
+  const d = document.createElement('div');
+  d.className = 'fm-item';
+  d.innerHTML = `
+    <div class="fm-item-thumb">
+      ${item.img
+        ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`
+        : item.emoji}
+    </div>
+    <div class="fm-item-info">
+      <div class="fm-item-name">${item.name}</div>
+      <div class="fm-item-desc">${item.desc}</div>
+    </div>
+    <div class="fm-item-right">
+      <div class="fm-price">${item.price}</div>
+      <button class="fm-btn" onclick="event.stopPropagation();openLightbox(MENU[${i}])">Pedir</button>
+    </div>`;
+  d.addEventListener('click', () => openLightbox(item));
+  fmList.appendChild(d);
+});
+
+/* ── LIGHTBOX ── */
+function openLightbox(item) {
+  document.getElementById('lbName').textContent = item.name;
+  document.getElementById('lbDesc').textContent = item.desc;
+  document.getElementById('lbPrice').textContent = item.price;
+  document.getElementById('lbImgWrap').innerHTML = item.img
+    ? `<img src="${item.img}" alt="${item.name}" style="width:100%;height:200px;object-fit:cover;display:block">`
+    : `<div class="lb-emoji-big">${item.emoji}</div>`;
+  document.getElementById('lbWa').href = 'https://wa.me/50662118389?text='+encodeURIComponent('Hola! '+item.wa);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightbox').addEventListener('click', function(e){
+  if(e.target === this) closeLightbox();
+});
+
+/* ── FULL MENU OPEN/CLOSE ── */
+function openFullMenu() {
+  const fm = document.getElementById('fullMenu');
+  fm.style.display = 'block';
+  requestAnimationFrame(() => fm.classList.add('open'));
+  document.body.style.overflow = 'hidden';
+}
+function closeFullMenu() {
+  const fm = document.getElementById('fullMenu');
+  fm.classList.remove('open');
+  setTimeout(() => fm.style.display = 'none', 380);
+  document.body.style.overflow = '';
+}
+
+/* ── PARALLAX HERO ── */
+const heroImg = document.getElementById('heroImg');
+window.addEventListener('scroll', () => {
+  const s = window.scrollY;
+  if(s < 400) heroImg.style.transform = 'translateY('+s*0.35+'px)';
+}, {passive:true});
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── LIVE COUNTER ── */
+let count = 12;
+setInterval(() => {
+  if(Math.random() > 0.7) {
+    count++;
+    const el = document.getElementById('liveCount');
+    if(el) el.textContent = count;
+  }
+}, 8000);
+
+/* ── CAPTURE ── */
+function handleCapture() {
+  const name = document.getElementById('capName').value.trim();
+  const phone = document.getElementById('capPhone').value.trim();
+  if(!name || !phone){ alert('Por favor completá nombre y WhatsApp.'); return; }
+  const msg = encodeURIComponent('Hola! Soy '+name+' ('+phone+') y me gustaría recibir las promos de Hamburguesas La Corte 🍔');
+  window.open('https://wa.me/50662118389?text='+msg, '_blank');
+}
+</script>
+</body>
+</html>
