@@ -374,6 +374,49 @@
     .fade-up { opacity:0; transform:translateY(22px); transition:opacity .5s ease,transform .5s ease; }
     .fade-up.visible { opacity:1; transform:translateY(0); }
 
+    /* ENTREGAS RECIENTES */
+    .entregas-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 16px 4px; }
+    .entrega-card { background:var(--white); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer; transition:transform .18s; }
+    .entrega-card:active { transform:scale(.97); }
+    .entrega-img-wrap { position:relative; aspect-ratio:4/3; overflow:hidden; }
+    .entrega-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+    .entrega-card:active .entrega-img-wrap img { transform:scale(1.05); }
+    .entrega-badge { position:absolute; top:8px; right:8px; background:rgba(0,0,0,.52); backdrop-filter:blur(6px);
+      color:#fff; font-size:9px; font-weight:700; padding:3px 8px; border-radius:10px; letter-spacing:.3px; }
+    .entrega-info { padding:10px 12px 12px; }
+    .entrega-tipo { font-size:12.5px; font-weight:700; color:var(--text); margin-bottom:2px; }
+    .entrega-desc { font-size:10.5px; color:var(--muted); line-height:1.4; }
+    .ver-mas-trabajos { display:flex; align-items:center; gap:10px; margin:10px 16px 16px;
+      padding:13px 16px; background:var(--white); border-radius:16px; box-shadow:var(--shadow);
+      font-size:13px; font-weight:600; color:var(--oak-dark); text-decoration:none; transition:transform .18s; }
+    .ver-mas-trabajos:active { transform:scale(.97); }
+    .ver-mas-trabajos i:first-child { color:#1877f2; font-size:15px; }
+
+    /* MODAL FLOAT BACK + INFO SECTIONS (formato Quinta Atenas) */
+    .modal-float-back { position:absolute; top:14px; left:14px; z-index:20; width:34px; height:34px;
+      border-radius:50%; background:rgba(92,61,22,.18); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+      border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+      color:var(--oak-dark); font-size:14px; transition:background .18s,transform .18s; }
+    .modal-float-back:active { transform:scale(.88); background:rgba(92,61,22,.32); }
+    .modal-body-pad { padding:52px 14px 0; }
+    .info-section { margin-bottom:12px; background:var(--white); border-radius:18px; padding:16px; box-shadow:0 2px 12px rgba(0,0,0,.08); }
+    .info-section h4 { font-size:14px; font-weight:700; color:var(--text); margin-bottom:12px;
+      display:flex; align-items:center; gap:8px; padding-bottom:10px; border-bottom:1px solid var(--warm); }
+    .info-list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .info-list li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:var(--muted); line-height:1.5; }
+    .info-list li i { color:var(--oak-dark); font-size:12px; width:16px; text-align:center; flex-shrink:0; margin-top:2px; }
+
+    /* FAQ ROW BTN (formato Quinta Atenas) */
+    .faq-row-btn { display:flex; align-items:center; gap:12px; width:100%; margin-top:12px; padding:12px 14px;
+      background:var(--white); border-radius:14px; border:1px solid rgba(0,0,0,.06); cursor:pointer;
+      font-family:'DM Sans',sans-serif; transition:transform .18s,box-shadow .18s;
+      box-shadow:0 3px 12px rgba(0,0,0,.10); }
+    .faq-row-btn:active { transform:scale(.98); }
+
+    /* DESC BTNS formato Quinta Atenas */
+    .desc-btn.db-info   { background:var(--oak-dark); color:#fff; box-shadow:0 4px 14px rgba(92,61,22,.30); }
+    .desc-btn.db-normas { background:var(--white); color:var(--text); box-shadow:0 3px 12px rgba(0,0,0,.10); border:1px solid rgba(0,0,0,.06); }
+
     /* OPINION CARD */
     .opinion-card { margin:0 16px 16px; background:var(--white); border-radius:22px; padding:18px; box-shadow:var(--shadow); }
     .op-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
@@ -510,24 +553,22 @@
   <div class="description-card fade-up">
     <p>Somos especialistas en <strong>mobiliario de alta gama</strong>, utilizando <strong>maderas sólidas y acabados premium</strong> en cada proyecto. Con sede en <strong>Sardinal de Carrillo, Guanacaste</strong>, fabricamos cada pieza especialmente para vos — a medida, al diseño que receptaste.</p>
     <p>Nuestros trabajos van desde camas de madera sólida, mesas de tablón rústico y mesas con resina, hasta cocinas completas, sillas, escritorios y cualquier mueble personalizado que imaginés.</p>
-    <div class="capacity-pills">
-      <div class="pill"><i class="fa fa-tree"></i> Madera sólida natural</div>
-      <div class="pill"><i class="fa fa-ruler-combined"></i> A tu medida</div>
-      <div class="pill"><i class="fa fa-star"></i> Alta gama</div>
-      <div class="pill"><i class="fa fa-map-pin"></i> Sardinal, Guanacaste</div>
-    </div>
-    <!-- Sub-modales dentro de Quiénes Somos -->
     <div class="desc-btns">
-      <button class="desc-btn" onclick="openModal('materialesModal')">
+      <button class="desc-btn db-info" onclick="openModal('materialesModal')">
         <i class="fa fa-layer-group"></i> Materiales
       </button>
-      <button class="desc-btn" onclick="openModal('procesoModal')">
+      <button class="desc-btn db-normas" onclick="openModal('procesoModal')">
         <i class="fa fa-list-check"></i> Cómo trabajamos
       </button>
-      <button class="desc-btn" onclick="openModal('faqModal')">
-        <i class="fa fa-circle-question"></i> Preguntas frecuentes
-      </button>
     </div>
+    <button class="faq-row-btn" onclick="openModal('faqModal')">
+      <div style="display:flex;align-items:center;gap:9px;flex:1;min-width:0">
+        <i class="fa fa-circle-question" style="color:var(--gold);font-size:15px;flex-shrink:0"></i>
+        <span style="font-size:13px;font-weight:700;color:var(--text);white-space:nowrap">Preguntas frecuentes</span>
+        <span style="font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">· tiempos, garantía, pagos</span>
+      </div>
+      <i class="fa fa-chevron-right" style="color:var(--muted);font-size:12px;flex-shrink:0"></i>
+    </button>
   </div>
 
   <!-- ══ COTIZACIÓN ══ -->
@@ -570,22 +611,65 @@
     </div>
   </div>
 
-  <!-- ══ GALERÍA ══ -->
-  <div class="section-title fade-up"><h2>Nuestros Trabajos</h2></div>
-  <p style="font-size:12px;color:var(--muted);padding:0 18px 10px;display:flex;align-items:center;gap:6px;" class="fade-up">
-    <i class="fa fa-images" style="color:var(--gold);font-size:11px"></i>
-    Tocá cualquier foto para verla completa
-  </p>
-  <div class="gallery-scroll fade-up">
-    <div class="gallery-thumb" onclick="openLightbox(0)"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=80" alt="Cocina" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(1)"><img src="https://images.unsplash.com/photo-1605371924599-2d0365da1ae0?w=300&q=80" alt="Mesa madera" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(2)"><img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Taller" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(3)"><img src="https://images.unsplash.com/photo-1565791380713-1756b9a05343?w=300&q=80" alt="Closet" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(4)"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=80" alt="Mueble sala" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(5)"><img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=300&q=80" alt="Mesa comedor" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(6)"><img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=300&q=80" alt="Cocina moderna" loading="lazy"></div>
-    <div class="gallery-thumb" onclick="openLightbox(7)"><img src="https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=300&q=80" alt="Puerta madera" loading="lazy"></div>
+  <!-- ══ ENTREGAS RECIENTES ══ -->
+  <div class="section-title fade-up">
+    <h2>Entregas Recientes</h2>
   </div>
+  <p style="font-size:12px;color:var(--muted);padding:0 18px 10px;display:flex;align-items:center;gap:6px;" class="fade-up">
+    <i class="fa fa-calendar-check" style="color:var(--gold);font-size:11px"></i>
+    Proyectos recién terminados y entregados · actualizamos cada mes
+  </p>
+  <div class="entregas-grid fade-up">
+
+    <div class="entrega-card" onclick="openLightbox(0)">
+      <div class="entrega-img-wrap">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&q=85" alt="Cocina a medida" loading="lazy" />
+        <div class="entrega-badge">Mayo 2025</div>
+      </div>
+      <div class="entrega-info">
+        <div class="entrega-tipo">🍳 Cocina a medida</div>
+        <div class="entrega-desc">Gabinetes en madera sólida · Sardinal</div>
+      </div>
+    </div>
+
+    <div class="entrega-card" onclick="openLightbox(1)">
+      <div class="entrega-img-wrap">
+        <img src="https://images.unsplash.com/photo-1605371924599-2d0365da1ae0?w=500&q=85" alt="Mesa de tablón con resina" loading="lazy" />
+        <div class="entrega-badge">Mayo 2025</div>
+      </div>
+      <div class="entrega-info">
+        <div class="entrega-tipo">🌊 Mesa tablón con resina</div>
+        <div class="entrega-desc">Efecto río · 8 personas · Liberia</div>
+      </div>
+    </div>
+
+    <div class="entrega-card" onclick="openLightbox(3)">
+      <div class="entrega-img-wrap">
+        <img src="https://images.unsplash.com/photo-1565791380713-1756b9a05343?w=500&q=85" alt="Closet a medida" loading="lazy" />
+        <div class="entrega-badge">Abril 2025</div>
+      </div>
+      <div class="entrega-info">
+        <div class="entrega-tipo">🚪 Closet a medida</div>
+        <div class="entrega-desc">Madera sólida + melamina · Nicoya</div>
+      </div>
+    </div>
+
+    <div class="entrega-card" onclick="openLightbox(5)">
+      <div class="entrega-img-wrap">
+        <img src="https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=500&q=85" alt="Mesa de comedor" loading="lazy" />
+        <div class="entrega-badge">Abril 2025</div>
+      </div>
+      <div class="entrega-info">
+        <div class="entrega-tipo">🪑 Mesa de comedor</div>
+        <div class="entrega-desc">Tablón rústico · 6 sillas · Cañas</div>
+      </div>
+    </div>
+
+  </div>
+  <a href="https://www.facebook.com/share/16SgL1MqY8/" target="_blank" class="ver-mas-trabajos fade-up">
+    <i class="fab fa-facebook-f"></i> Ver más trabajos en Facebook
+    <i class="fa fa-chevron-right" style="font-size:11px;margin-left:auto"></i>
+  </a>
 
   <!-- ══ RESEÑAS ══ -->
   <div class="section-title fade-up"><h2>Opiniones de Clientes</h2></div>
@@ -944,72 +1028,41 @@
 </div>
 
 <!-- MODAL: QUIÉNES SOMOS (hub con sub-modales) -->
-<div class="modal-overlay" id="quienesModal" onclick="closeModal('quienesModal')">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🪚 Quiénes Somos</h3>
-    <p class="modal-sub">Todo lo que necesitás saber sobre Taller del Carpintero.</p>
-    <div class="modal-list">
-      <button class="quienes-sub-btn" onclick="closeModal('quienesModal'); openModal('materialesModal')">
-        <div class="qsb-icon" style="background:#fef3e7">🪵</div>
-        <div class="qsb-text">
-          <div class="qsb-title">Nuestros Materiales</div>
-          <div class="qsb-sub">Madera sólida, resina, melamina y más</div>
-        </div>
-        <i class="fa fa-chevron-right qsb-arrow"></i>
-      </button>
-      <button class="quienes-sub-btn" onclick="closeModal('quienesModal'); openModal('procesoModal')">
-        <div class="qsb-icon" style="background:#e8f8ef">⚙️</div>
-        <div class="qsb-text">
-          <div class="qsb-title">Cómo Trabajamos</div>
-          <div class="qsb-sub">Del primer contacto a la instalación</div>
-        </div>
-        <i class="fa fa-chevron-right qsb-arrow"></i>
-      </button>
-      <button class="quienes-sub-btn" onclick="closeModal('quienesModal'); openModal('faqModal')">
-        <div class="qsb-icon" style="background:#e7f0fd">❓</div>
-        <div class="qsb-text">
-          <div class="qsb-title">Preguntas Frecuentes</div>
-          <div class="qsb-sub">Tiempos, garantía, pagos y más</div>
-        </div>
-        <i class="fa fa-chevron-right qsb-arrow"></i>
-      </button>
-    </div>
-    <button class="modal-cancel" onclick="closeModal('quienesModal')">Cerrar</button>
-  </div>
-</div>
-
 <!-- MODAL: MATERIALES -->
 <div class="modal-overlay" id="materialesModal" onclick="closeModal('materialesModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🪵 Nuestros Materiales</h3>
-    <p class="modal-sub">Trabajamos con los mejores materiales para garantizar durabilidad y belleza en cada pieza.</p>
-    <div class="modal-list">
-      <div class="modal-row" style="cursor:default">
-        <div class="mr-icon" style="background:#fef3e7;font-size:22px">🪵</div>
-        <div class="mr-text"><div class="mr-title">Madera Sólida</div><div class="mr-desc">Piezas únicas de veta natural. Alta durabilidad y belleza sin igual. Nuestra especialidad.</div></div>
-        <span style="font-size:10px;background:var(--warm);color:var(--oak-dark);padding:3px 8px;border-radius:8px;font-weight:600;white-space:nowrap">Premium</span>
+    <button class="modal-float-back" onclick="closeModal('materialesModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-tree" style="color:var(--oak-dark)"></i> Maderas naturales</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Madera sólida — veta natural, alta durabilidad, nuestra especialidad</li>
+          <li><i class="fa fa-check"></i> Tablón rústico — piezas únicas con carácter propio</li>
+          <li><i class="fa fa-check"></i> Cada pieza es irrepetible por la veta natural de la madera</li>
+        </ul>
       </div>
-      <div class="modal-row" style="cursor:default">
-        <div class="mr-icon" style="background:#e8f4ff;font-size:22px">🌊</div>
-        <div class="mr-text"><div class="mr-title">Resina Epóxica</div><div class="mr-desc">Efectos de río o mar sobre tablón rústico. Colores personalizados — diseños únicos.</div></div>
-        <span style="font-size:10px;background:var(--warm);color:var(--oak-dark);padding:3px 8px;border-radius:8px;font-weight:600;white-space:nowrap">Tendencia</span>
+      <div class="info-section">
+        <h4><i class="fa fa-droplet" style="color:#4a9eda"></i> Resina epóxica</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Efectos de río, mar o lava sobre tablón rústico</li>
+          <li><i class="fa fa-check"></i> Colores completamente personalizables</li>
+          <li><i class="fa fa-check"></i> Uno de los acabados más solicitados — tendencia premium</li>
+        </ul>
       </div>
-      <div class="modal-row" style="cursor:default">
-        <div class="mr-icon" style="background:#f5f5f5;font-size:22px">🔲</div>
-        <div class="mr-text"><div class="mr-title">Melamina RH</div><div class="mr-desc">Resistente y económica. Ideal para cocinas, closets y oficinas con mucho uso.</div></div>
-        <span style="font-size:10px;background:var(--warm);color:var(--oak-dark);padding:3px 8px;border-radius:8px;font-weight:600;white-space:nowrap">Popular</span>
+      <div class="info-section">
+        <h4><i class="fa fa-grip" style="color:var(--muted)"></i> Otros materiales</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Melamina RH — resistente, económica, ideal para cocinas y closets</li>
+          <li><i class="fa fa-check"></i> MDF / Plywood — versátil para molduras y paneles decorativos</li>
+        </ul>
       </div>
-      <div class="modal-row" style="cursor:default">
-        <div class="mr-icon" style="background:#f0ede8;font-size:22px">🪜</div>
-        <div class="mr-text"><div class="mr-title">MDF / Plywood</div><div class="mr-desc">Versátil para molduras, paneles decorativos y muebles de diseño.</div></div>
-        <span style="font-size:10px;background:var(--warm);color:var(--oak-dark);padding:3px 8px;border-radius:8px;font-weight:600;white-space:nowrap">Versátil</span>
-      </div>
-      <div class="modal-row" style="cursor:default">
-        <div class="mr-icon" style="background:#f5f0ff;font-size:22px">⚙️</div>
-        <div class="mr-text"><div class="mr-title">Herrajes Premium</div><div class="mr-desc">Bisagras, correderas y jaladeras de primera — funcionalidad y estética juntas.</div></div>
-        <span style="font-size:10px;background:var(--warm);color:var(--oak-dark);padding:3px 8px;border-radius:8px;font-weight:600;white-space:nowrap">Alta gama</span>
+      <div class="info-section">
+        <h4><i class="fa fa-gears" style="color:var(--gold)"></i> Herrajes premium</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Bisagras y correderas de primera calidad</li>
+          <li><i class="fa fa-check"></i> Jaladeras y acabados de alta gama</li>
+          <li><i class="fa fa-check"></i> Funcionalidad y estética en cada detalle</li>
+        </ul>
       </div>
     </div>
     <button class="modal-cancel" onclick="closeModal('materialesModal')">Cerrar</button>
@@ -1019,39 +1072,48 @@
 <!-- MODAL: PROCESO DE TRABAJO -->
 <div class="modal-overlay" id="procesoModal" onclick="closeModal('procesoModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>⚙️ Cómo Trabajamos</h3>
-    <p class="modal-sub">Un proceso claro, sin sorpresas, del primer contacto a la instalación final.</p>
-    <div style="display:flex;flex-direction:column;gap:0">
-      <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8da;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">1</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Contacto inicial por WhatsApp</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Nos escribís con tu idea, foto de referencia o medidas. Ronald responde rápido.</div></div>
+    <button class="modal-float-back" onclick="closeModal('procesoModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <div class="info-section">
+        <h4><i class="fa fa-comments" style="color:#25d366"></i> 1. Contacto inicial</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Nos escribís por WhatsApp con tu idea o foto de referencia</li>
+          <li><i class="fa fa-check"></i> Ronald responde rápido — generalmente en menos de 1 hora</li>
+        </ul>
       </div>
-      <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8da;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">2</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Visita y medición sin costo</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Visitamos el espacio, tomamos medidas exactas y evaluamos los materiales ideales para el proyecto.</div></div>
+      <div class="info-section">
+        <h4><i class="fa fa-ruler-combined" style="color:var(--oak-dark)"></i> 2. Visita y medición</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Visitamos tu espacio sin costo adicional</li>
+          <li><i class="fa fa-check"></i> Tomamos medidas exactas y evaluamos los mejores materiales</li>
+        </ul>
       </div>
-      <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8da;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">3</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Diseño y cotización</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Te enviamos el diseño con medidas y presupuesto detallado. Sin sorpresas ni cobros ocultos.</div></div>
+      <div class="info-section">
+        <h4><i class="fa fa-file-lines" style="color:var(--gold)"></i> 3. Diseño y cotización</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Enviamos el diseño con medidas y presupuesto detallado</li>
+          <li><i class="fa fa-check"></i> Sin sorpresas ni cobros ocultos — todo acordado de antemano</li>
+        </ul>
       </div>
-      <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8da;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">4</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Fabricación artesanal</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Cada pieza se fabrica a mano en el taller con madera sólida de primera calidad. Sin prisa, con precisión.</div></div>
+      <div class="info-section">
+        <h4><i class="fa fa-hammer" style="color:var(--oak)"></i> 4 y 5. Fabricación e instalación</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Cada pieza fabricada a mano en el taller — artesanal, con precisión</li>
+          <li><i class="fa fa-check"></i> Instalación incluida en el precio — nos aseguramos que quede perfecto</li>
+        </ul>
       </div>
-      <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #f0e8da;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">5</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Instalación y entrega</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Instalamos en tu espacio y verificamos que todo quede perfecto antes de irnos.</div></div>
+      <div class="info-section">
+        <h4><i class="fa fa-shield-halved" style="color:#4caf50"></i> 6. Garantía y seguimiento</h4>
+        <ul class="info-list">
+          <li><i class="fa fa-check"></i> Respaldamos cada proyecto sin costo adicional</li>
+          <li><i class="fa fa-check"></i> Si algo necesita ajuste después de la entrega, lo resolvemos</li>
+        </ul>
       </div>
-      <div style="display:flex;gap:14px;padding:14px 0;align-items:flex-start">
-        <div style="width:30px;height:30px;border-radius:50%;background:var(--oak-dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;margin-top:1px">6</div>
-        <div><div style="font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px">Garantía y seguimiento</div><div style="font-size:12px;color:var(--muted);line-height:1.55">Respaldamos nuestro trabajo. Si algo necesita ajuste después de la entrega, lo resolvemos sin costo adicional.</div></div>
-      </div>
+      <a href="https://api.whatsapp.com/send?phone=50689789417&text=Hola%20Ronald%20%F0%9F%91%8B%20Quiero%20empezar%20mi%20proyecto%20%F0%9F%AA9%20%C2%BFMe%20ayud%C3%A1s%3F" target="_blank"
+         style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:14px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none;margin:16px 0 4px">
+        <i class="fab fa-whatsapp"></i> Empezar mi proyecto ahora
+      </a>
     </div>
-    <a href="https://api.whatsapp.com/send?phone=50689789417&text=Hola%20Ronald%20%F0%9F%91%8B%20Quiero%20empezar%20mi%20proyecto%20%F0%9F%AA9%20%C2%BFMe%20ayud%C3%A1s%3F" target="_blank"
-       style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:14px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none;margin-top:16px">
-      <i class="fab fa-whatsapp"></i> Empezar mi proyecto ahora
-    </a>
     <button class="modal-cancel" onclick="closeModal('procesoModal')">Cerrar</button>
   </div>
 </div>
