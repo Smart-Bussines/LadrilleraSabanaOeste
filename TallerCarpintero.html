@@ -77,36 +77,35 @@
       overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center; }
     .hld-ring img { width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* LOGO STRIP */
-    .logo-strip { background:var(--white); padding:10px 18px; display:flex; align-items:center; justify-content:space-between;
-      border-bottom:1px solid #e8dccb; box-shadow:0 4px 20px rgba(92,61,22,.15), 0 1px 4px rgba(0,0,0,.07);
-      position:sticky; top:0; z-index:50; min-height:68px; }
+    /* LOGO STRIP — mismo formato Quinta Atenas */
+    .logo-strip { background:var(--white); padding:5px 16px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid #e8dccb; box-shadow:0 4px 20px rgba(0,0,0,.14), 0 1px 4px rgba(0,0,0,.08);
+      position:sticky; top:0; z-index:50; min-height:88px; overflow:hidden; }
 
-    /* IZQUIERDA: texto al inicio → logo circular al scroll */
-    .strip-left { position:relative; height:52px; flex:1; display:flex; align-items:center; overflow:visible; }
-    .strip-biz-text { position:absolute; left:0; top:50%; transform:translateY(-50%);
-      display:flex; flex-direction:column; justify-content:center; opacity:1;
+    /* Wrapper izquierda con logo rect + circular */
+    .strip-left-wrap { position:relative; height:78px; min-width:80px; display:flex; align-items:center; }
+    /* Logo rectangular — visible al inicio */
+    .strip-logo-rect { height:72px; width:auto; max-width:200px; object-fit:contain; flex-shrink:0;
+      position:absolute; left:0;
       transition:transform .45s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
-    .strip-biz-text .sb-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700;
-      color:var(--oak-dark); line-height:1.15; white-space:nowrap;
-      opacity:0; animation:heroFadeUp .6s .4s ease forwards; }
-    .strip-biz-text .sb-sub { font-size:11px; color:var(--muted); white-space:nowrap; margin-top:3px;
-      font-weight:500; opacity:0; animation:heroFadeUp .6s .55s ease forwards; }
     /* Logo circular — oculto arriba, baja al scroll */
-    .strip-logo-circ { position:absolute; left:0; width:46px; height:46px; border-radius:50%;
-      border:2px solid var(--oak-lt); overflow:hidden; background:#fff;
+    .strip-logo-circ { position:absolute; left:0; width:68px; height:68px; border-radius:50%;
+      border:2.5px solid var(--oak-lt); overflow:hidden; background:#fff;
       box-shadow:0 2px 8px rgba(92,61,22,.25);
-      transform:translateY(-120%); opacity:0; transition:transform .45s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
+      transform:translateY(-130%); opacity:0; transition:transform .45s cubic-bezier(.4,0,.2,1), opacity .3s ease; }
     .strip-logo-circ img { width:100%; height:100%; object-fit:cover; display:block; }
-    .logo-strip.scrolled .strip-biz-text { transform:translateY(calc(-50% - 40px)); opacity:0; }
+    .logo-strip.scrolled .strip-logo-rect { transform:translateY(-130%); opacity:0; }
     .logo-strip.scrolled .strip-logo-circ { transform:translateY(0); opacity:1; }
 
     /* DERECHA */
-    .strip-right { position:relative; height:52px; min-width:130px; overflow:visible; flex-shrink:0; }
+    .strip-right { position:relative; height:52px; min-width:160px; overflow:visible; flex-shrink:0; }
     .strip-tagline { position:absolute; top:0; right:0; height:100%; display:flex; flex-direction:column;
       align-items:flex-end; justify-content:center; transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease; }
-    .strip-tagline .t-title { font-family:'Playfair Display',serif; font-size:12px; font-weight:700; color:var(--oak-dark); white-space:nowrap; }
-    .strip-tagline .t-sub { font-size:10px; color:var(--muted); white-space:nowrap; margin-top:2px; }
+    .strip-tagline .t-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:750; color:var(--oak-dark);
+      line-height:1.2; white-space:nowrap; opacity:0; animation:heroFadeUp .6s .4s ease forwards; }
+    .strip-tagline .t-sub { font-size:12px; color:var(--muted); white-space:nowrap; margin-top:3px;
+      opacity:0; animation:heroFadeUp .6s .55s ease forwards; }
     .strip-icons { position:absolute; bottom:0; right:0; display:flex; align-items:flex-end; gap:10px;
       transform:translateY(110%); opacity:0; transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .3s ease; }
     .logo-strip.scrolled .strip-tagline { transform:translateY(110%); opacity:0; }
@@ -115,24 +114,25 @@
       background:none; border:none; font-family:'DM Sans',sans-serif; transition:transform .18s; padding:0; }
     .sicon:active { transform:scale(.85); }
     .sicon .sicon-circle { width:34px; height:34px; border-radius:50%; background:rgba(92,61,22,.09);
-      border:1px solid rgba(92,61,22,.2); display:flex; align-items:center; justify-content:center;
-      font-size:14px; color:var(--oak-dark); }
-    .sicon .sicon-label { font-size:9px; font-weight:600; color:var(--muted); white-space:nowrap; }
+      border:1px solid rgba(92,61,22,.18); display:flex; align-items:center; justify-content:center;
+      font-size:14px; color:var(--oak-dark); flex-shrink:0; }
+    .sicon .sicon-label { font-size:9px; font-weight:600; color:var(--muted); white-space:nowrap; text-align:center; }
 
-    /* ACTION BUTTONS */
-    .actions { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; padding:16px 16px 4px; }
-    .action-btn { display:flex; flex-direction:column; align-items:center; padding:18px 6px 14px; border-radius:20px;
+    /* ACTION BUTTONS — mismo estilo Quinta Atenas */
+    .actions { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; padding:18px 16px 4px; }
+    .action-btn { display:flex; flex-direction:column; align-items:center; padding:18px 8px 14px; border-radius:20px;
       text-decoration:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; background:var(--white);
-      box-shadow:var(--shadow); transition:transform .18s,box-shadow .18s; position:relative; overflow:hidden; }
+      box-shadow:var(--shadow-card); transition:transform .18s,box-shadow .18s; position:relative; overflow:hidden; }
     .action-btn:active { transform:scale(.94); box-shadow:0 2px 8px rgba(0,0,0,.07); }
     .action-btn::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:20px 20px 0 0; }
-    .action-btn.ac-videos::before    { background:linear-gradient(90deg,#ff0000,#ff6b6b); }
+    .action-btn.ac-videos::before    { background:linear-gradient(90deg,var(--oak-dark),#8b5e3c); }
     .action-btn.ac-portafolio::before { background:linear-gradient(90deg,var(--oak-dark),var(--oak)); }
-    .action-btn.ac-redes::before     { background:linear-gradient(90deg,#1877f2,#e1306c); }
-    .action-icon-wrap { width:64px; height:64px; display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
-    .action-icon-wrap.emoji-wrap { font-size:42px; line-height:1; filter:drop-shadow(0 4px 8px rgba(0,0,0,.2)); }
-    .action-label { font-size:11.5px; font-weight:700; color:var(--text); text-align:center; line-height:1.2; }
-    .action-sub   { font-size:9.5px; color:var(--muted); text-align:center; margin-top:3px; }
+    .action-btn.ac-redes::before     { background:linear-gradient(90deg,#344e6e,#4a6a90); }
+    .action-icon-wrap { width:73px; height:73px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; flex-shrink:0; }
+    .action-icon-wrap.clear { background:transparent; }
+    .action-icon-wrap.clear img { width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 5px 10px rgba(0,0,0,.22)); }
+    .action-label { font-size:12px; font-weight:600; color:var(--text); text-align:center; line-height:1.2; }
+    .action-sub   { font-size:10px; color:var(--muted); text-align:center; margin-top:3px; line-height:1.3; }
 
     /* BADGE */
     .quick-reply-badge { display:flex; align-items:center; justify-content:center; gap:5px;
@@ -399,6 +399,7 @@
       color:var(--oak-dark); font-size:14px; transition:background .18s,transform .18s; }
     .modal-float-back:active { transform:scale(.88); background:rgba(92,61,22,.32); }
     .modal-body-pad { padding:52px 14px 0; }
+    .modal-body-pad-sm { padding:52px 0 0; }  /* Para modales con su propio padding interno */
     .info-section { margin-bottom:12px; background:var(--white); border-radius:18px; padding:16px; box-shadow:0 2px 12px rgba(0,0,0,.08); }
     .info-section h4 { font-size:14px; font-weight:700; color:var(--text); margin-bottom:12px;
       display:flex; align-items:center; gap:8px; padding-bottom:10px; border-bottom:1px solid var(--warm); }
@@ -475,29 +476,27 @@
     <div class="hero-logo-d">
       <div class="hld-ring">
         <!-- Reemplazar src con la URL del logo circular del negocio -->
-        <img src="img/img/logocircular.png" alt="Taller del Carpintero logo" />
+        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=200&q=80" alt="Taller del Carpintero logo" />
       </div>
     </div>
   </div>
 
   <!-- ══ LOGO STRIP (sticky) ══ -->
   <div class="logo-strip fade-up" id="logoStrip">
-    <!-- IZQUIERDA: texto al inicio → logo al scroll -->
-    <div class="strip-left">
-      <div class="strip-biz-text">
-        <span class="sb-title">Taller del Carpintero</span>
-        <span class="sb-sub">Sardinal de Carrillo, Guanacaste</span>
-      </div>
-      <!-- Logo circular que baja al hacer scroll -->
+    <!-- IZQUIERDA: logo rectangular al inicio → logo circular al scroll -->
+    <div class="strip-left-wrap">
+      <!-- Logo rectangular: reemplazar src con URL real del logo horizontal -->
+      <img class="strip-logo-rect" src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=300&q=80" alt="Taller del Carpintero" />
+      <!-- Logo circular: aparece al scroll -->
       <div class="strip-logo-circ">
-        <img src="img/img/carpintero.png" alt="Logo" />
+        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&q=80" alt="Logo" />
       </div>
     </div>
     <!-- DERECHA: tagline al inicio → íconos al scroll -->
     <div class="strip-right">
       <div class="strip-tagline">
         <span class="t-title">Madera sólida</span>
-        <span class="t-sub">A medida · Guanacaste</span>
+        <span class="t-sub">A medida · Guanacaste 🪵</span>
       </div>
       <div class="strip-icons">
         <button class="sicon" onclick="openModal('saveModal')">
@@ -516,22 +515,28 @@
     </div>
   </div>
 
-  <!-- ══ ACTION BUTTONS ══ -->
+  <!-- ══ ACTION BUTTONS — íconos PNG del cliente ══ -->
   <div class="actions fade-up">
     <button class="action-btn ac-videos" onclick="openModal('videosModal')">
-      <div class="action-icon-wrap emoji-wrap">🎬</div>
-      <div class="action-label">Videos</div>
-      <div class="action-sub">TikTok · proceso</div>
+      <div class="action-icon-wrap clear">
+        <img id="iconVideos" src="" alt="Videos" style="width:100%;height:100%;object-fit:contain;display:block;" />
+      </div>
+      <span class="action-label">Videos</span>
+      <span class="action-sub">TikTok · proceso</span>
     </button>
     <button class="action-btn ac-portafolio" onclick="openModal('portafolioModal')">
-      <div class="action-icon-wrap emoji-wrap">🪵</div>
-      <div class="action-label">Portafolio</div>
-      <div class="action-sub">Trabajos realizados</div>
+      <div class="action-icon-wrap clear">
+        <img id="iconPortafolio" src="" alt="Portafolio" style="width:100%;height:100%;object-fit:contain;display:block;" />
+      </div>
+      <span class="action-label">Portafolio</span>
+      <span class="action-sub">Trabajos realizados</span>
     </button>
     <button class="action-btn ac-redes" onclick="openModal('socialModal')">
-      <div class="action-icon-wrap emoji-wrap">📲</div>
-      <div class="action-label">Redes</div>
-      <div class="action-sub">Seguinos</div>
+      <div class="action-icon-wrap clear">
+        <img id="iconRedes" src="" alt="Redes" style="width:100%;height:100%;object-fit:contain;display:block;" />
+      </div>
+      <span class="action-label">Redes S.</span>
+      <span class="action-sub">Síguenos</span>
     </button>
   </div>
 
@@ -554,11 +559,11 @@
     <p>Somos especialistas en <strong>mobiliario de alta gama</strong>, utilizando <strong>maderas sólidas y acabados premium</strong> en cada proyecto. Con sede en <strong>Sardinal de Carrillo, Guanacaste</strong>, fabricamos cada pieza especialmente para vos — a medida, al diseño que receptaste.</p>
     <p>Nuestros trabajos van desde camas de madera sólida, mesas de tablón rústico y mesas con resina, hasta cocinas completas, sillas, escritorios y cualquier mueble personalizado que imaginés.</p>
     <div class="desc-btns">
-      <button class="desc-btn db-info" onclick="openModal('materialesModal')">
-        <i class="fa fa-layer-group"></i> Materiales
-      </button>
-      <button class="desc-btn db-normas" onclick="openModal('procesoModal')">
+      <button class="desc-btn db-info" onclick="openModal('procesoModal')">
         <i class="fa fa-list-check"></i> Cómo trabajamos
+      </button>
+      <button class="desc-btn db-normas" onclick="openModal('materialesModal')">
+        <i class="fa fa-layer-group"></i> Materiales
       </button>
     </div>
     <button class="faq-row-btn" onclick="openModal('faqModal')">
@@ -841,7 +846,8 @@
 <!-- MODAL: VIDEOS -->
 <div class="modal-overlay" id="videosModal" onclick="closeModal('videosModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('videosModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>🎬 Videos del Taller</h3>
     <p class="modal-sub">Mirá el proceso artesanal — de la madera cruda al mueble terminado.</p>
 
@@ -883,7 +889,8 @@
 <!-- MODAL: PORTAFOLIO -->
 <div class="modal-overlay" id="portafolioModal" onclick="closeModal('portafolioModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('portafolioModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>🪵 Portafolio de Proyectos</h3>
     <p class="modal-sub">Cada pieza fabricada a mano en nuestro taller de Sardinal.</p>
     <div class="port-grid">
@@ -923,7 +930,8 @@
 <!-- MODAL: REDES -->
 <div class="modal-overlay" id="socialModal" onclick="closeModal('socialModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('socialModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>📲 Redes Sociales</h3>
     <p class="modal-sub">Seguinos para ver proyectos, procesos y trabajos recién terminados.</p>
     <div class="modal-list">
@@ -955,7 +963,8 @@
 <!-- MODAL: GUARDAR -->
 <div class="modal-overlay" id="saveModal" onclick="closeModal('saveModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('saveModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>💾 Guardar Contacto</h3>
     <p class="modal-sub">Guardá a Ronald del Taller del Carpintero para tener siempre el número a mano.</p>
     <div class="modal-list">
@@ -977,23 +986,54 @@
 <!-- MODAL: HORARIO -->
 <div class="modal-overlay" id="horarioModal" onclick="closeModal('horarioModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
-    <h3>🕘 Horario de Atención</h3>
-    <p class="modal-sub">Taller del Carpintero · Sardinal de Carrillo, Guanacaste</p>
-    <div class="horario-grid">
-      <div class="h-row" id="h-Lunes"><div class="h-dia">Lunes</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row" id="h-Martes"><div class="h-dia">Martes</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row" id="h-Miércoles"><div class="h-dia">Miércoles</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row" id="h-Jueves"><div class="h-dia">Jueves</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row" id="h-Viernes"><div class="h-dia">Viernes</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row" id="h-Sábado"><div class="h-dia">Sábado</div><div class="h-hora">8am – 4pm</div></div>
-      <div class="h-row cerrado" id="h-Domingo" style="grid-column:span 2"><div class="h-dia">Domingo</div><div class="h-hora">Cerrado</div></div>
-    </div>
-    <div class="modal-list">
-      <a href="https://api.whatsapp.com/send?phone=50689789417&text=Hola%20Ronald%20%F0%9F%91%8B%20%C2%BFEst%C3%A1n%20disponibles%20hoy%3F" target="_blank" class="modal-row primary">
-        <div class="mr-icon" style="background:rgba(255,255,255,.2)"><i class="fab fa-whatsapp" style="color:#fff"></i></div>
-        <div class="mr-text"><div class="mr-title">Consultar disponibilidad hoy</div><div class="mr-desc">Ronald responde en menos de 1 hora</div></div>
-        <i class="fa fa-chevron-right mr-arrow"></i>
+    <button class="modal-float-back" onclick="closeModal('horarioModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad">
+      <h3 style="font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:4px">🕘 Horario de Atención</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.5">Taller del Carpintero · Sardinal de Carrillo, Guanacaste</p>
+
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)">
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Lunes — Viernes</span>
+          <span style="font-size:13px;color:var(--oak-dark);font-weight:700">8:00 am — 4:00 pm</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)">
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Sábado</span>
+          <span style="font-size:13px;color:var(--oak-dark);font-weight:700">8:00 am — 12:00 md</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)">
+          <span style="font-size:13px;font-weight:600;color:var(--muted)">Domingo</span>
+          <span style="font-size:13px;color:var(--muted);font-weight:600">Cerrado</span>
+        </div>
+
+        <!-- Tiempos estimados de entrega -->
+        <div style="padding:14px 16px;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08)">
+          <p style="font-size:12px;font-weight:700;color:var(--oak-dark);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--warm)">🪵 Tiempos estimados de entrega</p>
+          <div style="display:flex;justify-content:space-between;margin-bottom:7px">
+            <span style="font-size:12px;color:var(--muted)">Camas / Mesas</span>
+            <span style="font-size:12px;font-weight:600;color:var(--text)">1 – 2 semanas</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:7px">
+            <span style="font-size:12px;color:var(--muted)">Cocinas completas</span>
+            <span style="font-size:12px;font-weight:600;color:var(--text)">3 – 4 semanas</span>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <span style="font-size:12px;color:var(--muted)">Proyectos grandes</span>
+            <span style="font-size:12px;font-weight:600;color:var(--text)">A coordinar</span>
+          </div>
+        </div>
+
+        <!-- Nota respuesta -->
+        <div style="padding:13px 16px;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);border-left:3px solid #25d366">
+          <p style="font-size:12px;color:var(--text);line-height:1.5">
+            <strong>⚡ Tiempo de respuesta:</strong> Ronald responde en menos de 1 hora en horario de atención. Mensajes fuera de horario son respondidos a primera hora.
+          </p>
+        </div>
+      </div>
+
+      <a href="https://api.whatsapp.com/send?phone=50689789417&text=Hola%20Ronald%20%F0%9F%91%8B%20%C2%BFEst%C3%A1n%20disponibles%20hoy%3F" target="_blank"
+         style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;padding:14px;border-radius:14px;font-size:14px;font-weight:700;text-decoration:none">
+        <i class="fab fa-whatsapp"></i> Escribir ahora
       </a>
     </div>
     <button class="modal-cancel" onclick="closeModal('horarioModal')">Cerrar</button>
@@ -1003,7 +1043,8 @@
 <!-- MODAL: CÓMO LLEGAR -->
 <div class="modal-overlay" id="llegarModal" onclick="closeModal('llegarModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('llegarModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>📍 Cómo Llegar</h3>
     <p class="modal-sub">Taller del Carpintero · Sardinal de Carrillo, Guanacaste, Costa Rica</p>
     <div class="modal-list">
@@ -1121,7 +1162,8 @@
 <!-- MODAL: FAQ -->
 <div class="modal-overlay" id="faqModal" onclick="closeModal('faqModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('faqModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>❓ Preguntas Frecuentes</h3>
     <p class="modal-sub">Las dudas más comunes sobre nuestros servicios.</p>
     <div style="display:flex;flex-direction:column;gap:0">
@@ -1186,7 +1228,8 @@
 <!-- MODAL: QR -->
 <div class="modal-overlay" id="qrModal" onclick="closeModal('qrModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('qrModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>📱 Código QR</h3>
     <p class="modal-sub">Compartí este código para que cualquier persona abra la tarjeta al instante.</p>
     <div class="qr-box">
@@ -1200,7 +1243,8 @@
 <!-- MODAL: INSTALAR -->
 <div class="modal-overlay" id="installModal" onclick="closeModal('installModal')">
   <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-handle"></div>
+    <button class="modal-float-back" onclick="closeModal('installModal')"><i class="fa fa-arrow-left"></i></button>
+    <div class="modal-body-pad-sm">
     <h3>📲 Agregar a Pantalla de Inicio</h3>
     <p class="modal-sub">Instalá esta tarjeta como app — acceso directo en tu teléfono.</p>
     <div class="modal-list">
@@ -1300,12 +1344,21 @@ function toggleFaq(btn){
   if(!isOpen)item.classList.add('open');
 }
 
-/* HORARIO — resaltar día actual */
+/* ÍCONOS: cargar base64 desde datos compartidos por el cliente.
+   Reemplazar estas URLs con las imágenes reales cuando estén disponibles.
+   Por ahora se usan íconos de Font Awesome como fallback visual. */
 (function(){
-  var dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-  var hoy=dias[new Date().getDay()];
-  var el=document.getElementById('h-'+hoy);
-  if(el) el.classList.add('hoy');
+  /* Videos icon — fallback emoji si no hay PNG */
+  var iv=document.getElementById('iconVideos');
+  var ip=document.getElementById('iconPortafolio');
+  var ir=document.getElementById('iconRedes');
+  if(iv){iv.onerror=function(){iv.style.display='none';iv.parentNode.innerHTML='<span style="font-size:44px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))">🎬</span>';};}
+  if(ip){ip.onerror=function(){ip.style.display='none';ip.parentNode.innerHTML='<span style="font-size:44px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))">🪵</span>';};}
+  if(ir){ir.onerror=function(){ir.style.display='none';ir.parentNode.innerHTML='<span style="font-size:44px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.2))">📲</span>';};}
+  /* Disparar onerror para usar fallback hasta que el cliente agregue los PNG reales */
+  if(iv&&!iv.src)iv.dispatchEvent(new Event('error'));
+  if(ip&&!ip.src)ip.dispatchEvent(new Event('error'));
+  if(ir&&!ir.src)ir.dispatchEvent(new Event('error'));
 })();
 
 /* COTIZAR */
